@@ -77,9 +77,9 @@ class User implements JsonSerializable, UserInterface, PasswordAuthenticatedUser
     /**
      * @var string
      *
-     * @ORM\Column(name="documment", type="string", length=45, nullable=false)
+     * @ORM\Column(name="document", type="string", length=45, nullable=false)
      */
-    private $documment;
+    private $document;
 
     /**
      * @var string|null
@@ -186,14 +186,14 @@ class User implements JsonSerializable, UserInterface, PasswordAuthenticatedUser
         return $this;
     }
 
-    public function getDocumment(): ?string
+    public function getdocument(): ?string
     {
-        return $this->documment;
+        return $this->document;
     }
 
-    public function setDocumment(string $documment): self
+    public function setdocument(string $document): self
     {
-        $this->documment = $documment;
+        $this->document = $document;
 
         return $this;
     }
