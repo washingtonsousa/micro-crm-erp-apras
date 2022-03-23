@@ -1,0 +1,29 @@
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+    prefix:   '/api'
+    trailing_slash_on_root: false
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+
+# api:
+#     prefix: /api
+
+api_index:
+    path: /index
+    controller: App\Controller\DefaultController::index
+
+register:
+    path: /register
+    controller: App\Controller\DefaultController::register
+
+login_check:
+    path:     /login_check
+    methods:  [POST]
+
+test_protection:
+    path: /test
+    controller: App\Controller\DefaultController::testProtection

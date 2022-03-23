@@ -1,0 +1,3 @@
+0
+notification2
+O:40:"App\Core\Shared\Model\DomainNotification":3:{s:3:"key";s:0:"";s:7:"message";s:5:"teste";s:4:"rank";i:0;}
