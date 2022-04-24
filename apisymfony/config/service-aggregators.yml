@@ -14,11 +14,11 @@ services:
     user_service:
         class: App\Core\Domain\Service\UserService
         public: true
-
+    
 
     App\Core\Shared\Handler\HandlerAggregator: '@handler_aggregator'
     App\Core\Shared\Event\DomainNotificationContainer: '@domain_notification_container'
-    App\Core\Domain\Abstraction\Interface\IUserService: @user_service
+    App\Core\Domain\Abstraction\Interface\IUserService: '@user_service'
     Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'
 
         

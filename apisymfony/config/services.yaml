@@ -32,9 +32,18 @@ services:
     on_request_domain_notification_handler:
         class: App\Core\Shared\EventSubscribers\DomainNotificationSubscriber
         tags:
-            - { name: on_request_domain_notification_handler }         
+            - { name: on_request_domain_notification_handler }   
+                  
+    app.core.domain.provider.auth_user_provider:
+        class: App\Core\Domain\Provider\AuthUserProvider
+        arguments:
+            - '@app.core.domain.repository.usuario_repository'
+        public: true
+
+    app.core.domain.repository.usuario_repository:
+        class: App\Core\Domain\Repository\UsuarioRepository
+        public: true
 
 
+    App\Core\Domain\Abstraction\IUsuarioRepository: '@app.core.domain.repository.usuario_repository'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones

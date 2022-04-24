@@ -1,0 +1,23 @@
+
+<div class="fixed-wrapper">
+
+  <box-container class="login-box centered-box" >
+
+          <h1> <i class="fa fa-lock"></i> Login </h1>
+
+
+          <login-form (onSuccess)="onLogin($event)" (onFail)="onError($event)">
+
+          </login-form>
+
+          <div *ngFor="let alert of alerts">
+            <alert [type]="alert.type" [dismissible]="true">{{ alert.message }}</alert>
+          </div>
+
+
+  </box-container>
+
+</div>
+
+
+

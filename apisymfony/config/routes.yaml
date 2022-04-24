@@ -12,13 +12,14 @@ kernel:
 # api:
 #     prefix: /api
 
-api_index:
-    path: /index
-    controller: App\Controller\DefaultController::index
-
 register:
     path: /register
-    controller: App\Controller\DefaultController::register
+    controller: App\Controller\UsuarioController::register
+
+login:
+    path:     /login
+    methods:  [POST]
+    controller: App\Controller\LoginController::login
 
 login_check:
     path:     /login_check
@@ -26,4 +27,4 @@ login_check:
 
 test_protection:
     path: /test
-    controller: App\Controller\DefaultController::testProtection
+    controller: App\Controller\UsuarioController::testProtection

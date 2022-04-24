@@ -15,8 +15,8 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
-    'api_index' => [[], ['_controller' => 'App\\Controller\\DefaultController::index'], [], [['text', '/index']], [], [], []],
-    'register' => [[], ['_controller' => 'App\\Controller\\DefaultController::register'], [], [['text', '/register']], [], [], []],
+    'register' => [[], ['_controller' => 'App\\Controller\\UsuarioController::register'], [], [['text', '/register']], [], [], []],
+    'login' => [[], ['_controller' => 'App\\Controller\\LoginController::login'], [], [['text', '/login']], [], [], []],
     'login_check' => [[], [], [], [['text', '/login_check']], [], [], []],
-    'test_protection' => [[], ['_controller' => 'App\\Controller\\DefaultController::testProtection'], [], [['text', '/test']], [], [], []],
+    'test_protection' => [[], ['_controller' => 'App\\Controller\\UsuarioController::testProtection'], [], [['text', '/test']], [], [], []],
 ];
