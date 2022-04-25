@@ -2,12 +2,10 @@
 namespace App\Core\Domain\Repository;
 
 use App\Core\Domain\Abstraction\Interface\IUsuarioRepository;
-use App\Core\Domain\Entity\User;
 use App\Core\Domain\Entity\Usuario;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepository {

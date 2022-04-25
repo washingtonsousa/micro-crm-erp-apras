@@ -1,13 +1,13 @@
 <?php
 namespace App\Core\Domain\Command\Result;
 
-use App\Core\Domain\Entity\User;
+use App\Core\Domain\Entity\Usuario;
 
 class CreateUserCommandResult {
 
-    private ?User $user;
+    private ?Usuario $user;
 
-    public function __construct(?User $user)
+    public function __construct(?Usuario $user)
     {
         $this->user = $user;
     }

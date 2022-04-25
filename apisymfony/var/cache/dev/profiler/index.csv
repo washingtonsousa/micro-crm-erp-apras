@@ -163,3 +163,11 @@ cefc9b,::1,POST,http://localhost:8000/login_check,1650759243,,200
 b2925f,::1,POST,http://localhost:8000/login_check,1650760536,,200
 6fa214,::1,POST,http://localhost:8000/login_check,1650760541,,200
 70a089,::1,POST,http://localhost:8000/login_check,1650760584,,200
+70888f,::1,GET,http://localhost:8000/register,1650889425,fb2314,500
+fb2314,::1,POST,http://localhost:8000/register,1650889426,,500
+46cbae,::1,GET,http://localhost:8000/register,1650889760,05bee1,500
+05bee1,::1,POST,http://localhost:8000/register,1650889760,,500
+42a313,::1,GET,http://localhost:8000/register,1650889780,ebd40f,500
+ebd40f,::1,POST,http://localhost:8000/register,1650889780,,500
+fff378,::1,GET,http://localhost:8000/register,1650889815,078eed,500
+078eed,::1,POST,http://localhost:8000/register,1650889815,,500

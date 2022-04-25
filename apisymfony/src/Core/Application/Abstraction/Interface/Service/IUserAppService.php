@@ -1,10 +1,9 @@
 <?php
 namespace App\Core\Application\Abstraction\Interface\Service;
 
-use App\Core\Application\ViewModel\UserViewModel;
+use App\Core\Application\ViewModel\UsuarioViewModel;
 
-interface IUserAppService {
+interface IUsuarioAppService {
 
-        public function register(UserViewModel $userViewModel);
-        public function login();
+        public function register(UsuarioViewModel $userViewModel);
 }

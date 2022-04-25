@@ -1,55 +1,37 @@
 <?php
 namespace App\Controller;
 
-use App\Core\Domain\Entity\Usuario;
-use DateTime;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Core\Application\Abstraction\Interface\Service\IUsuarioAppService;
+use App\Core\Application\ViewModel\UsuarioViewModel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class UsuarioController extends AbstractController {
 
-   private ManagerRegistry $doctrine;
+   private IUsuarioAppService $usuarioAppService;
 
-        public function __construct(ManagerRegistry $doctrine
+        public function __construct(IUsuarioAppService $usuarioAppService
         )
         {
-          $this->doctrine =  $doctrine;
-    
+          $this->usuarioAppService =  $usuarioAppService;
         }
         
-        public function index() {
-            
-            $queryFetched = $this->doctrine->getRepository(TbUser::class)->findAll();
 
-
-            return new Response(json_encode( $queryFetched));
-        }
-
-        public function register(Request $request, UserPasswordHasherInterface $encoder)
+        public function register(SerializerInterface  $serializerInterface, Request $request)
         {
-         $em = $this->doctrine->getManager();
 
-         $parameters = json_decode($request->getContent(), true);
+        $requestValue = $serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
+          DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s',
+        ]);
 
-         $password =  $parameters['password'];
-         $email =  $parameters['email'];
-    
-         $user = new Usuario();
-         $user->setSenha($encoder->hashPassword($user, $password));
-         $user->setEmail($email);
-         $user->setNome('Washington');
-         $user->setNivelAcesso(0);
-         $user->setDocumento("36036876807");
-         $user->setStatus(true);
-         $user->setDtUltimoLogin(new DateTime());
-         $em->persist($user);
-         $em->flush();
+        $result = $this->usuarioAppService->register($requestValue);
 
-         return new JsonResponse($user->getEmail());
+        return new JsonResponse($result);
+
         }
 
         public function testProtection() {
