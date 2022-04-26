@@ -7,22 +7,16 @@ import { Context } from "src/app/business/entities/singleton/context.model";
 export class ContextService {
 
         public static HandleTokenResponse(tokenResponse: TokenResponse) {
-
             localStorage.setItem("token", tokenResponse.token);
-
         }
 
         public static GetContext() {
-          console.log(localStorage.getItem("token"));
           let  AuthToken =  (localStorage.getItem("token") == undefined || localStorage.getItem("token") == null) ? "" : localStorage.getItem("token");
-          return new Context(AuthToken);
-
+          return new Context(AuthToken == null ? "" : AuthToken);
         }
 
         static get isLoggedIn(): boolean {
-          console.log(this.GetContext().token != null && this.GetContext().token != "");
           return this.GetContext().token != null && this.GetContext().token != "";
-
         }
 
 

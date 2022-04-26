@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { AlertModule } from "ngx-bootstrap/alert";
 import { UsuarioService } from "src/app/services/core/api/usuario-service.service";
+import { ClienteFormComponent } from "./cliente/cliente-form.component";
 import { LoginFormComponent } from "./login/login-form.component";
 
 
@@ -12,8 +13,8 @@ import { LoginFormComponent } from "./login/login-form.component";
 @NgModule({
 
   imports: [CommonModule, BrowserModule, ReactiveFormsModule, HttpClientModule, AlertModule],
-  exports: [LoginFormComponent],
-  declarations: [LoginFormComponent],
+  exports: [LoginFormComponent, ClienteFormComponent],
+  declarations: [LoginFormComponent, ClienteFormComponent],
   providers: [UsuarioService]
 
 })

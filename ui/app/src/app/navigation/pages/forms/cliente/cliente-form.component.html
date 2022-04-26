@@ -1,0 +1,27 @@
+<form [formGroup]="clientFormGroup" (ngSubmit)="Submit()">
+
+  <label class="mb-2 required"> Nome: </label>
+
+  <input type="text" class="form-control mb-1" formControlName="nome" />
+
+  <alert type="danger" *ngIf="clientFormGroup.touched && clientFormGroup.controls['username'].errors?.required">
+
+    Insira o nome, é obrigatório
+
+  </alert>
+
+  <label class="mb-2"> Imagem/Ícone do cliente: </label>
+
+  <input type="file" class="form-control mb-1"  (change)="onFileChange($event)" formControlName="imagem"  />
+
+
+  <p class="mt-2"> <small>
+
+    Todos os itens marcados com "*" são obrigatórios.
+
+  </small></p>
+
+
+  <button [disabled]="!clientFormGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-save"></i> Enviar  </button>
+
+</form>

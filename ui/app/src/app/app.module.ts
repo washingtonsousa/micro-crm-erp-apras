@@ -10,6 +10,9 @@ import { NavigationModule } from './navigation/module/navigation.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { AuthGuard } from './infra/interceptors/guard/auth-guard';
+import { MaterialModule } from './ui-components/material/material.module';
+import { GeneralUIModule } from './ui-components/general/generalUI.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { AuthGuard } from './infra/interceptors/guard/auth-guard';
     NavigationModule,
     LayoutModule,
     BrowserAnimationsModule,
+    MaterialModule,
+    GeneralUIModule,
+    TooltipModule.forRoot(),
     AlertModule.forRoot()
   ],
   providers: [{
