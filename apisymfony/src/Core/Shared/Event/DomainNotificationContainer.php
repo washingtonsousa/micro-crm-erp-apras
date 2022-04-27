@@ -15,7 +15,6 @@ class DomainNotificationContainer implements IDomainNotificationContainer, IHand
     }
 
     public function Handle($entity) {
-
         if($entity instanceof DomainNotification)
         $this->notifications[] = $entity;
 

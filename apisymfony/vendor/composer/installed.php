@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '085cb11db41f5ab51c3de70be041f1a9f4887b53',
+        'reference' => '94fb81e8d54a0b6fef85edd66ddc62b107feb17e',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '085cb11db41f5ab51c3de70be041f1a9f4887b53',
+            'reference' => '94fb81e8d54a0b6fef85edd66ddc62b107feb17e',
             'dev_requirement' => false,
         ),
         'doctrine/annotations' => array(
@@ -206,6 +206,15 @@
             'install_path' => __DIR__ . '/../lexik/jwt-authentication-bundle',
             'aliases' => array(),
             'reference' => 'b08d174fc979e12f609ad075e49b46a9e30ecfac',
+            'dev_requirement' => false,
+        ),
+        'mark-gerarts/auto-mapper-plus' => array(
+            'pretty_version' => '1.3.12',
+            'version' => '1.3.12.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mark-gerarts/auto-mapper-plus',
+            'aliases' => array(),
+            'reference' => 'b35e1a3013f940d84520b794424a84913f5e83ea',
             'dev_requirement' => false,
         ),
         'namshi/jose' => array(

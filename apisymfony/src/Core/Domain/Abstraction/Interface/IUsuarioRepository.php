@@ -21,4 +21,9 @@ public function getById($id) : Usuario;
 public function insert(Usuario $user);
 
 
+/**
+ * @return bool
+ */
+public function checkIfExists(string $documento, string $email);
+
 }

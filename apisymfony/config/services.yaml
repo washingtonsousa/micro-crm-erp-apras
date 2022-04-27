@@ -23,7 +23,5 @@ services:
             - '../src/Kernel.php'
             - '../src/Core/'
 
-
-
 imports:
     - { resource: "ioc-modules/*.yml" }

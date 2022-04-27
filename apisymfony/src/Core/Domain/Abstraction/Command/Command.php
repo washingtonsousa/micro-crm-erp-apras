@@ -3,11 +3,17 @@ namespace App\Core\Domain\Abstraction\Command;
 
 use App\Core\Domain\Abstraction\Command\Interface\ICommand;
 use Exception;
+use App\Core\Domain\Contract\Contract;
 
 abstract class Command implements ICommand {
 
-    private $contract;
+    protected $contract;
     private  $commandResult;
+
+    public function __construct()
+    {
+        $this->contract = new Contract();
+    }
 
     public function getResult() {
         return $this->commandResult;

@@ -6,6 +6,6 @@ use App\Core\Domain\Entity\Usuario;
 interface IUsuarioService {
 
             public function Subscribe(Usuario $user);
-
+            public function GetUsers() : iterable;
 
 }

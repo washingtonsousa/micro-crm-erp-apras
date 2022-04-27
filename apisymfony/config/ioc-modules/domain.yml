@@ -21,10 +21,11 @@ services:
       tags:
           - { name: domaineventlistener }   
 
-  on_request_domain_notification_handler:
+  on_request_domain_notification_subscriber:
       class: App\Core\Shared\EventSubscribers\DomainNotificationSubscriber
       tags:
-          - { name: on_request_domain_notification_handler }   
+          - {  name: kernel.event_subscriber }
+      autowire: true   
                 
   app.core.domain.provider.auth_user_provider:
       class: App\Core\Domain\Provider\AuthUserProvider

@@ -21,6 +21,9 @@ class StatementResult {
       
     }
 
+    public function hasException() : bool {
+        return $this->exceptionMessage != null;
+    }
 
 
 }

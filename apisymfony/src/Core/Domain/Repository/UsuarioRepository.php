@@ -23,7 +23,7 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
 
             public function get() : iterable {
                 return   $this->createQueryBuilder('u')
-                ->join('u.logs','u')
+                ->leftJoin('u.logs','l')
                 ->getQuery()->getResult();
             }
 
@@ -58,6 +58,18 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
             public function insert(Usuario $user) {
 
                return $this->manager->persist($user);
+            }
+
+            public function checkIfExists(string $documento, string $email) {
+
+                return  $this->createQueryBuilder('u')
+                ->select('COUNT(u.idUsuario)')
+                ->where('u.documento = :documento OR u.email = :email')
+                ->setParameter('documento', $documento)
+                ->setParameter('email', $email)
+                ->getQuery()
+                ->getScalarResult(\Doctrine\ORM\Query::HYDRATE_SINGLE_SCALAR) > 0;
+
             }
 
 }

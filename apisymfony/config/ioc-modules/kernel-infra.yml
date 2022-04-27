@@ -9,6 +9,12 @@ services:
         class: App\Core\Shared\Handler\GenericHandler
         public: true
         tags: ['handler']
+
+    auto_mapper_init:
+        class:  App\Core\Shared\Mapper\AutoMapperInitializer
+        public: true
+        autowire: true
         
     App\Core\Shared\Handler\HandlerAggregator: '@handler_aggregator'
     App\Core\Shared\Event\DomainNotificationContainer: '@domain_notification_container'
+    App\Core\Shared\Mapper\AutoMapperInitializer: '@auto_mapper_init'

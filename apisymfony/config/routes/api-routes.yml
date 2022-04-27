@@ -1,3 +1,7 @@
 api_register:
     path: /register
     controller: App\Controller\UsuarioController::register
+
+api_usuario:
+    path: /usuario
+    controller: App\Controller\UsuarioController::get

@@ -24,14 +24,21 @@ class UsuarioController extends AbstractController {
         public function register(SerializerInterface  $serializerInterface, Request $request)
         {
       
-        $requestValue = $serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
-          DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
-        ]);
+              $requestValue = $serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
+                DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
+              ]);
 
-  
-        $result = $this->usuarioAppService->register($requestValue);
-        var_dump( $result);
-        return new JsonResponse($result);
+              $result = $this->usuarioAppService->register($requestValue);
+              return new JsonResponse($result);
+
+        }
+
+        public function get(Request $request)
+        {
+      
+
+              $result = $this->usuarioAppService->getUsers();
+              return new JsonResponse($result);
 
         }
 

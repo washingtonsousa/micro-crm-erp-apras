@@ -20,13 +20,11 @@ class CreateUserCommand extends Command {
 
     public function __construct(Usuario $user, IUsuarioRepository $userRepo,UserPasswordHasherInterface $encoder, IUnityOfWork $unityOfWork)
     {
+        parent::__construct();
         $this->unityOfWork = $unityOfWork;
-
-            $this->user = $user;
-            $this->userRepo = $userRepo;
-
-
-                    $this->encoder = $encoder;
+        $this->user = $user;
+        $this->userRepo = $userRepo;
+        $this->encoder = $encoder;
             
     }
 
@@ -36,9 +34,14 @@ class CreateUserCommand extends Command {
             
             $this->user->setSenha($this->encoder->hashPassword($this->user, $this->user->getPassword()));
             $this->user->setDataCriacao(new DateTime());
+            $this->user->setDataAtualizacao(new DateTime());
+
             $this->userRepo->insert($this->user); 
-            $this->unityOfWork->Commit();
-            $this->setResult(new CreateUserCommandResult($this->user));
+            $statementResult = $this->unityOfWork->Commit();
+
+
+            $this->setResult(new CreateUserCommandResult(!$statementResult->hasException() ? $this->user : null));
+
 
         } catch(Exception $ex) {
             $this->setResult(new CreateUserCommandResult(null));
@@ -47,7 +50,7 @@ class CreateUserCommand extends Command {
 
     public function ValidateResult() {
             //TODO
-            return null;
+            return  $this->contract->MustBeNotNull($this->getResult()->getUser(), "Ocorreu um problema ao tentar cadastrar o usuário, consulte logs para maiores detalhes");
     }
 
 }

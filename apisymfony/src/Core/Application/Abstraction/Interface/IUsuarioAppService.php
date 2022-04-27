@@ -6,4 +6,5 @@ use App\Core\Application\ViewModel\UsuarioViewModel;
 interface IUsuarioAppService {
 
         public function register(UsuarioViewModel $userViewModel);
+        public function getUsers() : iterable;
 }

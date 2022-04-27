@@ -3,7 +3,7 @@ namespace App\Core\Shared\Event;
 
 use App\Core\Shared\Enum\RankEnum;
 use App\Core\Shared\Model\DomainNotification;
-use App\core\Shared\Event\DomainEvent;
+use App\Core\Shared\Event\DomainEvent;
 
 class AssertionConcern {
 
@@ -12,6 +12,7 @@ class AssertionConcern {
     {
 
       $notificationsNotNull = array_filter($validations, fn($value) => !is_null($value));
+
 
       AssertionConcern::NotifyAll($notificationsNotNull);
 
@@ -53,21 +54,24 @@ class AssertionConcern {
 
     public static function AssertNotEmpty(string $stringValue, string $message, string $key = "AssertArgumentNotEmpty")
     {
+
+      
+
       return ($stringValue == null || strlen(trim($stringValue)) == 0)
           ? new DomainNotification($key, $message)
           : null;
     }
 
-    public static function AssertNotNull(object $object1, string $message, string $key = "AssertArgumentNotNull", $rank = RankEnum::Low)
+    public static function AssertNotNull(mixed $object1 , string $message, string $key = "AssertArgumentNotNull", $rank = RankEnum::Low)
     {
-      return ($object1 == null)
+      return ($object1  == null)
           ? new DomainNotification($key, $message, $rank)
           : null;
     }
 
-        public static function AssertNull(object $object1, string $message, string $key = "AssertArgumentNotNull", $rank = RankEnum::Low)
+        public static function AssertNull(mixed $object1 , string $message, string $key = "AssertArgumentNotNull", $rank = RankEnum::Low)
         {
-            return ($object1 != null)
+            return ($object1  != null)
                 ? new DomainNotification($key, $message, $rank)
                 : null;
         }

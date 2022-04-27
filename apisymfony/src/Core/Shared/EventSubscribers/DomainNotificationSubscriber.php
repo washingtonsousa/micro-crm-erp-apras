@@ -24,15 +24,28 @@ class DomainNotificationSubscriber implements EventSubscriberInterface {
 
         $headers->set("Content-Type", "application/json");
 
-        $responseData = new  DefaultResponseViewModel("processado com sucesso", json_decode($response->getContent()));
+        $responseStrData = $event->getResponse()->getContent();
+        $data = json_decode($responseStrData);
 
-        if($this->domainNotificationContainer->HasNotifications())
-        $responseData = new DefaultResponseViewModel(
-            "Erros ocorreram no processamento de sua requisição",
-            $this->domainNotificationContainer->Notify()
-        );
+        if($data == false)
+          return;
 
-        $response->setContent($response->getContent());
+
+        if($this->domainNotificationContainer->HasNotifications()) {
+
+            $data = $this->domainNotificationContainer->Notify();
+            $response->setStatusCode(400);
+        }
+            
+        $message =  $response->isSuccessful() ? "Processado com sucesso" : "Erros ou redirecionamentos ocorreram no processamento de sua requisição";
+
+        $responseData = new  DefaultResponseViewModel($data, $message);
+
+        $contentString = json_encode($responseData);
+
+        if($data != false)
+        $response->setContent($contentString);
+
     }
 
     public static function getSubscribedEvents()

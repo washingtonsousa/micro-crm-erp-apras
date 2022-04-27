@@ -10,7 +10,7 @@ class DomainEvent {
 
     public static function DomainEventHandle($object) {
 
-       $handlers = DependencyResolver::make("handler_aggregator");
+       $handlers = DependencyResolver::make("domain_notification_container");
 
 
         $handlers->Handle($object);

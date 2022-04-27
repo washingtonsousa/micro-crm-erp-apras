@@ -86,7 +86,7 @@ class Usuario extends SerializableEntity implements  UserInterface, PasswordAuth
 
     /**
      * 
-     * @ORM\OneToMany(targetEntity="Log", mappedBy="id_usuario", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Log", mappedBy="idUsuario", cascade={"all"})
      */
     public $logs;
 
