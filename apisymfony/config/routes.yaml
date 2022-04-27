@@ -8,13 +8,10 @@ kernel:
     resource: ../src/Kernel.php
     type: annotation
 
+api:
+    prefix: /api
+    resource: './routes/api-routes.yml'
 
-# api:
-#     prefix: /api
-
-register:
-    path: /register
-    controller: App\Controller\UsuarioController::register
 
 login:
     path:     /login

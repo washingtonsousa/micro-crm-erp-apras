@@ -2,134 +2,96 @@
 
 namespace App\Core\Domain\Entity;
 
+use App\Core\Domain\Abstraction\Serializable\SerializableEntity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use JsonSerializable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use JsonSerializable;
+
+
 /**
  * Usuario
  *
  * @ORM\Table(name="usuario", uniqueConstraints={@ORM\UniqueConstraint(name="documento_UNIQUE", columns={"documento"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"}), @ORM\UniqueConstraint(name="usuario_UNIQUE", columns={"usuario"})})
  * @ORM\Entity(repositoryClass="App\Core\Domain\Repository\UsuarioRepository")
  */
-class Usuario implements JsonSerializable, UserInterface, PasswordAuthenticatedUserInterface
+class Usuario extends SerializableEntity implements  UserInterface, PasswordAuthenticatedUserInterface
 {
 
-    public function jsonSerialize()
-    {
-        $vars = get_object_vars($this);
-
-        return $vars;
-    }
-
-    public function getPassword(): ?string {
-        return $this->senha;
-    }
-
-    public function getRoles(): array {
-                if($this->nivelAcesso == 1)
-                   return array("ROLE_ADMIN");
-
-                   return array("ROLE_FUNCIONARIO");
-    }
-
-    public function eraseCredentials() {
-
-    }
-
-
-    public function getUserIdentifier(): string {
-        return $this->email;
-    }
-
-    /**
+   /**
      * @var int
      *
      * @ORM\Column(name="id_usuario", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idUsuario;
+    public $idUsuario;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nome", type="string", length=255, nullable=false)
      */
-    private $nome;
-
+    public $nome;
 
     /**
      * @var string
      *
      * @ORM\Column(name="senha", type="text", length=65535, nullable=false)
      */
-    private $senha;
+    public $senha;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTime
      *
-     * @ORM\Column(name="data_criacao", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="data_criacao", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $dataCriacao;
+    public ?DateTime $dataCriacao;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTime
      *
-     * @ORM\Column(name="data_atualizacao", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="data_atualizacao", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $dataAtualizacao;
+    public ?DateTime $dataAtualizacao;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="status", type="boolean", nullable=false, options={"default"="1"})
      */
-    private $status = true;
+    public $status = true;
 
     /**
      * @var int
      *
      * @ORM\Column(name="nivel_acesso", type="integer", nullable=false, options={"default"="1"})
      */
-    private $nivelAcesso = 1;
+    public $nivelAcesso = 1;
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
-    private $email;
+    public $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="documento", type="string", length=11, nullable=false)
      */
-    private $documento;
+    public $documento;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dt_ultimo_login", type="datetime", nullable=false)
+     * 
+     * @ORM\OneToMany(targetEntity="Log", mappedBy="id_usuario", cascade={"all"})
      */
-    private $dtUltimoLogin;
+    public $logs;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="host_origem_ultimo_login", type="text", length=65535, nullable=true)
-     */
-    private $hostOrigemUltimoLogin;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="localizacao_ultimo_login", type="text", length=65535, nullable=true)
-     */
-    private $localizacaoUltimoLogin;
-
+     //////////////// Methods ////////////////////
 
 
     /**
@@ -246,16 +208,81 @@ class Usuario implements JsonSerializable, UserInterface, PasswordAuthenticatedU
         return $this->documento;
     }
 
+
+    public function getPassword(): ?string {
+        return $this->senha;
+    }
+
+    public function getRoles(): array {
+                if($this->nivelAcesso == 2)
+                   return array("ROLE_ADMIN");
+
+                   return array("ROLE_FUNCIONARIO");
+    }
+
+    public function eraseCredentials() {
+
+    }
+
+
+    public function getUserIdentifier(): string {
+        return $this->email;
+    }
+
+
     /**
-     * Set the value of dtUltimoLogin
+     * Get the value of logs
+     */ 
+    public function getLogs()
+    {
+        return $this->logs;
+    }
+
+    /**
+     * Get the value of dataCriacao
      *
-     * @param  \DateTime  $dtUltimoLogin
+     * @return  \DateTime
+     */ 
+    public function getDataCriacao()
+    {
+        return $this->dataCriacao;
+    }
+
+
+    /**
+     * Get the value of dataAtualizacao
+     *
+     * @return  \DateTime
+     */ 
+    public function getDataAtualizacao()
+    {
+        return $this->dataAtualizacao;
+    }
+
+    /**
+     * Set the value of dataAtualizacao
+     *
+     * @param  \DateTime  $dataAtualizacao
      *
      * @return  self
      */ 
-    public function setDtUltimoLogin(\DateTime $dtUltimoLogin)
+    public function setDataAtualizacao(\DateTime $dataAtualizacao)
     {
-        $this->dtUltimoLogin = $dtUltimoLogin;
+        $this->dataAtualizacao = $dataAtualizacao;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of dataCriacao
+     *
+     * @param  \DateTime  $dataCriacao
+     *
+     * @return  self
+     */ 
+    public function setDataCriacao(\DateTime $dataCriacao)
+    {
+        $this->dataCriacao = $dataCriacao;
 
         return $this;
     }

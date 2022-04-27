@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Core\Application\Abstraction\Interface\Service\IUsuarioAppService;
+use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,13 +23,14 @@ class UsuarioController extends AbstractController {
 
         public function register(SerializerInterface  $serializerInterface, Request $request)
         {
-
+      
         $requestValue = $serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
-          DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s',
+          DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
         ]);
 
+  
         $result = $this->usuarioAppService->register($requestValue);
-
+        var_dump( $result);
         return new JsonResponse($result);
 
         }

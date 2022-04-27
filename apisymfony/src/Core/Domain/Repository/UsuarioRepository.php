@@ -21,13 +21,21 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
              
             }
 
-
             public function get() : iterable {
-                return   $this->findAll();
+                return   $this->createQueryBuilder('u')
+                ->join('u.logs','u')
+                ->getQuery()->getResult();
             }
 
             public function getById($id) : Usuario {
-                return   $this->find($id);
+
+                return  $this->createQueryBuilder('u')
+                ->select('u')
+                ->where('u.id_usuario = :id_usuario')
+                ->setParameter('id_usuario', $id) 
+                ->getQuery()   
+                ->getOneOrNullResult();
+
             }
 
             public function loadUserByIdentifier(string $identifier): ?UserInterface

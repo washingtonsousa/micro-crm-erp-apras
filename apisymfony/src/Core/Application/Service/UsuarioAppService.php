@@ -1,21 +1,14 @@
 <?php
 namespace App\Core\Application\Service;
 
-use App\Core\Application\Abstraction\Interface\Service\IUserAppService;
-use App\Core\Application\Abstraction\Interface\Service\IUsuarioAppService;
-use App\Core\Application\ViewModel\UserViewModel;
+use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
 use App\Core\Application\ViewModel\UsuarioViewModel;
-use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
-use App\Core\Domain\Abstraction\Interface\IUserService;
 use App\Core\Domain\Abstraction\Interface\IUsuarioService;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Core\Domain\Entity\Usuario;
 
-class UsuarioAppService implements IUsuarioAppService{
-
-
+class UsuarioAppService implements IUsuarioAppService {
 
     protected IUsuarioService $userService;
-  
 
     public function __construct(IUsuarioService $userService)
     {
@@ -24,8 +17,15 @@ class UsuarioAppService implements IUsuarioAppService{
 
     public function register(UsuarioViewModel $userViewModel) {
 
+        $usuario = $userViewModel->ToDomainModel();
 
-        $this->userService->Subscribe($userViewModel->ToDomainModel());
+        $result =  $this->userService->Subscribe($usuario);
+     
+        if($result == null)
+            return null;
+
+        return  $result;
+
 
     }
 

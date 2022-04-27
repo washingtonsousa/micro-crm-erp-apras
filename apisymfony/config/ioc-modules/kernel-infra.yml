@@ -1,0 +1,14 @@
+services:
+    domain_notification_container:
+        class: App\Core\Shared\Event\DomainNotificationContainer
+        public: true
+        tags: ['handler']
+        shared: true
+
+    generic_handler:
+        class: App\Core\Shared\Handler\GenericHandler
+        public: true
+        tags: ['handler']
+        
+    App\Core\Shared\Handler\HandlerAggregator: '@handler_aggregator'
+    App\Core\Shared\Event\DomainNotificationContainer: '@domain_notification_container'

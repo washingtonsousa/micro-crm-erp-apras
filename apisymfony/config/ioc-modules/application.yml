@@ -1,0 +1,8 @@
+services:
+
+    App\Core\Application\Service\:
+        resource: '../../src/Core/Application/Service/'
+        public: true
+        autowire: true
+
+    App\Core\Application\Abstraction\Interface\IUsuarioAppService: '@App\Core\Application\Service\UsuarioAppService'

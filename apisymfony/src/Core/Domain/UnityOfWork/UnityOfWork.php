@@ -20,21 +20,31 @@ class UnityOfWork implements IUnityOfWork {
 
 
     public function Commit() : StatementResult {
+        $time_pre = microtime(true);
 
         try {
-            $time_pre = microtime(true);
+
+            
 
             $this->manager->flush();
 
             $time_post = microtime(true);
 
             $exec_time = $time_post - $time_pre;
-
+           
             return new StatementResult(true, $exec_time);
+
         } 
         
         catch(Exception $ex) {
-            return new StatementResult(true, $exec_time, $ex);
+            
+            $time_post = microtime(true);
+
+            $exec_time = $time_post - $time_pre;
+
+            $result = new StatementResult(true, $exec_time, $ex);
+
+            return $result;
         }
 
     }

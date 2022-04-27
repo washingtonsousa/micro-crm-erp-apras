@@ -6,6 +6,7 @@ use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
 use App\Core\Domain\Abstraction\Interface\IUsuarioRepository;
 use App\Core\Domain\Command\Result\CreateUserCommandResult;
 use App\Core\Domain\Entity\Usuario;
+use DateTime;
 use Exception;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -13,7 +14,7 @@ class CreateUserCommand extends Command {
 
 
     private Usuario $user;
-    private IUsuarioRepository $_userRepo;
+    private IUsuarioRepository $userRepo;
     private UserPasswordHasherInterface $encoder;
     private IUnityOfWork $unityOfWork;
 
@@ -21,8 +22,8 @@ class CreateUserCommand extends Command {
     {
         $this->unityOfWork = $unityOfWork;
 
-            $this->_user = $user;
-            $this->_userRepo = $userRepo;
+            $this->user = $user;
+            $this->userRepo = $userRepo;
 
 
                     $this->encoder = $encoder;
@@ -32,10 +33,12 @@ class CreateUserCommand extends Command {
     public function GenerateResult() {
 
         try {
+            
             $this->user->setSenha($this->encoder->hashPassword($this->user, $this->user->getPassword()));
-            $result = $this->_userRepo->insert($this->user);
+            $this->user->setDataCriacao(new DateTime());
+            $this->userRepo->insert($this->user); 
             $this->unityOfWork->Commit();
-            $this->setResult(new CreateUserCommandResult($result));
+            $this->setResult(new CreateUserCommandResult($this->user));
 
         } catch(Exception $ex) {
             $this->setResult(new CreateUserCommandResult(null));

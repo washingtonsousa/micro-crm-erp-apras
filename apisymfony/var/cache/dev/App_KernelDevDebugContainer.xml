@@ -326,13 +326,37 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="App\Core\Application\Service\UsuarioAppService" class="App\Core\Application\Service\UsuarioAppService" public="true" autowire="true">
+      <argument type="service" id="App\Core\Domain\Service\UsuarioService"/>
+    </service>
+    <service id="App\Core\Domain\Service\UsuarioService" class="App\Core\Domain\Service\UsuarioService" public="true" autowire="true">
+      <argument type="service" id="security.user_password_hasher"/>
+      <argument type="service" id="unity_of_work"/>
+      <argument type="service" id="App\Core\Domain\Repository\UsuarioRepository"/>
+    </service>
+    <service id="App\Core\Domain\Repository\UsuarioRepository" class="App\Core\Domain\Repository\UsuarioRepository" public="true" autowire="true">
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="unity_of_work" class="App\Core\Domain\UnityOfWork\UnityOfWork" public="true" autowire="true">
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="domain_notify_subscriber" class="App\Core\Shared\EventListener\DomainEventListener">
+      <tag name="domaineventlistener"/>
+    </service>
+    <service id="on_request_domain_notification_handler" class="App\Core\Shared\EventSubscribers\DomainNotificationSubscriber">
+      <tag name="on_request_domain_notification_handler"/>
+    </service>
+    <service id="app.core.domain.provider.auth_user_provider" class="App\Core\Domain\Provider\AuthUserProvider" public="true">
+      <argument type="service" id="App\Core\Domain\Repository\UsuarioRepository"/>
+    </service>
     <service id="domain_notification_container" class="App\Core\Shared\Event\DomainNotificationContainer" public="true">
       <tag name="handler"/>
     </service>
     <service id="generic_handler" class="App\Core\Shared\Handler\GenericHandler" public="true">
       <tag name="handler"/>
     </service>
-    <service id="user_service" class="App\Core\Domain\Service\UserService" public="true"/>
+    <service id="App\Controller\ClienteController" class="App\Controller\ClienteController" autowire="true" autoconfigure="true"/>
+    <service id="App\Controller\FichaController" class="App\Controller\FichaController" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\LoginController" class="App\Controller\LoginController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -340,31 +364,14 @@
         <argument type="service" id=".service_locator.l1ae.Qz.App\Controller\LoginController"/>
       </call>
     </service>
+    <service id="App\Controller\ProdutoController" class="App\Controller\ProdutoController" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\UsuarioController" class="App\Controller\UsuarioController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
-      <argument type="service" id="doctrine"/>
+      <argument type="service" id="App\Core\Application\Service\UsuarioAppService"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.l1ae.Qz.App\Controller\UsuarioController"/>
       </call>
-    </service>
-    <service id="domain_notify_subscriber" class="App\Core\Shared\EventListener\DomainEventListener" autowire="true" autoconfigure="true">
-      <tag name="domaineventlistener"/>
-      <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="domain_notification_container"/>
-    </service>
-    <service id="on_request_domain_notification_handler" class="App\Core\Shared\EventSubscribers\DomainNotificationSubscriber" autowire="true" autoconfigure="true">
-      <tag name="on_request_domain_notification_handler"/>
-      <tag name="kernel.event_subscriber"/>
-      <tag name="container.hot_path"/>
-      <argument type="service" id="domain_notification_container"/>
-    </service>
-    <service id="app.core.domain.provider.auth_user_provider" class="App\Core\Domain\Provider\AuthUserProvider" public="true" autowire="true" autoconfigure="true">
-      <argument type="service" id="app.core.domain.repository.usuario_repository"/>
-    </service>
-    <service id="app.core.domain.repository.usuario_repository" class="App\Core\Domain\Repository\UsuarioRepository" public="true" autowire="true" autoconfigure="true">
-      <tag name="doctrine.repository_service"/>
-      <argument type="service" id="doctrine"/>
     </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
@@ -1170,22 +1177,6 @@
         <argument type="collection">
           <argument type="service_closure" id="nelmio_cors.cacheable_response_vary_listener"/>
           <argument>onResponse</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>notification.emit</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="domain_notify_subscriber"/>
-          <argument>notify</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>kernel.response</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="on_request_domain_notification_handler"/>
-          <argument>onKernelResponse</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -2391,7 +2382,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.52Q8yTh"/>
+      <argument type="service" id=".service_locator.Xbsa8iG"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4512,12 +4503,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\UsuarioController" class="App\Controller\UsuarioController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\UsuarioController" class="App\Controller\UsuarioController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\UsuarioController" class="App\Controller\UsuarioController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\EventDispatcher\EventSubscriberInterface.0.domain_notify_subscriber" class="App\Core\Shared\EventListener\DomainEventListener" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.domain_notify_subscriber" class="App\Core\Shared\EventListener\DomainEventListener" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\EventDispatcher\EventSubscriberInterface.0.on_request_domain_notification_handler" class="App\Core\Shared\EventSubscribers\DomainNotificationSubscriber" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.on_request_domain_notification_handler" class="App\Core\Shared\EventSubscribers\DomainNotificationSubscriber" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.app.core.domain.repository.usuario_repository" class="App\Core\Domain\Repository\UsuarioRepository" public="true" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.app.core.domain.repository.usuario_repository" class="App\Core\Domain\Repository\UsuarioRepository" public="true" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.gSv9zYw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4839,17 +4824,16 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
-    <service id=".service_locator.63PV7jN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ax467XH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="encoder" type="service_closure" id="security.user_password_hasher"/>
         <argument key="serializerInterface" type="service_closure" id="serializer"/>
       </argument>
     </service>
-    <service id=".service_locator.KcQPCUB" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.XzJDzUH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\UsuarioController::register" type="service_closure" id=".service_locator.63PV7jN"/>
+        <argument key="App\Controller\UsuarioController::register" type="service_closure" id=".service_locator.ax467XH"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::process" type="service_closure" id=".service_locator.u47of.0"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
@@ -4858,7 +4842,7 @@
         <argument key="kernel::process" type="service_closure" id=".service_locator.u47of.0"/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::terminate" type="service_closure" id=".service_locator.KfwZsne"/>
-        <argument key="App\Controller\UsuarioController:register" type="service_closure" id=".service_locator.63PV7jN"/>
+        <argument key="App\Controller\UsuarioController:register" type="service_closure" id=".service_locator.ax467XH"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:process" type="service_closure" id=".service_locator.u47of.0"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
@@ -4927,11 +4911,9 @@
       <argument type="service" id="cache.doctrine.orm.default.result"/>
       <factory class="Doctrine\Common\Cache\Psr6\DoctrineProvider" method="wrap"/>
     </service>
-    <service id=".service_locator.52Q8yTh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Xbsa8iG" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="app.core.domain.repository.usuario_repository" type="service_closure" id="app.core.domain.repository.usuario_repository"/>
-      </argument>
+      <argument type="collection"/>
     </service>
     <service id=".service_locator.KLVvNIq" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -5132,12 +5114,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.KcQPCUB"/>
+      <argument type="service" id=".service_locator.XzJDzUH"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.KcQPCUB"/>
+      <argument type="service" id=".service_locator.XzJDzUH"/>
     </service>
     <service id=".doctrine.orm.default_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
       <call method="addDriver">
@@ -5751,11 +5733,13 @@
         <argument key="Symfony\Bridge\Twig\Extension\SerializerRuntime" type="service_closure" id="twig.runtime.serializer"/>
       </argument>
     </service>
+    <service id="App\Core\Application\Abstraction\Interface\IUsuarioAppService" alias="App\Core\Application\Service\UsuarioAppService"/>
+    <service id="App\Core\Domain\Abstraction\Interface\IUsuarioRepository" alias="App\Core\Domain\Repository\UsuarioRepository"/>
+    <service id="App\Core\Domain\Abstraction\Interface\IUsuarioService" alias="App\Core\Domain\Service\UsuarioService"/>
+    <service id="App\Core\Domain\Abstraction\Interface\IUnityOfWork" alias="unity_of_work"/>
+    <service id="Symfony\Component\Cache\Adapter\AdapterInterface" alias="cache.app"/>
     <service id="App\Core\Shared\Handler\HandlerAggregator" alias="handler_aggregator"/>
     <service id="App\Core\Shared\Event\DomainNotificationContainer" alias="domain_notification_container"/>
-    <service id="App\Core\Domain\Abstraction\Interface\IUserService" alias="user_service"/>
-    <service id="Symfony\Component\Cache\Adapter\AdapterInterface" alias="cache.app"/>
-    <service id="App\Core\Domain\Abstraction\IUsuarioRepository" alias="app.core.domain.repository.usuario_repository"/>
     <service id="App\Kernel" alias="kernel" public="true"/>
     <service id="Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface" alias="parameter_bag"/>
     <service id="Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface" alias="parameter_bag"/>
@@ -5880,14 +5864,13 @@
     <service id="Twig\Environment" alias="twig"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.KcQPCUB"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.XzJDzUH"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.Nm1lUCf" alias=".service_locator.4QeXDrO"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
-    <service id=".service_locator.RqthX28" alias=".service_locator.63PV7jN"/>
-    <service id=".service_locator.y2xfO_C" alias=".service_locator.KcQPCUB"/>
+    <service id=".service_locator.UAiMlKJ" alias=".service_locator.XzJDzUH"/>
     <service id=".service_locator.qBCHs1a" alias=".service_locator.QXcJQkF"/>
     <service id=".service_locator.jkb6XQV" alias=".service_locator.l1ae.Qz"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher" public="true"/>
@@ -5912,7 +5895,7 @@
     <service id=".service_locator.X5ETDUb" alias=".service_locator.u47of.0"/>
     <service id=".service_locator._5g_Wvc" alias=".service_locator.KfwZsne"/>
     <service id=".service_locator.JBAFp66" alias=".service_locator.KfbR3DY"/>
-    <service id=".service_locator.BEraaHo" alias=".service_locator.63PV7jN"/>
+    <service id=".service_locator.oqW7_IQ" alias=".service_locator.ax467XH"/>
     <service id=".service_locator.bk6HUrh" alias=".service_locator.l1ae.Qz"/>
     <service id=".service_locator.gZgheaJ" alias=".service_locator.zJR52sE"/>
     <service id=".service_locator.u6DWx23" alias=".service_locator.cXsfP3P"/>

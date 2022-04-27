@@ -18,7 +18,7 @@ abstract class Command implements ICommand {
     }
 
     public function Execute() : mixed {
-
+      
         $this->GenerateResult();
 
         if($this->commandResult == null)

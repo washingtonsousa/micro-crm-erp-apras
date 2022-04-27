@@ -1,0 +1,38 @@
+services:
+
+
+  App\Core\Domain\Service\:
+    resource: '../../src/Core/Domain/Service/'
+    public: true
+    autowire: true
+
+  App\Core\Domain\Repository\:
+    resource: '../../src/Core/Domain/Repository/'
+    public: true
+    autowire: true
+
+  unity_of_work:
+          class: App\Core\Domain\UnityOfWork\UnityOfWork
+          public: true
+          autowire: true
+
+  domain_notify_subscriber:
+      class: App\Core\Shared\EventListener\DomainEventListener
+      tags:
+          - { name: domaineventlistener }   
+
+  on_request_domain_notification_handler:
+      class: App\Core\Shared\EventSubscribers\DomainNotificationSubscriber
+      tags:
+          - { name: on_request_domain_notification_handler }   
+                
+  app.core.domain.provider.auth_user_provider:
+      class: App\Core\Domain\Provider\AuthUserProvider
+      arguments:
+          - '@App\Core\Domain\Abstraction\Interface\IUsuarioRepository'
+      public: true
+
+  App\Core\Domain\Abstraction\Interface\IUsuarioRepository: '@App\Core\Domain\Repository\UsuarioRepository'
+  App\Core\Domain\Abstraction\Interface\IUsuarioService: '@App\Core\Domain\Service\UsuarioService'
+  App\Core\Domain\Abstraction\Interface\IUnityOfWork: '@unity_of_work'
+  Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'

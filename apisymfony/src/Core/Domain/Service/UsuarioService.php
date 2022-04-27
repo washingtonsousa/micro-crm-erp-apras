@@ -10,25 +10,26 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UsuarioService implements IUsuarioService {
 
-    private IUsuarioRepository $_userRepo;
+    private IUsuarioRepository $userRepo;
     private UserPasswordHasherInterface $encoder;
     private IUnityOfWork $unityOfWork;
 
-    public function __construct(UserPasswordHasherInterface $encoder, IUnityOfWork $unityOfWork)
+    public function __construct(UserPasswordHasherInterface $encoder, IUnityOfWork $unityOfWork, IUsuarioRepository $userRepo)
     {
             $this->encoder = $encoder;
             $this->unityOfWork = $unityOfWork;
+            $this->userRepo = $userRepo;
     }
 
         public function Subscribe(Usuario $user) {
-
                 
-                $command = new CreateUserCommand($user, $this->_userRepo, $this->encoder,  $this->unityOfWork);
+
+                $command = new CreateUserCommand($user, $this->userRepo, $this->encoder,  $this->unityOfWork);
 
                 $result = $command->Execute();
 
                 if($result->isSuccess())
-                        return $result;
+                        return $result->getUser();
 
                 return null;
 

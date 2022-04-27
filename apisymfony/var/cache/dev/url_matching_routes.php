@@ -13,7 +13,7 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
-        '/register' => [[['_route' => 'register', '_controller' => 'App\\Controller\\UsuarioController::register'], null, null, null, false, false, null]],
+        '/api/register' => [[['_route' => 'api_register', '_controller' => 'App\\Controller\\UsuarioController::register'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'login', '_controller' => 'App\\Controller\\LoginController::login'], null, ['POST' => 0], null, false, false, null]],
         '/login_check' => [[['_route' => 'login_check'], null, ['POST' => 0], null, false, false, null]],
         '/test' => [[['_route' => 'test_protection', '_controller' => 'App\\Controller\\UsuarioController::testProtection'], null, null, null, false, false, null]],

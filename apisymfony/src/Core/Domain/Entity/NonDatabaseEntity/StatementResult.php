@@ -8,13 +8,17 @@ class StatementResult {
 
     public bool $success;
     public string $elapsed;
-    public Exception $exception;
+    public ?string $exceptionMessage;
 
     public function __construct(bool $success, string $elapsed, Exception $ex = null)
-    {
+    {  
+        
+        
         $this->success = $ex != null ? false : $success;
         $this->elapsed = $elapsed;
-        $this->exception = $ex;
+        $this->exceptionMessage = $ex != null ? $ex->getMessage() : null;
+
+      
     }
 
 

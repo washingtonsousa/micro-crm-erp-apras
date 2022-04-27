@@ -6,8 +6,6 @@
 parameters:
 
 
-imports:
-    - { resource: "service-aggregators.yml" }
 
 services:
     # default configuration for services in *this* file
@@ -25,25 +23,7 @@ services:
             - '../src/Kernel.php'
             - '../src/Core/'
 
-    domain_notify_subscriber:
-        class: App\Core\Shared\EventListener\DomainEventListener
-        tags:
-            - { name: domaineventlistener }   
-    on_request_domain_notification_handler:
-        class: App\Core\Shared\EventSubscribers\DomainNotificationSubscriber
-        tags:
-            - { name: on_request_domain_notification_handler }   
-                  
-    app.core.domain.provider.auth_user_provider:
-        class: App\Core\Domain\Provider\AuthUserProvider
-        arguments:
-            - '@app.core.domain.repository.usuario_repository'
-        public: true
-
-    app.core.domain.repository.usuario_repository:
-        class: App\Core\Domain\Repository\UsuarioRepository
-        public: true
 
 
-    App\Core\Domain\Abstraction\IUsuarioRepository: '@app.core.domain.repository.usuario_repository'
-
+imports:
+    - { resource: "ioc-modules/*.yml" }
