@@ -1,3 +1,0 @@
-<?php //App%255CCore%255CApplication%255CAbstraction%255CViewModel%255CEntityViewModel
-
-return [PHP_INT_MAX, []];
