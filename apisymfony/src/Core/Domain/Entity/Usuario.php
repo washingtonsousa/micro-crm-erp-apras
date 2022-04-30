@@ -13,7 +13,7 @@ use JsonSerializable;
 /**
  * Usuario
  *
- * @ORM\Table(name="usuario", uniqueConstraints={@ORM\UniqueConstraint(name="documento_UNIQUE", columns={"documento"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"}), @ORM\UniqueConstraint(name="usuario_UNIQUE", columns={"usuario"})})
+ * @ORM\Table(name="usuario", uniqueConstraints={@ORM\UniqueConstraint(name="documento_UNIQUE", columns={"documento"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity(repositoryClass="App\Core\Domain\Repository\UsuarioRepository")
  */
 class Usuario extends SerializableEntity implements  UserInterface, PasswordAuthenticatedUserInterface

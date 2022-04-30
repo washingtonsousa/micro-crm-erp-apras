@@ -2,7 +2,9 @@
 namespace App\Core\Domain\Repository;
 
 use App\Core\Domain\Abstraction\Interface\IUsuarioRepository;
+use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\Usuario;
+use App\Core\Domain\Helper\Doctrine\PaginationHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
@@ -21,10 +23,23 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
              
             }
 
-            public function get() : iterable {
-                return   $this->createQueryBuilder('u')
-                ->leftJoin('u.logs','l')
-                ->getQuery()->getResult();
+            public function get($filters, $pageSize = 0, $page = 0) : PaginationAggregator {  
+
+                $query =   $this->createQueryBuilder('u')
+                ->leftJoin('u.logs','l');
+
+                foreach ($filters as $key => $value) {
+                    $query->where('u.'.$key.' '.$value['operator'].' :'.$key); 
+                } 
+                
+                foreach ($filters as $key => $value) {
+                    $query->setParameter('u.'.$key, $value['value']); 
+                }  
+
+                $query = $query->getQuery();
+
+                return PaginationHelper::executePaginationAggregator($query,$pageSize,$page);
+
             }
 
             public function getById($id) : Usuario {

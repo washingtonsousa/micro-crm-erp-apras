@@ -4,6 +4,7 @@ namespace App\Core\Application\Service;
 use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Domain\Abstraction\Interface\IUsuarioService;
+use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\Usuario;
 use App\Core\Domain\Specification\UsuarioSpecification;
 use App\Core\Shared\Mapper\AutoMapperInitializer;
@@ -40,7 +41,7 @@ class UsuarioAppService implements IUsuarioAppService {
 
     }
 
-    public function getUsers() : iterable {
+    public function getUsers() : PaginationAggregator {
 
         $result =  $this->userService->GetUsers();
         return  $result;

@@ -8,6 +8,7 @@ use App\Core\Domain\Command\CheckIfUserExistsCommand;
 use App\Core\Domain\Command\CreateUserCommand;
 use App\Core\Domain\Command\GetUsersCommand;
 use App\Core\Domain\Command\Result\CheckIfUserExistsCommandResult;
+use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\Usuario;
 use App\Core\Domain\Specification\UsuarioSpecification;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -59,13 +60,14 @@ class UsuarioService implements IUsuarioService {
         }
 
 
-        public function GetUsers() : iterable {
+        public function GetUsers() : PaginationAggregator {
+                
                 $command = new GetUsersCommand($this->userRepo);
 
                 $result = $command->Execute();
 
                 if($result->isSuccess())
-                        return $result->getUsers();
+                        return $result->getPaginationResult();
 
                 return null;
         }

@@ -2,13 +2,9 @@
 namespace App\Core\Domain\Command;
 
 use App\Core\Domain\Abstraction\Command\Command;
-use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
 use App\Core\Domain\Abstraction\Interface\IUsuarioRepository;
-use App\Core\Domain\Command\Result\GetUsersCommandResult;
-use App\Core\Domain\Entity\Usuario;
-use DateTime;
+use App\Core\Domain\Command\Result\GetPageOfItemsCommandResult;
 use Exception;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class GetUsersCommand extends Command {
 
@@ -28,14 +24,13 @@ class GetUsersCommand extends Command {
         try {
             
 
-
-           $users = $this->userRepo->get(); 
-            $this->setResult(new GetUsersCommandResult($users));
+           $pagination = $this->userRepo->get(array(),0,0); 
+           $this->setResult(new GetPageOfItemsCommandResult($pagination));
 
 
         } catch(Exception $ex) {
-            var_dump($ex->getMessage());
-            $this->setResult(new GetUsersCommandResult(null));
+            
+            $this->setResult(new GetPageOfItemsCommandResult(null));
         }
     }
 
