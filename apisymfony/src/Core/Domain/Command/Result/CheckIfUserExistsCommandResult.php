@@ -17,7 +17,8 @@ class CheckIfUserExistsCommandResult {
     }
 
     public function isSuccess() {
-        return $this->result != null;
+         
+        return isset($this->result);
     }
 
 }

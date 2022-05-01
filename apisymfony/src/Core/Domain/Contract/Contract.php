@@ -23,6 +23,13 @@ class Contract extends Notifiable {
                 return $this;
             }
 
+            public function MustBeIsset($value, $message) {
+
+                $notification = AssertionConcern::AssertIsset($value,$message);
+                $this->notify( $notification);
+                return $this;
+            }
+
             public function MustBeTrue($value, $message) {
                 $notification = AssertionConcern::AssertTrue($value,$message);
                 $this->notify( $notification);

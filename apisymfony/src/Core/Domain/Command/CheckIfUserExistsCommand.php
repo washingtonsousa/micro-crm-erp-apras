@@ -34,14 +34,14 @@ class CheckIfUserExistsCommand extends Command {
 
         } catch(Exception $ex) {
 
-            var_dump($ex->getMessage());
             $this->setResult(new CheckIfUserExistsCommandResult(null));
         }
     }
 
     public function ValidateResult() {
             //TODO
-            return  $this->contract->MustBeNotNull($this->getResult()->getResult(), "Ocorreu um problema ao tentar verificar o usuário, consulte logs para maiores detalhes");
+
+            return  $this->contract->MustBeIsset($this->getResult()->getResult(), "Ocorreu um problema ao tentar verificar o usuário, consulte logs para maiores detalhes");
     }
 
 }

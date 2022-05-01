@@ -4,11 +4,14 @@ namespace App\Core\Domain\Service;
 use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
 use App\Core\Domain\Abstraction\Interface\IUsuarioRepository;
 use App\Core\Domain\Abstraction\Interface\IUsuarioService;
+use App\Core\Domain\Abstraction\PaginatedEntityRequest;
 use App\Core\Domain\Command\CheckIfUserExistsCommand;
 use App\Core\Domain\Command\CreateUserCommand;
+use App\Core\Domain\Command\GetPageOfItemsCommand;
 use App\Core\Domain\Command\GetUsersCommand;
 use App\Core\Domain\Command\Result\CheckIfUserExistsCommandResult;
 use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
+use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetUsuarioPaginatedEntityQuery;
 use App\Core\Domain\Entity\Usuario;
 use App\Core\Domain\Specification\UsuarioSpecification;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -60,9 +63,10 @@ class UsuarioService implements IUsuarioService {
         }
 
 
-        public function GetUsers() : PaginationAggregator {
+        public function GetUsers(GetUsuarioPaginatedEntityQuery $paginatedRequest) : PaginationAggregator {
+
                 
-                $command = new GetUsersCommand($this->userRepo);
+                $command = new GetPageOfItemsCommand($this->userRepo, $paginatedRequest);
 
                 $result = $command->Execute();
 

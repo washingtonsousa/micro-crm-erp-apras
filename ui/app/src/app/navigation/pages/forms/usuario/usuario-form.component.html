@@ -1,0 +1,33 @@
+<form [formGroup]="usuarioFormGroup" (ngSubmit)="Login()">
+
+  <label class="mb-2 required"> Nome: </label>
+
+  <input type="text" class="form-control mb-1" formControlName="username" />
+
+  <alert type="danger" *ngIf="loginFormGroup.touched && loginFormGroup.controls['username'].errors?.required">
+
+    Insira o usuário, é obrigatório
+
+  </alert>
+
+
+  <label class="mb-2 required"> Senha: </label>
+
+  <input type="password" class="form-control mb-1" formControlName="password"  />
+
+  <alert type="danger" *ngIf="loginFormGroup.touched && loginFormGroup.controls['password'].errors?.required">
+
+    Insira a senha, é obrigatório
+
+  </alert>
+
+  <p class="mt-2"> <small>
+
+    Todos os itens marcados com "*" são obrigatórios.
+
+  </small></p>
+
+
+  <button [disabled]="!loginFormGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-sign-in"></i> Entrar  </button>
+
+</form>

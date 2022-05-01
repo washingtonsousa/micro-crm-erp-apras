@@ -62,9 +62,17 @@ class AssertionConcern {
           : null;
     }
 
+    public static function AssertIsset(mixed $object1 , string $message, string $key = "AssertArgumentIsset", $rank = RankEnum::Low)
+    {
+
+      return !isset($object1)
+          ? new DomainNotification($key, $message, $rank)
+          : null;
+    }
+
     public static function AssertNotNull(mixed $object1 , string $message, string $key = "AssertArgumentNotNull", $rank = RankEnum::Low)
     {
-      return ($object1  == null)
+      return (empty($object1))
           ? new DomainNotification($key, $message, $rank)
           : null;
     }

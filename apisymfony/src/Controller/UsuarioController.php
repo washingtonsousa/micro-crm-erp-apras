@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
+use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
+use App\Core\Application\ViewModel\Request\UsuarioGetRequestViewModel as RequestUsuarioGetRequestViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,6 +30,8 @@ class UsuarioController extends AbstractController {
                 DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
               ]);
 
+            
+
               $result = $this->usuarioAppService->register($requestValue);
               return new JsonResponse($result);
 
@@ -35,9 +39,9 @@ class UsuarioController extends AbstractController {
 
         public function get(Request $request)
         {
-      
 
-              $result = $this->usuarioAppService->getUsers();
+              $requestParams = new PaginatedEntityRequestViewModel($request->query->all());
+              $result = $this->usuarioAppService->getUsers($requestParams);
               return new JsonResponse($result);
 
         }

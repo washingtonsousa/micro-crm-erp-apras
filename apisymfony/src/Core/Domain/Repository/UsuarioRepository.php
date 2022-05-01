@@ -3,9 +3,13 @@ namespace App\Core\Domain\Repository;
 
 use App\Core\Domain\Abstraction\Interface\IUsuarioRepository;
 use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
+use App\Core\Domain\Entity\NonDatabaseEntity\QueryExpression;
 use App\Core\Domain\Entity\Usuario;
 use App\Core\Domain\Helper\Doctrine\PaginationHelper;
+use App\Core\Domain\Helper\QueryHelper;
+use App\Core\Domain\Query\UsuarioQueryHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,25 +24,19 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
                 $this->doctrine = $doctrine;
                 $this->manager = $this->doctrine->getManager();
                 parent::__construct($doctrine, Usuario::class);
-             
             }
 
-            public function get($filters, $pageSize = 0, $page = 0) : PaginationAggregator {  
+            public function get(QueryExpression $queryExpression, $pageSize = 0, $orderBy, $page = 0, $order = 'DESC', ) : PaginationAggregator {  
 
-                $query =   $this->createQueryBuilder('u')
-                ->leftJoin('u.logs','l');
-
-                foreach ($filters as $key => $value) {
-                    $query->where('u.'.$key.' '.$value['operator'].' :'.$key); 
-                } 
+                $query = UsuarioQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
+                $queryForCount  = UsuarioQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
                 
-                foreach ($filters as $key => $value) {
-                    $query->setParameter('u.'.$key, $value['value']); 
-                }  
+                $query = UsuarioQueryHelper::buildDefaultSelectForGetPageList($query);
+                $totalItemsCount = (int) QueryHelper::buildQueryFiltersAndDoCount($queryForCount, $queryExpression, 'u.idUsuario');
 
-                $query = $query->getQuery();
+                $query = QueryHelper::buildQueryFilters($query, $queryExpression);
 
-                return PaginationHelper::executePaginationAggregator($query,$pageSize,$page);
+                return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page, $totalItemsCount);
 
             }
 
@@ -77,14 +75,15 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
 
             public function checkIfExists(string $documento, string $email) {
 
-                return  $this->createQueryBuilder('u')
+                $result = (int) $this->createQueryBuilder('u')
                 ->select('COUNT(u.idUsuario)')
                 ->where('u.documento = :documento OR u.email = :email')
                 ->setParameter('documento', $documento)
                 ->setParameter('email', $email)
                 ->getQuery()
-                ->getScalarResult(\Doctrine\ORM\Query::HYDRATE_SINGLE_SCALAR) > 0;
+                ->getSingleScalarResult();
 
+                return      $result  > 0;
             }
 
 }
