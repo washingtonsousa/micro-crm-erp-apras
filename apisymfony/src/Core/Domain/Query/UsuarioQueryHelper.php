@@ -17,7 +17,7 @@ class UsuarioQueryHelper {
     }
 
     public static function buildDefaultSelectForGetPageList(\Doctrine\ORM\QueryBuilder $queryBuilder) {
-        return $queryBuilder->select('u.idUsuario', 'u.nome', 'u.email', 'u.documento');
+        return $queryBuilder->select('u.idUsuario', 'u.nome', 'u.email', 'u.documento', 'u.dataCriacao');
     }
 
 

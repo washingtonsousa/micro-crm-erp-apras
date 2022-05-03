@@ -30,6 +30,12 @@ security:
             provider: auth_user_provider
             jwt: ~
 
+        api:
+            pattern:  ^/api
+            stateless: true
+            provider: auth_user_provider
+            jwt: ~
+
         main:
             lazy: true
             provider: auth_user_provider
@@ -44,7 +50,9 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/v1/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/usuario, roles: IS_FULLY_AUTHENTICATED, methods: [PATCH]}
+        - { path: ^/api/usuario, roles: ROLE_ADMIN, methods: [PUT, GET, POST, DELETE]}
+
 
 when@test:
     security:

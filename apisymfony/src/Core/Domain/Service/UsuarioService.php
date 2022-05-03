@@ -15,18 +15,23 @@ use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetUsuarioPaginatedEntityQuer
 use App\Core\Domain\Entity\Usuario;
 use App\Core\Domain\Specification\UsuarioSpecification;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UsuarioService implements IUsuarioService {
 
     private IUsuarioRepository $userRepo;
     private UserPasswordHasherInterface $encoder;
     private IUnityOfWork $unityOfWork;
+    protected TokenStorageInterface $tokenInterface;
 
-    public function __construct(UserPasswordHasherInterface $encoder, IUnityOfWork $unityOfWork, IUsuarioRepository $userRepo)
+    public function __construct(TokenStorageInterface $tokenInterface, 
+    UserPasswordHasherInterface $encoder, IUnityOfWork $unityOfWork, IUsuarioRepository $userRepo)
     {
             $this->encoder = $encoder;
             $this->unityOfWork = $unityOfWork;
             $this->userRepo = $userRepo;
+            $this->tokenInterface = $tokenInterface;
+
     }
 
 
@@ -45,7 +50,28 @@ class UsuarioService implements IUsuarioService {
 
         }
 
-        public function Subscribe(Usuario $user) {
+        public function getCurrentLoggedInUser() : ?Usuario {
+
+                $token = $this->tokenInterface->getToken();
+        
+                if (!$token) {
+                    return null;
+                }
+            
+                $user = $token->getUser();
+            
+                 if (!$user instanceof Usuario) {
+                     return null;
+                 }
+        
+                return $user;
+            }
+
+        public function update(Usuario $usuario) {
+                return $usuario;
+        }
+
+        public function subscribe(Usuario $user) {
                 
 
                 if(!UsuarioSpecification::MustNotExists($this->CheckIfExists($user)))
@@ -63,10 +89,10 @@ class UsuarioService implements IUsuarioService {
         }
 
 
-        public function GetUsers(GetUsuarioPaginatedEntityQuery $paginatedRequest) : PaginationAggregator {
+        public function getUsers(GetUsuarioPaginatedEntityQuery $paginatedQuery) : PaginationAggregator {
 
                 
-                $command = new GetPageOfItemsCommand($this->userRepo, $paginatedRequest);
+                $command = new GetPageOfItemsCommand($this->userRepo, $paginatedQuery);
 
                 $result = $command->Execute();
 

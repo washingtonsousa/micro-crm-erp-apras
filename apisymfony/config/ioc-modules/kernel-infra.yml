@@ -14,7 +14,13 @@ services:
         class:  App\Core\Shared\Mapper\AutoMapperInitializer
         public: true
         autowire: true
+
+    paginated_request_handler:
+        class: App\Core\Shared\Handler\PaginatedRequestHandler
+        public: true
+        autowire: true
         
     App\Core\Shared\Handler\HandlerAggregator: '@handler_aggregator'
     App\Core\Shared\Event\DomainNotificationContainer: '@domain_notification_container'
     App\Core\Shared\Mapper\AutoMapperInitializer: '@auto_mapper_init'
+    App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler: '@paginated_request_handler'

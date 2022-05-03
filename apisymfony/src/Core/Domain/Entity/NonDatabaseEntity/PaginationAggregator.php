@@ -3,11 +3,11 @@ namespace App\Core\Domain\Entity\NonDatabaseEntity;
 
 
 class PaginationAggregator {
-
-        public $items;
-        public $totalItems;
-        public $page;
-        public $totalPages;
+        
+        public array $items;
+        public int $totalItems;
+        public int $page;
+        public int $totalPages;
 
         public function __construct($items, $totalItems, $page, $totalPages)
         {

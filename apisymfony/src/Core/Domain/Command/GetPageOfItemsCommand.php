@@ -28,7 +28,7 @@ class GetPageOfItemsCommand extends Command {
             
            $pagination = $this->paginatedRepository->get(
         
-            $this->paginatedRequestedModel->getQueryExpressions(), 
+           $this->paginatedRequestedModel->getQueryExpressions(), 
            $this->paginatedRequestedModel->getRequest()->getPageSize(), 
            $this->paginatedRequestedModel->getOrderByField(),
            $this->paginatedRequestedModel->getRequest()->getPage(),

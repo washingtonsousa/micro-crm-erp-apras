@@ -4,7 +4,7 @@
 
   <input type="text" class="form-control mb-1" formControlName="username" />
 
-  <alert type="danger" *ngIf="loginFormGroup.touched && loginFormGroup.controls['username'].errors?.required">
+  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['username'].errors?.required">
 
     Insira o usuário, é obrigatório
 
@@ -15,7 +15,7 @@
 
   <input type="password" class="form-control mb-1" formControlName="password"  />
 
-  <alert type="danger" *ngIf="loginFormGroup.touched && loginFormGroup.controls['password'].errors?.required">
+  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['password'].errors?.required">
 
     Insira a senha, é obrigatório
 
@@ -28,6 +28,6 @@
   </small></p>
 
 
-  <button [disabled]="!loginFormGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-sign-in"></i> Entrar  </button>
+  <button [disabled]="!usuarioFormGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-sign-in"></i> Entrar  </button>
 
 </form>

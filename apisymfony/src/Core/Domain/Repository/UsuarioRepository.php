@@ -67,7 +67,7 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
 
 
             }
-
+            
             public function insert(Usuario $user) {
 
                return $this->manager->persist($user);

@@ -52,7 +52,7 @@ class Usuario extends SerializableEntity implements  UserInterface, PasswordAuth
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_atualizacao", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="data_atualizacao", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
     public ?DateTime $dataAtualizacao;
 

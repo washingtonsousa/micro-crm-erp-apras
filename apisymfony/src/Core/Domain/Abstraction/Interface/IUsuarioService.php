@@ -8,7 +8,8 @@ use App\Core\Domain\Entity\Usuario;
 
 interface IUsuarioService {
 
-            public function Subscribe(Usuario $user);
-            public function GetUsers(GetUsuarioPaginatedEntityQuery $paginatedQuery) : PaginationAggregator;
-
+            public function update(Usuario $user);
+            public function subscribe(Usuario $user);
+            public function getUsers(GetUsuarioPaginatedEntityQuery $paginatedQuery) : PaginationAggregator;
+            public function getCurrentLoggedInUser() : ?Usuario;
 }

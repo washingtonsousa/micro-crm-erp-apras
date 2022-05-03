@@ -12,16 +12,6 @@ api:
     prefix: /api
     resource: './routes/api-routes.yml'
 
-
-login:
-    path:     /login
-    methods:  [POST]
-    controller: App\Controller\LoginController::login
-
 login_check:
     path:     /login_check
     methods:  [POST]
-
-test_protection:
-    path: /test
-    controller: App\Controller\UsuarioController::testProtection

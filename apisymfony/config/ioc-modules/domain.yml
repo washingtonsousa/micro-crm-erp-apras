@@ -25,8 +25,14 @@ services:
       class: App\Core\Shared\EventSubscribers\DomainNotificationSubscriber
       tags:
           - {  name: kernel.event_subscriber }
-      autowire: true   
-                
+      autowire: true  
+
+  on_request_paginated_request_handler_listener:
+      class:  App\Core\Shared\EventSubscribers\PaginatedRequestHandlerListener
+      tags:
+          - {  name: kernel.event_subscriber }
+      autowire: true  
+
   app.core.domain.provider.auth_user_provider:
       class: App\Core\Domain\Provider\AuthUserProvider
       arguments:
