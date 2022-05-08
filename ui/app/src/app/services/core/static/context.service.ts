@@ -19,6 +19,10 @@ export class ContextService {
           return this.GetContext().token != null && this.GetContext().token != "";
         }
 
+        static logout() {
+          localStorage.setItem("token", '');
+        }
+
 
 
 

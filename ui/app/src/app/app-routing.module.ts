@@ -4,6 +4,7 @@ import { AuthGuard } from './infra/interceptors/guard/auth-guard';
 import { ClienteComponent } from './navigation/pages/cliente/cliente.component';
 import { HomeComponent } from './navigation/pages/home/home.component';
 import { LoginComponent } from './navigation/pages/login/login.component';
+import { UsuarioComponent } from './navigation/pages/usuario/usuario.component';
 
 const routes: Routes = [
 
@@ -23,6 +24,12 @@ const routes: Routes = [
 {
 
   path: "cliente", component: ClienteComponent, canActivate: [AuthGuard]
+
+},
+
+{
+
+  path: "usuario", component: UsuarioComponent, canActivate: [AuthGuard]
 
 }
 

@@ -1,25 +1,79 @@
-<form [formGroup]="usuarioFormGroup" (ngSubmit)="Login()">
+<form [formGroup]="usuarioFormGroup" (ngSubmit)="Subscribe()">
 
   <label class="mb-2 required"> Nome: </label>
 
-  <input type="text" class="form-control mb-1" formControlName="username" />
+  <input type="text" class="form-control mb-1" formControlName="nome" />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['username'].errors?.required">
+  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['nome'].errors?.required">
 
-    Insira o usuário, é obrigatório
+    Insira o nome, é obrigatório
+
+  </alert>
+
+
+  <label class="mb-2 required"> Email: </label>
+
+  <input type="text" class="form-control mb-1" formControlName="email"  />
+
+  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['email'].errors?.required">
+
+    Insira o email, é obrigatório
+
+  </alert>
+
+  <label class="mb-2 required"> Documento: </label>
+
+  <input type="text" class="form-control mb-1" formControlName="documento"  />
+
+  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['documento'].errors?.required">
+
+    Insira o documento, é obrigatório
 
   </alert>
 
 
   <label class="mb-2 required"> Senha: </label>
 
-  <input type="password" class="form-control mb-1" formControlName="password"  />
+  <input type="password" class="form-control mb-1" formControlName="senha"  />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['password'].errors?.required">
+  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['senha'].errors?.required">
 
     Insira a senha, é obrigatório
 
   </alert>
+
+  <label class="mb-2 required"> Repita a Senha: </label>
+
+  <input type="password" (change)="onSenhaValueChanges($event)" class="form-control mb-1" />
+
+  <alert type="danger" *ngIf="usuarioFormGroup.touched && (usuarioFormGroup.controls['senha'].value != senhaConferencia)">
+
+    Senhas não conferem
+
+  </alert>
+
+
+  <label class="mb-2 required"> Nível de acesso: </label>
+
+
+  <select formControlName="nivelAcesso" name="nivelAcesso">
+
+
+    <option  value="1" selected="selected">
+
+      Funcionario
+
+  </option>
+
+    <option  value="2">
+
+        Administrador
+
+    </option>
+
+
+
+  </select>
 
   <p class="mt-2"> <small>
 
@@ -28,6 +82,6 @@
   </small></p>
 
 
-  <button [disabled]="!usuarioFormGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-sign-in"></i> Entrar  </button>
+  <button [disabled]="!usuarioFormGroup.valid" class="mt-2 w-100 btn btn-primary "> <i class="fas fa-save"></i> Cadastrar  </button>
 
 </form>

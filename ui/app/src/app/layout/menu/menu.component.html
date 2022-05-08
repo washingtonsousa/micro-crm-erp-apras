@@ -1,14 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Apras Uniformes</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="assets/logo.png" width="100px" /></a>
+
+
+    <div  id="navbarNav">
+      <ul class="custom-navbar d-flex">
+
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <user-menu></user-menu>
         </li>
+
+        <li class="nav-item">
+          <a class="side-menu-toggler nav-link active pointer" (click)="barsClick.emit()" aria-current="page" ><i class="side-menu-toggler fas fa-bars"></i></a>
+        </li>
+
+
+
+
       </ul>
     </div>
   </div>

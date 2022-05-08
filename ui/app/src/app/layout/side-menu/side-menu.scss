@@ -1,0 +1,72 @@
+@import "/src/global-styles/vars.scss";
+
+.side-menu {
+
+   transition: all 0.3s;
+
+  &.side-menu-show {
+    right:0px;
+  }
+
+  .side-menu-logo-area {
+
+    padding:24px;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  right:-500px;
+
+    max-width: 100%;
+    min-width:300px;
+    height:100%;
+    position: fixed;
+    display: block;
+    height: 100%;
+    background-color: white;
+    z-index: 9999999;
+
+      .side-menu-options {
+
+        background-color: #f1f1f1;
+
+          ul {
+
+            padding-left: 0rem;
+            width: 100%;
+            margin-bottom: 0rem;
+
+              li {
+
+                width: 100%;
+                display: block;
+                list-style-type: none;
+
+                  a {
+                    text-decoration: none;
+                    color:$primary-menu-text-color;
+                    width: 100%;
+                    padding:16px;
+                    display: block;
+                    font-size: 1.3em;
+                    text-align: center;
+                  }
+
+                  border-top: 1px solid #ccc ;
+
+                  &:last-child {
+
+                    border-bottom: 1px solid #ccc ;
+
+                  }
+              }
+
+
+
+          }
+
+      }
+
+
+}

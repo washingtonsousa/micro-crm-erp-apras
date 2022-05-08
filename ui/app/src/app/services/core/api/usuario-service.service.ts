@@ -15,16 +15,26 @@ export class UsuarioService {
 
       }
 
-      public Login(requestData: TokenRequest) : Observable<TokenResponse> {
-           return this.http.post<TokenResponse>(environment.apiUri + "/login_check", requestData);
+      public Login(requestData: TokenRequest) : Observable<DefaultDataResponse<TokenResponse>> {
+           return this.http.post<DefaultDataResponse<TokenResponse>>(environment.apiUri + "/login_check", requestData);
       }
 
       public Get() : Observable<DefaultDataResponse<PaginationReponse<Usuario>>> {
-        return this.http.get<DefaultDataResponse<PaginationReponse<Usuario>>>(environment.apiUri + "/usuario");
+        return this.http.get<DefaultDataResponse<PaginationReponse<Usuario>>>(
+          environment.apiUri +
+          "/api/usuario",  {
+          params: {
+            pageSize: '4',
+            cnt: '5'
+          }
+        }
+
+          )
+          ;
       }
 
       public Subscribe( usuario: Usuario) : Observable<DefaultDataResponse<Usuario>> {
-        return this.http.post<DefaultDataResponse<Usuario>>(environment.apiUri + "/usuario", usuario);
+        return this.http.post<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario", usuario);
       }
 
 

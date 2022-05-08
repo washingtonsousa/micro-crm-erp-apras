@@ -1,3 +1,9 @@
 body {
   background-color: #f1f1f1 !important;
 }
+
+.box-shadow {
+  @extend %default-shadow;
+}
+
+

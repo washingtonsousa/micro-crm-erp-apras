@@ -2,6 +2,7 @@ import { Component, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { EventEmitter } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Cliente } from "src/app/business/entities/model/cliente";
 
 
 
@@ -12,6 +13,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 })
 export class ClienteComponent {
 
+   clientes!: Cliente[];
 
 
   constructor() {

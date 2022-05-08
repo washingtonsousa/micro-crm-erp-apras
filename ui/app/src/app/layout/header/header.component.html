@@ -1,4 +1,7 @@
 
+<side-menu #sideMenu></side-menu>
+
+
 <div class="header">
-  <menu></menu>
+  <menu  (barsClick)="sideMenu.Toggle()" ></menu>
 </div>

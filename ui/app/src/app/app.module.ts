@@ -13,6 +13,8 @@ import { AuthGuard } from './infra/interceptors/guard/auth-guard';
 import { MaterialModule } from './ui-components/material/material.module';
 import { GeneralUIModule } from './ui-components/general/generalUI.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
     NavigationModule,
     LayoutModule,
     BrowserAnimationsModule,

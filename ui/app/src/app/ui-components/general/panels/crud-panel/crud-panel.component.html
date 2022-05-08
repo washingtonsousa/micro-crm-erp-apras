@@ -1,13 +1,18 @@
 
   <box-container>
 
-    <div class="container d-flex">
+    <div class="container d-flex justify-content-end ms-auto">
 
       <ng-content> </ng-content>
 
-      <input class="form-control" type="text" value="" />
+      <div class="col-xl-4">
 
-      <button class="btn btn-success" tooltip="Adicionar"> <i class="fas fa-plus"></i>  </button>
+        <input class="form-control" [(ngModel)]="searchValue" type="text" value="" />
+
+      </div>
+
+      <button class="btn btn-primary mx-1" (click)="onSearchClick.emit(searchValue)" tooltip="Pesquisar"> <i class="fas fa-search"></i>  </button>
+      <button class="btn btn-success" (click)="onAddClick.emit($event)" tooltip="Adicionar"> <i class="fas fa-plus"></i>  </button>
 
 
     </div>
