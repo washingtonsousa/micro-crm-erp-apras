@@ -11,6 +11,7 @@ class PaginatedEntityRequestViewModel {
         protected int  $pageSize = 10;
         protected ?string $order = "desc";
         protected ?string $orderBy = null;
+        protected ?string $term = "";
         protected $queryParams = array();
 
         public function __construct(array $queryParams)
@@ -47,6 +48,9 @@ class PaginatedEntityRequestViewModel {
             $orderValue = isset($queryParams["order"]) ? $queryParams["order"] : $this->order;
             $this->order = trim(strtolower($orderValue)) != "desc" &&  trim(strtolower($orderValue)) != "asc" ? $this->order :  $orderValue;
             $this->orderBy = isset($queryParams["orderBy"]) ? $queryParams["orderBy"] : $this->orderBy;
+            $this->term = isset($queryParams["term"]) ? $queryParams["term"] : $this->term;
+
+            
         }
 
         private function init(array $queryParams) {

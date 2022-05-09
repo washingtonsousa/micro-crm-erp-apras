@@ -1,9 +1,13 @@
+@import "/src/global-styles/vars.scss";
+
 .card-icon {
       svg {
         height: 8rem;
+        color: $primary;
       }
 
       padding: 16px;
       text-align: center;
+      background-color: #ccc;
 }
 

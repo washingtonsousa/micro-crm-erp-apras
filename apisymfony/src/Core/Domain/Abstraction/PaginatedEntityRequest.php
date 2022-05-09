@@ -7,6 +7,8 @@ class PaginatedEntityRequest {
         private int  $pageSize;
         private ?string $order;
         private ?string $orderBy;
+        private ?string $term;
+
         private array $queryParams;
 
         public  function __construct()
@@ -51,5 +53,14 @@ class PaginatedEntityRequest {
         public function getQueryParams() : array
         {
                 return $this->queryParams;
+        }
+
+        /**
+         * Get the value of term
+         */ 
+        public function getTerm()
+        {
+                
+                return $this->term;
         }
 }

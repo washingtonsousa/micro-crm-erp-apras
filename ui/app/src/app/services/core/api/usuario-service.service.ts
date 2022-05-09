@@ -7,6 +7,7 @@ import { TokenRequest } from "../../../business/entities/request/token-request";
 import { Usuario } from "src/app/business/entities/model/usuario";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
 import { PaginationReponse } from "src/app/business/entities/response/pagination-response";
+import { PaginationDataRequest } from "src/app/business/entities/request/pagination-data-request";
 
 @Injectable()
 export class UsuarioService {
@@ -19,14 +20,11 @@ export class UsuarioService {
            return this.http.post<DefaultDataResponse<TokenResponse>>(environment.apiUri + "/login_check", requestData);
       }
 
-      public Get() : Observable<DefaultDataResponse<PaginationReponse<Usuario>>> {
+      public Get(request: PaginationDataRequest<Usuario>) : Observable<DefaultDataResponse<PaginationReponse<Usuario>>> {
         return this.http.get<DefaultDataResponse<PaginationReponse<Usuario>>>(
           environment.apiUri +
           "/api/usuario",  {
-          params: {
-            pageSize: '4',
-            cnt: '5'
-          }
+          params: request.ToHTTPParams()
         }
 
           )

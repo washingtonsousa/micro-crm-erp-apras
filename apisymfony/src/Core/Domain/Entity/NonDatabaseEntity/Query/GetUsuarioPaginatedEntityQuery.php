@@ -34,9 +34,9 @@ class GetUsuarioPaginatedEntityQuery extends PaginatedEntityQuery {
             $array = array();
             $params = $this->getAllowedQueryParams();
 
-            $array['nome'] = new QueryFilter('nome', $params['nome'], 'like');
-            $array['email'] = new QueryFilter('email', $params['email'], 'like');
-            $array['documento'] = new QueryFilter('documento', $params['documento'], 'like');
+            $array['nome'] = new QueryFilter('nome', $this->request->getTerm(), 'like');
+            $array['email'] = new QueryFilter('email', $this->request->getTerm(), 'like');
+            $array['documento'] = new QueryFilter('documento', $this->request->getTerm(), 'like');
 
             return  $array;
 
@@ -48,8 +48,8 @@ class GetUsuarioPaginatedEntityQuery extends PaginatedEntityQuery {
            
             foreach($filters as $filter) {
 
-                if(isset(  $this->queryExpressionBuilder))
-                $this->queryExpressionBuilder->addAndExpression($filter, 'u');
+                if(isset($this->queryExpressionBuilder))
+                $this->queryExpressionBuilder->addORExpression($filter, 'u');
 
                 if(!isset(  $this->queryExpressionBuilder))
                 $this->queryExpressionBuilder = new QueryExpressionBuilder($filter, 'u');

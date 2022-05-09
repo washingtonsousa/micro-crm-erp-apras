@@ -2,7 +2,7 @@
 
   <box-container>
 
-    <crud-panel (onAddClick)="modalUsuario.openModal()">  </crud-panel>
+    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadUsuarios()" (onCurrentPageChanges)="request.page = $event; loadUsuarios();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalUsuario.openModal()">  </crud-panel>
 
           <div class="container" class="mt-3">
 
@@ -17,12 +17,31 @@
             </div>
 
 
+
+
   </box-container>
 
 
 </container>
 
 <clean-modal #modalUsuario title="Cadastro de Usuário">
+
+  <usuario-form (onSuccess)="onSubscribeSuccess($event); modalUsuario.closeModal()" (onFail)="onSubscribeFail($event)">
+
+  </usuario-form>
+
+
+  <alert *ngFor="let notification of notifications" type="danger">
+
+     {{ notification.message }}
+
+  </alert>
+
+
+</clean-modal>
+
+
+<clean-modal #modalUsuarioUpdate title="Atualizacao de Usuário">
 
   <usuario-form (onSuccess)="onSubscribeSuccess($event); modalUsuario.closeModal()" (onFail)="onSubscribeFail($event)">
 
