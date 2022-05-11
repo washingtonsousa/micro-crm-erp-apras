@@ -31,9 +31,23 @@ export class UsuarioService {
           ;
       }
 
+      public GetById(id: number) : Observable<DefaultDataResponse<Usuario>> {
+        return this.http.get<DefaultDataResponse<Usuario>>(
+          environment.apiUri +
+          "/api/usuario/" + id
+          )
+          ;
+      }
+
       public Subscribe( usuario: Usuario) : Observable<DefaultDataResponse<Usuario>> {
         return this.http.post<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario", usuario);
       }
+
+
+      public Update( usuario: Usuario) : Observable<DefaultDataResponse<Usuario>> {
+        return this.http.put<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario/" + usuario.idUsuario, usuario);
+      }
+
 
 
 }

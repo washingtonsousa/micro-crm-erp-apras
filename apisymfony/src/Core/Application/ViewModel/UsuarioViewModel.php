@@ -5,6 +5,7 @@ use App\Core\Application\Abstraction\ViewModel\EntityViewModel;
 use DateTime;
 
 class UsuarioViewModel extends EntityViewModel {
+    public $idUsuario;
 
     public $nome;
     public $email;

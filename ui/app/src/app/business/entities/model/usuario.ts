@@ -1,5 +1,7 @@
 export class Usuario {
-      nome!: string;
-      email!:string;
-      documento!:string;
+      idUsuario:number = 0;
+      nome: string = "";
+      email:string = "";
+      documento:string = "";
+      nivelAcesso: number = 1;
 }

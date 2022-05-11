@@ -1,9 +1,10 @@
 <?php
 namespace App\Core\Application\Abstraction\ViewModel\Pagination;
 
-class PaginationAggregatorTemplateViewModel {
+class PaginationAggregatorViewModel {
 
     public int $totalItems;
     public int $page;
     public int $totalPages;
+    public mixed $items;
 }

@@ -3,6 +3,7 @@ namespace App\Core\Application\Service;
 
 use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
+use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\Pagination\UsuarioPaginationResponseViewModel;
 use App\Core\Application\ViewModel\Request\UsuarioGetRequestViewModel as RequestUsuarioGetRequestViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
@@ -30,7 +31,7 @@ class UsuarioAppService implements IUsuarioAppService {
         $this->mapper = $mapperInitializer->getMapper();
     }
 
-    public function register(UsuarioViewModel $userViewModel) {
+    public function register(UsuarioViewModel $userViewModel) : ?UsuarioViewModel {
 
         $usuario = $this->mapper->map($userViewModel, Usuario::class);
 
@@ -54,7 +55,7 @@ class UsuarioAppService implements IUsuarioAppService {
 
         $usuario = $this->mapper->map($userViewModel, Usuario::class);
 
-        $result =  $this->userService->getCurrentLoggedInUser();
+        $result =  $this->userService->update($usuario);
      
         if($result == null)
             return null;
@@ -82,15 +83,23 @@ class UsuarioAppService implements IUsuarioAppService {
 
     }
 
-    public function getUsers(PaginatedEntityRequestViewModel $paramsModel) : UsuarioPaginationResponseViewModel {
+    public function getUsers(PaginatedEntityRequestViewModel $paramsModel) : PaginationAggregatorViewModel {
 
         $params = $this->mapper->map($paramsModel, PaginatedEntityRequest::class);
 
         $query = new GetUsuarioPaginatedEntityQuery($params);
 
-        $result =  $this->mapper->map($this->userService->getUsers($query), UsuarioPaginationResponseViewModel::class);
+        $domainResult  =$this->userService->getUsers($query);
 
+        $result =  $this->mapper->map( $domainResult, PaginationAggregatorViewModel::class);
         return  $result;
+    }
+
+    public function getUsuarioById(int $id) : ?UsuarioViewModel {
+
+        $result =  $this->mapper->map($this->userService->getUsuarioById($id), UsuarioViewModel::class);
+        return  $result;
+
     }
 
 

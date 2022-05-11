@@ -27,6 +27,12 @@ services:
           - {  name: kernel.event_subscriber }
       autowire: true  
 
+  on_request_response_subscriber:
+      class: App\Core\Shared\EventSubscribers\ResponseDataSubscriber
+      tags:
+          - {  name: kernel.event_subscriber }
+      autowire: true    
+
   on_request_paginated_request_handler_listener:
       class:  App\Core\Shared\EventSubscribers\PaginatedRequestHandlerListener
       tags:

@@ -2,6 +2,7 @@
 namespace App\Core\Application\Mapping;
 
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
+use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\Pagination\UsuarioPaginationResponseViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
@@ -26,7 +27,7 @@ class ViewModelMapping {
         });
 
         $config->registerMapping(PaginatedEntityRequestViewModel::class, PaginatedEntityRequest::class);
-        $config->registerMapping(PaginationAggregator::class, UsuarioPaginationResponseViewModel::class);
+        $config->registerMapping(PaginationAggregator::class, PaginationAggregatorViewModel::class);
 
     }
 

@@ -6,7 +6,7 @@ use Exception;
 
 class GetUserCommandResult {
 
-    private ?Usuario $user;
+    private ?Usuario $usuario;
     private ?Exception $ex;
 
     private function __construct()
@@ -14,9 +14,9 @@ class GetUserCommandResult {
         
     }
 
-    protected function setUsuario(?Usuario $user)
+    protected function setUsuario(?Usuario $usuario)
     {
-        $this->user = $user;
+        $this->usuario = $usuario;
     }
 
     protected function setException(?Exception $ex)
@@ -39,12 +39,12 @@ class GetUserCommandResult {
     }
 
 
-    public function getUser() {
-        return $this->user;
+    public function getUsuario() {
+        return $this->usuario;
     }
 
     public function isSuccess() {
-        return $this->user != null;
+        return $this->usuario != null;
     }
 
 }

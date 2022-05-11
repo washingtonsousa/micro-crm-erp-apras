@@ -38,8 +38,16 @@ class UsuarioController extends AbstractController {
 
         public function get(IPaginatedRequestHandler $handler)
         {
-
+          
               $result = $this->usuarioAppService->getUsers($handler->getRequestViewModel());
+              return new JsonResponse($result);
+
+        }
+
+        public function getById(Request $request)
+        {
+          
+              $result = $this->usuarioAppService->getUsuarioById($request->attributes->get('id'));
               return new JsonResponse($result);
 
         }

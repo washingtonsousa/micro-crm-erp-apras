@@ -8,6 +8,7 @@ use App\Core\Domain\Abstraction\PaginatedEntityRequest;
 use App\Core\Domain\Command\CheckIfUserExistsCommand;
 use App\Core\Domain\Command\CreateUserCommand;
 use App\Core\Domain\Command\GetPageOfItemsCommand;
+use App\Core\Domain\Command\GetUserCommand;
 use App\Core\Domain\Command\GetUsersCommand;
 use App\Core\Domain\Command\Result\CheckIfUserExistsCommandResult;
 use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
@@ -81,6 +82,7 @@ class UsuarioService implements IUsuarioService {
 
                 $result = $command->Execute();
 
+
                 if($result->isSuccess())
                         return $result->getUser();
 
@@ -95,9 +97,24 @@ class UsuarioService implements IUsuarioService {
                 $command = new GetPageOfItemsCommand($this->userRepo, $paginatedQuery);
 
                 $result = $command->Execute();
+               
 
                 if($result->isSuccess())
                         return $result->getPaginationResult();
+
+                return null;
+        }
+
+
+        public function getUsuarioById(int $id) : ?Usuario {
+
+                
+                $command = new GetUserCommand($id, $this->userRepo);
+
+                $result = $command->Execute();
+
+                if($result->isSuccess())
+                        return $result->getUsuario();
 
                 return null;
         }

@@ -1,10 +1,10 @@
-<form [formGroup]="usuarioFormGroup" (ngSubmit)="Subscribe()">
+<form [formGroup]="usuarioFormGroup" (ngSubmit)="Submit()">
 
   <label class="mb-2 required"> Nome: </label>
 
   <input type="text" class="form-control mb-1" formControlName="nome" />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['nome'].errors?.required">
+  <alert type="danger" *ngIf="usuarioFormGroup.get('nome')?.touched && usuarioFormGroup.controls['nome'].errors?.required">
 
     Insira o nome, é obrigatório
 
@@ -15,7 +15,7 @@
 
   <input type="text" class="form-control mb-1" formControlName="email"  />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['email'].errors?.required">
+  <alert type="danger" *ngIf="usuarioFormGroup.get('email')?.touched && usuarioFormGroup.controls['email'].errors?.required">
 
     Insira o email, é obrigatório
 
@@ -23,7 +23,7 @@
 
   <label class="mb-2 required"> Documento: </label>
 
-  <input type="text" class="form-control mb-1" formControlName="documento"  />
+  <input [attr.disabled]="updateMode ? '' : null" type="text" class="form-control mb-1" formControlName="documento"  />
 
   <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['documento'].errors?.required">
 
@@ -31,10 +31,11 @@
 
   </alert>
 
+  <section *ngIf="!updateMode">
 
   <label class="mb-2 required"> Senha: </label>
 
-  <input type="password" class="form-control mb-1" formControlName="senha"  />
+  <input  type="password" class="form-control mb-1 disabled" formControlName="senha"  />
 
   <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['senha'].errors?.required">
 
@@ -42,9 +43,15 @@
 
   </alert>
 
+  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['senha'].errors?.minlength">
+
+    A senha deve ter no mínimo 8 caracteres
+
+  </alert>
+
   <label class="mb-2 required"> Repita a Senha: </label>
 
-  <input type="password" (change)="onSenhaValueChanges($event)" class="form-control mb-1" />
+  <input   type="text" type="password" (change)="onSenhaValueChanges($event)" class="form-control mb-1" />
 
   <alert type="danger" *ngIf="usuarioFormGroup.touched && (usuarioFormGroup.controls['senha'].value != senhaConferencia)">
 
@@ -52,11 +59,11 @@
 
   </alert>
 
+</section>
 
   <label class="mb-2 required"> Nível de acesso: </label>
 
-
-  <select formControlName="nivelAcesso" name="nivelAcesso">
+  <select class="form-control" formControlName="nivelAcesso" name="nivelAcesso">
 
 
     <option  value="1" selected="selected">
@@ -81,7 +88,9 @@
 
   </small></p>
 
+  <button [disabled]="!usuarioFormGroup.valid" class="mt-2 w-100 btn btn-primary "> <i class="fas fa-save"></i> {{ updateMode ? 'Atualizar' : 'Cadastrar' }}  </button>
 
-  <button [disabled]="!usuarioFormGroup.valid" class="mt-2 w-100 btn btn-primary "> <i class="fas fa-save"></i> Cadastrar  </button>
+
+
 
 </form>

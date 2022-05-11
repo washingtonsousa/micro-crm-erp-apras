@@ -30,6 +30,7 @@ class GetUserCommand extends Command {
 
 
         } catch(Exception $ex) {
+            var_dump($ex->getMessage());
             $this->setResult(GetUserCommandResult::WithException($ex));
         }
     }

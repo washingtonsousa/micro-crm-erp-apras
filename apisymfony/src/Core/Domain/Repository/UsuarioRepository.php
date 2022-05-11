@@ -40,12 +40,12 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
 
             }
 
-            public function getById($id) : Usuario {
+            public function getById($id) : ?Usuario {
 
                 return  $this->createQueryBuilder('u')
                 ->select('u')
-                ->where('u.id_usuario = :id_usuario')
-                ->setParameter('id_usuario', $id) 
+                ->where('u.idUsuario = :idUsuario')
+                ->setParameter('idUsuario', $id) 
                 ->getQuery()   
                 ->getOneOrNullResult();
 
@@ -72,6 +72,12 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
 
                return $this->manager->persist($user);
             }
+
+              
+            public function persist(Usuario $user) {
+
+                return $this->manager->persist($user);
+             }
 
             public function checkIfExists(string $documento, string $email) {
 

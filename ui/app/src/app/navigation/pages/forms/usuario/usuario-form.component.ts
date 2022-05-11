@@ -1,12 +1,10 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Usuario } from "src/app/business/entities/model/usuario";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
 import { UsuarioService } from "src/app/services/core/api/usuario-service.service";
 import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
-
-
 
 @Component({
 
@@ -14,13 +12,17 @@ import { LoadingIconService } from "src/app/services/core/static/loading-icon.se
   templateUrl: "usuario-form.component.html"
 
 })
-export class UsuarioFormComponent {
+export class UsuarioFormComponent implements OnInit, OnChanges {
 
   usuarioFormGroup!: FormGroup;
   senhaConferencia!: string;
 
   @Output("onSuccess") onSuccess: EventEmitter<Usuario> = new  EventEmitter<Usuario>();
   @Output("onFail") onFail: EventEmitter<any> = new  EventEmitter<any>();
+  @Input("usuario") usuario:Usuario = new Usuario();
+
+  updateMode = false;
+
 
   constructor(private formBuilder: FormBuilder, private loginService: UsuarioService) {
 
@@ -30,19 +32,22 @@ export class UsuarioFormComponent {
    this.senhaConferencia = $event.target.value;
   }
 
-  Subscribe() {
+  Submit() {
 
     LoadingIconService.show("Aguarde um momento...");
 
-    this.loginService.Subscribe(this.usuarioFormGroup.value).subscribe({
+    var observable =  this.updateMode ? this.loginService.Update(this.usuarioFormGroup.value) :  this.loginService.Subscribe(this.usuarioFormGroup.value);
+
+    observable.subscribe({
 
       next:  (data:DefaultDataResponse<Usuario>) => {
         this.onSuccess.emit(data.data);
       },
       error:(data:HttpErrorResponse) => {
+
         this.onFail.emit(data.error);
-        console.log(data);
         LoadingIconService.hide();
+
       },
       complete: () => {
 
@@ -55,18 +60,30 @@ export class UsuarioFormComponent {
 
   }
 
+  initForm() {
 
+    this.updateMode = this.usuario.idUsuario > 0;
 
-  ngOnInit(): void {
-    this.usuarioFormGroup = this.formBuilder.group({
+          this.usuarioFormGroup = this.formBuilder.group({
 
-      nome: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      documento: ['', [Validators.required]],
-      nivelAcesso: ['', [Validators.required]],
-      senha: ['', [Validators.required]]
+            idUsuario: [this.usuario.idUsuario],
+            nome: [this.usuario.nome, [Validators.required]],
+            email: [this.usuario.email, [Validators.required]],
+            documento: [ { value: this.usuario.documento, disabled: this.updateMode }, [Validators.required]],
+            nivelAcesso: [this.usuario.nivelAcesso, [Validators.required]],
+            senha: [{ value: '', disabled: this.updateMode }, [Validators.required, Validators.minLength(8)]]
 
         });
+  }
+
+  ngOnChanges() {
+    this.initForm();
+  }
+
+  ngOnInit(): void {
+
+    this.initForm();
+
   }
 
 }

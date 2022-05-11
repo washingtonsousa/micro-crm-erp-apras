@@ -8,6 +8,11 @@ api_usuario_get:
     controller: App\Controller\UsuarioController::get
     methods:  [GET]
 
+api_usuario_get_by_id:
+    path: /usuario/{id}
+    controller: App\Controller\UsuarioController::getById
+    methods:  [GET]
+
 api_usuario_patch:
     path: /usuario
     controller: App\Controller\UsuarioController::patch

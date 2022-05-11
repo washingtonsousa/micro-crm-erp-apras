@@ -11,13 +11,17 @@ interface IUsuarioRepository extends UserLoaderInterface, IPaginatedRepository  
 /**
  * @return Usuario
  */
-public function getById($id) : Usuario;
+public function getById($id) : ?Usuario;
 
 /**
  * @return Usuario
  */
 public function insert(Usuario $user);
 
+/**
+ * @return Usuario
+ */
+public function persist(Usuario $user);
 
 /**
  * @return bool
