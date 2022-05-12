@@ -49,19 +49,44 @@ export class UsuarioComponent implements OnInit {
         this.loadUsuarios();
       }
 
-      onSubscribeFail($event:any) {
+      onFormFail($event:any) {
             this.notifications = $event?.data;
       }
 
-      onSubscribeSuccess($event:any) {
+      onFormSuccess($event:any, message = "Usuário cadastrado com sucesso") {
         this.notifications = [];
-        GlobalModalService.open("Usuário cadastrado com sucesso");
+        GlobalModalService.open(message);
         this.ngOnInit();
       }
+
+
+
 
       onChangeSearchTerm($event:any) {
             this.request.term = $event;
             this.loadUsuarios();
+      }
+
+      remove(id:number) {
+
+        LoadingIconService.show();
+
+        this.usuarioService.Remove(id).subscribe({
+
+          next: (data:DefaultDataResponse<boolean>) => {
+            this.loadUsuarios();
+            LoadingIconService.hide();
+          },
+          error: (error) => {
+
+            GlobalModalService.open("Ocorreu uma falha ao tentar deletar este usuário");
+
+            LoadingIconService.hide();
+
+          }
+
+        });
+
       }
 
 

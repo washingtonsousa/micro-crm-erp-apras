@@ -51,11 +51,11 @@ class UsuarioAppService implements IUsuarioAppService {
 
     }
 
-    public function update(UsuarioViewModel $userViewModel) : UsuarioViewModel {
+    public function update(UsuarioViewModel $userViewModel, $id, $changeSenha = false) : UsuarioViewModel {
 
         $usuario = $this->mapper->map($userViewModel, Usuario::class);
 
-        $result =  $this->userService->update($usuario);
+        $result =  $this->userService->update($usuario, $id);
      
         if($result == null)
             return null;
@@ -67,12 +67,22 @@ class UsuarioAppService implements IUsuarioAppService {
 
     }
 
+    
+    public function remove($id) : bool {
+
+        
+        return $this->userService->remove($id);
+
+   }
+
     public function partialUpdate(UsuarioViewModel $userViewModel) : UsuarioViewModel {
 
         $usuario = $this->mapper->map($userViewModel, Usuario::class);
 
-        $result =  $this->userService->update($usuario);
-     
+        //$result =  $this->userService->update($usuario);
+
+        $result = null;
+
         if($result == null)
             return null;
 

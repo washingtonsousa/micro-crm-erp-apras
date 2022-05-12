@@ -69,8 +69,24 @@ class UsuarioController extends AbstractController {
               DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
             ]);
 
-              $result = $this->usuarioAppService->update($requestValue);
-              return new JsonResponse($result);
+            $id = $request->attributes->get('id');
+
+            $changeSenha = $request->query->get('changeSenha') != null ? $request->query->get('changeSenha') : false;
+
+            $result = $this->usuarioAppService->update($requestValue, $id, $changeSenha);
+
+            return new JsonResponse($result);
+
+        }
+
+        public function delete(Request $request)
+        {
+
+            $id = $request->attributes->get('id');
+
+            $result = $this->usuarioAppService->remove($id);
+
+            return new JsonResponse(null, 204);
 
         }
 }

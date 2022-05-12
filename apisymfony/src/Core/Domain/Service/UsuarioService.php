@@ -10,11 +10,15 @@ use App\Core\Domain\Command\CreateUserCommand;
 use App\Core\Domain\Command\GetPageOfItemsCommand;
 use App\Core\Domain\Command\GetUserCommand;
 use App\Core\Domain\Command\GetUsersCommand;
+use App\Core\Domain\Command\PersistCommand;
+use App\Core\Domain\Command\PersistUserCommand;
 use App\Core\Domain\Command\Result\CheckIfUserExistsCommandResult;
+use App\Core\Domain\Command\UpdateUserCommand;
 use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetUsuarioPaginatedEntityQuery;
 use App\Core\Domain\Entity\Usuario;
 use App\Core\Domain\Specification\UsuarioSpecification;
+use DateTime;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -68,8 +72,42 @@ class UsuarioService implements IUsuarioService {
                 return $user;
             }
 
-        public function update(Usuario $usuario) {
-                return $usuario;
+
+       public function remove($id) : bool {
+
+                $usuarioForUpdate = $this->getUsuarioById($id); 
+
+                if($usuarioForUpdate == null)
+                        return false;
+
+                $this->unityOfWork->Remove($usuarioForUpdate);
+
+                $stmResult =  $this->unityOfWork->Commit();
+        
+                if($stmResult->isSuccess())
+                        return true;
+
+                return false;
+        }
+
+
+        public function update(Usuario $usuario, $id, $changeSenha = false) {
+
+                $usuarioForUpdate = $this->getUsuarioById($id); 
+                
+                $usuarioForUpdate->fullUpdate($usuario);
+
+                if($changeSenha)
+                   $usuarioForUpdate->setSenha($this->encoder->hashPassword($this->user, $this->user->getPassword()));
+
+                $command = new PersistCommand($usuarioForUpdate, $this->unityOfWork);
+
+                $result = $command->Execute();
+
+                if($result->isSuccess())
+                        return $result->getEntity();
+
+                return null;
         }
 
         public function subscribe(Usuario $user) {
@@ -78,13 +116,15 @@ class UsuarioService implements IUsuarioService {
                 if(!UsuarioSpecification::MustNotExists($this->CheckIfExists($user)))
                     return null;
 
-                $command = new CreateUserCommand($user, $this->userRepo, $this->encoder,  $this->unityOfWork);
+                $user->setSenha($this->encoder->hashPassword($this->user, $this->user->getPassword()));
+                $user->setDataCriacao(new DateTime());
+
+                $command = new PersistCommand($user, $this->unityOfWork);
 
                 $result = $command->Execute();
 
-
                 if($result->isSuccess())
-                        return $result->getUser();
+                        return $result->getEntity();
 
                 return null;
 
@@ -107,7 +147,6 @@ class UsuarioService implements IUsuarioService {
 
 
         public function getUsuarioById(int $id) : ?Usuario {
-
                 
                 $command = new GetUserCommand($id, $this->userRepo);
 

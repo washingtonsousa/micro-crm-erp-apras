@@ -8,7 +8,7 @@
 
             <div class="row">
 
-                <usuario-card (edit)="loadUserForUpdate($event)" [usuario]="usuario" class="col-xl-3 col-lg-4 p-2" *ngFor="let usuario of pageData?.items">
+                <usuario-card (delete)="remove($event)" (edit)="loadUserForUpdate($event)" [usuario]="usuario" class="col-xl-3 col-lg-4 p-2" *ngFor="let usuario of pageData?.items">
 
                 </usuario-card>
 
@@ -16,17 +16,13 @@
 
             </div>
 
-
-
-
   </box-container>
-
 
 </container>
 
 <clean-modal #modalUsuario title="Cadastro de Usuário">
 
-  <usuario-form (onSuccess)="onSubscribeSuccess($event); modalUsuario.closeModal()" (onFail)="onSubscribeFail($event)">
+  <usuario-form (onSuccess)="onFormSuccess($event); modalUsuario.closeModal()" (onFail)="onFormFail($event)">
 
   </usuario-form>
 
@@ -43,7 +39,7 @@
 
 <clean-modal #modalUsuarioUpdate title="Atualizacao de Usuário">
 
-  <usuario-form [usuario]="currentUsuarioForUpdate" (onSuccess)="onSubscribeSuccess($event); modalUsuario.closeModal()" (onFail)="onSubscribeFail($event)">
+  <usuario-form [usuario]="currentUsuarioForUpdate" (onSuccess)="onFormSuccess($event, 'Usuário atualizado com sucesso!'); modalUsuarioUpdate.closeModal()" (onFail)="onFormFail($event)">
 
   </usuario-form>
 

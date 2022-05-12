@@ -22,6 +22,13 @@ export class UsuarioFormComponent implements OnInit, OnChanges {
   @Input("usuario") usuario:Usuario = new Usuario();
 
   updateMode = false;
+  changeSenhaToggle = false;
+
+  get enableSwitchSenhaForm() : boolean {
+
+    return !this.updateMode || this.changeSenhaToggle;
+
+  }
 
 
   constructor(private formBuilder: FormBuilder, private loginService: UsuarioService) {
@@ -36,11 +43,12 @@ export class UsuarioFormComponent implements OnInit, OnChanges {
 
     LoadingIconService.show("Aguarde um momento...");
 
-    var observable =  this.updateMode ? this.loginService.Update(this.usuarioFormGroup.value) :  this.loginService.Subscribe(this.usuarioFormGroup.value);
+    var observable =  this.updateMode ? this.loginService.Update(this.usuarioFormGroup.value, this.changeSenhaToggle) :  this.loginService.Subscribe(this.usuarioFormGroup.value);
 
     observable.subscribe({
 
       next:  (data:DefaultDataResponse<Usuario>) => {
+        this.changeSenhaToggle = false;
         this.onSuccess.emit(data.data);
       },
       error:(data:HttpErrorResponse) => {
@@ -71,7 +79,7 @@ export class UsuarioFormComponent implements OnInit, OnChanges {
             email: [this.usuario.email, [Validators.required]],
             documento: [ { value: this.usuario.documento, disabled: this.updateMode }, [Validators.required]],
             nivelAcesso: [this.usuario.nivelAcesso, [Validators.required]],
-            senha: [{ value: '', disabled: this.updateMode }, [Validators.required, Validators.minLength(8)]]
+            senha: [{ value: '', disabled: !this.enableSwitchSenhaForm }, [Validators.required, Validators.minLength(8)]]
 
         });
   }

@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
+import { SwitchButtonComponent } from "./buttons/switch-btn/switch-btn.component";
 import { CardWithIconComponent } from "./card/card-with-icon/card-with-icon.component";
 import { SimpleCardComponent } from "./card/simple-card/simple-card.component";
 import { EditDeleteDropDownComponent } from "./dropdowns/edit-delete-dropdown/edit-delete-dropdown.component";
@@ -15,8 +16,8 @@ import { GlobalModalComponent } from "./modal/global-modal/global-modal.componen
 @NgModule({
   imports: [CommonModule, BrowserModule,   BrowserAnimationsModule,
     BsDropdownModule],
-  exports: [SimpleCardComponent,EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
-  declarations: [SimpleCardComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
+  exports: [SimpleCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
+  declarations: [SimpleCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
   providers: []
 })
 export class MaterialModule {

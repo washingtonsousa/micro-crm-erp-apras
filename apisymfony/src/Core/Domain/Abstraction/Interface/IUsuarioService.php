@@ -9,9 +9,10 @@ use App\Core\Domain\Entity\Usuario;
 
 interface IUsuarioService {
 
-            public function update(Usuario $user);
+            public function update(Usuario $user, $id, $changeSenha = false);
             public function subscribe(Usuario $user);
             public function getUsuarioById(int $id) : ?Usuario;
             public function getUsers(GetUsuarioPaginatedEntityQuery $paginatedQuery) : PaginationAggregator;
             public function getCurrentLoggedInUser() : ?Usuario;
+            public function remove($id) : bool;
 }

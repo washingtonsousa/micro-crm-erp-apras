@@ -64,20 +64,9 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
                  ->getQuery()
                  ->getOneOrNullResult();
 
-
-
             }
-            
-            public function insert(Usuario $user) {
-
-               return $this->manager->persist($user);
-            }
-
-              
-            public function persist(Usuario $user) {
-
-                return $this->manager->persist($user);
-             }
+        
+    
 
             public function checkIfExists(string $documento, string $email) {
 
@@ -89,7 +78,7 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
                 ->getQuery()
                 ->getSingleScalarResult();
 
-                return      $result  > 0;
+                return  $result  > 0;
             }
 
 }

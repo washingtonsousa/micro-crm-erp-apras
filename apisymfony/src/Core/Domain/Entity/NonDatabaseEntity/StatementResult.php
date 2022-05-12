@@ -25,5 +25,7 @@ class StatementResult {
         return $this->exceptionMessage != null;
     }
 
-
+    public function isSuccess() : bool {
+        return $this->exceptionMessage == null;
+    }
 }

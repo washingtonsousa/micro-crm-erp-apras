@@ -31,11 +31,19 @@
 
   </alert>
 
-  <section *ngIf="!updateMode">
+  <section *ngIf="updateMode">
+
+  <label> Alterar Senha? </label>
+
+  <switch-btn (onCheck)="changeSenhaToggle = $event; initForm();"> </switch-btn>
+
+  </section>
+
+  <section *ngIf="enableSwitchSenhaForm">
 
   <label class="mb-2 required"> Senha: </label>
 
-  <input  type="password" class="form-control mb-1 disabled" formControlName="senha"  />
+  <input  type="password" class="form-control mb-1" formControlName="senha"  />
 
   <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['senha'].errors?.required">
 
@@ -43,7 +51,7 @@
 
   </alert>
 
-  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['senha'].errors?.minlength">
+  <alert type="danger" *ngIf="changeSenhaToggle && usuarioFormGroup.touched && usuarioFormGroup.controls['senha'].errors?.minlength">
 
     A senha deve ter no mínimo 8 caracteres
 
@@ -53,7 +61,7 @@
 
   <input   type="text" type="password" (change)="onSenhaValueChanges($event)" class="form-control mb-1" />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.touched && (usuarioFormGroup.controls['senha'].value != senhaConferencia)">
+  <alert type="danger" *ngIf="changeSenhaToggle && usuarioFormGroup.touched && (usuarioFormGroup.controls['senha'].value != senhaConferencia)">
 
     Senhas não conferem
 

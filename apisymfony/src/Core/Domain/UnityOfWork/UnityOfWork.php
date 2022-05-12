@@ -50,4 +50,15 @@ class UnityOfWork implements IUnityOfWork {
     }
 
 
+    public function Remove(mixed $entity) {
+
+        return $this->manager->remove($entity);
+    }
+      
+    public function Persist(mixed $entity) {
+
+        return $this->manager->persist($entity);
+    }
+
+
 }

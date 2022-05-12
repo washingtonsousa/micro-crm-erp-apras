@@ -44,8 +44,12 @@ export class UsuarioService {
       }
 
 
-      public Update( usuario: Usuario) : Observable<DefaultDataResponse<Usuario>> {
-        return this.http.put<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario/" + usuario.idUsuario, usuario);
+      public Update( usuario: Usuario, changeSenha: boolean = false ) : Observable<DefaultDataResponse<Usuario>> {
+        return this.http.put<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario/" + usuario.idUsuario, usuario,  { params: { changeSenha: changeSenha }});
+      }
+
+      public Remove(id: number ) : Observable<DefaultDataResponse<boolean>> {
+        return this.http.delete<DefaultDataResponse<boolean>>(environment.apiUri + "/api/usuario/" + id);
       }
 
 

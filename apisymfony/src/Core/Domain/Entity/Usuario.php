@@ -225,6 +225,12 @@ class Usuario extends SerializableEntity implements  UserInterface, PasswordAuth
     }
 
 
+    public function  fullUpdate(Usuario $usuario) {
+
+        $this->email = $usuario->getEmail();
+
+    }
+
     public function getUserIdentifier(): string {
         return $this->email;
     }

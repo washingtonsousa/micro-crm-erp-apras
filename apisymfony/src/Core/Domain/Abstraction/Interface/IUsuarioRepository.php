@@ -12,20 +12,10 @@ interface IUsuarioRepository extends UserLoaderInterface, IPaginatedRepository  
  * @return Usuario
  */
 public function getById($id) : ?Usuario;
-
-/**
- * @return Usuario
- */
-public function insert(Usuario $user);
-
-/**
- * @return Usuario
- */
-public function persist(Usuario $user);
-
 /**
  * @return bool
  */
 public function checkIfExists(string $documento, string $email);
+
 
 }

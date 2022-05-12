@@ -10,8 +10,9 @@ use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 
 interface IUsuarioAppService {
         public function getUsuarioById(int $id) : ?UsuarioViewModel;
-        public function update(UsuarioViewModel $usuario) : ?UsuarioViewModel;
+        public function update(UsuarioViewModel $usuario, $id, $changeSenha = false) : ?UsuarioViewModel;
         public function partialUpdate(UsuarioViewModel $usuario) : ?UsuarioViewModel;
         public function register(UsuarioViewModel $userViewModel) : ?UsuarioViewModel;
         public function getUsers(PaginatedEntityRequestViewModel $paramsModel) : PaginationAggregatorViewModel;
+        public function remove($id) : bool;
 }
