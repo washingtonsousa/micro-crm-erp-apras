@@ -69,11 +69,10 @@ class UsuarioAppService implements IUsuarioAppService {
 
     
     public function remove($id) : bool {
-
         
         return $this->userService->remove($id);
 
-   }
+    }
 
     public function partialUpdate(UsuarioViewModel $userViewModel) : UsuarioViewModel {
 
