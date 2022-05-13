@@ -45,7 +45,9 @@ services:
           - '@App\Core\Domain\Abstraction\Interface\IUsuarioRepository'
       public: true
 
+  App\Core\Domain\Abstraction\Interface\IClienteRepository: '@App\Core\Domain\Repository\ClienteRepository'
   App\Core\Domain\Abstraction\Interface\IUsuarioRepository: '@App\Core\Domain\Repository\UsuarioRepository'
   App\Core\Domain\Abstraction\Interface\IUsuarioService: '@App\Core\Domain\Service\UsuarioService'
+  App\Core\Domain\Abstraction\Interface\IClienteService: '@App\Core\Domain\Service\ClienteService'
   App\Core\Domain\Abstraction\Interface\IUnityOfWork: '@unity_of_work'
   Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'

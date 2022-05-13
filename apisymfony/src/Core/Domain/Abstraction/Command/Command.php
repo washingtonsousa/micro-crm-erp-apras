@@ -5,7 +5,7 @@ use App\Core\Domain\Abstraction\Command\Interface\ICommand;
 use Exception;
 use App\Core\Domain\Contract\Contract;
 
-abstract class Command implements ICommand {
+abstract class Command  {
 
     protected $contract;
     private  $commandResult;

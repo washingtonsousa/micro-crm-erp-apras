@@ -6,3 +6,4 @@ services:
         autowire: true
 
     App\Core\Application\Abstraction\Interface\IUsuarioAppService: '@App\Core\Application\Service\UsuarioAppService'
+    App\Core\Application\Abstraction\Interface\IClienteAppService: '@App\Core\Application\Service\ClienteAppService'

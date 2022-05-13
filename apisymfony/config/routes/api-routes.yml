@@ -27,3 +27,37 @@ api_usuario_delete:
     path: /usuario/{id}
     controller: App\Controller\UsuarioController::delete
     methods:  [DELETE]
+
+
+
+# Clientes
+
+api_cliente_post:
+    path: /cliente
+    controller: App\Controller\ClienteController::subscribe
+    methods:  [POST]
+
+api_cliente_get:
+    path: /cliente
+    controller: App\Controller\ClienteController::get
+    methods:  [GET]
+
+api_cliente_get_by_id:
+    path: /cliente/{id}
+    controller: App\Controller\ClienteController::getById
+    methods:  [GET]
+
+api_cliente_patch:
+    path: /cliente
+    controller: App\Controller\ClienteController::patch
+    methods:  [PATCH]
+
+api_cliente_put:
+    path: /cliente/{id}
+    controller: App\Controller\ClienteController::put
+    methods:  [PUT]
+
+api_cliente_delete:
+    path: /cliente/{id}
+    controller: App\Controller\ClienteController::delete
+    methods:  [DELETE]
