@@ -1,10 +1,10 @@
-<form [formGroup]="usuarioFormGroup" (ngSubmit)="Submit()">
+<form [formGroup]="formGroup" (ngSubmit)="Submit()">
 
   <label class="mb-2 required"> Nome: </label>
 
   <input type="text" class="form-control mb-1" formControlName="nome" />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.get('nome')?.touched && usuarioFormGroup.controls['nome'].errors?.required">
+  <alert type="danger" *ngIf="formGroup.get('nome')?.touched && formGroup.controls['nome'].errors?.required">
 
     Insira o nome, é obrigatório
 
@@ -15,7 +15,7 @@
 
   <input type="text" class="form-control mb-1" formControlName="email"  />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.get('email')?.touched && usuarioFormGroup.controls['email'].errors?.required">
+  <alert type="danger" *ngIf="formGroup.get('email')?.touched && formGroup.controls['email'].errors?.required">
 
     Insira o email, é obrigatório
 
@@ -25,7 +25,7 @@
 
   <input [attr.disabled]="updateMode ? '' : null" type="text" class="form-control mb-1" formControlName="documento"  />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['documento'].errors?.required">
+  <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['documento'].errors?.required">
 
     Insira o documento, é obrigatório
 
@@ -45,13 +45,13 @@
 
   <input  type="password" class="form-control mb-1" formControlName="senha"  />
 
-  <alert type="danger" *ngIf="usuarioFormGroup.touched && usuarioFormGroup.controls['senha'].errors?.required">
+  <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['senha'].errors?.required">
 
     Insira a senha, é obrigatório
 
   </alert>
 
-  <alert type="danger" *ngIf="changeSenhaToggle && usuarioFormGroup.touched && usuarioFormGroup.controls['senha'].errors?.minlength">
+  <alert type="danger" *ngIf="changeSenhaToggle && formGroup.touched && formGroup.controls['senha'].errors?.minlength">
 
     A senha deve ter no mínimo 8 caracteres
 
@@ -61,7 +61,7 @@
 
   <input   type="text" type="password" (change)="onSenhaValueChanges($event)" class="form-control mb-1" />
 
-  <alert type="danger" *ngIf="changeSenhaToggle && usuarioFormGroup.touched && (usuarioFormGroup.controls['senha'].value != senhaConferencia)">
+  <alert type="danger" *ngIf="changeSenhaToggle && formGroup.touched && (formGroup.controls['senha'].value != senhaConferencia)">
 
     Senhas não conferem
 
@@ -96,7 +96,7 @@
 
   </small></p>
 
-  <button [disabled]="!usuarioFormGroup.valid" class="mt-2 w-100 btn btn-primary "> <i class="fas fa-save"></i> {{ updateMode ? 'Atualizar' : 'Cadastrar' }}  </button>
+  <button [disabled]="!formGroup.valid" class="mt-2 w-100 btn btn-primary "> <i class="fas fa-save"></i> {{ updateMode ? 'Atualizar' : 'Cadastrar' }}  </button>
 
 
 

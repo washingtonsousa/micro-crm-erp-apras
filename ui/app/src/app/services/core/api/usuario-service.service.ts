@@ -8,9 +8,10 @@ import { Usuario } from "src/app/business/entities/model/usuario";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
 import { PaginationReponse } from "src/app/business/entities/response/pagination-response";
 import { PaginationDataRequest } from "src/app/business/entities/request/pagination-data-request";
+import { IPaginatedCrudService } from "./abstractions/paginated-crud-service";
 
 @Injectable()
-export class UsuarioService {
+export class UsuarioService implements IPaginatedCrudService<Usuario> {
 
       constructor(private http:HttpClient) {
 
@@ -44,8 +45,8 @@ export class UsuarioService {
       }
 
 
-      public Update( usuario: Usuario, changeSenha: boolean = false ) : Observable<DefaultDataResponse<Usuario>> {
-        return this.http.put<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario/" + usuario.idUsuario, usuario,  { params: { changeSenha: changeSenha }});
+      public Update( usuario: Usuario, aditionalParams:any[] = [false]) : Observable<DefaultDataResponse<Usuario>> {
+        return this.http.put<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario/" + usuario.idUsuario, usuario,  { params: { changeSenha: aditionalParams[0] }});
       }
 
       public Remove(id: number ) : Observable<DefaultDataResponse<boolean>> {

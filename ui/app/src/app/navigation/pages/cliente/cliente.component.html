@@ -2,12 +2,60 @@
 
   <box-container>
 
-    <crud-panel>
+    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalCliente.openModal()">
 
 
 
 
     </crud-panel>
+
+
+    <div class="container" class="mt-3">
+
+      <div class="row">
+
+          <cliente-card (delete)="remove($event)" (edit)="loadClienteForUpdate($event)" [cliente]="cliente" class="col-xl-3 col-lg-4 p-2" *ngFor="let cliente of pageData?.items">
+
+          </cliente-card>
+
+      </div>
+
+    </div>
+
+
+
+    <clean-modal #modalCliente title="Cadastro de Usuário">
+
+      <cliente-form (onSuccess)="onFormSuccess($event); modalCliente.closeModal()" (onFail)="onFormFail($event)">
+
+      </cliente-form>
+
+
+      <alert *ngFor="let notification of notifications" type="danger">
+
+         {{ notification.message }}
+
+      </alert>
+
+
+    </clean-modal>
+
+
+    <clean-modal #modalClienteUpdate title="Atualizacao de Cliente">
+
+      <cliente-form [entity]="currentEntityForUpdate" (onSuccess)="onFormSuccess($event, 'Cliente atualizado com sucesso!'); modalClienteUpdate.closeModal()" (onFail)="onFormFail($event)">
+
+      </cliente-form>
+
+
+      <alert *ngFor="let notification of notifications" type="danger">
+
+         {{ notification.message }}
+
+      </alert>
+
+
+    </clean-modal>
 
 
   </box-container>

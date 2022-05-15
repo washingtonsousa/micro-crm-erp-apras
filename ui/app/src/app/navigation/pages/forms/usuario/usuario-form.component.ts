@@ -5,6 +5,7 @@ import { Usuario } from "src/app/business/entities/model/usuario";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
 import { UsuarioService } from "src/app/services/core/api/usuario-service.service";
 import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
+import { UpdateCreateReactiveForm } from "../abstractions/update-create-reactive-form";
 
 @Component({
 
@@ -12,83 +13,61 @@ import { LoadingIconService } from "src/app/services/core/static/loading-icon.se
   templateUrl: "usuario-form.component.html"
 
 })
-export class UsuarioFormComponent implements OnInit, OnChanges {
+export class UsuarioFormComponent extends UpdateCreateReactiveForm<Usuario> implements OnInit, OnChanges {
 
-  usuarioFormGroup!: FormGroup;
   senhaConferencia!: string;
 
-  @Output("onSuccess") onSuccess: EventEmitter<Usuario> = new  EventEmitter<Usuario>();
-  @Output("onFail") onFail: EventEmitter<any> = new  EventEmitter<any>();
-  @Input("usuario") usuario:Usuario = new Usuario();
-
-  updateMode = false;
   changeSenhaToggle = false;
 
   get enableSwitchSenhaForm() : boolean {
 
-    return !this.updateMode || this.changeSenhaToggle;
+    return !super.updateMode || this.changeSenhaToggle;
 
   }
 
 
-  constructor(private formBuilder: FormBuilder, private loginService: UsuarioService) {
-
+  constructor(public override formBuilder: FormBuilder, public override dataService: UsuarioService) {
+    super();
   }
 
   onSenhaValueChanges($event:any) {
    this.senhaConferencia = $event.target.value;
   }
 
+
+
   Submit() {
 
-    LoadingIconService.show("Aguarde um momento...");
 
-    var observable =  this.updateMode ? this.loginService.Update(this.usuarioFormGroup.value, this.changeSenhaToggle) :  this.loginService.Subscribe(this.usuarioFormGroup.value);
+    super.OnSubmit([this.changeSenhaToggle], () => {
 
-    observable.subscribe({
+      this.senhaConferencia = "";
+      this.changeSenhaToggle = false;
 
-      next:  (data:DefaultDataResponse<Usuario>) => {
-        this.changeSenhaToggle = false;
-        this.onSuccess.emit(data.data);
-      },
-      error:(data:HttpErrorResponse) => {
-
-        this.onFail.emit(data.error);
-        LoadingIconService.hide();
-
-      },
-      complete: () => {
-
-        this.usuarioFormGroup.reset();
-        this.senhaConferencia = "";
-        LoadingIconService.hide();
-
-      }
     });
 
   }
 
   initForm() {
 
-    this.updateMode = this.usuario.idUsuario > 0;
+    this.updateMode = this.entity.idUsuario > 0;
 
-          this.usuarioFormGroup = this.formBuilder.group({
-
-            idUsuario: [this.usuario.idUsuario],
-            nome: [this.usuario.nome, [Validators.required]],
-            email: [this.usuario.email, [Validators.required]],
-            documento: [ { value: this.usuario.documento, disabled: this.updateMode }, [Validators.required]],
-            nivelAcesso: [this.usuario.nivelAcesso, [Validators.required]],
+          this.formGroup = this.formBuilder.group({
+            idUsuario: [this.entity.idUsuario],
+            nome: [this.entity.nome, [Validators.required]],
+            email: [this.entity.email, [Validators.required]],
+            documento: [ { value: this.entity.documento, disabled: this.updateMode }, [Validators.required]],
+            nivelAcesso: [this.entity.nivelAcesso, [Validators.required]],
             senha: [{ value: '', disabled: !this.enableSwitchSenhaForm }, [Validators.required, Validators.minLength(8)]]
 
         });
   }
 
-  ngOnChanges() {
+  override ngOnChanges() {
     this.initForm();
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
 
     this.initForm();
 

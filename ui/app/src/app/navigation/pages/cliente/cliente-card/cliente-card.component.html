@@ -1,0 +1,5 @@
+<horizontal-card [title]="cliente.strNome">
+
+  <edit-delete-dropdown (edit)="edit.emit(cliente.idCliente)" (delete)="delete.emit(cliente.idCliente)" class="justify-content-end w-100 d-flex"></edit-delete-dropdown>
+
+</horizontal-card>

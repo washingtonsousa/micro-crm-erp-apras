@@ -16,38 +16,17 @@ services:
           public: true
           autowire: true
 
-  domain_notify_subscriber:
-      class: App\Core\Shared\EventListener\DomainEventListener
-      tags:
-          - { name: domaineventlistener }   
 
-  on_request_domain_notification_subscriber:
-      class: App\Core\Shared\EventSubscribers\DomainNotificationSubscriber
-      tags:
-          - {  name: kernel.event_subscriber }
-      autowire: true  
-
-  on_request_response_subscriber:
-      class: App\Core\Shared\EventSubscribers\ResponseDataSubscriber
-      tags:
-          - {  name: kernel.event_subscriber }
-      autowire: true    
-
-  on_request_paginated_request_handler_listener:
-      class:  App\Core\Shared\EventSubscribers\PaginatedRequestHandlerListener
-      tags:
-          - {  name: kernel.event_subscriber }
-      autowire: true  
-
-  app.core.domain.provider.auth_user_provider:
-      class: App\Core\Domain\Provider\AuthUserProvider
-      arguments:
-          - '@App\Core\Domain\Abstraction\Interface\IUsuarioRepository'
-      public: true
 
   App\Core\Domain\Abstraction\Interface\IClienteRepository: '@App\Core\Domain\Repository\ClienteRepository'
   App\Core\Domain\Abstraction\Interface\IUsuarioRepository: '@App\Core\Domain\Repository\UsuarioRepository'
+  App\Core\Domain\Abstraction\Interface\IProdutoRepository: '@App\Core\Domain\Repository\ProdutoRepository'
+  App\Core\Domain\Abstraction\Interface\IPedidoRepository: '@App\Core\Domain\Repository\PedidoRepository'
+  App\Core\Domain\Abstraction\Interface\IImagemRepository: '@App\Core\Domain\Repository\ImagemRepository'
   App\Core\Domain\Abstraction\Interface\IUsuarioService: '@App\Core\Domain\Service\UsuarioService'
   App\Core\Domain\Abstraction\Interface\IClienteService: '@App\Core\Domain\Service\ClienteService'
+  App\Core\Domain\Abstraction\Interface\IProdutoService: '@App\Core\Domain\Service\ProdutoService'
+  App\Core\Domain\Abstraction\Interface\IPedidoService: '@App\Core\Domain\Service\PedidoService'
+  App\Core\Domain\Abstraction\Interface\IImagemService: '@App\Core\Domain\Service\ImagemService'
   App\Core\Domain\Abstraction\Interface\IUnityOfWork: '@unity_of_work'
   Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'

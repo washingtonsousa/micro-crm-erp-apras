@@ -1,0 +1,30 @@
+api_usuario_post:
+    path: /
+    controller: App\Controller\UsuarioController::register
+    methods:  [POST]
+
+api_usuario_get:
+    path: /
+    controller: App\Controller\UsuarioController::get
+    methods:  [GET]
+
+api_usuario_get_by_id:
+    path: /{id}
+    controller: App\Controller\UsuarioController::getById
+    methods:  [GET]
+
+api_usuario_patch:
+    path: /
+    controller: App\Controller\UsuarioController::patch
+    methods:  [PATCH]
+
+api_usuario_put:
+    path: /{id}
+    controller: App\Controller\UsuarioController::put
+    methods:  [PUT]
+
+api_usuario_delete:
+    path: /{id}
+    controller: App\Controller\UsuarioController::delete
+    methods:  [DELETE]
+

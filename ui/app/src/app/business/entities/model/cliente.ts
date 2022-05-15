@@ -1,7 +1,12 @@
+import { ClienteImagem } from "./cliente-imagem";
+
 export class Cliente {
 
-   nome!: string;
+  strNome!: string;
+  idCliente!: number;
 
+
+  clienteImagem!: ClienteImagem[];
 
 
 

@@ -1,5 +1,5 @@
 
-  <box-container>
+
 
     <div class="container">
 
@@ -8,34 +8,35 @@
 
       <div class="col-xl-8">
 
-            <div *ngIf="paginationResponse" class="d-flex">
-
-                    <span class="mx-1">   Página {{ paginationResponse?.page  }} de {{ paginationResponse?.totalPages }} </span>
-                    <span> / </span>
-                    <span class="mx-1">   Total de {{ paginationResponse?.totalItems  }} resultados  </span>
+            <div *ngIf="paginationResponse" class="row">
 
 
-                    <div class="d-flex mx-1">
+              <div class="col-xl-5 col-12">
 
-                      <a class="pointer" (click)="back()">
-                          <i class="fas fa-chevron-left"></i> Anterior
-                      </a>
+                    <span class="mx-1"> <small> Página {{ paginationResponse?.page  }} de {{ paginationResponse?.totalPages }}
+                     Total de {{ paginationResponse?.totalItems  }} resultados</small>  </span>
 
-                      <span class="d-block mx-2"></span>
+              </div>
 
-                      <a class="pointer" (click)="next()">
-                        Próximo <i class="fas fa-chevron-right"></i>
-                    </a>
+              <div class="d-flex col-xl-4 col-12 justify-content-center">
 
-                  </div>
+                <a class="pointer mx-1" (click)="back()">
+                    <i class="fas fa-chevron-left"></i> Anterior
+                </a>
 
-                    <div class="d-flex mx-1">
+                <a class="pointer" (click)="next()">
+                  Próximo <i class="fas fa-chevron-right"></i>
+              </a>
 
-                      <span>
-                        Itens por página:
-                      </span>
+        </div>
 
-                      <select (change)="onItensPerPageChangeFunction($event)"  name="itemsPerPage">
+                    <div class="col-xl-3 col-12 d-flex">
+
+                      <label>
+                      <small>  Itens: </small>
+                      </label>
+
+                      <select class="form-control"(change)="onItensPerPageChangeFunction($event)"  name="itemsPerPage">
 
                         <option value="4">
 
@@ -68,33 +69,34 @@
 
 
 
+
             </div>
 
       </div>
 
-      <div class="col-xl-4 col-lg-4 col-12 d-flex justify-content-end">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-xs-12 col-12">
 
-        <div class="d-flex mx-1">
+        <div class="row justify-content-end">
+
+        <div class="d-flex p-0 col-xl-8 col-12">
 
           <input class="form-control" [(ngModel)]="searchValue" type="text" value="" />
           <button class="btn btn-primary " (click)="onSearchClick.emit(searchValue)" tooltip="Pesquisar"> <i class="fas fa-search"></i>  </button>
 
         </div>
-
-
+        <div class="d-flex p-0 col-xl-4 col-12">
 
         <button class="btn btn-warning" (click)="toggleOrdering()"> <i class="fas fa-exchange"></i>  </button>
 
-        <button class="btn btn-success mx-1" (click)="onAddClick.emit($event)" tooltip="Adicionar"> <i class="fas fa-plus"></i>  </button>
+        <button class="btn btn-success" (click)="onAddClick.emit($event)" tooltip="Adicionar"> <i class="fas fa-plus"></i>  </button>
 
       </div>
 
+      </div>
     </div>
     </div>
+    </div>
 
 
-
-
-  </box-container>
 
 

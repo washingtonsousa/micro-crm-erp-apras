@@ -1,10 +1,10 @@
-<form [formGroup]="clientFormGroup" (ngSubmit)="Submit()">
+<form [formGroup]="formGroup" (ngSubmit)="Submit()">
 
   <label class="mb-2 required"> Nome: </label>
 
-  <input type="text" class="form-control mb-1" formControlName="nome" />
+  <input type="text" class="form-control mb-1" formControlName="strNome" />
 
-  <alert type="danger" *ngIf="clientFormGroup.touched && clientFormGroup.controls['username'].errors?.required">
+  <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['strNome'].errors?.required">
 
     Insira o nome, é obrigatório
 
@@ -22,6 +22,6 @@
   </small></p>
 
 
-  <button [disabled]="!clientFormGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-save"></i> Enviar  </button>
+  <button [disabled]="!formGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-save"></i> Enviar  </button>
 
 </form>

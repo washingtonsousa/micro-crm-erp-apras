@@ -7,6 +7,7 @@ import { FlexBoxModule } from "src/app/ui-components/flex-box/flex-box.module";
 import { GeneralUIModule } from "src/app/ui-components/general/generalUI.module";
 import { MaterialModule } from "src/app/ui-components/material/material.module";
 import { ClienteComponent } from "../pages/cliente/cliente.component";
+import { ClienteModule } from "../pages/cliente/cliente.module";
 import { FormsModuleA } from "../pages/forms/forms.module";
 import { HomeComponent } from "../pages/home/home.component";
 import { LoginComponent } from "../pages/login/login.component";
@@ -20,7 +21,7 @@ import { UsuarioModule } from "../pages/usuario/usuario.module";
     providers: [],
     declarations: [HomeComponent, UsuarioComponent, LoginComponent,ClienteComponent],
     exports: [HomeComponent, LoginComponent,ClienteComponent],
-    imports: [UsuarioModule, RouterModule, MaterialModule, CommonModule,LayoutModule,FlexBoxModule,FormsModuleA, AlertModule, GeneralUIModule]
+    imports: [UsuarioModule, ClienteModule, RouterModule, MaterialModule, CommonModule,LayoutModule,FlexBoxModule,FormsModuleA, AlertModule, GeneralUIModule]
 
 })
 export class NavigationModule {

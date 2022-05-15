@@ -1,7 +1,11 @@
-import { Component, Output } from "@angular/core";
+import { Component, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { EventEmitter } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Cliente } from "src/app/business/entities/model/cliente";
+import { ClienteService } from "src/app/services/core/api/cliente-service.service";
+import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
+import { UpdateCreateReactiveForm } from "../abstractions/update-create-reactive-form";
 
 
 
@@ -10,22 +14,20 @@ import { HttpErrorResponse } from "@angular/common/http";
     selector: "cliente-form",
     templateUrl: "cliente-form.component.html"
 })
-export class ClienteFormComponent {
+export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> implements OnInit {
 
-  clientFormGroup!: FormGroup;
-  @Output("onSuccess") onSuccess: EventEmitter<any> = new  EventEmitter<any>();
-  @Output("onFail") onFail: EventEmitter<any> = new  EventEmitter<any>();
+
   file!: File;
 
-  constructor(private formBuilder: FormBuilder) {
-
+  constructor(public override formBuilder: FormBuilder, public override dataService: ClienteService) {
+    super();
   }
 
   onFileChange(event: any) {
 
     if (event.target.files.length > 0) {
       this.file  = event.target.files[0];
-      this.clientFormGroup.patchValue({
+      this.formGroup.patchValue({
         file: this.file
       });
 
@@ -34,37 +36,39 @@ export class ClienteFormComponent {
 
   Submit() {
 
-    if(this.clientFormGroup == null)
+    if(this.formGroup == null)
     return;
 
     const formData = new FormData();
-    formData.append('imagem', this.file, "imagem-cliente");
-    formData.append('nome', this.clientFormGroup?.get('nome')?.value);
 
-    // this.loginService.Login(this.clientFormGroup.value).subscribe({
+    //formData.append('imagem', this.file, "imagem-cliente");
 
-    //   next:  (data:TokenResponse) => {
-    //     this.onSuccess.emit(data);
-    //   },
-    //   error:(data:HttpErrorResponse) => {
-    //     this.onFail.emit(data);
-    //     console.log(data);
-    //   },
+    formData.append('strNome', this.formGroup?.get('strNome')?.value);
 
-    // }
+    this.dataService.Subscribe(this.formGroup.value).subscribe({
 
+       next:  (data:DefaultDataResponse<Cliente>) => {
+         this.onSuccess.emit(data.data);
+       },
+       error:(data:HttpErrorResponse) => {
+         this.onFail.emit(data);
+         console.log(data);
+      },
 
-    //);
+    });
   }
+  initForm(): void {
+    this.formGroup = this.formBuilder.group({
 
-
-
-  ngOnInit(): void {
-    this.clientFormGroup = this.formBuilder.group({
-      nome: ['', [Validators.required]],
+      strNome: ['', [Validators.required]],
       imagem: [null, []],
 
         });
+
+  }
+
+  override ngOnInit(): void {
+   super.ngOnInit();
   }
 
 

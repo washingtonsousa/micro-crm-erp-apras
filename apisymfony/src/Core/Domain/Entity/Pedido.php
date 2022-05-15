@@ -22,6 +22,13 @@ class Pedido
     private $idPedido;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="integer", nullable=false)
+     */
+    private $status;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="txt_observacoes", type="text", length=65535, nullable=true)
@@ -37,16 +44,6 @@ class Pedido
      * })
      */
     private $idCliente;
-
-    /**
-     * @var \PedidoProduto
-     *
-     * @ORM\ManyToOne(targetEntity="PedidoProduto")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_pedido_produto", referencedColumnName="id_pedido_produto")
-     * })
-     */
-    private $idPedidoProduto;
 
 
 }

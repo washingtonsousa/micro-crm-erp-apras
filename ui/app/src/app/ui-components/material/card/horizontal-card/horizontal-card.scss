@@ -1,0 +1,30 @@
+@import "/src/global-styles/vars.scss";
+
+.card-icon {
+      svg {
+        height: 4rem;
+        color: $primary;
+      }
+
+      padding: 16px;
+      text-align: center;
+      background-color: #ccc;
+
+      width:20%;
+}
+
+.horizontal-card {
+
+
+
+  border-left-width: 2px;
+  border-left-style: solid;
+}
+
+.horizontal-card-body {
+  padding: 4px;
+  width:80%;
+}
+
+
+

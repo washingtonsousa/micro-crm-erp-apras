@@ -1,0 +1,31 @@
+# Clientes
+
+api_cliente_post:
+    path: /
+    controller: App\Controller\ClienteController::subscribe
+    methods: [POST]
+
+api_cliente_get:
+    path: /
+    controller: App\Controller\ClienteController::get
+    methods: [GET]
+
+api_cliente_get_by_id:
+    path: /{id}
+    controller: App\Controller\ClienteController::getById
+    methods:  [GET]
+
+api_cliente_patch:
+    path: /
+    controller: App\Controller\ClienteController::patch
+    methods:  [PATCH]
+
+api_cliente_put:
+    path: /{id}
+    controller: App\Controller\ClienteController::put
+    methods:  [PUT]
+
+api_cliente_delete:
+    path: /{id}
+    controller: App\Controller\ClienteController::delete
+    methods:  [DELETE]

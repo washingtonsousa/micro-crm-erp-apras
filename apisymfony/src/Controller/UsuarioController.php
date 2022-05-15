@@ -39,7 +39,7 @@ class UsuarioController extends AbstractController {
         public function get(IPaginatedRequestHandler $handler)
         {
           
-              $result = $this->usuarioAppService->getUsers($handler->getRequestViewModel());
+              $result = $this->usuarioAppService->get($handler->getRequestViewModel());
               return new JsonResponse($result);
 
         }
@@ -47,7 +47,7 @@ class UsuarioController extends AbstractController {
         public function getById(Request $request)
         {
           
-              $result = $this->usuarioAppService->getUsuarioById($request->attributes->get('id'));
+              $result = $this->usuarioAppService->getById($request->attributes->get('id'));
               return new JsonResponse($result);
 
         }

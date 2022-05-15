@@ -1,63 +1,24 @@
-api_usuario_post:
-    path: /usuario
-    controller: App\Controller\UsuarioController::register
-    methods:  [POST]
-
-api_usuario_get:
-    path: /usuario
-    controller: App\Controller\UsuarioController::get
-    methods:  [GET]
-
-api_usuario_get_by_id:
-    path: /usuario/{id}
-    controller: App\Controller\UsuarioController::getById
-    methods:  [GET]
-
-api_usuario_patch:
-    path: /usuario
-    controller: App\Controller\UsuarioController::patch
-    methods:  [PATCH]
-
-api_usuario_put:
-    path: /usuario/{id}
-    controller: App\Controller\UsuarioController::put
-    methods:  [PUT]
-
-api_usuario_delete:
-    path: /usuario/{id}
-    controller: App\Controller\UsuarioController::delete
-    methods:  [DELETE]
+api_usuario:
+    prefix: /usuario
+    resource: './usuario.yml'
 
 
 
 # Clientes
 
-api_cliente_post:
-    path: /cliente
-    controller: App\Controller\ClienteController::subscribe
-    methods:  [POST]
+api_cliente:
+    prefix: /cliente
+    resource: './cliente.yml'
 
-api_cliente_get:
-    path: /cliente
-    controller: App\Controller\ClienteController::get
-    methods:  [GET]
 
-api_cliente_get_by_id:
-    path: /cliente/{id}
-    controller: App\Controller\ClienteController::getById
-    methods:  [GET]
+# Produtos
 
-api_cliente_patch:
-    path: /cliente
-    controller: App\Controller\ClienteController::patch
-    methods:  [PATCH]
+api_produto:
+    prefix: /produto
+    resource: './produto.yml'
 
-api_cliente_put:
-    path: /cliente/{id}
-    controller: App\Controller\ClienteController::put
-    methods:  [PUT]
+# Pedidos
 
-api_cliente_delete:
-    path: /cliente/{id}
-    controller: App\Controller\ClienteController::delete
-    methods:  [DELETE]
+api_pedido:
+    prefix: /pedido
+    resource: './pedido.yml'

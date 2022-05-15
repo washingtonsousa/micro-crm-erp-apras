@@ -15,6 +15,8 @@ import { GeneralUIModule } from './ui-components/general/generalUI.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ClienteService } from './services/core/api/cliente-service.service';
+import { UsuarioService } from './services/core/api/usuario-service.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TooltipModule.forRoot(),
     AlertModule.forRoot()
   ],
-  providers: [{
+  providers: [
+
+    ClienteService,
+    UsuarioService,
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,
     multi: true

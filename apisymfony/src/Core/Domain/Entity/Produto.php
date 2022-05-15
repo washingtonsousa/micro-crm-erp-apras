@@ -56,15 +56,7 @@ class Produto
      */
     private $dtDataCadastro;
 
-    /**
-     * @var \PedidoProduto
-     *
-     * @ORM\ManyToOne(targetEntity="PedidoProduto")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_pedido_produto", referencedColumnName="id_pedido_produto")
-     * })
-     */
-    private $idPedidoProduto;
+    
 
 
 }

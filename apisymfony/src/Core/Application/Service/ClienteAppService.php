@@ -2,28 +2,17 @@
 namespace App\Core\Application\Service;
 
 use App\Core\Application\Abstraction\Interface\IClienteAppService;
-use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\ClienteViewModel;
-use App\Core\Application\ViewModel\Pagination\UsuarioPaginationResponseViewModel;
-use App\Core\Application\ViewModel\Request\UsuarioGetRequestViewModel as RequestUsuarioGetRequestViewModel;
-use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Domain\Abstraction\Interface\IClienteService;
-use App\Core\Domain\Abstraction\Interface\IUsuarioService;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
 use App\Core\Domain\Entity\Cliente;
-use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetClientePaginatedEntityQuery;
-use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetUsuarioPaginatedEntityQuery;
-use App\Core\Domain\Entity\Usuario;
-use App\Core\Domain\Specification\UsuarioSpecification;
 use App\Core\Shared\Mapper\AutoMapperInitializer;
 use AutoMapperPlus\AutoMapperInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use UsuarioGetRequestViewModel;
 
-class ClienteAppService implements IClienteAppService{
+class ClienteAppService implements IClienteAppService {
 
     protected IClienteService $service;
     protected AutoMapperInterface $mapper;
@@ -80,7 +69,7 @@ class ClienteAppService implements IClienteAppService{
     }
 
 
-    public function getClientes(PaginatedEntityRequestViewModel $paramsModel): PaginationAggregatorViewModel
+    public function get(PaginatedEntityRequestViewModel $paramsModel): PaginationAggregatorViewModel
      {
 
         $params = $this->mapper->map($paramsModel, PaginatedEntityRequest::class);
@@ -93,7 +82,7 @@ class ClienteAppService implements IClienteAppService{
         return  $result;
     }
 
-    public function getClienteById(int $id): ?ClienteViewModel
+    public function getById(int $id): ?ClienteViewModel
     {
 
         $result =  $this->mapper->map($this->service->getClienteById($id), ClienteViewModel::class);

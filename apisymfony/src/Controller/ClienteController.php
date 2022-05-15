@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Core\Application\Abstraction\Interface\IClienteAppService;
-use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
 use App\Core\Application\ViewModel\ClienteViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
@@ -26,7 +25,7 @@ class ClienteController extends AbstractController {
         }
         
 
-        public function subscribe( Request $request)
+        public function subscribe(Request $request)
         {
       
               $requestValue = $this->serializerInterface->deserialize($request->getContent(), ClienteViewModel::class, 'json', [
@@ -41,7 +40,7 @@ class ClienteController extends AbstractController {
         public function get(IPaginatedRequestHandler $handler)
         {
           
-              $result = $this->clienteAppService->getClientes($handler->getRequestViewModel());
+              $result = $this->clienteAppService->get($handler->getRequestViewModel());
               return new JsonResponse($result);
 
         }
@@ -49,7 +48,7 @@ class ClienteController extends AbstractController {
         public function getById(Request $request)
         {
           
-              $result = $this->clienteAppService->getClienteById($request->attributes->get('id'));
+              $result = $this->clienteAppService->getById($request->attributes->get('id'));
               return new JsonResponse($result);
 
         }
@@ -85,7 +84,7 @@ class ClienteController extends AbstractController {
 
             $result = $this->clienteAppService->remove($id);
 
-            return new JsonResponse(null, 204);
+            return new JsonResponse(null, $result ? 200 : 204);
 
         }
 }

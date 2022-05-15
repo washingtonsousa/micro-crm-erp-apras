@@ -11,9 +11,6 @@ class DefaultResponseViewModel   {
     {
         $this->data = $data;
         $this->message = $message;
-
     }
-
-
 
 }

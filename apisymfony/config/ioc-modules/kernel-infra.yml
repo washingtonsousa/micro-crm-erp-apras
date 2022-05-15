@@ -19,6 +19,35 @@ services:
         class: App\Core\Shared\Handler\PaginatedRequestHandler
         public: true
         autowire: true
+
+    domain_notify_subscriber:
+      class: App\Core\Shared\EventListener\DomainEventListener
+      tags:
+          - { name: domaineventlistener }   
+
+    on_request_domain_notification_subscriber:
+        class: App\Core\Shared\EventSubscribers\DomainNotificationSubscriber
+        tags:
+            - {  name: kernel.event_subscriber }
+        autowire: true  
+
+    on_request_response_subscriber:
+        class: App\Core\Shared\EventSubscribers\ResponseDataSubscriber
+        tags:
+            - {  name: kernel.event_subscriber }
+        autowire: true    
+
+    on_request_paginated_request_handler_listener:
+        class:  App\Core\Shared\EventSubscribers\PaginatedRequestHandlerListener
+        tags:
+            - {  name: kernel.event_subscriber }
+        autowire: true  
+
+    app.core.domain.provider.auth_user_provider:
+        class: App\Core\Domain\Provider\AuthUserProvider
+        arguments:
+            - '@App\Core\Domain\Abstraction\Interface\IUsuarioRepository'
+        public: true
         
     App\Core\Shared\Handler\HandlerAggregator: '@handler_aggregator'
     App\Core\Shared\Event\DomainNotificationContainer: '@domain_notification_container'

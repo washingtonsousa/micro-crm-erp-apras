@@ -23,11 +23,15 @@ class ResponseDataSubscriber implements EventSubscriberInterface {
         $response = $event->getResponse();
 
         $responseStrData = $event->getResponse()->getContent();
+
         $data = json_decode($responseStrData, false);
 
         if($data == false)
           return;
-
+        
+        if(!$event->getResponse()->isSuccessful())
+        return;
+        
         $headers->set("Content-Type", "application/json");
 
         if($this->domainNotificationContainer->HasNotifications())
@@ -35,14 +39,17 @@ class ResponseDataSubscriber implements EventSubscriberInterface {
 
        $isEmpty = get_object_vars($data) ? FALSE : TRUE;
 
-        $responseData = new DefaultResponseViewModel($data, $isEmpty ? "Não retornou resultados" : "Processado com sucesso");
+       $method = $event->getRequest()->getMethod();
+
+        $isNotFoundEntityContext = $method == 'GET' && $isEmpty;
+
+        $message = $isNotFoundEntityContext ? "Não retornou resultados" : "Processado com sucesso";
+
+        $responseData = new DefaultResponseViewModel($data,  $message);
 
         $contentString = json_encode($responseData, true);
 
-
-        //$statusCode = $isEmpty ? 204 :  200;    
-        //$response->setStatusCode($statusCode);
-         $response->setContent($contentString);
+        $response->setContent($contentString);
 
 
     }
