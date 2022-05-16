@@ -6,9 +6,15 @@ import { Component, Input, Output,EventEmitter } from "@angular/core";
   template: `
   <div  class="horizontal-card d-flex box-shadow" [style]="'width: ' + width + ';' + 'border-left-color: ' + borderColor">
 
-      <div class="card-icon">
+      <div *ngIf="!imgSrc" class="card-icon">
 
           <i class="fa fa-info"> </i>
+
+      </div>
+
+      <div *ngIf="imgSrc" class="card-icon">
+
+         <img class="img-fluid"  [src]="imgSrc">
 
       </div>
 
@@ -30,5 +36,6 @@ export class HorizontalCardComponent {
   @Input("borderColor") borderColor: string = "#003E81";
   @Output("edit") edit: EventEmitter<any> = new EventEmitter<any>();
   @Output("delete") delete: EventEmitter<any> = new EventEmitter<any>();
+  @Input("imgSrc") imgSrc!: any;
 
 }

@@ -29,3 +29,9 @@ api_cliente_delete:
     path: /{id}
     controller: App\Controller\ClienteController::delete
     methods:  [DELETE]
+
+
+api_cliente_imagem_post:
+    path: /{id}/imagem/
+    controller: App\Controller\ClienteImagemController::add
+    methods:  [POST]

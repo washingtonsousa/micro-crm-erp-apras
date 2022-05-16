@@ -15,14 +15,17 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
             $page = $page <= 0 ? 1 : $page;
 
+            $firstResult = $page == 1 ? 0 : $pageSize * ($page - 1);
+            $pageSizeOffset = $page == 1 ?  $pageSize :  $pageSize + 1;
             if($totalItems <= 0)
             return new PaginationAggregator(array(),$totalItems,$page,1);
 
             $pagesCount = ceil($totalItems / $pageSize);
-      
+    
+
             $query
-                ->setFirstResult($pageSize * ($page-1)) // set the offset
-                ->setMaxResults($pageSize); // set the limit
+                ->setFirstResult($firstResult) // set the offset
+                ->setMaxResults($pageSizeOffset); // set the limit
             
             $items = $query->getResult();  
 

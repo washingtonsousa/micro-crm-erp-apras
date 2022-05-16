@@ -3,15 +3,15 @@ namespace App\Core\Domain\Service;
 
 use App\Core\Domain\Abstraction\Interface\IImagemRepository;
 use App\Core\Domain\Abstraction\Interface\IImagemService;
+use App\Core\Domain\Abstraction\Interface\IProdutoImagemService;
 use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
 use App\Core\Domain\Command\GetEntityCommand;
-use App\Core\Domain\Command\GetPageOfItemsCommand;
 use App\Core\Domain\Command\PersistCommand;
-use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
-use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetImagemPaginatedEntityQuery;
 use App\Core\Domain\Entity\Imagem;
+use App\Core\Domain\Entity\ProdutoImagem;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ImagemService implements IImagemService {
+class ProdutoImagemService implements IProdutoImagemService {
 
     private IImagemRepository $imagemRepo;
     private IUnityOfWork $unityOfWork;
@@ -25,8 +25,7 @@ class ImagemService implements IImagemService {
     }
 
 
-
-        public function CheckIfExists(Imagem $imagem) : ?bool {
+    public function CheckIfExists(Imagem $imagem, UploadedFile $file) : ?bool {
                 
 
                         // $command = new CheckIfUserExistsCommand($imagem, $this->imagemRepo);
@@ -58,7 +57,7 @@ class ImagemService implements IImagemService {
         }
 
 
-        public function update(Imagem $imagem, $id, $changeSenha = false) {
+        public function update(Imagem $imagem, $id) {
 
                 $imagemForUpdate = $this->getById($id); 
                 
@@ -74,12 +73,8 @@ class ImagemService implements IImagemService {
                 return null;
         }
 
-        public function subscribe(Imagem $imagem) {
+        public function add(ProdutoImagem $imagem, UploadedFile $file): ?ProdutoImagem {
                 
-
-                // if(!ImagemSpecification::MustNotExists($this->CheckIfExists($imagem)))
-                //     return null;
-
 
                 $command = new PersistCommand($imagem, $this->unityOfWork);
 

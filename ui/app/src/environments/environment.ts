@@ -4,6 +4,7 @@
 
 export const environment = {
   apiUri: "http://localhost:8000",
+  publicUri: "http://localhost:8000/public/",
   production: false
 };
 

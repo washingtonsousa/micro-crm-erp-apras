@@ -43,6 +43,10 @@ services:
             - {  name: kernel.event_subscriber }
         autowire: true  
 
+    app.serializer:
+        alias: Symfony\Component\Serializer\SerializerInterface
+        public: true
+
     app.core.domain.provider.auth_user_provider:
         class: App\Core\Domain\Provider\AuthUserProvider
         arguments:

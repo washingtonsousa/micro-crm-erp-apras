@@ -4,9 +4,7 @@ export class Cliente {
 
   strNome!: string;
   idCliente!: number;
-
-
-  clienteImagem!: ClienteImagem[];
+  clienteImagens!: ClienteImagem[];
 
 
 

@@ -28,5 +28,6 @@ services:
   App\Core\Domain\Abstraction\Interface\IProdutoService: '@App\Core\Domain\Service\ProdutoService'
   App\Core\Domain\Abstraction\Interface\IPedidoService: '@App\Core\Domain\Service\PedidoService'
   App\Core\Domain\Abstraction\Interface\IImagemService: '@App\Core\Domain\Service\ImagemService'
+  App\Core\Domain\Abstraction\Interface\IClienteImagemService: '@App\Core\Domain\Service\ClienteImagemService'
   App\Core\Domain\Abstraction\Interface\IUnityOfWork: '@unity_of_work'
   Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'

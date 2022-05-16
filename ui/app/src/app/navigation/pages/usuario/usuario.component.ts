@@ -21,7 +21,7 @@ export class UsuarioComponent extends CrudPageTemplate<Usuario> implements OnIni
      @ViewChild("modalUsuarioUpdate") modalUsuarioUpdate!: CleanModalComponent;
 
 
-     currentUsuarioForUpdate: Usuario = new Usuario();
+     override currentEntityForUpdate: Usuario = new Usuario();
 
       constructor(public override dataService:  UsuarioService,
         public override changeDetector: ChangeDetectorRef){

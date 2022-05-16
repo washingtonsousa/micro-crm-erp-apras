@@ -7,5 +7,6 @@ services:
 
     App\Core\Application\Abstraction\Interface\IUsuarioAppService: '@App\Core\Application\Service\UsuarioAppService'
     App\Core\Application\Abstraction\Interface\IClienteAppService: '@App\Core\Application\Service\ClienteAppService'
+    App\Core\Application\Abstraction\Interface\IClienteImagemAppService: '@App\Core\Application\Service\ClienteImagemAppService'
     App\Core\Application\Abstraction\Interface\IProdutoAppService: '@App\Core\Application\Service\ProdutoAppService'
     App\Core\Application\Abstraction\Interface\IPedidoAppService: '@App\Core\Application\Service\PedidoAppService'

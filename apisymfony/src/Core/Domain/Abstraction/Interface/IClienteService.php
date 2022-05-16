@@ -13,7 +13,7 @@ interface IClienteService {
 
             public function update(Cliente $user, $id);
             public function subscribe(Cliente $user);
-            public function getClienteById(int $id) : ?Cliente;
-            public function getClientes(GetClientePaginatedEntityQuery $paginatedQuery) : PaginationAggregator;
+            public function getById(int $id) : ?Cliente;
+            public function get(GetClientePaginatedEntityQuery $paginatedQuery) : PaginationAggregator;
             public function remove($id) : bool;
 }

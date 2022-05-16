@@ -5,9 +5,11 @@ use App\Core\Application\Abstraction\Interface\IClienteAppService;
 use App\Core\Application\ViewModel\ClienteViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
+use App\Core\Shared\Resolver\DependencyResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -27,11 +29,13 @@ class ClienteController extends AbstractController {
 
         public function subscribe(Request $request)
         {
-      
+            
+
               $requestValue = $this->serializerInterface->deserialize($request->getContent(), ClienteViewModel::class, 'json', [
               ]);
 
               $result = $this->clienteAppService->subscribe($requestValue);
+
               return new JsonResponse($result);
 
         }

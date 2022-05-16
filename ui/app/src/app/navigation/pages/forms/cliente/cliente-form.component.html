@@ -1,5 +1,7 @@
 <form [formGroup]="formGroup" (ngSubmit)="Submit()">
 
+
+
   <label class="mb-2 required"> Nome: </label>
 
   <input type="text" class="form-control mb-1" formControlName="strNome" />
@@ -11,6 +13,8 @@
   </alert>
 
   <label class="mb-2"> Imagem/Ícone do cliente: </label>
+
+  <img [src]="imageSrc" />
 
   <input type="file" class="form-control mb-1"  (change)="onFileChange($event)" formControlName="imagem"  />
 

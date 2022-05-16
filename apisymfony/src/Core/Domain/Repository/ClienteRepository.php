@@ -38,15 +38,17 @@ class ClienteRepository  extends ServiceEntityRepository implements IClienteRepo
                 $totalItemsCount = (int) QueryHelper::buildQueryFiltersAndDoCount($queryForCount, $queryExpression, 'c.idCliente');
 
                 $query = QueryHelper::buildQueryFilters($query, $queryExpression);
-
-                return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page, $totalItemsCount);
+            
+               return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page, $totalItemsCount);
 
             }
 
             public function getById($id) : ?Cliente {
 
                 return  $this->createQueryBuilder('c')
-                ->select('c')
+                ->select('c','img', 'i')
+                ->leftJoin('c.clienteImagens', 'i')
+                ->leftJoin('i.imagem', 'img')
                 ->where('c.idCliente = :idCliente')
                 ->setParameter('idCliente', $id) 
                 ->getQuery()   

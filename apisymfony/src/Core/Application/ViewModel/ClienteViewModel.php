@@ -8,7 +8,5 @@ class ClienteViewModel extends EntityViewModel {
     
     public $idCliente;
     public $strNome;
-
-
-    public $clienteImagem;
+    public mixed $clienteImagens;
 }

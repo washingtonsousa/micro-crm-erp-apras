@@ -16,12 +16,13 @@ import { UpdateCreateReactiveForm } from "../abstractions/update-create-reactive
 export class UsuarioFormComponent extends UpdateCreateReactiveForm<Usuario> implements OnInit, OnChanges {
 
   senhaConferencia!: string;
+   @Input("entity") override entity:Usuario = new Usuario();
 
   changeSenhaToggle = false;
 
   get enableSwitchSenhaForm() : boolean {
 
-    return !super.updateMode || this.changeSenhaToggle;
+    return !this.updateMode || this.changeSenhaToggle;
 
   }
 
@@ -53,6 +54,7 @@ export class UsuarioFormComponent extends UpdateCreateReactiveForm<Usuario> impl
     this.updateMode = this.entity.idUsuario > 0;
 
           this.formGroup = this.formBuilder.group({
+
             idUsuario: [this.entity.idUsuario],
             nome: [this.entity.nome, [Validators.required]],
             email: [this.entity.email, [Validators.required]],
@@ -64,13 +66,16 @@ export class UsuarioFormComponent extends UpdateCreateReactiveForm<Usuario> impl
   }
 
   override ngOnChanges() {
+    console.log("onChangesUsuarioForm");
     this.initForm();
+    console.log("onChangesUsuarioFormUpdateMode: " +  this.updateMode)
+    console.log("onChangesUsuarioFormEnableChangeSenhaForm: " +  this.enableSwitchSenhaForm)
+
   }
 
   override ngOnInit(): void {
-
+    console.log("onInitUsuarioForm");
     this.initForm();
-
   }
 
 }

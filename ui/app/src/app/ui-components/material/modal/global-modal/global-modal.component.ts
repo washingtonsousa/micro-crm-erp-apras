@@ -13,6 +13,10 @@ import { GlobalModalConfig } from "./global-modal";
 
       <div [innerHtml]="content"></div>
 
+      <hr />
+
+      <button (click)="close()" class=" w-100 btn btn-primary"> Ok </button>
+
       </clean-modal>
 
   `

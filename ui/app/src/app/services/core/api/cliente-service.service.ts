@@ -9,6 +9,7 @@ import { PaginationReponse } from "src/app/business/entities/response/pagination
 import { PaginationDataRequest } from "src/app/business/entities/request/pagination-data-request";
 import { IPaginatedCrudService } from "./abstractions/paginated-crud-service";
 import { Cliente } from "src/app/business/entities/model/cliente";
+import { ClienteImagem } from "src/app/business/entities/model/cliente-imagem";
 
 @Injectable()
 export class ClienteService implements IPaginatedCrudService<Cliente> {
@@ -41,6 +42,14 @@ export class ClienteService implements IPaginatedCrudService<Cliente> {
         return this.http.post<DefaultDataResponse<Cliente>>(environment.apiUri + "/api/cliente/", Cliente);
       }
 
+      public UploadClienteLogo(id:number, file: File) : Observable<DefaultDataResponse<ClienteImagem>> {
+
+        var formData = new FormData();
+        console.log(file.name.split('.').pop());
+        formData.append('logo', file, "logo." + file.name.split('.').pop());
+        return this.http.post<DefaultDataResponse<ClienteImagem>>(environment.apiUri + "/api/cliente/"+id+"/imagem/", formData);
+
+      }
 
       public Update( Cliente: Cliente, aditionalParams:any[] = [false]) : Observable<DefaultDataResponse<Cliente>> {
         return this.http.put<DefaultDataResponse<Cliente>>(environment.apiUri + "/api/cliente/" + Cliente.idCliente, Cliente,  { params: { changeSenha: aditionalParams[0] }});

@@ -19,7 +19,7 @@ class ClienteImagem
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idclienteImagem;
+    public $idClienteImagem;
 
     /**
      * @var \Cliente
@@ -29,17 +29,59 @@ class ClienteImagem
      *   @ORM\JoinColumn(name="id_cliente", referencedColumnName="id_cliente")
      * })
      */
-    private $idCliente;
+    public $cliente;
 
     /**
      * @var \Imagem
      *
-     * @ORM\ManyToOne(targetEntity="Imagem")
+     * @ORM\ManyToOne(targetEntity="Imagem", cascade={"all"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_imagem", referencedColumnName="id_imagem")
      * })
      */
-    private $idImagem;
+    public $imagem;
 
 
+
+    /**
+     * @var int
+     * @ORM\Column(name="id_cliente", type="integer", nullable=false)
+     */
+    public $idCliente;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_imagem", type="integer", nullable=false)
+     */
+    public $idImagem;
+
+
+    public function __construct($cliente, $imagem)
+    {
+        $this->imagem = $imagem;
+        $this->cliente = $cliente;
+    }
+
+
+
+    /**
+     * Get the value of idCliente
+     *
+     * @return  \Cliente
+     */ 
+    public function getIdCliente()
+    {
+        return $this->cliente;
+    }
+
+    /**
+     * Get the value of idImagem
+     *
+     * @return  \Imagem
+     */ 
+    public function getImagem()
+    {
+        return $this->imagem;
+    }
 }

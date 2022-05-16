@@ -19,14 +19,20 @@ class Cliente
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idCliente;
+    public $idCliente;
 
     /**
      * @var string
      *
      * @ORM\Column(name="str_nome", type="string", length=255, nullable=false)
      */
-    private $strNome;
+    public $strNome;
 
+
+    /**
+    * 
+    * @ORM\OneToMany(targetEntity="ClienteImagem", mappedBy="cliente", cascade={"all"})
+    */
+    public $clienteImagens;
 
 }
