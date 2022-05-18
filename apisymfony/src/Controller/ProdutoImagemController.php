@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Core\Application\Abstraction\Interface\IProdutoAppService;
+use App\Core\Application\Abstraction\Interface\IProdutoImagemAppService;
 use App\Core\Application\ViewModel\ClienteViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
@@ -13,78 +13,27 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class ProdutoImagemController extends AbstractController {
 
-   private IProdutoAppService $produtoAppService;
-   private SerializerInterface  $serializerInterface;
+   private IProdutoImagemAppService $produtoImagemAppService;
 
-        public function __construct(IProdutoAppService $produtoAppService,
+
+        public function __construct(IProdutoImagemAppService $produtoImagemAppService,
         SerializerInterface  $serializerInterface
         )
         {
-          $this->produtoAppService =  $produtoAppService;
+          $this->produtoImagemAppService =  $produtoImagemAppService;
           $this->serializerInterface = $serializerInterface;
         }
         
 
-        public function subscribe( Request $request)
+        public function add(Request $request)
         {
       
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), ClienteViewModel::class, 'json', [
-              ]);
 
-              $result = $this->produtoAppService->subscribe($requestValue);
-              return new JsonResponse($result);
+              $id = $request->attributes->get('id');
 
-        }
-        
+              $entity = $this->produtoImagemAppService->add($id, $request->files->get('produtoImg'));
 
-        public function get(IPaginatedRequestHandler $handler)
-        {
-          
-              $result = $this->produtoAppService->get($handler->getRequestViewModel());
-              return new JsonResponse($result);
-
-        }
-
-        public function getById(Request $request)
-        {
-          
-              $result = $this->produtoAppService->getById($request->attributes->get('id'));
-              return new JsonResponse($result);
-
-        }
-
-        public function patch(Request $request)
-        {
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
-                DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
-              ]);
-              //  $result = $this->produtoAppService->partialUpdate($requestValue);
-               return new JsonResponse();
-
-        }
-
-        public function put(Request $request)
-        {
-
-            $requestValue = $this->serializerInterface->deserialize($request->getContent(), ClienteViewModel::class, 'json', [
-            ]);
-
-            $id = $request->attributes->get('id');
-
-            $result = $this->produtoAppService->update($requestValue, $id);
-
-            return new JsonResponse($result);
-
-        }
-
-        public function delete(Request $request)
-        {
-
-            $id = $request->attributes->get('id');
-
-            $result = $this->produtoAppService->remove($id);
-
-            return new JsonResponse(null, $result ? 200 : 204);
+              return new JsonResponse($entity);
 
         }
 

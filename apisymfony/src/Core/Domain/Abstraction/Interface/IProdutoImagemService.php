@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface IProdutoImagemService {
 
-            public function update(Imagem $imagem, $id);
             public function add(ProdutoImagem $imagem, UploadedFile $file) : ?ProdutoImagem;
-            public function getById(int $id) : ?Imagem;
-            public function remove($id) : bool;
+       
 }

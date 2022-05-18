@@ -4,6 +4,7 @@ namespace App\Core\Application\Service;
 use App\Core\Application\Abstraction\Interface\IProdutoAppService;
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
+use App\Core\Application\Abstraction\ViewModel\Pagination\ProdutoPaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\ProdutoViewModel;
 use App\Core\Domain\Abstraction\Interface\IProdutoService;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
@@ -27,12 +28,16 @@ class ProdutoAppService implements IProdutoAppService {
 
     public function subscribe(ProdutoViewModel $produtoViewModel) : ?ProdutoViewModel {
 
-        $cliente = $this->mapper->map($produtoViewModel, Produto::class);
+
+
+
+        $produto = $this->mapper->map($produtoViewModel, Produto::class);
+
 
         // if(!UsuarioSpecification::IsValidForInsert($usuario))
         //     return null;
 
-        $result =  $this->service->subscribe($cliente);
+        $result =  $this->service->subscribe($produto);
      
         if($result == null)
             return null;
@@ -69,17 +74,19 @@ class ProdutoAppService implements IProdutoAppService {
     }
 
 
-    public function get(PaginatedEntityRequestViewModel $paramsModel): PaginationAggregatorViewModel
+    public function get(PaginatedEntityRequestViewModel $paramsModel): ProdutoPaginationAggregatorViewModel
      {
 
         $params = $this->mapper->map($paramsModel, PaginatedEntityRequest::class);
 
         $query = new GetProdutoPaginatedEntityQuery($params);
 
-        $domainResult  =$this->service->get($query);
+        $domainResult  =$this->service->get($query);  
 
-        $result =  $this->mapper->map( $domainResult, PaginationAggregatorViewModel::class);
+        $result =  $this->mapper->map($domainResult, ProdutoPaginationAggregatorViewModel::class);
+
         return  $result;
+
     }
 
     public function getById(int $id): ?ProdutoViewModel

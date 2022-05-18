@@ -29,3 +29,8 @@ api_produto_delete:
     path: /{id}
     controller: App\Controller\ProdutoController::delete
     methods:  [DELETE]
+
+api_produto_imagem_post:
+    path: /{id}/imagem/
+    controller: App\Controller\ProdutoImagemController::add
+    methods:  [POST]

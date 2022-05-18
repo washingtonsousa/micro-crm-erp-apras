@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Produto
  *
- * @ORM\Table(name="produto", indexes={@ORM\Index(name="fk_produto_pedido_produto1_idx", columns={"id_pedido_produto"})})
+ * @ORM\Table(name="produto")
  * @ORM\Entity
  */
 class Produto
@@ -27,6 +27,14 @@ class Produto
      * @ORM\Column(name="nome", type="string", length=255, nullable=true)
      */
     private $nome;
+
+
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="codigo_produto", type="string", length=255, nullable=false)
+    */
+     public $codigoProduto;
 
     /**
      * @var string|null
@@ -56,7 +64,11 @@ class Produto
      */
     private $dtDataCadastro;
 
-    
+     /**
+     * 
+     * @ORM\OneToOne(targetEntity="ProdutoImagem", mappedBy="produto", cascade={"all"})
+     */
+    private $produtoImagem;
 
 
 }

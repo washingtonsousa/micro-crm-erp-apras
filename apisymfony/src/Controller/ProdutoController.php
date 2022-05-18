@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Core\Application\Abstraction\Interface\IProdutoAppService;
 use App\Core\Application\ViewModel\ClienteViewModel;
+use App\Core\Application\ViewModel\ProdutoViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ class ProdutoController extends AbstractController {
         public function subscribe( Request $request)
         {
       
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), ClienteViewModel::class, 'json', [
+              $requestValue = $this->serializerInterface->deserialize($request->getContent(), ProdutoViewModel::class, 'json', [
               ]);
 
               $result = $this->produtoAppService->subscribe($requestValue);
@@ -84,7 +85,7 @@ class ProdutoController extends AbstractController {
 
             $result = $this->produtoAppService->remove($id);
 
-            return new JsonResponse(null, $result ? 200 : 204);
+            return new JsonResponse(null, $result ? 200 : 422);
 
         }
 

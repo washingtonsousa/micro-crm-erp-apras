@@ -31,8 +31,8 @@ class Cliente
 
     /**
     * 
-    * @ORM\OneToMany(targetEntity="ClienteImagem", mappedBy="cliente", cascade={"all"})
+    * @ORM\OneToOne(targetEntity="ClienteImagem", mappedBy="cliente", cascade={"all"})
     */
-    public $clienteImagens;
+    public $clienteImagem;
 
 }

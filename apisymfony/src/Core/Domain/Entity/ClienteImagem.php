@@ -24,7 +24,7 @@ class ClienteImagem
     /**
      * @var \Cliente
      *
-     * @ORM\ManyToOne(targetEntity="Cliente")
+     * @ORM\OneToOne(targetEntity="Cliente")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_cliente", referencedColumnName="id_cliente")
      * })
@@ -34,7 +34,7 @@ class ClienteImagem
     /**
      * @var \Imagem
      *
-     * @ORM\ManyToOne(targetEntity="Imagem", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="Imagem", cascade={"all"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_imagem", referencedColumnName="id_imagem")
      * })

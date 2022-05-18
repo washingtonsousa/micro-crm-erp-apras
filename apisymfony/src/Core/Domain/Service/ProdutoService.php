@@ -86,6 +86,7 @@ class ProdutoService implements IProdutoService {
 
                 $result = $command->Execute();
 
+
                 if($result->isSuccess())
                         return $result->getEntity();
 
@@ -100,7 +101,6 @@ class ProdutoService implements IProdutoService {
                 $command = new GetPageOfItemsCommand($this->produtoRepo, $paginatedQuery);
 
                 $result = $command->Execute();
-               
 
                 if($result->isSuccess())
                         return $result->getPaginationResult();

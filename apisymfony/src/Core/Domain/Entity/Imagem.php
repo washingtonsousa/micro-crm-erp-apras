@@ -52,9 +52,15 @@ class Imagem
 
        /**
     * 
-    * @ORM\OneToMany(targetEntity="ClienteImagem", mappedBy="imagem", cascade={"all"})
+    * @ORM\OneToOne(targetEntity="ClienteImagem", mappedBy="imagem")
     */
-    public $clienteImagens;
+    public $clienteImagem;
+
+       /**
+    * 
+    * @ORM\OneToOne(targetEntity="ProdutoImagem", mappedBy="imagem")
+    */
+    public $produtoImagem;
 
 
     /**

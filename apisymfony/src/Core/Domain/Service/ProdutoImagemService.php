@@ -9,6 +9,7 @@ use App\Core\Domain\Command\GetEntityCommand;
 use App\Core\Domain\Command\PersistCommand;
 use App\Core\Domain\Entity\Imagem;
 use App\Core\Domain\Entity\ProdutoImagem;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProdutoImagemService implements IProdutoImagemService {
@@ -16,7 +17,7 @@ class ProdutoImagemService implements IProdutoImagemService {
     private IImagemRepository $imagemRepo;
     private IUnityOfWork $unityOfWork;
 
-    public function __construct(
+    public function __construct(private ParameterBagInterface $parameterBag,
                                 IUnityOfWork $unityOfWork, IImagemRepository $imagemRepo)
     {
             $this->unityOfWork = $unityOfWork;
@@ -25,58 +26,13 @@ class ProdutoImagemService implements IProdutoImagemService {
     }
 
 
-    public function CheckIfExists(Imagem $imagem, UploadedFile $file) : ?bool {
+        public function add(ProdutoImagem $produtoImagem, UploadedFile $file): ?ProdutoImagem {
                 
+                $imagem = $produtoImagem->getImagem();
 
-                        // $command = new CheckIfUserExistsCommand($imagem, $this->imagemRepo);
+                $fileSaved = $file->move($this->parameterBag->get('webDir').$imagem->getAbsolutPath(), $imagem->getNome());
 
-                        // $result = $command->Execute();
-
-                        // if($result->isSuccess())
-                        //         return $result->getResult();
-
-                        return null;
-
-        }
-
-       public function remove($id) : bool {
-
-                $imagemForUpdate = $this->getById($id); 
-
-                if($imagemForUpdate == null)
-                        return false;
-
-                $this->unityOfWork->Remove($imagemForUpdate);
-
-                $stmResult =  $this->unityOfWork->Commit();
-        
-                if($stmResult->isSuccess())
-                        return true;
-
-                return false;
-        }
-
-
-        public function update(Imagem $imagem, $id) {
-
-                $imagemForUpdate = $this->getById($id); 
-                
-                //$imagemForUpdate->fullUpdate($imagem);
-
-                $command = new PersistCommand($imagemForUpdate, $this->unityOfWork);
-
-                $result = $command->Execute();
-
-                if($result->isSuccess())
-                        return $result->getEntity();
-
-                return null;
-        }
-
-        public function add(ProdutoImagem $imagem, UploadedFile $file): ?ProdutoImagem {
-                
-
-                $command = new PersistCommand($imagem, $this->unityOfWork);
+                $command = new PersistCommand($produtoImagem, $this->unityOfWork);
 
                 $result = $command->Execute();
 

@@ -47,7 +47,7 @@ class ClienteRepository  extends ServiceEntityRepository implements IClienteRepo
 
                 return  $this->createQueryBuilder('c')
                 ->select('c','img', 'i')
-                ->leftJoin('c.clienteImagens', 'i')
+                ->leftJoin('c.clienteImagem', 'i')
                 ->leftJoin('i.imagem', 'img')
                 ->where('c.idCliente = :idCliente')
                 ->setParameter('idCliente', $id) 

@@ -7,6 +7,7 @@ use App\Core\Domain\Abstraction\Interface\IUsuarioRepository;
 use App\Core\Domain\Command\Result\CreateUserCommandResult;
 use App\Core\Domain\Command\Result\PersistCommandResult;
 use App\Core\Domain\Command\Result\PersistUserCommandResult;
+use App\Core\Domain\Entity\NonDatabaseEntity\StatementResult;
 use App\Core\Domain\Entity\Usuario;
 use DateTime;
 use Exception;
@@ -34,10 +35,10 @@ class PersistCommand extends Command {
 
             $statementResult = $this->unityOfWork->Commit();
 
-            $this->setResult(new PersistCommandResult(!$statementResult->hasException() ? $this->entity : null));
+            $this->setResult(new PersistCommandResult(!$statementResult->hasException() ? $this->entity : null, $statementResult));
 
         } catch(Exception $ex) {
-            $this->setResult(new PersistCommandResult(null));
+            $this->setResult(new PersistCommandResult(null, new StatementResult(false,0,$ex)));
         }
     }
 

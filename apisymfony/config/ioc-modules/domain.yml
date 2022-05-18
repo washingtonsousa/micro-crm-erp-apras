@@ -1,6 +1,5 @@
 services:
 
-
   App\Core\Domain\Service\:
     resource: '../../src/Core/Domain/Service/'
     public: true
@@ -16,8 +15,6 @@ services:
           public: true
           autowire: true
 
-
-
   App\Core\Domain\Abstraction\Interface\IClienteRepository: '@App\Core\Domain\Repository\ClienteRepository'
   App\Core\Domain\Abstraction\Interface\IUsuarioRepository: '@App\Core\Domain\Repository\UsuarioRepository'
   App\Core\Domain\Abstraction\Interface\IProdutoRepository: '@App\Core\Domain\Repository\ProdutoRepository'
@@ -29,5 +26,7 @@ services:
   App\Core\Domain\Abstraction\Interface\IPedidoService: '@App\Core\Domain\Service\PedidoService'
   App\Core\Domain\Abstraction\Interface\IImagemService: '@App\Core\Domain\Service\ImagemService'
   App\Core\Domain\Abstraction\Interface\IClienteImagemService: '@App\Core\Domain\Service\ClienteImagemService'
+  App\Core\Domain\Abstraction\Interface\IProdutoImagemService: '@App\Core\Domain\Service\ProdutoImagemService'
+
   App\Core\Domain\Abstraction\Interface\IUnityOfWork: '@unity_of_work'
   Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'

@@ -10,7 +10,7 @@ class ClienteQueryHelper {
     public static function buildDefaultPaginatedQueryBuilder(ServiceEntityRepository $repo,$order = 'DESC', $orderField = 'idCliente') {
                   
         return $repo->createQueryBuilder('c')
-            ->leftJoin('c.clienteImagens', 'i')
+            ->leftJoin('c.clienteImagem', 'i')
             ->leftJoin('i.imagem', 'img')
             ->orderBy('c.'.$orderField, $order);
     }

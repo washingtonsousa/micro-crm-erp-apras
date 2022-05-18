@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ProdutoImagem
  *
- * @ORM\Table(name="produto_imagem", indexes={@ORM\Index(name="fk_produto_imagem_imagem1_idx", columns={"id_imagem"}), @ORM\Index(name="fk_produto_imagem_produto1_idx", columns={"idproduto"})})
+ * @ORM\Table(name="produto_imagem", indexes={@ORM\Index(name="fk_produto_imagem_imagem1_idx", columns={"id_imagem"}), @ORM\Index(name="fk_produto_imagem_produto1_idx", columns={"id_produto"})})
  * @ORM\Entity
  */
 class ProdutoImagem
@@ -21,25 +21,68 @@ class ProdutoImagem
      */
     private $idProdutoImagem;
 
+
+    /**
+     * @var int
+     * @ORM\Column(name="id_produto", type="integer", nullable=false)
+     */
+    public $idProduto;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_imagem", type="integer", nullable=false)
+     */
+    public $idImagem;
+
+
     /**
      * @var \Imagem
      *
-     * @ORM\ManyToOne(targetEntity="Imagem")
+     * @ORM\OneToOne(targetEntity="Imagem", cascade={"all"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_imagem", referencedColumnName="id_imagem")
      * })
      */
-    private $idImagem;
+    private $imagem;
 
     /**
      * @var \Produto
      *
-     * @ORM\ManyToOne(targetEntity="Produto")
+     * @ORM\OneToOne(targetEntity="Produto", cascade={"all"})
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idproduto", referencedColumnName="id_produto")
+     *   @ORM\JoinColumn(name="id_produto", referencedColumnName="id_produto")
      * })
      */
-    private $idproduto;
+    private $produto;
 
+
+
+    /**
+     * Get the value of imagem
+     *
+     * @return  \Imagem
+     */ 
+    public function getImagem()
+    {
+        return $this->imagem;
+    }
+
+    /**
+     * Get the value of produto
+     *
+     * @return  \Produto
+     */ 
+    public function getProduto()
+    {
+        return $this->produto;
+    }
+
+
+    public function __construct($produto, $imagem)
+    {
+        $this->imagem = $imagem;
+        $this->produto = $produto;
+    }
 
 }

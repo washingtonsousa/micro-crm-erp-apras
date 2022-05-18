@@ -45,6 +45,7 @@ class ClienteController extends AbstractController {
         {
           
               $result = $this->clienteAppService->get($handler->getRequestViewModel());
+
               return new JsonResponse($result);
 
         }

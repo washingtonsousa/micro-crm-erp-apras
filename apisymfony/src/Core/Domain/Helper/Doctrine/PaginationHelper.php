@@ -17,6 +17,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
             $firstResult = $page == 1 ? 0 : $pageSize * ($page - 1);
             $pageSizeOffset = $page == 1 ?  $pageSize :  $pageSize + 1;
+
             if($totalItems <= 0)
             return new PaginationAggregator(array(),$totalItems,$page,1);
 
@@ -27,8 +28,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
                 ->setFirstResult($firstResult) // set the offset
                 ->setMaxResults($pageSizeOffset); // set the limit
             
-            $items = $query->getResult();  
-
+            $items = $query->getResult(\Doctrine\ORM\Query::HYDRATE_OBJECT);  
 
             return new PaginationAggregator($items,$totalItems,$page,$pagesCount);
 

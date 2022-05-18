@@ -4,10 +4,10 @@ namespace  App\Core\Application\ViewModel;
 use App\Core\Application\Abstraction\ViewModel\EntityViewModel;
 use DateTime;
 
-class ClienteImagemViewModel extends EntityViewModel  {
+class ProdutoImagemViewModel extends EntityViewModel  {
 
-    public $idClienteImagem;
-    public $idCliente;  
+    public $idProdutoImagem;
+    public $idProduto;  
     public $idImagem;
     public $cliente;  
     public $imagem;
