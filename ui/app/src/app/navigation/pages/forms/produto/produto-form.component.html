@@ -1,0 +1,44 @@
+<form [formGroup]="formGroup" (ngSubmit)="Submit()">
+
+
+
+  <label class="mb-2 required"> Nome: </label>
+
+  <input type="text" class="form-control mb-1" formControlName="nome" />
+
+  <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['nome'].errors?.required">
+
+    Insira o nome, é obrigatório
+
+  </alert>
+
+  <label class="mb-2 required"> Código do produto: </label>
+
+
+  <input type="text" class="form-control mb-1" formControlName="codigoProduto" />
+
+  <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['codigoProduto'].errors?.required">
+
+    Insira o código, é obrigatório
+
+  </alert>
+
+  <label class="mb-2"> Imagem/Ícone do cliente: </label>
+
+  <image-frame (click)="fileInput.click()" class="my-2 d-block pointer" [imgUri]="imageSrc">
+
+  </image-frame>
+
+  <input #fileInput accept="image/png, image/gif, image/jpeg" type="file" class="d-none"  (change)="onFileChange($event)"  />
+
+
+  <p class="mt-2"> <small>
+
+    Todos os itens marcados com "*" são obrigatórios.
+
+  </small></p>
+
+
+  <button [disabled]="!formGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-save"></i> Enviar  </button>
+
+</form>

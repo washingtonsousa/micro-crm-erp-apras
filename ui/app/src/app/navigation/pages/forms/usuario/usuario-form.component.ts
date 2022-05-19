@@ -40,11 +40,10 @@ export class UsuarioFormComponent extends UpdateCreateReactiveForm<Usuario> impl
   Submit() {
 
 
-    super.OnSubmit([this.changeSenhaToggle], () => {
-
+    super.OnSubmit([this.changeSenhaToggle], (data:DefaultDataResponse<Usuario>) => {
+      this.onSuccess.emit(data.data);
       this.senhaConferencia = "";
       this.changeSenhaToggle = false;
-
     });
 
   }

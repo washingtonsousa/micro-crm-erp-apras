@@ -6,9 +6,15 @@ import { Component, Input, Output,EventEmitter } from "@angular/core";
   template: `
   <div class="card" [style]="'width: ' + width + ';'">
 
-      <div class="card-icon">
+      <div *ngIf="!imgSrc" class="card-icon">
 
             <i [class]="iconClass"> </i>
+
+      </div>
+
+      <div *ngIf="imgSrc" class="card-img">
+
+            <img [src]="imgSrc | sanitizerUrl"  class="img-fluid"/>
 
       </div>
 
@@ -26,7 +32,8 @@ import { Component, Input, Output,EventEmitter } from "@angular/core";
 export class CardWithIconComponent {
 
   @Input("iconClass") iconClass: string = "fas fa-info";
-  @Input("title") title!: string;
+  @Input("imgSrc") imgSrc!:any;
+  @Input("title") title!: string | undefined;
   @Input("width") width: string = "100%";
 
   @Output("edit") edit: EventEmitter<any> = new EventEmitter<any>();

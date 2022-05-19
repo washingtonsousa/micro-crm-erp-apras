@@ -32,7 +32,7 @@ class ClienteImagem
     public $cliente;
 
     /**
-     * @var \Imagem
+     * @var \App\Core\Domain\Entity\Imagem
      *
      * @ORM\OneToOne(targetEntity="Imagem", cascade={"all"})
      * @ORM\JoinColumns({
@@ -61,6 +61,10 @@ class ClienteImagem
     {
         $this->imagem = $imagem;
         $this->cliente = $cliente;
+
+        $this->idCliente = $cliente->getIdCliente();
+        $this->idImagem = $imagem->getIdImagem();
+
     }
 
 
@@ -70,7 +74,7 @@ class ClienteImagem
      *
      * @return  \Cliente
      */ 
-    public function getIdCliente()
+    public function getCliente()
     {
         return $this->cliente;
     }
@@ -78,10 +82,26 @@ class ClienteImagem
     /**
      * Get the value of idImagem
      *
-     * @return  \Imagem
      */ 
-    public function getImagem()
+    public function getImagem() : Imagem
     {
         return $this->imagem;
+    }
+
+    /**
+     * Get the value of idCliente
+     *
+     * @return  int
+     */ 
+    public function getIdCliente()
+    {
+        return $this->idCliente;
+    }
+
+    public function updateImagem(Imagem $imagem) : ClienteImagem {
+
+        $this->imagem = $imagem;
+        return $this;
+
     }
 }

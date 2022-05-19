@@ -66,11 +66,11 @@ class ClienteService implements IClienteService {
         }
 
 
-        public function update(Cliente $usuario, $id) {
+        public function update(Cliente $cliente, $id) {
 
                 $clienteForUpdate = $this->getById($id); 
                 
-               // $usuarioForUpdate->fullUpdate($usuario);
+                 $clienteForUpdate->fullUpdate($cliente);
 
                 $command = new PersistCommand($clienteForUpdate, $this->unityOfWork);
 

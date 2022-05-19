@@ -17,6 +17,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ClienteService } from './services/core/api/cliente-service.service';
 import { UsuarioService } from './services/core/api/usuario-service.service';
+import { ProdutoService } from './services/core/api/produto-service.service';
+import { PedidoService } from './services/core/api/pedido-service.service';
 
 @NgModule({
   declarations: [
@@ -37,9 +39,10 @@ import { UsuarioService } from './services/core/api/usuario-service.service';
     AlertModule.forRoot()
   ],
   providers: [
-
+    PedidoService,
     ClienteService,
     UsuarioService,
+    ProdutoService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,

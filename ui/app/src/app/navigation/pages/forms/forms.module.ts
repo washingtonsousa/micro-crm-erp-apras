@@ -9,15 +9,17 @@ import { UsuarioService } from "src/app/services/core/api/usuario-service.servic
 import { MaterialModule } from "src/app/ui-components/material/material.module";
 import { ClienteFormComponent } from "./cliente/cliente-form.component";
 import { LoginFormComponent } from "./login/login-form.component";
+import { PedidoFormComponent } from "./pedido/pedido-form.component";
+import { ProdutoFormComponent } from "./produto/produto-form.component";
 import { UsuarioFormComponent } from "./usuario/usuario-form.component";
 
 
 
 @NgModule({
 
-  imports: [CommonModule, PathResolverPipesModule, MaterialModule, BrowserModule, ReactiveFormsModule, HttpClientModule, AlertModule],
-  exports: [LoginFormComponent, PathResolverPipesModule, ClienteFormComponent,UsuarioFormComponent],
-  declarations: [LoginFormComponent, ClienteFormComponent,UsuarioFormComponent],
+  imports: [CommonModule, ReactiveFormsModule, PathResolverPipesModule, MaterialModule, BrowserModule, ReactiveFormsModule, HttpClientModule, AlertModule],
+  exports: [LoginFormComponent, PedidoFormComponent, ProdutoFormComponent, PathResolverPipesModule, ClienteFormComponent,UsuarioFormComponent],
+  declarations: [LoginFormComponent,PedidoFormComponent, ProdutoFormComponent, ClienteFormComponent,UsuarioFormComponent],
   providers: [UsuarioService]
 
 })

@@ -35,7 +35,7 @@ class ClienteImagemAppService implements IClienteImagemAppService {
         $this->mapper = $this->mapperInitializer->getMapper();
     }
 
-    public function add($id, UploadedFile $file) : ?ClienteImagemViewModel {
+    public function addOrUpdate($id, UploadedFile $file) : ?ClienteImagemViewModel {
 
         $cliente = $this->service->getById($id);
 
@@ -43,12 +43,13 @@ class ClienteImagemAppService implements IClienteImagemAppService {
             return null;
 
         $imagem = new Imagem();
+
         $imagem->setNome("logo.".$file->getClientOriginalExtension());
         $imagem->setAbsolutPath(Constants::UploadDir."clientes/"."$id"."/");
 
         $clienteImagem = new ClienteImagem($cliente, $imagem);
 
-        $result =  $this->imagemService->add($clienteImagem, $file);
+        $result =  $this->imagemService->addOrUpdate($clienteImagem, $file);
     
         if($result == null)
              return null;
@@ -58,52 +59,5 @@ class ClienteImagemAppService implements IClienteImagemAppService {
         return  $resultViewModel;
 
     }
-
-    public function update(ClienteViewModel $clienteViewModel, $id) : ClienteViewModel {
-
-        $usuario = $this->mapper->map($clienteViewModel, Cliente::class);
-
-        $result =  $this->service->update($usuario, $id);
-     
-        if($result == null)
-            return null;
-
-        $clienteViewModel = $this->mapper->map($result, ClienteViewModel::class);
-
-        return    $clienteViewModel ;
-
-
-    }
-
-    
-    public function remove($id) : bool {
-        
-        return $this->service->remove($id);
-
-    }
-
-
-    public function get(PaginatedEntityRequestViewModel $paramsModel): PaginationAggregatorViewModel
-     {
-
-        $params = $this->mapper->map($paramsModel, PaginatedEntityRequest::class);
-
-        $query = new GetClientePaginatedEntityQuery($params);
-
-        $domainResult  =$this->service->get($query);
-
-        $result =  $this->mapper->map( $domainResult, PaginationAggregatorViewModel::class);
-        return  $result;
-    }
-
-    public function getById(int $id): ?ClienteViewModel
-    {
-
-        $result =  $this->mapper->map($this->service->getById($id), ClienteViewModel::class);
-        return  $result;
-
-    }
-
-
 
 }

@@ -1,7 +1,9 @@
 <?php
 namespace App\Core\Domain\Service;
 
+use App\Core\Domain\Abstraction\Interface\IClienteImagemRepository;
 use App\Core\Domain\Abstraction\Interface\IClienteImagemService;
+use App\Core\Domain\Abstraction\Interface\IClienteRepository;
 use App\Core\Domain\Abstraction\Interface\IImagemRepository;
 use App\Core\Domain\Abstraction\Interface\IImagemService;
 use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
@@ -18,71 +20,27 @@ class ClienteImagemService implements IClienteImagemService {
 
 
     public function __construct(  private ParameterBagInterface $parameterBag, 
-    private  IUnityOfWork $unityOfWork, private IImagemRepository $imagemRepo)
+    private  IUnityOfWork $unityOfWork, private IClienteImagemRepository $imagemRepo)
     {
     }
 
-
-    public function CheckIfExists(Cliente $idCliente) : ?bool {
-                
-
-        // $command = new CheckIfUserExistsCommand($user, $this->userRepo);
-
-        // $result = $command->Execute();
-
-        // if($result->isSuccess())
-             //    return $result->getResult();
-
-        return null;
-   }
-
-
-       public function remove($id) : bool {
-
-                $imagemForUpdate = $this->getById($id); 
-
-                if($imagemForUpdate == null)
-                        return false;
-
-                $this->unityOfWork->Remove($imagemForUpdate);
-
-                $stmResult =  $this->unityOfWork->Commit();
-        
-                if($stmResult->isSuccess())
-                        return true;
-
-                return false;
-        }
-
-
-        public function update(ClienteImagem $imagem, UploadedFile $file) {
-
-                //$imagemForUpdate = $this->getById($id); 
-                
-                //$imagemForUpdate->fullUpdate($imagem);
-
-               // $command = new PersistCommand($imagemForUpdate, $this->unityOfWork);
-
-               // $result = $command->Execute();
-
-               // if($result->isSuccess())
-                 //       return $result->getEntity();
-
-                return null;
-        }
-
-        public function add(ClienteImagem $clienteImagem, UploadedFile $file) : ?ClienteImagem {
+        public function addOrUpdate(ClienteImagem $clienteImagem, UploadedFile $file) : ?ClienteImagem {
                 
                 $imagem = $clienteImagem->getImagem();
+                
+                $clienteImagemFromDb = $this->getByClienteId($clienteImagem->getIdCliente());
+
+                if($clienteImagemFromDb != null)
+                         $clienteImagem = $clienteImagemFromDb->UpdateImagem($imagem);                
 
                 $fileSaved = $file->move($this->parameterBag->get('webDir').$imagem->getAbsolutPath(), $imagem->getNome());
 
-                $command = new PersistCommand($clienteImagem, $this->unityOfWork);
+                 $command = new PersistCommand($clienteImagem, $this->unityOfWork);
 
-                $result = $command->Execute();
+                 $result = $command->Execute();
 
-                if($result->isSuccess())
-                        return $result->getEntity();
+                 if($result->isSuccess())
+                         return $result->getEntity();
 
                 return null;
 
@@ -90,7 +48,8 @@ class ClienteImagemService implements IClienteImagemService {
 
 
 
-        public function getById(int $id) : ?Imagem {
+
+        public function getByClienteId(int $id) : ?ClienteImagem {
                 
                 $command = new GetEntityCommand($id, $this->imagemRepo);
 

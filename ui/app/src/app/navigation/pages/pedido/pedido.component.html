@@ -1,0 +1,68 @@
+<container>
+
+  <box-container>
+
+    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalProduto.openModal()">
+
+
+
+
+    </crud-panel>
+
+
+    <div class="container" class="mt-3">
+
+      <div class="row">
+
+          <pedido-card (delete)="remove($event)" (edit)="loadPedidoForUpdate($event)" [pedido]="pedido" class="col-xl-3 col-lg-4 p-2" *ngFor="let pedido of pageData?.items">
+
+          </pedido-card>
+
+      </div>
+
+    </div>
+
+
+
+    <clean-modal #modalProduto title="Cadastro de Produto">
+
+
+      <produto-form (onSuccess)="onFormSuccess($event); modalProduto.closeModal()" (onFail)="onFormFail($event)">
+
+      </produto-form>
+
+
+      <alert *ngFor="let notification of notifications" type="danger">
+
+         {{ notification.message }}
+
+      </alert>
+
+
+    </clean-modal>
+
+
+    <clean-modal #modalProdutoUpdate title="Atualizacao de Produto">
+
+      <pedido-form [entity]="currentEntityForUpdate" (onSuccess)="onFormSuccess($event, 'Produto atualizado com sucesso!'); modalProdutoUpdate.closeModal()" (onFail)="onFormFail($event)">
+
+      </pedido-form>
+
+
+      <alert *ngFor="let notification of notifications" type="danger">
+
+         {{ notification.message }}
+
+      </alert>
+
+
+    </clean-modal>
+
+
+  </box-container>
+
+
+
+
+
+</container>

@@ -11,17 +11,29 @@ import { ClienteModule } from "../pages/cliente/cliente.module";
 import { FormsModuleA } from "../pages/forms/forms.module";
 import { HomeComponent } from "../pages/home/home.component";
 import { LoginComponent } from "../pages/login/login.component";
+import { PedidoModule } from "../pages/pedido/pedido.module";
+import { ProdutoModule } from "../pages/produto/produto.module";
 import { UsuarioComponent } from "../pages/usuario/usuario.component";
 import { UsuarioModule } from "../pages/usuario/usuario.module";
-
-
 
 @NgModule({
 
     providers: [],
-    declarations: [HomeComponent, UsuarioComponent, LoginComponent,ClienteComponent],
+    declarations: [HomeComponent, LoginComponent,ClienteComponent],
     exports: [HomeComponent, LoginComponent,ClienteComponent],
-    imports: [UsuarioModule, ClienteModule, RouterModule, MaterialModule, CommonModule,LayoutModule,FlexBoxModule,FormsModuleA, AlertModule, GeneralUIModule]
+    imports: [UsuarioModule,
+      ProdutoModule,
+      UsuarioModule,
+      ClienteModule,
+      RouterModule,
+      MaterialModule,
+      CommonModule,
+      LayoutModule,
+      PedidoModule,
+      FlexBoxModule,
+      FormsModuleA,
+      AlertModule,
+      GeneralUIModule]
 
 })
 export class NavigationModule {

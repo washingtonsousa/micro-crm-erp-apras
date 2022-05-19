@@ -35,4 +35,28 @@ class Cliente
     */
     public $clienteImagem;
 
+
+    /**
+     * Get the value of idCliente
+     *
+     * @return  int
+     */ 
+    public function getIdCliente()
+    {
+        return $this->idCliente;
+    }
+
+    public function fullUpdate(Cliente $cliente) {
+        $this->strNome = $cliente->getNome();
+    }
+
+    /**
+     * Get the value of strNome
+     *
+     * @return  string
+     */ 
+    public function getNome()
+    {
+        return $this->strNome;
+    }
 }

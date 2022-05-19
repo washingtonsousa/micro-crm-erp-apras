@@ -42,12 +42,14 @@ export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> impl
 
     this.file = event.target.files[0];
     this.imageSelected = this.file.name;
+
         if (event.target.files && event.target.files[0]) {
           const reader = new FileReader();
           reader.onload = (e: any) => {
             this.imageSrc = e.target.result;
           };
-  reader.readAsDataURL(event.target.files[0]);
+
+      reader.readAsDataURL(event.target.files[0]);
   }
 }
 
@@ -58,55 +60,46 @@ export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> impl
 
     LoadingIconService.show();
 
-    this.dataService.Subscribe(this.formGroup.value).subscribe({
-
-       next:  (data:DefaultDataResponse<Cliente>) => {
-
-        if(this.file == undefined)
-          this.onSuccess.emit(data.data);
+    super.OnSubmit([], (data:DefaultDataResponse<Cliente>) => {
 
         if(this.file != undefined)
         this.dataService.UploadClienteLogo(data.data.idCliente, this.file).subscribe({
 
-          next:  (dataImage:DefaultDataResponse<ClienteImagem>) => {
+              next:  (dataImage:DefaultDataResponse<ClienteImagem>) => {
+                this.onSuccess.emit(data.data);
+              },
+              error: (data:HttpErrorResponse) => {
+                this.onFail.emit(data.error);
+              },
+              complete: () => {
+              }
 
+            });
 
-          },
-          error: (data:HttpErrorResponse) => {
-            this.onFail.emit(data);
-            console.log(data);
-          },
-          complete: () => {
+        if(this.file == undefined)
             this.onSuccess.emit(data.data);
-          }
 
-        })
-
-
-
-       },
-       error:(data:HttpErrorResponse) => {
-         this.onFail.emit(data);
-       },
-       complete: () => {
-
-        LoadingIconService.hide();
-
-       }
 
     });
   }
   initForm(): void {
 
-    var imagems = this.entity?.clienteImagens;
+    console.log( this.entity);
+
+    this.updateMode = this.entity?.idCliente > 0;
+
+
+    var imagems = this.entity?.clienteImagem;
 
     if(imagems!= undefined)
-      this.imageSrc = enviroment.environment.apiUri + imagems[0]?.imagem?.absolutPath + "/" + imagems[0]?.imagem?.nome;
+      this.imageSrc = enviroment.environment.apiUri + imagems?.imagem?.absolutPath + "/" + imagems?.imagem?.nome;
+    else {
+      this.imageSrc = '';
+    }
 
     this.formGroup = this.formBuilder.group({
-
-      strNome: [this.entity?.strNome, [Validators.required]],
-      imagem: [null, []],
+      idCliente:[this.entity?.idCliente, [Validators.required]],
+      strNome: [this.entity?.strNome, [Validators.required]]
 
     });
 

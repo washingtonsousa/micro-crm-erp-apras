@@ -37,7 +37,6 @@ class ProdutoImagem
 
 
     /**
-     * @var \Imagem
      *
      * @ORM\OneToOne(targetEntity="Imagem", cascade={"all"})
      * @ORM\JoinColumns({
@@ -61,9 +60,8 @@ class ProdutoImagem
     /**
      * Get the value of imagem
      *
-     * @return  \Imagem
      */ 
-    public function getImagem()
+    public function getImagem() : Imagem
     {
         return $this->imagem;
     }
@@ -83,6 +81,27 @@ class ProdutoImagem
     {
         $this->imagem = $imagem;
         $this->produto = $produto;
+
+        $this->idProduto = $produto->getIdProduto();
+        $this->idImagem = $imagem->getIdImagem();
+
     }
 
+
+    /**
+     * Get the value of idProduto
+     *
+     * @return  int
+     */ 
+    public function getIdProduto()
+    {
+        return $this->idProduto;
+    }
+
+    public function updateImagem(Imagem $imagem) : ProdutoImagem {
+
+        $this->imagem = $imagem;
+        return $this;
+
+    }
 }

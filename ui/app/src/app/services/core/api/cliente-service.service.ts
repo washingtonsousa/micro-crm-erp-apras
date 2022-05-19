@@ -52,7 +52,7 @@ export class ClienteService implements IPaginatedCrudService<Cliente> {
       }
 
       public Update( Cliente: Cliente, aditionalParams:any[] = [false]) : Observable<DefaultDataResponse<Cliente>> {
-        return this.http.put<DefaultDataResponse<Cliente>>(environment.apiUri + "/api/cliente/" + Cliente.idCliente, Cliente,  { params: { changeSenha: aditionalParams[0] }});
+        return this.http.put<DefaultDataResponse<Cliente>>(environment.apiUri + "/api/cliente/" + Cliente.idCliente, Cliente);
       }
 
       public Remove(id: number ) : Observable<DefaultDataResponse<boolean>> {

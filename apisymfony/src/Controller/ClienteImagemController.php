@@ -32,7 +32,7 @@ class ClienteImagemController extends AbstractController {
 
               $id = $request->attributes->get('id');
 
-              $entity = $this->clienteImagemAppService->add($id, $request->files->get('logo'));
+              $entity = $this->clienteImagemAppService->addOrUpdate($id, $request->files->get('logo'));
 
               return new JsonResponse($entity);
 

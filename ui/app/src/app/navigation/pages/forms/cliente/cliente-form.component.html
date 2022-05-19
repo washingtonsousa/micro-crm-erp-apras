@@ -14,9 +14,11 @@
 
   <label class="mb-2"> Imagem/Ícone do cliente: </label>
 
-  <img [src]="imageSrc" />
+  <image-frame (click)="fileInput.click()" class="my-2 d-block pointer" [imgUri]="imageSrc">
 
-  <input type="file" class="form-control mb-1"  (change)="onFileChange($event)" formControlName="imagem"  />
+  </image-frame>
+
+  <input #fileInput accept="image/png, image/gif, image/jpeg" type="file" class="d-none"  (change)="onFileChange($event)"  />
 
 
   <p class="mt-2"> <small>

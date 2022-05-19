@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface IClienteImagemService {
 
-            public function  update(ClienteImagem $imagem, UploadedFile $file);
-            public function add(ClienteImagem $imagem, UploadedFile $file) : ?ClienteImagem;
-            public function getById(int $id) : ?Imagem;
-            public function remove($id) : bool;
+            public function addOrUpdate(ClienteImagem $imagem, UploadedFile $file) : ?ClienteImagem;
+            public function getByClienteId(int $id) : ?ClienteImagem;
+      
+
 }

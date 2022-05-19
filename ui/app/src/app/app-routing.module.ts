@@ -4,6 +4,8 @@ import { AuthGuard } from './infra/interceptors/guard/auth-guard';
 import { ClienteComponent } from './navigation/pages/cliente/cliente.component';
 import { HomeComponent } from './navigation/pages/home/home.component';
 import { LoginComponent } from './navigation/pages/login/login.component';
+import { PedidoComponent } from './navigation/pages/pedido/pedido.component';
+import { ProdutoComponent } from './navigation/pages/produto/produto.component';
 import { UsuarioComponent } from './navigation/pages/usuario/usuario.component';
 
 const routes: Routes = [
@@ -31,7 +33,21 @@ const routes: Routes = [
 
   path: "usuario", component: UsuarioComponent, canActivate: [AuthGuard]
 
+},
+
+{
+
+  path: "produto", component: ProdutoComponent, canActivate: [AuthGuard]
+
+},
+
+{
+
+  path: "pedido", component: PedidoComponent, canActivate: [AuthGuard]
+
 }
+
+
 
 
 

@@ -11,19 +11,17 @@ export class ClienteImagemResolverPipe implements PipeTransform {
 
     constructor(protected sanitizer: DomSanitizer) {}
 
-    transform(image: ClienteImagem[], Type: string = "none") : SafeStyle | null {
+    transform(image: Imagem | null | undefined, Type: string = "none") : SafeStyle | null {
 
-        var singleImage = image[0];
+        var singleImage = image;
 
         if(singleImage == undefined)
         return null;
 
-        if(singleImage.imagem == undefined)
+        if(singleImage == undefined)
         return null;
 
-        console.log(singleImage.imagem);
-
-        let path = enviroment.environment.apiUri + singleImage?.imagem?.absolutPath + '/' + singleImage?.imagem?.nome;
+        let path = enviroment.environment.apiUri + singleImage?.absolutPath + '/' + singleImage?.nome;
         let resource = null;
 
         switch (Type) {

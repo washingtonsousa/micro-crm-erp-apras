@@ -1,0 +1,10 @@
+
+
+
+<card-with-icon iconClass="fas fa-tshirt"  [title]="produto?.nome" [imgSrc]="produto?.produtoImagem?.imagem | imageUrl">
+
+
+  <edit-delete-dropdown (edit)="edit.emit(produto.idProduto)" (delete)="delete.emit(produto.idProduto)" class="justify-content-end w-100 p-3 d-flex"></edit-delete-dropdown>
+
+
+</card-with-icon>

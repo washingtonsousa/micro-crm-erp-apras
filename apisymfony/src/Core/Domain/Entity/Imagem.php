@@ -113,4 +113,14 @@ class Imagem
     {
         return $this->nome;
     }
+
+    /**
+     * Get the value of idImagem
+     *
+     * @return  int
+     */ 
+    public function getIdImagem()
+    {
+        return $this->idImagem;
+    }
 }

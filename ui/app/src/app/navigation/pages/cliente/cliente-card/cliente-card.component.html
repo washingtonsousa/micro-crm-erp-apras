@@ -1,4 +1,4 @@
-<horizontal-card [imgSrc]="cliente.clienteImagens | imageUrl" [title]="cliente.strNome">
+<horizontal-card [imgSrc]="cliente?.clienteImagem?.imagem | imageUrl" [title]="cliente.strNome">
 
   <edit-delete-dropdown (edit)="edit.emit(cliente.idCliente)" (delete)="delete.emit(cliente.idCliente)" class="justify-content-end w-100 d-flex"></edit-delete-dropdown>
 

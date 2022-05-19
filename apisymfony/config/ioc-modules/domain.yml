@@ -27,6 +27,7 @@ services:
   App\Core\Domain\Abstraction\Interface\IImagemService: '@App\Core\Domain\Service\ImagemService'
   App\Core\Domain\Abstraction\Interface\IClienteImagemService: '@App\Core\Domain\Service\ClienteImagemService'
   App\Core\Domain\Abstraction\Interface\IProdutoImagemService: '@App\Core\Domain\Service\ProdutoImagemService'
-
+  App\Core\Domain\Abstraction\Interface\IClienteImagemRepository: '@App\Core\Domain\Repository\ClienteImagemRepository'
+  App\Core\Domain\Abstraction\Interface\IProdutoImagemRepository: '@App\Core\Domain\Repository\ProdutoImagemRepository'
   App\Core\Domain\Abstraction\Interface\IUnityOfWork: '@unity_of_work'
   Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'

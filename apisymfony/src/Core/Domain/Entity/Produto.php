@@ -71,4 +71,14 @@ class Produto
     private $produtoImagem;
 
 
+
+    /**
+     * Get the value of idProduto
+     *
+     * @return  int
+     */ 
+    public function getIdProduto()
+    {
+        return $this->idProduto;
+    }
 }

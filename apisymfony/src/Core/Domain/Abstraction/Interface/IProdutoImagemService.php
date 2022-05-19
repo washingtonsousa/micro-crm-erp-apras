@@ -9,5 +9,5 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 interface IProdutoImagemService {
 
             public function add(ProdutoImagem $imagem, UploadedFile $file) : ?ProdutoImagem;
-       
+            public function getByProdutoId(int $id) : ?ProdutoImagem;
 }

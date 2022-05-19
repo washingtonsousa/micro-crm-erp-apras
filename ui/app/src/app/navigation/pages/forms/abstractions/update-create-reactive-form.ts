@@ -20,7 +20,18 @@ export abstract class UpdateCreateReactiveForm<T> {
   public updateMode = false;
 
 
-  OnSubmit(aditionalParams: any[], onSuccess = () => {}, onFail = () => {}, onComplete = () => {}) {
+  OnSubmit(aditionalParams: any[], onSuccess = (data:any) => {
+
+    this.onSuccess.emit(data.data);
+    LoadingIconService.hide();
+
+
+  }, onFail = (data:any) => {
+
+        this.onFail.emit(data.error);
+        LoadingIconService.hide();
+
+  }, onComplete = () => {}) {
 
     LoadingIconService.show("Aguarde um momento...");
 
@@ -30,15 +41,13 @@ export abstract class UpdateCreateReactiveForm<T> {
 
       next:  (data:DefaultDataResponse<T>) => {
 
-        onSuccess();
-        this.onSuccess.emit(data.data);
+        onSuccess(data);
       },
       error:(data:HttpErrorResponse) => {
 
-        this.onFail.emit(data.error);
-        LoadingIconService.hide();
 
-        onFail();
+
+        onFail(data);
 
       },
       complete: () => {

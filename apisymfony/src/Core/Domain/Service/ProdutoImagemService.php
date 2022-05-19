@@ -1,24 +1,22 @@
 <?php
 namespace App\Core\Domain\Service;
 
-use App\Core\Domain\Abstraction\Interface\IImagemRepository;
-use App\Core\Domain\Abstraction\Interface\IImagemService;
+
+use App\Core\Domain\Abstraction\Interface\IProdutoImagemRepository;
 use App\Core\Domain\Abstraction\Interface\IProdutoImagemService;
 use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
 use App\Core\Domain\Command\GetEntityCommand;
 use App\Core\Domain\Command\PersistCommand;
-use App\Core\Domain\Entity\Imagem;
 use App\Core\Domain\Entity\ProdutoImagem;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProdutoImagemService implements IProdutoImagemService {
 
-    private IImagemRepository $imagemRepo;
-    private IUnityOfWork $unityOfWork;
+
 
     public function __construct(private ParameterBagInterface $parameterBag,
-                                IUnityOfWork $unityOfWork, IImagemRepository $imagemRepo)
+    private   IUnityOfWork $unityOfWork,private IProdutoImagemRepository $imagemRepo)
     {
             $this->unityOfWork = $unityOfWork;
             $this->imagemRepo = $imagemRepo;
@@ -29,6 +27,11 @@ class ProdutoImagemService implements IProdutoImagemService {
         public function add(ProdutoImagem $produtoImagem, UploadedFile $file): ?ProdutoImagem {
                 
                 $imagem = $produtoImagem->getImagem();
+
+                $produtoImagemFromDb = $this->getByProdutoId($produtoImagem->getIdProduto());
+
+                if($produtoImagemFromDb != null)
+                         $produtoImagem = $produtoImagemFromDb->UpdateImagem($imagem);  
 
                 $fileSaved = $file->move($this->parameterBag->get('webDir').$imagem->getAbsolutPath(), $imagem->getNome());
 
@@ -45,7 +48,7 @@ class ProdutoImagemService implements IProdutoImagemService {
 
 
 
-        public function getById(int $id) : ?Imagem {
+        public function getByProdutoId(int $id) : ?ProdutoImagem {
                 
                 $command = new GetEntityCommand($id, $this->imagemRepo);
 
