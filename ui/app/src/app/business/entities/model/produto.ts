@@ -6,4 +6,7 @@ export class Produto {
   idProduto!: number;
   produtoImagem!: any;
   codigoProduto!:string;
+  tamanho!: string;
+  cor!: string;
+
 }

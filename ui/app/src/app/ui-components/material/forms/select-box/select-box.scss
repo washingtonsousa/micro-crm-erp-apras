@@ -1,0 +1,27 @@
+.suspended-item {
+  display: block;
+  width: 100%;
+  padding:4px;
+  min-height: 20px;
+
+  border-bottom:1px solid #ccc;
+  cursor: pointer;
+
+  transition: background 400ms;
+  background-color: #fff;
+
+  &:hover {
+    background: #f1f1f1 radial-gradient(circle, transparent 1%, #f1f1f1 1%) center/15000%;
+  }
+  &:active {
+    background-color: #ccc;
+    background-size: 100%;
+    transition: background 0s;
+  }
+
+}
+
+.suspended-drop-down {
+  overflow-y: auto;
+  max-height: 200px;
+}

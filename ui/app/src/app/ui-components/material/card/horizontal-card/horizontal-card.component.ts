@@ -12,7 +12,7 @@ import { Component, Input, Output,EventEmitter } from "@angular/core";
 
       </div>
 
-      <div *ngIf="imgSrc" class="card-icon">
+      <div *ngIf="imgSrc" class="card-img">
 
          <img class="img-fluid"  [src]="imgSrc">
 

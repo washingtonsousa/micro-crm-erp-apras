@@ -20,7 +20,7 @@ import { Component, Input, Output,EventEmitter } from "@angular/core";
 
       <div class="card-body">
 
-        <h5 *ngIf="title != null" class="card-title">{{title}}</h5>
+        <h6 *ngIf="title != null" class="card-title">{{title}}</h6>
         <ng-content> </ng-content>
 
       </div>

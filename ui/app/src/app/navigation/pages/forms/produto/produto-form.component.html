@@ -23,7 +23,7 @@
 
   </alert>
 
-  <label class="mb-2"> Imagem/Ícone do cliente: </label>
+  <label class="mb-2"> Imagem do produto: </label>
 
   <image-frame (click)="fileInput.click()" class="my-2 d-block pointer" [imgUri]="imageSrc">
 
@@ -31,6 +31,21 @@
 
   <input #fileInput accept="image/png, image/gif, image/jpeg" type="file" class="d-none"  (change)="onFileChange($event)"  />
 
+
+  <label class="mb-2 required"> Cor: </label>
+
+
+  <input type="text" class="form-control mb-1" formControlName="cor" />
+
+  <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['cor'].errors?.required">
+
+    Insira o código, é obrigatório
+
+  </alert>
+
+ <label class="mb-2 required"> Tamanho: </label>
+
+ <select-box formControlName="tamanho" [list]="tamanhos"></select-box>
 
   <p class="mt-2"> <small>
 

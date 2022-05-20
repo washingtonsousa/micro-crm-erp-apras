@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
@@ -9,6 +10,8 @@ import { CardWithIconComponent } from "./card/card-with-icon/card-with-icon.comp
 import { HorizontalCardComponent } from "./card/horizontal-card/horizontal-card.component";
 import { SimpleCardComponent } from "./card/simple-card/simple-card.component";
 import { EditDeleteDropDownComponent } from "./dropdowns/edit-delete-dropdown/edit-delete-dropdown.component";
+import { SelectBoxItemDirective } from "./forms/select-box/select-box-item.directive";
+import { SelectBoxComponent } from "./forms/select-box/select-box.component";
 import { ImageFrameComponent } from "./image/image-frame/image-frame.component";
 import { GlobalLoadingIconComponent } from "./loading-icons/global-loading-icon/global-loading-icon.component";
 import { CleanModalComponent } from "./modal/clean-modal/clean-modal.component";
@@ -17,10 +20,10 @@ import { GlobalModalComponent } from "./modal/global-modal/global-modal.componen
 
 
 @NgModule({
-  imports: [PathResolverPipesModule, CommonModule, BrowserModule,   BrowserAnimationsModule,
+  imports: [PathResolverPipesModule, FormsModule, ReactiveFormsModule, CommonModule, BrowserModule,   BrowserAnimationsModule,
     BsDropdownModule],
-  exports: [SimpleCardComponent, ImageFrameComponent, HorizontalCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
-  declarations: [SimpleCardComponent, ImageFrameComponent, HorizontalCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
+  exports: [SimpleCardComponent,SelectBoxComponent, ImageFrameComponent, HorizontalCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
+  declarations: [SimpleCardComponent, SelectBoxComponent, SelectBoxItemDirective, ImageFrameComponent, HorizontalCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
   providers: []
 })
 export class MaterialModule {

@@ -11,6 +11,7 @@ import * as enviroment from "src/environments/environment";
 import { Produto } from "src/app/business/entities/model/produto";
 import { ProdutoService } from "src/app/services/core/api/produto-service.service";
 import { ProdutoImagem } from "src/app/business/entities/model/produto-imagem";
+import { SelectBoxItem } from "src/app/ui-components/material/forms/select-box/select-box-item.model";
 
 
 
@@ -25,6 +26,8 @@ export class ProdutoFormComponent extends UpdateCreateReactiveForm<Produto> impl
   file!: File;
   imageSelected!: string;
   imageSrc!:string ;
+
+  tamanhos: SelectBoxItem[] = [];
 
   constructor(public override formBuilder: FormBuilder,
     public override dataService: ProdutoService)
@@ -94,13 +97,47 @@ export class ProdutoFormComponent extends UpdateCreateReactiveForm<Produto> impl
     this.formGroup = this.formBuilder.group({
 
       nome: [this.entity?.nome, [Validators.required]],
-      codigoProduto: [this.entity?.codigoProduto, [Validators.required]]
+      codigoProduto: [this.entity?.codigoProduto, [Validators.required]],
+      tamanho:[this.entity?.tamanho, [Validators.required]],
+      cor: [this.entity?.cor, [Validators.required]]
     });
 
   }
 
   override ngOnInit(): void {
    super.ngOnInit();
+
+   this.tamanhos = [
+    { key: 'PP', value:'PP' },
+      { key: 'P', value:'P' },
+      { key: 'M', value:'M' },
+      { key: 'G', value:'G' },
+      { key: 'XG', value:'XG' },
+      { key: 'XGG', value:'XGG' },
+      { key: '0', value:'0' },
+      { key: '2', value:'2' },
+      { key: '4', value:'4' },
+      { key: '6', value:'6' },
+      { key: '8', value:'8' },
+      { key: '10', value:'10' },
+      { key: '12', value:'12' },
+      { key: '14', value:'14' },
+      { key: '16', value:'16' },
+      { key: '36', value:'36' },
+      { key: '36', value:'36' },
+      { key: '37', value:'37' },
+      { key: '38', value:'38' },
+      { key: '39', value:'39' },
+      { key: '40', value:'40' },
+      { key: '41', value:'41' },
+      { key: '42', value:'42' },
+      { key: '43', value:'43' },
+      { key: '44', value:'44' },
+      { key: '46', value:'46' },
+      { key: '48', value:'48' },
+      { key: '50', value:'50' }
+
+    ];
   }
 
 
