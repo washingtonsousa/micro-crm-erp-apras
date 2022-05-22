@@ -36,12 +36,19 @@ class Pedido
     private $txtObservacoes;
 
     /**
-     * @var \Cliente
      *
      * @ORM\ManyToOne(targetEntity="Cliente")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_cliente", referencedColumnName="id_cliente")
      * })
+     */
+    private $cliente;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_cliente", type="integer", nullable=true)
      */
     private $idCliente;
 

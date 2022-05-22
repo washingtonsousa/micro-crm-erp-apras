@@ -25,12 +25,7 @@
 
   <label class="mb-2"> Imagem do produto: </label>
 
-  <image-frame (click)="fileInput.click()" class="my-2 d-block pointer" [imgUri]="imageSrc">
-
-  </image-frame>
-
-  <input #fileInput accept="image/png, image/gif, image/jpeg" type="file" class="d-none"  (change)="onFileChange($event)"  />
-
+  <image-item [imageSrc]="imageSrc" (onValueChanges)="file = $event"> </image-item>
 
   <label class="mb-2 required"> Cor: </label>
 
@@ -43,6 +38,17 @@
 
   </alert>
 
+
+  <section *ngIf="!updateMode">
+
+    <label> Criar itens todos os tamanhos? </label>
+
+    <switch-btn (onCheck)="todosTamanhos = $event; toggleTamanhoValidator($event);"> </switch-btn>
+
+    </section>
+
+    <section *ngIf="!todosTamanhos">
+
  <label class="mb-2 required"> Tamanho: </label>
 
  <select-box formControlName="tamanho" [list]="tamanhos"></select-box>
@@ -52,7 +58,7 @@
     Todos os itens marcados com "*" são obrigatórios.
 
   </small></p>
-
+</section>
 
   <button [disabled]="!formGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-save"></i> Enviar  </button>
 

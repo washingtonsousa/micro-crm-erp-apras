@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from "@angular/core";
+import { Component, Output, EventEmitter, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { PaginationReponse } from "src/app/business/entities/response/pagination-response";
 
 
@@ -7,8 +7,9 @@ import { PaginationReponse } from "src/app/business/entities/response/pagination
   templateUrl: "crud-panel.component.html",
   styleUrls: ["crud-panel.scss"]
 })
-export class CrudPanelComponent {
+export class CrudPanelComponent   {
 
+  @Output("onRefreshClick") onRefreshClick: EventEmitter<any> = new EventEmitter<any>();
   @Output("onAddClick") onAddClick: EventEmitter<any> = new EventEmitter<any>();
   @Output("onSearchClick") onSearchClick: EventEmitter<any> = new EventEmitter<any>();
   order: string = "DESC";
@@ -19,8 +20,46 @@ export class CrudPanelComponent {
   searchValue: string = '';
 
 
+  get numbers() {
+
+    var numbers: number[] = [];
+
+    let controlsNumber = 5;
+
+    let maxPages = this.paginationResponse.totalPages >= controlsNumber ?
+
+    controlsNumber : this.paginationResponse.totalPages;
+
+    let i = 1;
+
+    let maxOffset = this.paginationResponse.totalPages - controlsNumber == this.paginationResponse.page
+    ?
+    this.paginationResponse.page
+    :
+
+   Math.ceil(controlsNumber / 2)
+
+    ;
+
+    let offset = this.paginationResponse.page > 1 ? maxOffset : this.paginationResponse.page;
+
+    while(i <= maxPages) {
+
+      if(offset <= this.paginationResponse.totalPages)
+      numbers.push(offset);
+      offset++;
+      i++;
+
+    }
+
+    return numbers;
+
+  }
+
+
+
   onItensPerPageChangeFunction($event:any) {
-    this.onItensPerPageChange.emit($event.target.value);
+      this.onItensPerPageChange.emit($event.target.value);
   }
 
   toggleOrdering() {

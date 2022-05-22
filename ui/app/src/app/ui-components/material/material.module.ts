@@ -10,6 +10,7 @@ import { CardWithIconComponent } from "./card/card-with-icon/card-with-icon.comp
 import { HorizontalCardComponent } from "./card/horizontal-card/horizontal-card.component";
 import { SimpleCardComponent } from "./card/simple-card/simple-card.component";
 import { EditDeleteDropDownComponent } from "./dropdowns/edit-delete-dropdown/edit-delete-dropdown.component";
+import { ImageItemComponent } from "./forms/image-item/image-item.component";
 import { SelectBoxItemDirective } from "./forms/select-box/select-box-item.directive";
 import { SelectBoxComponent } from "./forms/select-box/select-box.component";
 import { ImageFrameComponent } from "./image/image-frame/image-frame.component";
@@ -22,8 +23,8 @@ import { GlobalModalComponent } from "./modal/global-modal/global-modal.componen
 @NgModule({
   imports: [PathResolverPipesModule, FormsModule, ReactiveFormsModule, CommonModule, BrowserModule,   BrowserAnimationsModule,
     BsDropdownModule],
-  exports: [SimpleCardComponent,SelectBoxComponent, ImageFrameComponent, HorizontalCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
-  declarations: [SimpleCardComponent, SelectBoxComponent, SelectBoxItemDirective, ImageFrameComponent, HorizontalCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
+  exports: [SimpleCardComponent, ImageItemComponent, SelectBoxComponent, ImageFrameComponent, HorizontalCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
+  declarations: [SimpleCardComponent, ImageItemComponent, SelectBoxComponent, SelectBoxItemDirective, ImageFrameComponent, HorizontalCardComponent, SwitchButtonComponent, EditDeleteDropDownComponent, GlobalModalComponent, GlobalLoadingIconComponent, CleanModalComponent, CardWithIconComponent],
   providers: []
 })
 export class MaterialModule {

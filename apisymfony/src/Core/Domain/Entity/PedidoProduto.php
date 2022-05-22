@@ -30,15 +30,28 @@ class PedidoProduto
 
 
     /**
-     * @var \Produto
+     * @var Produto
      *
      * @ORM\ManyToOne(targetEntity="Produto")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_produto", referencedColumnName="id_produto")
      * })
      */
+    private $produto;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_produto", type="integer", nullable=false)
+     */
     private $idProduto;
 
+    /**
+     *
+     * @ORM\Column(name="id_pedido", type="integer", nullable=false)
+     */
+    private $idPedido;
 
     /**
      * @var \Pedido
@@ -48,7 +61,7 @@ class PedidoProduto
      *   @ORM\JoinColumn(name="id_pedido", referencedColumnName="id_pedido")
      * })
      */
-    private $idPedido;
+    private $pedido;
 
 
 }

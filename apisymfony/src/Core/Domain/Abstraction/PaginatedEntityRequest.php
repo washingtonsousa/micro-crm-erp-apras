@@ -60,7 +60,6 @@ class PaginatedEntityRequest {
          */ 
         public function getTerm()
         {
-                
-                return $this->term;
+                return  $this->term == null || trim($this->term) == '' ? '' :  $this->term;
         }
 }

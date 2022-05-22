@@ -52,7 +52,7 @@ class GetUsuarioPaginatedEntityQuery extends PaginatedEntityQuery {
                 $this->queryExpressionBuilder->addORExpression($filter, 'u');
 
                 if(!isset(  $this->queryExpressionBuilder))
-                $this->queryExpressionBuilder = new QueryExpressionBuilder($filter, 'u');
+                $this->queryExpressionBuilder = new QueryExpressionBuilder('u', $filter);
      
             }
 

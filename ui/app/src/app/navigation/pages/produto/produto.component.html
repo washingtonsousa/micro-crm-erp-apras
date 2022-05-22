@@ -2,9 +2,9 @@
 
   <box-container>
 
-    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalProduto.openModal()">
+    <crud-panel   (onRefreshClick)="loadPageData()" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalProduto.openModal()">
 
-
+    <section class="d-flex">  <small> Tamanho: </small>   <select-box (onValueChanges)="onFilterTamanho($event)"  [list]="tamanhos"></select-box> </section>
 
 
     </crud-panel>
@@ -14,7 +14,7 @@
 
       <div class="row">
 
-          <produto-card (delete)="remove($event)" (edit)="loadProdutoForUpdate($event)" [produto]="produto" class="col-xl-3 col-lg-4 p-2" *ngFor="let produto of pageData?.items">
+          <produto-card (delete)="remove($event)" (edit)="loadProdutoForUpdate($event)" [produto]="produto" class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 p-2" *ngFor="let produto of pageData?.items">
 
           </produto-card>
 

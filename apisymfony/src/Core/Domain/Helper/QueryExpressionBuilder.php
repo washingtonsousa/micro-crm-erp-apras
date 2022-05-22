@@ -6,21 +6,25 @@ use App\Core\Domain\Entity\NonDatabaseEntity\QueryFilter;
 
 class QueryExpressionBuilder {
 
-       private string $queryExpressionSTR;
+       private string $queryExpressionSTR = '';
        private string  $tableRef;
        private iterable $filters = array();
 
-       public  function __construct(QueryFilter $filter, string $tableRef = 'c')
+       public  function __construct(string $tableRef = 'c', QueryFilter $filter = null)
        {
+
+       
            $this->tableRef = $tableRef;
+
+           if($filter != null)
            $this->init($filter);
        }
 
-       private function init(QueryFilter $filter) {
-
+       public function init(QueryFilter $filter) {
 
             $this->queryExpressionSTR = $this->buildExpByQueryFilter($filter);
             $this->filters[] = $filter;
+            
        }
 
        private function buildExpByQueryFilter(QueryFilter $filter) {

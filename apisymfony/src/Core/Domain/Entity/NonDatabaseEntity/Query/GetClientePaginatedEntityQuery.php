@@ -50,7 +50,7 @@ class GetClientePaginatedEntityQuery extends PaginatedEntityQuery {
                 $this->queryExpressionBuilder->addORExpression($filter, 'c');
 
                 if(!isset(  $this->queryExpressionBuilder))
-                $this->queryExpressionBuilder = new QueryExpressionBuilder($filter, 'c');
+                $this->queryExpressionBuilder = new QueryExpressionBuilder('c', $filter);
      
             }
 

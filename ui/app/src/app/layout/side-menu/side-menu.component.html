@@ -1,6 +1,6 @@
 <section id="mainSideMenu" class="side-menu box-shadow">
 
-  <a class="pointer" (click)="Hide()"> <i class="fas fa-close"></i> </a>
+  <a class="close-anchor pointer" (click)="Hide()"> <i class="fas fa-chevron-right"></i> </a>
 
   <div class="side-menu-wrapper">
 
@@ -51,6 +51,15 @@
 
 
             <a [routerLink]="['/pedido']" class="pointer"> <i class="fas fa-list"></i>  Pedidos  </a>
+
+
+          </li>
+
+
+          <li>
+
+
+            <a [routerLink]="['/pedido']" class="pointer"> <i class="fas fa-file"></i>  Fichas de Produção  </a>
 
 
           </li>

@@ -5,8 +5,6 @@
     <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalProduto.openModal()">
 
 
-
-
     </crud-panel>
 
 
@@ -23,13 +21,12 @@
     </div>
 
 
+    <clean-modal #modalProduto title="Cadastro de Pedido">
 
-    <clean-modal #modalProduto title="Cadastro de Produto">
 
+      <pedido-form (onSuccess)="onFormSuccess($event); modalProduto.closeModal()" (onFail)="onFormFail($event)">
 
-      <produto-form (onSuccess)="onFormSuccess($event); modalProduto.closeModal()" (onFail)="onFormFail($event)">
-
-      </produto-form>
+      </pedido-form>
 
 
       <alert *ngFor="let notification of notifications" type="danger">

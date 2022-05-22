@@ -13,7 +13,7 @@ class GetProdutoPaginatedEntityQuery extends PaginatedEntityQuery {
 
         public function __construct(PaginatedEntityRequest $request)
         {   
-            $this->allowedFields = array('idProduto', 'nome');   
+            $this->allowedFields = array('idProduto', 'nome', 'tamanho');   
             parent::__construct($request);
         }
 
@@ -34,7 +34,15 @@ class GetProdutoPaginatedEntityQuery extends PaginatedEntityQuery {
             $array = array();
             $params = $this->getAllowedQueryParams();
 
-            $array['nome'] = new QueryFilter('nome', $this->request->getTerm(), 'like');
+            if(trim($this->request->getTerm()) != '') {
+
+                $array['nome'] = new QueryFilter('nome', $this->request->getTerm(), 'like');
+            
+            }
+
+            if(trim($params['tamanho']) != '') {
+                    $array['tamanho'] = new QueryFilter('tamanho', $params['tamanho'], '=');
+            }
 
             return  $array;
 
@@ -43,14 +51,17 @@ class GetProdutoPaginatedEntityQuery extends PaginatedEntityQuery {
         protected function prepareQueryExpression()
         {
             $filters = $this->getAllowedFilters();
+
+            if(count($filters) == 0)
+            $this->queryExpressionBuilder = new QueryExpressionBuilder('p');
            
             foreach($filters as $filter) {
 
                 if(isset($this->queryExpressionBuilder))
                 $this->queryExpressionBuilder->addORExpression($filter, 'p');
 
-                if(!isset(  $this->queryExpressionBuilder))
-                $this->queryExpressionBuilder = new QueryExpressionBuilder($filter, 'p');
+                if(!isset($this->queryExpressionBuilder))
+                $this->queryExpressionBuilder = new QueryExpressionBuilder('p', $filter);
      
             }
 

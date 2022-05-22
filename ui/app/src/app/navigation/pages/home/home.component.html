@@ -1,10 +1,71 @@
 <container>
 
+      <h1>  Tela Inicial   </h1>
+
+
       <box-container>
 
+        <div class="row">
+
+        <ul class="w-100 d-flex short-cut-area">
+
+          <li class="shortcut-item">
+
+
+            <a [routerLink]="['/usuario']" class="pointer"> <i class="fas fa-user"></i>  Usuarios  </a>
+
+
+          </li>
+
+
+          <li class="shortcut-item">
+
+
+            <a class="pointer" [routerLink]="['/cliente']"> <i class="fas fa-users"></i>  Clientes  </a>
+
+
+          </li>
 
 
 
+          <li class="shortcut-item">
+
+
+            <a [routerLink]="['/produto']" class="pointer"> <i class="fas fa-tshirt"></i>  Produtos  </a>
+
+
+          </li>
+
+
+          <li class="shortcut-item">
+
+
+            <a [routerLink]="['/pedido']" class="pointer"> <i class="fas fa-list"></i>  Pedidos  </a>
+
+
+          </li>
+
+
+          <li class="shortcut-item">
+
+
+            <a [routerLink]="['/pedido']" class="pointer"> <i class="fas fa-file"></i>  Fichas de Produção  </a>
+
+
+          </li>
+
+          <li class="shortcut-item">
+
+
+            <a class="pointer" logout> <i class="fas fa-sign-out"></i>  Sair  </a>
+
+
+          </li>
+
+
+        </ul>
+
+      </div>
 
 
       </box-container>

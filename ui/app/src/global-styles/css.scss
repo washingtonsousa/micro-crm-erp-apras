@@ -7,3 +7,17 @@ body {
 }
 
 
+  .d-sm-none {
+
+    display: none;
+
+      @media  (min-width:768px) {
+        display: block;
+      }
+  }
+
+
+  ul li {
+    list-style: none;
+  }
+

@@ -6,15 +6,15 @@ import { SelectBoxItem } from "./select-box-item.model";
   selector: 'select-box',
   template: `
 
-      <div *ngIf="!disabled" class="w-100 d-flex flex-column flex-align-center justify-content-center">
+      <div *ngIf="!disabled" class=" select-box-area w-100 d-flex flex-column flex-align-center justify-content-center">
 
-      <input (click)="onInputClick()" [(ngModel)]="filteredValue" (input)="onChangeInput($event)" type="text" class="form-control" name="selector-box" />
+      <input autocomplete="off" (click)="onInputClick()" [(ngModel)]="filteredValue" (input)="onChangeInput($event)" type="text" class="form-control" name="selector-box" />
 
       <div *ngIf="filteredList.length && showList" class="suspended-drop-down floating-box">
 
-        <div *ngFor="let item of filteredList" (onSelect)="onSelect($event); markAsTouched();" select-box-item [value]="item.key" class="suspended-item">
+        <div *ngFor="let item of filteredList" (onSelect)="onSelect($event); markAsTouched();" select-box-item [value]="item.value" class="suspended-item">
 
-          {{  item.value }}
+          {{  item.key }}
 
         </div>
 
@@ -44,7 +44,7 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
   disabled = false;
 
   selectedItem!:any;
-  filteredValue:string | null | undefined = '';
+  filteredValue:any;
 
 
   showList: boolean = false;
@@ -93,16 +93,24 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
     this.filteredValue = $event.target.value;
 
 
-    this.filteredList = this.list.filter(s =>
+    this.filteredList = this.list.filter(s => {
 
+      console.log(s);
 
-      s.value.toLowerCase().includes(this.filteredValue?.toLowerCase())
+      return s.value.toLowerCase().includes(this.filteredValue?.toLowerCase())
 
+      || s.key.toLowerCase().includes(this.filteredValue.toLowerCase());
+
+    }
 
     );
 
 
     this.changeDetector.detectChanges();
+
+    if(this.filteredValue == '') {
+      this.onValueChanges.emit('');
+    }
 
 
 

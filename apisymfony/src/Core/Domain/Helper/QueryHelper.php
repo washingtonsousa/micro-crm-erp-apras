@@ -9,7 +9,9 @@ class QueryHelper {
 
 
         public static function buildQueryFilters(QueryBuilder $query, QueryExpression $queryExp) {
-            
+
+            if(empty($queryExp->getExpString()))
+            return $query;
 
                 $query->where($queryExp->getExpString()); 
 

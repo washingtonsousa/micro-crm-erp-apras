@@ -41,8 +41,12 @@ export abstract class CrudPageTemplate<T> {
    }
 
    onItemsPerPageChange(pageSize:number) {
-     this.request.pageSize = pageSize;
-     this.loadPageData();
+
+    this.request.pageSize = pageSize;
+    this.request.page = 1;
+
+    this.loadPageData();
+
    }
 
    onFormFail($event:any) {

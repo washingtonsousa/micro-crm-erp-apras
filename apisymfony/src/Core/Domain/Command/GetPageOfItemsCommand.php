@@ -33,12 +33,13 @@ class GetPageOfItemsCommand extends Command {
            $this->paginatedRequestedModel->getOrderByField(),
            $this->paginatedRequestedModel->getRequest()->getPage(),
            $this->paginatedRequestedModel->getRequest()->getOrder()); 
-
            $this->setResult(new GetPageOfItemsCommandResult($pagination));
 
 
         } catch(Exception $ex) {
-                var_dump($ex->getMessage());
+            
+
+            var_dump($ex->getMessage());
             $this->setResult(new GetPageOfItemsCommandResult(null));
         }
     }

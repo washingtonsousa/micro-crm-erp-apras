@@ -50,7 +50,7 @@ class GetPedidoPaginatedEntityQuery extends PaginatedEntityQuery {
                 $this->queryExpressionBuilder->addANDExpression($filter, 'p');
 
                 if(!isset(  $this->queryExpressionBuilder))
-                $this->queryExpressionBuilder = new QueryExpressionBuilder($filter, 'p');
+                $this->queryExpressionBuilder = new QueryExpressionBuilder('p', $filter);
      
             }
 
