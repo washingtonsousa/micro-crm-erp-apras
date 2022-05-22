@@ -11,17 +11,6 @@ export class Produto {
   cor!: string;
 
 
-  public getProdutoImagemSrc() : string {
 
-    var imagem = this.produtoImagem;
-
-    console.log(this.produtoImagem);
-
-    if(imagem!= undefined)
-      return  environment.apiUri + imagem?.imagem?.absolutPath + "/" + imagem?.imagem?.nome;
-    else {
-      return '';
-    }
-  }
 
 }
