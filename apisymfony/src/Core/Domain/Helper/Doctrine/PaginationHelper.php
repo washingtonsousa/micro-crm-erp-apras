@@ -10,6 +10,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
         public static function executePaginationAggregator(Query $query, $pageSize, $page, $totalItems) {
 
+            if($pageSize == -1 && $page == 1)
+                    $pageSize = $totalItems;
 
             $pageSize = $pageSize <= 0 ? 4  : $pageSize;
 

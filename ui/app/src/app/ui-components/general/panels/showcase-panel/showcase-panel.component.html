@@ -1,0 +1,126 @@
+
+
+
+    <div class="container">
+
+
+      <div class="row justify-content-end mb-3">
+
+        <div class="crud-item col-xl-2 col-12">
+
+          <section>
+            Total de {{ paginationResponse?.totalItems  }} resultados
+          </section>
+
+        </div>
+
+
+          <div class="crud-item col-xl-4 col-12 row d-flex justify-content-end">
+
+            <div class="col-xl-6 col-12 d-flex">
+
+              <ng-content></ng-content>
+
+            </div>
+
+            <div class="col-xl-6 col-12 d-flex">
+
+
+            <small>  Itens: </small>
+
+
+            <select class="form-control"(change)="onItensPerPageChangeFunction($event)"  name="itemsPerPage">
+
+              <option value="4">
+
+                4
+
+              </option>
+
+              <option value="10">
+
+                10
+
+              </option>
+
+
+              <option value="100">
+
+                100
+
+              </option>
+
+              <option value="1000">
+
+                1000
+
+              </option>
+
+            </select>
+          </div>
+          </div>
+
+
+        <div class="crud-item d-flex p-0 col-xl-3 col-lg-4  col-sm-8 col-12 d-flex justify-content-end">
+
+          <input class="form-control" [(ngModel)]="searchValue" type="text" value="" />
+          <button class="search-btn btn btn-primary " (click)="onSearchClick.emit(searchValue)" tooltip="Pesquisar"> <i class="fas fa-search"></i>  </button>
+
+        </div>
+
+        <div class="crud-item d-flex p-0 col-xl-2 col-sm-4 col-12 justify-content-end">
+
+              <button class="control-btn btn btn-default" (click)="onRefreshClick.emit()"> <i class="fas fa-refresh"></i>  </button>
+
+              <button class="control-btn btn btn-warning" (click)="toggleOrdering()"> <i class="fas fa-exchange"></i>  </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Pagination Controls -->
+
+
+    <div *ngIf="paginationResponse" class="row justify-content-center">
+
+      <div class="w-100 justify-content-center d-flex align-content-center align-items-center">
+
+        <div class="crud-item col-xl-4 mb-2">
+
+
+          <span class="mx-1"> <small> Página {{ paginationResponse?.page  }} de {{ paginationResponse?.totalPages }} </small> </span>
+
+        </div>
+
+
+        <a class="btn-previous-page btn btn-primary pointer" (click)="back()">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+
+        <section *ngIf="paginationResponse.totalItems > 0" class="d-sm-none d-md-block">
+
+              <a  *ngFor="let page of numbers" [ngClass]="[ page == paginationResponse.page ? 'disabled' : '']" (click)="onCurrentPageChanges.emit(page)" class="btn btn-simple mx-1">
+
+                        {{ page }}
+
+              </a>
+
+        </section>
+
+        <a class="btn-next-page btn btn-primary pointer" (click)="next()">
+           <i class="fas fa-chevron-right"></i>
+        </a>
+
+    </div>
+
+
+
+    </div>
+
+    </div>
+
+
+
+
+

@@ -1,0 +1,60 @@
+import { ChangeDetectorRef, Component,EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { PedidoProduto } from "src/app/business/entities/model/pedido-produto";
+import { Produto } from "src/app/business/entities/model/produto";
+import { ProdutoPaginationDataRequest } from "src/app/business/entities/request/produto-pagination-data-request";
+import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
+import { PaginationReponse } from "src/app/business/entities/response/pagination-response";
+import { tamanhosSelectBoxItems } from "src/app/business/helpers/data/produto-data.helper";
+import { CrudPageTemplate } from "src/app/navigation/abstractions/template/crud-page-template";
+import { ProdutoService } from "src/app/services/core/api/produto-service.service";
+import { SelectBoxItem } from "src/app/ui-components/material/forms/select-box/select-box-item.model";
+
+
+@Component({
+  templateUrl: "produto-showcase.component.html",
+  selector: "produto-showcase"
+})
+export class ProdutoShowcaseComponent extends CrudPageTemplate<Produto> implements OnInit{
+
+  tamanhos: SelectBoxItem[] = tamanhosSelectBoxItems;
+  public override request: ProdutoPaginationDataRequest = new ProdutoPaginationDataRequest();
+  @Output("onChoose") onChoose: EventEmitter<PedidoProduto> = new EventEmitter<PedidoProduto>();
+
+  constructor(public override dataService:  ProdutoService,
+    public override changeDetector: ChangeDetectorRef){
+
+      super();
+
+  }
+
+        choose(produto: Produto, amount: any) {
+
+            var pedidoProduto = new PedidoProduto();
+
+            pedidoProduto.quantidade = amount;
+            pedidoProduto.produto = produto;
+            pedidoProduto.idProduto = produto.idProduto;
+
+            this.onChoose.emit(pedidoProduto);
+
+            console.log(pedidoProduto);
+
+
+        }
+
+       override ngOnInit(): void {
+            this.loadShowcase();
+        }
+
+          loadShowcase() {
+
+            this.dataService.Get(this.request)
+            .subscribe((data:DefaultDataResponse<PaginationReponse<Produto>>) => {
+              super.pageData = data.data;
+
+
+            });
+
+      }
+
+}

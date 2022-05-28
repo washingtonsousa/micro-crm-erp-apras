@@ -7,6 +7,7 @@ import { Produto } from "src/app/business/entities/model/produto";
 })
 export class ProdutoCardComponent {
      @Input("produto")   produto!: Produto;
+     @Input("editMode")   editMode: boolean = true;
 
      @Output("edit") edit: EventEmitter<number> = new EventEmitter<number>();
      @Output("delete") delete: EventEmitter<number> = new EventEmitter<number>();

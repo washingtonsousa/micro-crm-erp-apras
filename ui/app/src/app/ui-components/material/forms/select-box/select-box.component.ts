@@ -12,7 +12,7 @@ import { SelectBoxItem } from "./select-box-item.model";
 
       <div *ngIf="filteredList.length && showList" class="suspended-drop-down floating-box">
 
-        <div *ngFor="let item of filteredList" (onSelect)="onSelect($event); markAsTouched();" select-box-item [value]="item.value" class="suspended-item">
+        <div *ngFor="let item of filteredList" (onSelect)="onSelect($event); markAsTouched();" select-box-item [value]="item" class="suspended-item">
 
           {{  item.key }}
 
@@ -79,8 +79,8 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
   onSelect($event:any) {
 
       this.markAsTouched();
-      this.selectedItem = $event;
-      this.filteredValue = $event;
+      this.selectedItem = $event.value;
+      this.filteredValue = $event.key;
       this.onValueChanges.emit(this.selectedItem);
       this.showList = false;
       this.writeValue(this.selectedItem);
@@ -89,6 +89,8 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
   }
 
   onChangeInput($event:any){
+
+
     this.showList = true;
     this.filteredValue = $event.target.value;
 

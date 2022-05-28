@@ -2,14 +2,16 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Cliente } from "src/app/business/entities/model/cliente";
 import { Pedido } from "src/app/business/entities/model/pedido";
+import { Produto } from "src/app/business/entities/model/produto";
 import { PaginationDataRequest } from "src/app/business/entities/request/pagination-data-request";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
 import { PaginationReponse } from "src/app/business/entities/response/pagination-response";
 import { ClienteService } from "src/app/services/core/api/cliente-service.service";
 import { PedidoService } from "src/app/services/core/api/pedido-service.service";
+import { ProdutoService } from "src/app/services/core/api/produto-service.service";
 import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
 import { SelectBoxItem } from "src/app/ui-components/material/forms/select-box/select-box-item.model";
-import { UpdateCreateReactiveForm } from "../abstractions/update-create-reactive-form";
+import { UpdateCreateReactiveForm } from "../../forms/abstractions/update-create-reactive-form";
 
 
 @Component({
@@ -24,13 +26,26 @@ export class PedidoFormComponent extends UpdateCreateReactiveForm<Pedido>  imple
 
         clienteSelectBox : SelectBoxItem[] = [];
 
-       constructor(public clienteService:ClienteService, public override formBuilder: FormBuilder,
+       constructor(public clienteService:ClienteService,
+        public produtoService:ProdutoService,
+        public override formBuilder: FormBuilder,
         public override dataService: PedidoService)
       {
         super();
       }
 
+
+      onChooseProduto($event:any) {
+
+        this.formGroup.patchValue({
+          pedidoProdutos: [$event]
+        });
+
+        console.log(this.formGroup.value);
+      }
+
       override ngOnInit(): void {
+
                 super.ngOnInit();
 
                 LoadingIconService.show('inicializando Componentes...');

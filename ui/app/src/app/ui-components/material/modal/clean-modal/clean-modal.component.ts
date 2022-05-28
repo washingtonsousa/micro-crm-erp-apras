@@ -16,7 +16,7 @@ export class CleanModalComponent {
   constructor(private modalService: BsModalService) {}
 
   openModal() {
-    this.modalRef = this.modalService.show(this.modalTemplate);
+    this.modalRef = this.modalService.show(this.modalTemplate, { class: 'modal-lg' });
   }
 
   closeModal() {

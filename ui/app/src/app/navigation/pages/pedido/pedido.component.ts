@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, Output, ViewChild } from "@angular/core";
-import { CrudPageTemplate } from "../../abstractions/template/crud-page-template";
 import { CleanModalComponent } from "src/app/ui-components/material/modal/clean-modal/clean-modal.component";
 import { Pedido } from "src/app/business/entities/model/pedido";
 import { PedidoService } from "src/app/services/core/api/pedido-service.service";
+import { CrudPageTemplate } from "../../abstractions/template/crud-page-template";
 
 @Component({
     selector: "pedido",

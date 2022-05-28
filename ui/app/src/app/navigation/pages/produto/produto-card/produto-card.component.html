@@ -22,7 +22,12 @@
 
   </p>
 
-  <edit-delete-dropdown (edit)="edit.emit(produto.idProduto)" (delete)="delete.emit(produto.idProduto)" class="justify-content-end w-100 p-3 d-flex"></edit-delete-dropdown>
+
+  <ng-content>
+
+  </ng-content>
+
+  <edit-delete-dropdown *ngIf="editMode" (edit)="edit.emit(produto.idProduto)" (delete)="delete.emit(produto.idProduto)" class="justify-content-end w-100 p-3 d-flex"></edit-delete-dropdown>
 
 
 </card-with-icon>

@@ -39,10 +39,6 @@ import { PedidoService } from './services/core/api/pedido-service.service';
     AlertModule.forRoot()
   ],
   providers: [
-    PedidoService,
-    ClienteService,
-    UsuarioService,
-    ProdutoService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,

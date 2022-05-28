@@ -1,16 +1,12 @@
-import { Component, Input, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { EventEmitter } from "@angular/core";
+import { Component,  OnInit } from "@angular/core";
+import { FormBuilder,  Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Cliente } from "src/app/business/entities/model/cliente";
 import { ClienteService } from "src/app/services/core/api/cliente-service.service";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
-import { UpdateCreateReactiveForm } from "../abstractions/update-create-reactive-form";
+import { UpdateCreateReactiveForm } from "../../forms/abstractions/update-create-reactive-form";
 import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
 import { ClienteImagem } from "src/app/business/entities/model/cliente-imagem";
-import { DatePipe } from "@angular/common";
-import { ClienteImagemResolverPipe } from "src/app/pipes/path-resolver-pipes/cliente-imagem-resolver/cliente-imagem-resolver.pipe";
-import { SafeStyle } from "@angular/platform-browser";
 import * as enviroment from "src/environments/environment";
 
 

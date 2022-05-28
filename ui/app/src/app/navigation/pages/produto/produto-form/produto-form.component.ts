@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { EventEmitter } from "@angular/core";
 import { HttpErrorResponse, HttpEventType } from "@angular/common/http";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
-import { UpdateCreateReactiveForm } from "../abstractions/update-create-reactive-form";
+import { UpdateCreateReactiveForm } from "../../forms/abstractions/update-create-reactive-form";
 import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
 import { DatePipe } from "@angular/common";
 import { SafeStyle } from "@angular/platform-browser";

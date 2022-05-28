@@ -1,0 +1,21 @@
+
+<showcase-panel [pageData]="pageData" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadShowcase();" (onItensPerPageChange)="onItemsPerPageChange($event)" >
+
+</showcase-panel>
+
+<div class="row">
+
+<produto-card [editMode]="false"  [produto]="produto" class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 p-2" *ngFor="let produto of pageData?.items">
+
+<input #amountInput type="number" value="1" class="form-control"  />
+
+<button (click)="choose(produto, amountInput.value)" class="btn btn-success w-100">
+
+Add
+<i class="fas fa-plus"></i>
+
+</button>
+
+</produto-card>
+
+</div>
