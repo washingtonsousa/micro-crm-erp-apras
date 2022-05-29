@@ -9,6 +9,7 @@ use App\Core\Domain\Entity\Produto;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
 use App\Core\Shared\Resolver\DependencyResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
@@ -16,15 +17,13 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class PedidoController extends AbstractController {
 
-   private IPedidoAppService $pedidoAppService;
-   private SerializerInterface  $serializerInterface;
 
-        public function __construct(IPedidoAppService $pedidoAppService,
-        SerializerInterface  $serializerInterface
+
+        public function __construct(private IPedidoAppService $pedidoAppService,
+       private SerializerInterface  $serializerInterface
         )
         {
-          $this->pedidoAppService =  $pedidoAppService;
-          $this->serializerInterface = $serializerInterface;
+
         }
         
 

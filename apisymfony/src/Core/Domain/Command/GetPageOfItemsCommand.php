@@ -5,6 +5,7 @@ use App\Core\Domain\Abstraction\Command\Command;
 use App\Core\Domain\Abstraction\Interface\IPaginatedRepository;
 use App\Core\Domain\Abstraction\PaginatedEntityQuery;
 use App\Core\Domain\Command\Result\GetPageOfItemsCommandResult;
+use App\Core\Shared\Resolver\DependencyResolver;
 use Exception;
 
 class GetPageOfItemsCommand extends Command {
@@ -24,8 +25,11 @@ class GetPageOfItemsCommand extends Command {
 
         try {
             
+             $logger = DependencyResolver::make("app.logger");
 
-            
+             $logger->info('I just got the logger');
+
+
            $pagination = $this->paginatedRepository->get(
         
            $this->paginatedRequestedModel->getQueryExpressions(), 
