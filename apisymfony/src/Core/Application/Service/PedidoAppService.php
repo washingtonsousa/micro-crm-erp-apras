@@ -4,6 +4,7 @@ namespace App\Core\Application\Service;
 use App\Core\Application\Abstraction\Interface\IPedidoAppService;
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
+use App\Core\Application\Abstraction\ViewModel\Pagination\PedidoPaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\PedidoViewModel;
 use App\Core\Domain\Abstraction\Interface\IPedidoService;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
@@ -26,21 +27,17 @@ class PedidoAppService implements IPedidoAppService {
 
     public function subscribe(PedidoViewModel $pedidoViewModel) : ?PedidoViewModel {
 
-        $cliente = $this->mapper->map($pedidoViewModel, Pedido::class);
+        $pedido = $this->mapper->map($pedidoViewModel, Pedido::class);
 
-        // if(!UsuarioSpecification::IsValidForInsert($usuario))
-        //     return null;
 
-        $result =  $this->service->subscribe($cliente);
+        $result =  $this->service->subscribe($pedido);
      
         if($result == null)
             return null;
 
-        $userViewModel = $this->mapper->map($result, PedidoViewModel::class);
+        $pedidoViewModel = $this->mapper->map($result, PedidoViewModel::class);
 
-
-        return    $userViewModel ;
-
+        return  $pedidoViewModel;
 
     }
 
@@ -77,14 +74,20 @@ class PedidoAppService implements IPedidoAppService {
 
         $domainResult  =$this->service->get($query);
 
-        $result =  $this->mapper->map( $domainResult, PaginationAggregatorViewModel::class);
+        $result =  $this->mapper->map($domainResult, PedidoPaginationAggregatorViewModel::class);
         return  $result;
     }
 
     public function getById(int $id): ?PedidoViewModel
     {
 
-        $result =  $this->mapper->map($this->service->getById($id), PedidoViewModel::class);
+        $pedido = $this->service->getById($id);
+
+        if($pedido == null)
+                return null;
+
+        $result =  $this->mapper->map($pedido, PedidoViewModel::class);
+
         return  $result;
 
     }

@@ -56,7 +56,11 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
   constructor(private changeDetector: ChangeDetectorRef, private elRef: ElementRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
+
+    console.log(changes);
   }
+
+
   ngOnInit(): void {
       this.filteredList = this.list;
   }
@@ -118,8 +122,42 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
 
   }
 
+
+  selectInputByUniqueValue($event:any){
+
+
+    this.filteredValue = $event;
+
+    var filerStr =   this.filteredValue?.toString();
+
+    this.filteredList = this.list.filter(s => {
+
+      console.log(s);
+
+      return s.value.toString().toLowerCase().includes(filerStr?.toLowerCase())
+
+      || s.key.toString().toLowerCase().includes(filerStr?.toLowerCase());
+
+    }
+
+    );
+
+
+    this.changeDetector.detectChanges();
+
+    if(this.filteredValue == '') {
+      this.onValueChanges.emit('');
+    }
+
+
+
+  }
+
   writeValue(obj: any): void {
     this.selectedItem = obj;
+
+    this.selectInputByUniqueValue(obj);
+
   }
   registerOnChange(onChange: any): void {
     this.onChange = onChange;

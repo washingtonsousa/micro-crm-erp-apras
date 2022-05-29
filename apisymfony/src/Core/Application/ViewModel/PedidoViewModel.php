@@ -4,27 +4,39 @@ namespace  App\Core\Application\ViewModel;
 use App\Core\Application\Abstraction\ViewModel\EntityViewModel;
 use DateTime;
 
-class PedidoViewModel extends EntityViewModel {
+class PedidoViewModel extends EntityViewModel   implements \JsonSerializable  {
 
-    /**
-     * @var int
-     *
-    */
+
     public $idPedido;
-
     public $txtObservacoes;
+    public $dataCriacao;
+    public int $idCliente;
+    public $status;
+    public $cliente;
 
-    /**
-     * @var ClienteViewModel
+
+
+      /**
+     * @var PedidoProdutoViewModel[] | null 
      *
      */
-    public ClienteViewModel $idCliente;
+    public mixed $pedidoProdutos;
 
-    
-    /**
-     * @var PedidoProdutoViewModel[]
-     *
-     */
-    public mixed $produtos;
+
+    public function jsonSerialize() {
+
+
+      return [
+          'idPedido' => $this->idPedido,
+          'txtObservacoes' => $this->txtObservacoes,
+          'pedidoProdutos' => $this->pedidoProdutos,
+          'idCliente' => $this->idCliente,
+          'status' => $this->status,
+          'cliente' => $this->cliente,
+          'dataCriacao' => $this->dataCriacao
+
+
+      ];
+  }
 
 }

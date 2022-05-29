@@ -15,7 +15,81 @@
   <section class="mt-2">
     <label class="mb-2"> Produtos: </label>
 
-  <button class="btn btn-sm btn-outline-success" (click)="modalProdutos.openModal()"> <i class="fas fa-plus"></i> Adicionar </button>
+    <table class="table">
+
+      <thead>
+
+        <tr>
+          <th>
+            Nome:
+          </th>
+          <th>
+            Quantidade:
+          </th>
+          <th>
+            Tamanho:
+          </th>
+          <th>
+          </th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let pedidoProduto of this.entity?.pedidoProdutos">
+
+          <td>
+
+            {{
+
+              pedidoProduto?.produto?.nome
+
+            }}
+
+          </td>
+
+          <td>
+
+            {{
+
+              pedidoProduto?.quantidade
+
+            }}
+
+          </td>
+
+          <td>
+
+            {{
+
+              pedidoProduto?.produto?.tamanho
+
+            }}
+
+          </td>
+
+          <td>
+
+            <a class="pointer">
+              <i class="fas fa-close">
+              </i>
+
+            </a>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+
+    </table>
+
+
+
+    <button type="button" class="btn btn-sm btn-outline-success" (click)="modalProdutos.openModal()"> <i class="fas fa-plus"></i> Adicionar </button>
+
   </section>
 
   <label class="mb-2"> Observações: </label>
@@ -41,10 +115,11 @@
 
 </form>
 
-
 <clean-modal #modalProdutos title="Produtos disponíveis">
 
- <produto-showcase (onChoose)="onChooseProduto($event)" >
+ <produto-showcase (onChoose)="onChooseProduto($event); modalProdutos.closeModal();  " >
+
+
  </produto-showcase>
 
 </clean-modal>

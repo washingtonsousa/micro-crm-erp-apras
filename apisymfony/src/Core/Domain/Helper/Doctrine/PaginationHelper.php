@@ -8,31 +8,26 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
     class PaginationHelper {
 
 
-        public static function executePaginationAggregator(Query $query, $pageSize, $page, $totalItems) {
-
-            if($pageSize == -1 && $page == 1)
-                    $pageSize = $totalItems;
+        public static function executePaginationAggregator(Query $query, $pageSize, $page) {
 
             $pageSize = $pageSize <= 0 ? 4  : $pageSize;
 
             $page = $page <= 0 ? 1 : $page;
 
             $firstResult = $page == 1 ? 0 : $pageSize * ($page - 1);
-            $pageSizeOffset = $pageSize;
-
-            if($totalItems <= 0)
-            return new PaginationAggregator(array(),$totalItems,$page,1);
-
-            $pagesCount = ceil($totalItems / $pageSize);
-    
+            $pageSizeOffset = $pageSize;           
 
             $query
                 ->setFirstResult($firstResult) // set the offset
                 ->setMaxResults($pageSizeOffset); // set the limit
-            
-            $items = $query->getResult(\Doctrine\ORM\Query::HYDRATE_OBJECT);  
 
-            return new PaginationAggregator($items,$totalItems,$page,$pagesCount);
+            $paginator = new \Doctrine\ORM\Tools\Pagination\Paginator($query);
+
+            $items = $paginator->getIterator()->getArrayCopy();  
+
+            $pagesCount  = ceil($paginator->count() / $pageSize);
+
+            return new PaginationAggregator($items,$paginator->count(),$page,$pagesCount);
 
 
         }

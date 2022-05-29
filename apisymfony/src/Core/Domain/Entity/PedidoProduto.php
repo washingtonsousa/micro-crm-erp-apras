@@ -28,10 +28,21 @@ class PedidoProduto
      */
     private $quantidade;
 
+    /**
+     * @var int
+     * @ORM\Column(name="id_produto", type="integer", nullable=false)
+     */
+    public $idProduto;
 
     /**
-     * @var Produto
+     * @var int
      *
+     * @ORM\Column(name="id_pedido", type="integer", nullable=false)
+     */
+    public $idPedido;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="Produto")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_produto", referencedColumnName="id_produto")
@@ -39,23 +50,7 @@ class PedidoProduto
      */
     private $produto;
 
-
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_produto", type="integer", nullable=false)
-     */
-    private $idProduto;
-
-    /**
-     *
-     * @ORM\Column(name="id_pedido", type="integer", nullable=false)
-     */
-    private $idPedido;
-
-    /**
-     * @var \Pedido
-     *
      * @ORM\ManyToOne(targetEntity="Pedido")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pedido", referencedColumnName="id_pedido")
@@ -64,4 +59,56 @@ class PedidoProduto
     private $pedido;
 
 
+
+    /**
+     * Set })
+     *
+     * @return  self
+     */ 
+    public function setProduto($produto)
+    {
+        $this->produto = $produto;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idProduto
+     *
+     * @return  int
+     */ 
+    public function getIdProduto()
+    {
+        return $this->idProduto;
+    }
+
+    /**
+     * Set })
+     *
+     * @return  self
+     */ 
+    public function setPedido($pedido)
+    {
+        $this->pedido = $pedido;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idPedido
+     *
+     * @return  int
+     */ 
+    public function getIdPedido()
+    {
+        return $this->idPedido;
+    }
+
+    /**
+     * Get })
+     */ 
+    public function getProduto()
+    {
+        return $this->produto;
+    }
 }

@@ -4,10 +4,12 @@ namespace App\Core\Application\Mapping;
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\ClientePaginationAggregatorViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
+use App\Core\Application\Abstraction\ViewModel\Pagination\PedidoPaginationAggregatorViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\ProdutoPaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\ClienteImagemViewModel;
 use App\Core\Application\ViewModel\ClienteViewModel;
 use App\Core\Application\ViewModel\ImagemViewModel;
+use App\Core\Application\ViewModel\PedidoProdutoViewModel;
 use App\Core\Application\ViewModel\PedidoViewModel;
 use App\Core\Application\ViewModel\ProdutoImagemViewModel;
 use App\Core\Application\ViewModel\ProdutoViewModel;
@@ -18,6 +20,7 @@ use App\Core\Domain\Entity\ClienteImagem;
 use App\Core\Domain\Entity\Imagem;
 use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\Pedido;
+use App\Core\Domain\Entity\PedidoProduto;
 use App\Core\Domain\Entity\Produto;
 use App\Core\Domain\Entity\ProdutoImagem;
 use App\Core\Domain\Entity\Usuario;
@@ -33,24 +36,20 @@ class ViewModelMapping {
 
         self::$config = $config;
 
+        $config->registerMapping(PaginatedEntityRequestViewModel::class, PaginatedEntityRequest::class);
+        $config->registerMapping(PaginationAggregator::class, PaginationAggregatorViewModel::class);
         $config->registerMapping(UsuarioViewModel::class, Usuario::class);
 
         $config->registerMapping(Usuario::class, UsuarioViewModel::class)
         ->forMember('senha', function(Usuario $usuario) {
-            
             return '';
-        
         });
 
         self::MapCliente();
         self::MapProduto();
-      
-        $config->registerMapping(ImagemViewModel::class, Imagem::class);
-        $config->registerMapping(Imagem::class, ImagemViewModel::class);
-        $config->registerMapping(PedidoViewModel::class, Pedido::class);
-        $config->registerMapping(Pedido::class, PedidoViewModel::class);
-        $config->registerMapping(PaginatedEntityRequestViewModel::class, PaginatedEntityRequest::class);
-        $config->registerMapping(PaginationAggregator::class, PaginationAggregatorViewModel::class);
+        self::MapPedido();
+        self::MapImagem();
+   
 
     }
 
@@ -70,8 +69,11 @@ class ViewModelMapping {
         self::$config->registerMapping(ProdutoImagem::class, ProdutoImagemViewModel::class)
         ->forMember("imagem", Operation::mapTo(ImagemViewModel::class));
 
+    }
 
-   
+    static function MapImagem() {
+        self::$config->registerMapping(ImagemViewModel::class, Imagem::class);
+        self::$config->registerMapping(Imagem::class, ImagemViewModel::class);
     }
 
     static function MapCliente() {
@@ -91,5 +93,26 @@ class ViewModelMapping {
 
     }
 
+
+
+    static function MapPedido() {
+
+        self::$config->registerMapping(PedidoPaginationAggregatorViewModel::class, PaginationAggregator::class)  ;
+        
+        self::$config->registerMapping(PaginationAggregator::class, PedidoPaginationAggregatorViewModel::class)
+        ->forMember('items',  Operation::mapCollectionTo(PedidoViewModel::class));
+
+        self::$config->registerMapping(PedidoViewModel::class, Pedido::class)
+        ->forMember('pedidoProdutos', Operation::mapCollectionTo(PedidoProduto::class));
+
+        self::$config->registerMapping(PedidoProdutoViewModel::class, PedidoProduto::class);
+        
+        self::$config->registerMapping(Pedido::class, PedidoViewModel::class)
+        ->forMember('pedidoProdutos', Operation::mapCollectionTo(PedidoProdutoViewModel::class));
+
+        self::$config->registerMapping(PedidoProduto::class, PedidoProdutoViewModel::class)
+        ->forMember('produto', Operation::mapTo(ProdutoViewModel::class));
+        
+    }
 
 }

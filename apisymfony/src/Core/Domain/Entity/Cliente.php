@@ -35,6 +35,10 @@ class Cliente
     */
     public $clienteImagem;
 
+    /**
+    *  @ORM\OneToMany(targetEntity="Pedido", mappedBy="cliente", cascade={"all"}, indexBy="idCliente")
+    */
+    private $pedidos;
 
     /**
      * Get the value of idCliente
@@ -58,5 +62,23 @@ class Cliente
     public function getNome()
     {
         return $this->strNome;
+    }
+
+    public function __construct()
+    {
+    }
+
+    /**
+     * Set the value of idCliente
+     *
+     * @param  int  $idCliente
+     *
+     * @return  self
+     */ 
+    public function setIdCliente(int $idCliente)
+    {
+        $this->idCliente = $idCliente;
+
+        return $this;
     }
 }

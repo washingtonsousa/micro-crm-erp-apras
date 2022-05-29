@@ -4,7 +4,7 @@ namespace App\Core\Domain\Entity\NonDatabaseEntity;
 
 class PaginationAggregator {
         
-        public array $items;
+        public mixed $items;
         public int $totalItems;
         public int $page;
         public int $totalPages;

@@ -43,9 +43,6 @@ class ImagemRepository  extends ServiceEntityRepository implements IImagemReposi
 
                 $result = (int) $this->createQueryBuilder('i')
                 ->select('COUNT(u.idImagem)')
-                // ->where('u.documento = :documento OR u.email = :email')
-                // ->setParameter('documento', $documento)
-                // ->setParameter('email', $email)
                 ->getQuery()
                 ->getSingleScalarResult();
 

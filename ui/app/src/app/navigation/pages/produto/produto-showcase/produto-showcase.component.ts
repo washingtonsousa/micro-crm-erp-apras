@@ -7,6 +7,7 @@ import { PaginationReponse } from "src/app/business/entities/response/pagination
 import { tamanhosSelectBoxItems } from "src/app/business/helpers/data/produto-data.helper";
 import { CrudPageTemplate } from "src/app/navigation/abstractions/template/crud-page-template";
 import { ProdutoService } from "src/app/services/core/api/produto-service.service";
+import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
 import { SelectBoxItem } from "src/app/ui-components/material/forms/select-box/select-box-item.model";
 
 
@@ -27,19 +28,21 @@ export class ProdutoShowcaseComponent extends CrudPageTemplate<Produto> implemen
 
   }
 
-        choose(produto: Produto, amount: any) {
+        choose(produto: Produto, amount: string) {
 
             var pedidoProduto = new PedidoProduto();
 
-            pedidoProduto.quantidade = amount;
-            pedidoProduto.produto = produto;
+            pedidoProduto.quantidade = parseInt(amount);
             pedidoProduto.idProduto = produto.idProduto;
 
             this.onChoose.emit(pedidoProduto);
 
-            console.log(pedidoProduto);
+        }
 
-
+        onFilterTamanho(newTamanho:string) {
+          this.request.tamanho = newTamanho;
+          this.request.page = 1;
+          this.loadPageData();
         }
 
        override ngOnInit(): void {
@@ -47,10 +50,11 @@ export class ProdutoShowcaseComponent extends CrudPageTemplate<Produto> implemen
         }
 
           loadShowcase() {
-
+            LoadingIconService.show("Aguarde...");
             this.dataService.Get(this.request)
             .subscribe((data:DefaultDataResponse<PaginationReponse<Produto>>) => {
               super.pageData = data.data;
+              LoadingIconService.hide();
 
 
             });

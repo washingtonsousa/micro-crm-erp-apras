@@ -2,13 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Cliente } from "src/app/business/entities/model/cliente";
 import { Pedido } from "src/app/business/entities/model/pedido";
-import { Produto } from "src/app/business/entities/model/produto";
 import { PaginationDataRequest } from "src/app/business/entities/request/pagination-data-request";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
 import { PaginationReponse } from "src/app/business/entities/response/pagination-response";
 import { ClienteService } from "src/app/services/core/api/cliente-service.service";
 import { PedidoService } from "src/app/services/core/api/pedido-service.service";
-import { ProdutoService } from "src/app/services/core/api/produto-service.service";
 import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
 import { SelectBoxItem } from "src/app/ui-components/material/forms/select-box/select-box-item.model";
 import { UpdateCreateReactiveForm } from "../../forms/abstractions/update-create-reactive-form";
@@ -27,26 +25,28 @@ export class PedidoFormComponent extends UpdateCreateReactiveForm<Pedido>  imple
         clienteSelectBox : SelectBoxItem[] = [];
 
        constructor(public clienteService:ClienteService,
-        public produtoService:ProdutoService,
         public override formBuilder: FormBuilder,
         public override dataService: PedidoService)
       {
         super();
       }
 
-
       onChooseProduto($event:any) {
 
+        this.entity.pedidoProdutos.push($event);
+
         this.formGroup.patchValue({
-          pedidoProdutos: [$event]
+          pedidoProdutos: this.entity.pedidoProdutos
         });
 
-        console.log(this.formGroup.value);
       }
 
       override ngOnInit(): void {
 
                 super.ngOnInit();
+
+                if(this.entity == undefined)
+                  this.entity = new Pedido();
 
                 LoadingIconService.show('inicializando Componentes...');
 
@@ -57,7 +57,7 @@ export class PedidoFormComponent extends UpdateCreateReactiveForm<Pedido>  imple
                           this.clientes =  data.data.items;
 
                           for(let cliente of this.clientes){
-                            this.clienteSelectBox.push({ key: cliente.strNome , value: cliente.idCliente.toString() });
+                            this.clienteSelectBox.push({ key: cliente.strNome , value: cliente.idCliente });
                           }
 
                       }
@@ -68,17 +68,20 @@ export class PedidoFormComponent extends UpdateCreateReactiveForm<Pedido>  imple
 
       Submit() {
 
-
+        super.OnSubmit([]);
 
       }
 
 
       initForm(): void {
+
+     //   console.log(this.entity);
        this.formGroup = this.formBuilder.group({
             idCliente: [this.entity?.idCliente, [Validators.required]],
-            txtObservacoes: [this.entity?.txtObservacoes, [Validators.required]],
-            pedidoProdutos: [this.entity?.pedidoProdutos, [Validators.required]]
+            txtObservacoes: [this.entity?.txtObservacoes],
+            pedidoProdutos: [this.entity?.pedidoProdutos]
        });
+
       }
 
 

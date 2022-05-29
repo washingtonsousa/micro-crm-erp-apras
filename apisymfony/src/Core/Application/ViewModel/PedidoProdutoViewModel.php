@@ -9,7 +9,11 @@ class PedidoProdutoViewModel extends EntityViewModel {
   
     public int $idPedidoProduto;
     public int $quantidade;
-    public int $idProduto;
-    public int $idPedido;    
+    
+    public mixed $idProduto;
+    public mixed $idPedido;    
+
+    public mixed $produto;
+    public mixed $pedido;   
 
 }

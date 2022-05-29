@@ -26,22 +26,21 @@ class PedidoRepository  extends ServiceEntityRepository implements IPedidoReposi
 
             public function get(QueryExpression $queryExpression, $pageSize = 0, $orderBy, $page = 0, $order = 'DESC', ) : PaginationAggregator {  
 
-                $query = PedidoQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
-                $queryForCount  = PedidoQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
-                
+                $query = PedidoQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);  
                 $query = PedidoQueryHelper::buildDefaultSelectForGetPageList($query);
-                $totalItemsCount = (int) QueryHelper::buildQueryFiltersAndDoCount($queryForCount, $queryExpression, 'p.idPedido');
-
                 $query = QueryHelper::buildQueryFilters($query, $queryExpression);
 
-                return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page, $totalItemsCount);
+                return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page);
 
             }
 
             public function getById($id) : ?Pedido {
 
                 return  $this->createQueryBuilder('p')
-                ->select('p')
+                ->leftJoin('p.cliente', 'c')
+                ->leftJoin('p.pedidoProdutos', 'pPP')
+                ->leftJoin('pPP.produto', 'prd')
+                ->select('p', 'pPP', 'prd', 'c')
                 ->where('p.idPedido = :idPedido')
                 ->setParameter('idPedido', $id) 
                 ->getQuery()   

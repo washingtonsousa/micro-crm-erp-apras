@@ -4,7 +4,7 @@ namespace  App\Core\Application\ViewModel;
 use App\Core\Application\Abstraction\ViewModel\EntityViewModel;
 use DateTime;
 
-class ProdutoViewModel extends EntityViewModel {
+class ProdutoViewModel extends EntityViewModel  implements \JsonSerializable {
 
     public $idProduto;
     public $nome;
@@ -14,5 +14,20 @@ class ProdutoViewModel extends EntityViewModel {
     public $descricao;
     public $dtDataCadastro;
     public $produtoImagem;
+
+    public function jsonSerialize() {
+
+
+        return [
+            'codigoProduto' => $this->codigoProduto,
+            'nome' => $this->nome,
+            'idProduto' => $this->idProduto,
+            'cor' => $this->cor,
+            'tamanho' => $this->tamanho,
+            'descricao' => $this->descricao,
+            'dtDataCadastro' => $this->dtDataCadastro,
+            'produtoImagem' => $this->produtoImagem
+        ];
+    }
 
 }

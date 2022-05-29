@@ -47,6 +47,14 @@ services:
         alias: Symfony\Component\Serializer\SerializerInterface
         public: true
 
+    app.logger:
+        alias: Psr\Log\LoggerInterface
+        public: true
+
+    app.orm:
+        alias: Doctrine\Persistence\ManagerRegistry
+        public: true
+
     app.core.domain.provider.auth_user_provider:
         class: App\Core\Domain\Provider\AuthUserProvider
         arguments:

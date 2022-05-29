@@ -1,3 +1,4 @@
+import { Cliente } from "./cliente";
 import { PedidoProduto } from "./pedido-produto";
 
 export class Pedido {
@@ -5,4 +6,6 @@ export class Pedido {
   txtObservacoes:string = '';
   idCliente!:number;
   pedidoProdutos: PedidoProduto[] = [];
+  cliente!: Cliente;
+  status!:number;
 }

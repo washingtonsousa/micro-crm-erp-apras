@@ -27,14 +27,10 @@ class ProdutoRepository  extends ServiceEntityRepository implements IProdutoRepo
             public function get(QueryExpression $queryExpression, $pageSize = 0, $orderBy, $page = 0, $order = 'DESC', ) : PaginationAggregator {  
 
                 $query = ProdutoQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
-                $queryForCount  = ProdutoQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
-                
                 $query = ProdutoQueryHelper::buildDefaultSelectForGetPageList($query);
-                $totalItemsCount = (int) QueryHelper::buildQueryFiltersAndDoCount($queryForCount, $queryExpression, 'p.idProduto');
-
                 $query = QueryHelper::buildQueryFilters($query, $queryExpression);
 
-                return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page, $totalItemsCount);
+                return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page);
 
             }
 

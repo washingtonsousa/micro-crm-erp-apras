@@ -29,14 +29,10 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
             public function get(QueryExpression $queryExpression, $pageSize = 0, $orderBy, $page = 0, $order = 'DESC', ) : PaginationAggregator {  
 
                 $query = UsuarioQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
-                $queryForCount  = UsuarioQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
-                
                 $query = UsuarioQueryHelper::buildDefaultSelectForGetPageList($query);
-                $totalItemsCount = (int) QueryHelper::buildQueryFiltersAndDoCount($queryForCount, $queryExpression, 'u.idUsuario');
-
                 $query = QueryHelper::buildQueryFilters($query, $queryExpression);
 
-                return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page, $totalItemsCount);
+                return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page);
 
             }
 

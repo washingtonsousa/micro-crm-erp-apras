@@ -9,6 +9,7 @@ use App\Core\Domain\Command\Result\PersistCommandResult;
 use App\Core\Domain\Command\Result\PersistUserCommandResult;
 use App\Core\Domain\Entity\NonDatabaseEntity\StatementResult;
 use App\Core\Domain\Entity\Usuario;
+use App\Core\Shared\Resolver\DependencyResolver;
 use DateTime;
 use Exception;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -29,16 +30,21 @@ class PersistCommand extends Command {
 
     public function GenerateResult() {
 
+        $logger =  DependencyResolver::make('app.logger');
+
         try {
             
-            $this->unityOfWork->Persist($this->entity); 
+          $this->unityOfWork->Persist($this->entity); 
+          $statementResult = $this->unityOfWork->Commit();
+          $logger->info(json_encode($statementResult));
 
-            $statementResult = $this->unityOfWork->Commit();
-
-            $this->setResult(new PersistCommandResult(!$statementResult->hasException() ? $this->entity : null, $statementResult));
+          $this->setResult(new PersistCommandResult(!$statementResult->hasException() ? $this->entity : null, $statementResult));
 
         } catch(Exception $ex) {
-            $this->setResult(new PersistCommandResult(null, new StatementResult(false,0,$ex)));
+
+         $logger->info($ex->getMessage());
+
+          $this->setResult(new PersistCommandResult(null, new StatementResult(false,0,$ex)));
         }
     }
 

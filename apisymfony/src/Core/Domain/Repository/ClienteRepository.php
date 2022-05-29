@@ -32,14 +32,12 @@ class ClienteRepository  extends ServiceEntityRepository implements IClienteRepo
             public function get(QueryExpression $queryExpression, $pageSize = 0, $orderBy, $page = 0, $order = 'DESC', ) : PaginationAggregator {  
 
                 $query = ClienteQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
-                $queryForCount  = ClienteQueryHelper::buildDefaultPaginatedQueryBuilder($this,$order, $orderBy);
                 
                 $query = ClienteQueryHelper::buildDefaultSelectForGetPageList($query);
-                $totalItemsCount = (int) QueryHelper::buildQueryFiltersAndDoCount($queryForCount, $queryExpression, 'c.idCliente');
 
                 $query = QueryHelper::buildQueryFilters($query, $queryExpression);
             
-               return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page, $totalItemsCount);
+               return PaginationHelper::executePaginationAggregator($query->getQuery(), $pageSize,$page);
 
             }
 

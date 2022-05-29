@@ -60,20 +60,16 @@ class PedidoService implements IPedidoService {
         }
 
         public function subscribe(Pedido $pedido) {
-                
 
-                // if(!PedidoSpecification::MustNotExists($this->CheckIfExists($pedido)))
-                //     return null;
-
+                $pedido->prepareForInsert();
 
                 $command = new PersistCommand($pedido, $this->unityOfWork);
-
                 $result = $command->Execute();
 
                 if($result->isSuccess())
-                        return $result->getEntity();
+                        $pedido = $result->getEntity();
 
-                return null;
+                return $pedido;
 
         }
 

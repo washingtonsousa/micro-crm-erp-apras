@@ -3,8 +3,11 @@ namespace App\Controller;
 
 use App\Core\Application\Abstraction\Interface\IPedidoAppService;
 use App\Core\Application\ViewModel\ClienteViewModel;
+use App\Core\Application\ViewModel\PedidoViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
+use App\Core\Domain\Entity\Produto;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
+use App\Core\Shared\Resolver\DependencyResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,9 +29,10 @@ class PedidoController extends AbstractController {
         
 
         public function subscribe( Request $request)
-        {
-      
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), ClienteViewModel::class, 'json', [
+        {   
+
+
+              $requestValue = $this->serializerInterface->deserialize($request->getContent(), PedidoViewModel::class, 'json', [
               ]);
 
               $result = $this->pedidoAppService->subscribe($requestValue);

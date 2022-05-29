@@ -4,6 +4,15 @@
 <card-with-icon iconClass="fas fa-tshirt"  [title]="pedido?.idPedido?.toString()">
 
 
+  <p>
+    <b> Cliente: </b> {{ pedido?.cliente?.strNome }}
+  </p>
+
+
+  <p>
+   <b> Status: </b>  {{ pedido?.status | pedidoStatus }}
+  </p>
+
   <edit-delete-dropdown (edit)="edit.emit(pedido.idPedido)" (delete)="delete.emit(pedido.idPedido)" class="justify-content-end w-100 p-3 d-flex"></edit-delete-dropdown>
 
 

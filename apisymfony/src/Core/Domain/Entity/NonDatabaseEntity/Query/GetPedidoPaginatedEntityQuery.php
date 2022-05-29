@@ -34,7 +34,7 @@ class GetPedidoPaginatedEntityQuery extends PaginatedEntityQuery {
             $array = array();
             $params = $this->getAllowedQueryParams();
 
-            $array['idPedido'] = new QueryFilter('idPedido', $params['idPedido'], '=');
+            $array['idPedido'] = new QueryFilter('idPedido', $this->request->getTerm(), 'like');
 
             return  $array;
 
@@ -43,16 +43,8 @@ class GetPedidoPaginatedEntityQuery extends PaginatedEntityQuery {
         protected function prepareQueryExpression()
         {
             $filters = $this->getAllowedFilters();
-           
-            foreach($filters as $filter) {
 
-                if(isset($this->queryExpressionBuilder))
-                $this->queryExpressionBuilder->addANDExpression($filter, 'p');
-
-                if(!isset(  $this->queryExpressionBuilder))
-                $this->queryExpressionBuilder = new QueryExpressionBuilder('p', $filter);
-     
-            }
+            $this->queryExpressionBuilder = new QueryExpressionBuilder('p', $filters['idPedido']);
 
             return $this->queryExpressionBuilder->build();
 

@@ -2,7 +2,7 @@
 
   <box-container>
 
-    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalProduto.openModal()">
+    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalPedido.openModal()">
 
 
     </crud-panel>
@@ -21,10 +21,10 @@
     </div>
 
 
-    <clean-modal #modalProduto title="Cadastro de Pedido">
+    <clean-modal #modalPedido title="Cadastro de Pedido">
 
 
-      <pedido-form (onSuccess)="onFormSuccess($event); modalProduto.closeModal()" (onFail)="onFormFail($event)">
+      <pedido-form (onSuccess)="onFormSuccess($event); modalPedido.closeModal()" (onFail)="onFormFail($event)">
 
       </pedido-form>
 
@@ -39,9 +39,9 @@
     </clean-modal>
 
 
-    <clean-modal #modalProdutoUpdate title="Atualizacao de Produto">
+    <clean-modal #modalPedidoUpdate title="Atualizacao de Pedido">
 
-      <pedido-form [entity]="currentEntityForUpdate" (onSuccess)="onFormSuccess($event, 'Produto atualizado com sucesso!'); modalProdutoUpdate.closeModal()" (onFail)="onFormFail($event)">
+      <pedido-form [entity]="currentEntityForUpdate" (onSuccess)="onFormSuccess($event, 'Pedido atualizado com sucesso!'); modalPedidoUpdate.closeModal()" (onFail)="onFormFail($event)">
 
       </pedido-form>
 
