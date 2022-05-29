@@ -51,8 +51,11 @@ class PedidoController extends AbstractController {
 
         public function getById(Request $request)
         {
-          
+            
               $result = $this->pedidoAppService->getById($request->attributes->get('id'));
+
+                  
+
               return new JsonResponse($result);
 
         }
