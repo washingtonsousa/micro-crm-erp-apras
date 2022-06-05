@@ -35,6 +35,8 @@ export class PedidoFormComponent extends UpdateCreateReactiveForm<Pedido>  imple
 
         this.entity.pedidoProdutos.push($event);
 
+        console.log($event);
+
         this.formGroup.patchValue({
           pedidoProdutos: this.entity.pedidoProdutos
         });

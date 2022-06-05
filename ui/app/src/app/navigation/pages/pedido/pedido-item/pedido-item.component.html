@@ -2,14 +2,14 @@
 
     <box-container>
 
-      <alert *ngIf="!pedido" type="info">
+      <alert *ngIf="!pedido?.idPedido" type="info">
 
 
           <h1>  Pedido não encontrato ou não existe  </h1>
 
       </alert>
 
-      <div *ngIf="pedido" class="wrap-pedido container-fluid">
+      <div *ngIf="pedido?.idPedido" class="wrap-pedido container-fluid">
       <div class="row">
 
         <div class="col-xl-12">

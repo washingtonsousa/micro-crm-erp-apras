@@ -34,6 +34,7 @@ export class ProdutoShowcaseComponent extends CrudPageTemplate<Produto> implemen
 
             pedidoProduto.quantidade = parseInt(amount);
             pedidoProduto.idProduto = produto.idProduto;
+            pedidoProduto.produto = produto;
 
             this.onChoose.emit(pedidoProduto);
 

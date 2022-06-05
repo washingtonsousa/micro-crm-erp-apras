@@ -8,7 +8,7 @@ import { SelectBoxItem } from "./select-box-item.model";
 
       <div *ngIf="!disabled" class=" select-box-area w-100 d-flex flex-column flex-align-center justify-content-center">
 
-      <input autocomplete="off" (click)="onInputClick()" [(ngModel)]="filteredValue" (input)="onChangeInput($event)" type="text" class="form-control" name="selector-box" />
+      <input autocomplete="off" (click)="onInputClick()" [(ngModel)]="filteredKey" (input)="onChangeInput($event)" type="text" class="form-control" name="selector-box" />
 
       <div *ngIf="filteredList.length && showList" class="suspended-drop-down floating-box">
 
@@ -45,6 +45,7 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
 
   selectedItem!:any;
   filteredValue:any;
+  filteredKey:any;
 
 
   showList: boolean = false;
@@ -84,7 +85,7 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
 
       this.markAsTouched();
       this.selectedItem = $event.value;
-      this.filteredValue = $event.key;
+      this.filteredKey = $event.key;
       this.onValueChanges.emit(this.selectedItem);
       this.showList = false;
       this.writeValue(this.selectedItem);
@@ -96,16 +97,19 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
 
 
     this.showList = true;
-    this.filteredValue = $event.target.value;
+    this.filteredKey = $event.target.value;
 
 
     this.filteredList = this.list.filter(s => {
 
       console.log(s);
 
-      return s.value.toLowerCase().includes(this.filteredValue?.toLowerCase())
+      let value: string | number | any = s.value;
 
-      || s.key.toLowerCase().includes(this.filteredValue.toLowerCase());
+      if( typeof(s.value) == "number")
+        value = value.toString();
+
+      return s.key.toLowerCase().includes(this.filteredKey.toLowerCase());
 
     }
 
@@ -113,10 +117,6 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
 
 
     this.changeDetector.detectChanges();
-
-    if(this.filteredValue == '') {
-      this.onValueChanges.emit('');
-    }
 
 
 

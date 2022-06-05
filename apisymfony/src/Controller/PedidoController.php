@@ -44,6 +44,8 @@ class PedidoController extends AbstractController {
         {
           
               $result = $this->pedidoAppService->get($handler->getRequestViewModel());
+
+              
               return new JsonResponse($result);
 
         }

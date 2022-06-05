@@ -108,7 +108,8 @@ class ViewModelMapping {
         self::$config->registerMapping(PedidoProdutoViewModel::class, PedidoProduto::class);
         
         self::$config->registerMapping(Pedido::class, PedidoViewModel::class)
-        ->forMember('pedidoProdutos', Operation::mapCollectionTo(PedidoProdutoViewModel::class));
+        ->forMember('pedidoProdutos', Operation::mapCollectionTo(PedidoProdutoViewModel::class))
+        ->forMember('cliente', Operation::mapTo(ClienteViewModel::class));
 
         self::$config->registerMapping(PedidoProduto::class, PedidoProdutoViewModel::class)
         ->forMember('produto', Operation::mapTo(ProdutoViewModel::class));

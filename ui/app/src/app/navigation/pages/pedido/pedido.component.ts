@@ -3,6 +3,7 @@ import { CleanModalComponent } from "src/app/ui-components/material/modal/clean-
 import { Pedido } from "src/app/business/entities/model/pedido";
 import { PedidoService } from "src/app/services/core/api/pedido-service.service";
 import { CrudPageTemplate } from "../../abstractions/template/crud-page-template";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "pedido",
@@ -14,7 +15,7 @@ export class PedidoComponent extends CrudPageTemplate<Pedido> {
 
 
   constructor(public override dataService:  PedidoService,
-    public override changeDetector: ChangeDetectorRef){
+    public override changeDetector: ChangeDetectorRef, public router:Router){
 
       super();
 

@@ -12,6 +12,13 @@ class PedidoViewModel extends EntityViewModel   implements \JsonSerializable  {
     public $dataCriacao;
     public int $idCliente;
     public $status;
+
+
+    
+      /**
+     * @var ClienteViewModel | null 
+     *
+     */
     public $cliente;
 
 
@@ -24,6 +31,20 @@ class PedidoViewModel extends EntityViewModel   implements \JsonSerializable  {
 
 
     public function jsonSerialize() {
+
+
+      foreach($this->pedidoProdutos as $key =>  $pedidoProduto) {
+
+        $pedidoProduto->produto->pedidoProdutos = null;
+        $pedidoProduto->pedido->pedidoProdutos = null;
+
+        $this->pedidoProdutos[$key] = $pedidoProduto;
+
+
+      }
+
+      $this->cliente->clienteImagem = null;
+      $this->cliente->pedidos = null;
 
 
       return [
