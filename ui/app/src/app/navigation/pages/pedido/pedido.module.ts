@@ -14,13 +14,14 @@ import { MaterialModule } from "src/app/ui-components/material/material.module";
 import { ProdutoModule } from "../produto/produto.module";
 import { PedidoCardComponent } from "./pedido-card/pedido-card.component";
 import { PedidoFormComponent } from "./pedido-form/pedido-form.component";
+import { PedidoItemComponent } from "./pedido-item/pedido-item.component";
 import { PedidoComponent } from "./pedido.component";
 
 
 @NgModule({
   providers: [PedidoService, ProdutoService,],
-  declarations: [PedidoCardComponent,PedidoComponent, PedidoFormComponent],
-  exports: [PedidoCardComponent, PedidoFormComponent, PedidoComponent],
+  declarations: [PedidoCardComponent,PedidoComponent, PedidoItemComponent, PedidoFormComponent],
+  exports: [PedidoCardComponent, PedidoFormComponent, PedidoItemComponent, PedidoComponent],
   imports: [PipesModule, CommonModule, AlertModule, ProdutoModule, GeneralUIModule,
     LayoutModule,  MaterialModule, ReactiveFormsModule,
     FlexBoxModule, PathResolverPipesModule, ModalModule]

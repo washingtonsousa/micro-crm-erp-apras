@@ -14,12 +14,7 @@
 
   <label class="mb-2"> Imagem/Ícone do cliente: </label>
 
-  <image-frame (click)="fileInput.click()" class="my-2 d-block pointer" [imgUri]="imageSrc">
-
-  </image-frame>
-
-  <input #fileInput accept="image/png, image/gif, image/jpeg" type="file" class="d-none"  (change)="onFileChange($event)"  />
-
+  <image-item [imageSrc]="imageSrc" (onValueChanges)="file = $event"> </image-item>
 
   <p class="mt-2"> <small>
 

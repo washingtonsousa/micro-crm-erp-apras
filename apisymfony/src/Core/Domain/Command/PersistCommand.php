@@ -3,16 +3,11 @@ namespace App\Core\Domain\Command;
 
 use App\Core\Domain\Abstraction\Command\Command;
 use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
-use App\Core\Domain\Abstraction\Interface\IUsuarioRepository;
-use App\Core\Domain\Command\Result\CreateUserCommandResult;
 use App\Core\Domain\Command\Result\PersistCommandResult;
-use App\Core\Domain\Command\Result\PersistUserCommandResult;
 use App\Core\Domain\Entity\NonDatabaseEntity\StatementResult;
-use App\Core\Domain\Entity\Usuario;
 use App\Core\Shared\Resolver\DependencyResolver;
-use DateTime;
 use Exception;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 class PersistCommand extends Command {
 
@@ -36,14 +31,14 @@ class PersistCommand extends Command {
             
           $this->unityOfWork->Persist($this->entity); 
           $statementResult = $this->unityOfWork->Commit();
-          $logger->info(json_encode($statementResult));
+
+          $logger->info("{ PersistCommandLog : ".json_encode($statementResult)."}");
 
           $this->setResult(new PersistCommandResult(!$statementResult->hasException() ? $this->entity : null, $statementResult));
 
         } catch(Exception $ex) {
 
-         $logger->info($ex->getMessage());
-
+         $logger->info("{ PersistCommandLog : '".$ex->getMessage()."'}");
           $this->setResult(new PersistCommandResult(null, new StatementResult(false,0,$ex)));
         }
     }

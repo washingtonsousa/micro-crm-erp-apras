@@ -116,7 +116,7 @@ class UsuarioService implements IUsuarioService {
                 if(!UsuarioSpecification::MustNotExists($this->CheckIfExists($user)))
                     return null;
 
-                $user->setSenha($this->encoder->hashPassword($this->user, $this->user->getPassword()));
+                $user->setSenha($this->encoder->hashPassword($user, $user->getPassword()));
                 $user->setDataCriacao(new DateTime());
 
                 $command = new PersistCommand($user, $this->unityOfWork);

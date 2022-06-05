@@ -20,34 +20,13 @@ export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> impl
 
 
   file!: File;
-  imageSelected!: string;
   imageSrc!:string ;
 
   constructor( public override formBuilder: FormBuilder, public override dataService: ClienteService) {
     super();
   }
 
-  onFileChange(event: any) {
 
-    if (event.target.files.length > 0) {
-      this.file = event.target.files[0];
-      this.formGroup.patchValue({
-        file: this.file
-      });
-    }
-
-    this.file = event.target.files[0];
-    this.imageSelected = this.file.name;
-
-        if (event.target.files && event.target.files[0]) {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            this.imageSrc = e.target.result;
-          };
-
-      reader.readAsDataURL(event.target.files[0]);
-  }
-}
 
   Submit() {
 
@@ -94,7 +73,7 @@ export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> impl
     }
 
     this.formGroup = this.formBuilder.group({
-      idCliente:[this.entity?.idCliente, [Validators.required]],
+      idCliente:[this.entity?.idCliente],
       strNome: [this.entity?.strNome, [Validators.required]]
 
     });

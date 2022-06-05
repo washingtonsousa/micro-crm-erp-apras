@@ -4,18 +4,11 @@
     <div class="container">
 
 
-      <div class="row justify-content-end mb-3">
-
-        <div class="crud-item col-xl-2 col-12">
-
-          <section>
-            Total de {{ paginationResponse?.totalItems  }} resultados
-          </section>
-
-        </div>
+      <div class="row mb-3">
 
 
-          <div class="crud-item col-xl-4 col-12 row d-flex justify-content-end">
+
+          <div class="crud-item col-xl-6 col-12 row d-flex">
 
             <div class="col-xl-6 col-12 d-flex">
 
@@ -89,12 +82,12 @@
         <div class="crud-item col-xl-4 mb-2">
 
 
-          <span class="mx-1"> <small> Página {{ paginationResponse?.page  }} de {{ paginationResponse?.totalPages }} </small> </span>
+          <span class="mx-1"> <small> {{paginationResponse?.totalItems}} Resultados  </small> <small> Página {{ paginationResponse?.page  }} de {{ paginationResponse?.totalPages }} </small> </span>
 
         </div>
 
 
-        <a class="btn-previous-page btn btn-primary pointer" (click)="back()">
+        <a class="btn-previous-page btn btn-primary pointer mx-1" (click)="back()">
             <i class="fas fa-chevron-left"></i>
         </a>
 
@@ -108,7 +101,7 @@
 
         </section> -->
 
-        <a class="btn-next-page btn btn-primary pointer" (click)="next()">
+        <a class="btn-next-page btn btn-primary pointer mx-1" (click)="next()">
            <i class="fas fa-chevron-right"></i>
         </a>
 
