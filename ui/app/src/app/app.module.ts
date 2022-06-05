@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,7 @@ import { ClienteService } from './services/core/api/cliente-service.service';
 import { UsuarioService } from './services/core/api/usuario-service.service';
 import { ProdutoService } from './services/core/api/produto-service.service';
 import { PedidoService } from './services/core/api/pedido-service.service';
+import { ErrorInterceptor } from './infra/interceptors/jtw/error-interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,10 @@ import { PedidoService } from './services/core/api/pedido-service.service';
     provide: HTTP_INTERCEPTORS,
     useClass: JWTInterceptor,
     multi: true
-   },AuthGuard],
+   },  {
+    provide: ErrorHandler,
+    useClass: ErrorInterceptor
+   }, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,22 +2,75 @@
 
     <box-container>
 
-<div class="row">
-
-        <h1>
-
-            Detalhes do pedido: {{ pedido?.idPedido}}
-
-        </h1>
+      <alert *ngIf="!pedido" type="info">
 
 
+          <h1>  Pedido não encontrato ou não existe  </h1>
+
+      </alert>
+
+      <div *ngIf="pedido" class="wrap-pedido container-fluid">
+      <div class="row">
+
+        <div class="col-xl-12">
+
+              <h1>
+
+                  Detalhes do pedido: {{ pedido?.idPedido}}
+
+              </h1>
+
+            </div>
+
+            <div class="row">
+            <div class="col-xl-12">
+
+                <h2> Produtos </h2>
+
+                <table class="table table-stripped">
+
+                  <thead>
+
+                    <tr>
+
+                      <th>
+                        Produto
+                      </th>
+
+                    </tr>
+
+                  </thead>
 
 
-</div>
+                    <tbody>
+
+                  <tr *ngFor="let produto of pedido?.pedidoProdutos">
+
+                        <td>
+                        {{  produto?.produto?.nome }}
+                        </td>
+
+                  </tr>
+
+
+                </tbody>
+                </table>
+
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-xl-12">
+
+
+
+              </div>
+            </div>
+          </div>
+      </div>
 
 </box-container>
 
 
-<alert>
-
-</alert>
