@@ -9,6 +9,7 @@ class ClienteViewModel extends EntityViewModel implements \JsonSerializable {
     public $idCliente;
     public $strNome;
     public mixed $clienteImagem;
+    public mixed $pedidos;
 
     public function jsonSerialize() {
 
@@ -23,7 +24,8 @@ class ClienteViewModel extends EntityViewModel implements \JsonSerializable {
         return [
             'idCliente' => $this->idCliente,
             'strNome' => $this->strNome,
-            'clienteImagem' => $this->clienteImagem
+            'clienteImagem' => $this->clienteImagem,
+            'pedidos' => $this->pedidos
         ];
     }
 }

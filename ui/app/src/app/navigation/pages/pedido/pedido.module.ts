@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AlertModule } from "ngx-bootstrap/alert";
 import { ModalModule } from "ngx-bootstrap/modal";
+import { TabsModule } from "ngx-bootstrap/tabs";
 import { LayoutModule } from "src/app/layout/layout.module";
 import { PathResolverPipesModule } from "src/app/pipes/path-resolver-pipes/path-resolver-pipes.module";
 import { PipesModule } from "src/app/pipes/pipes.module";
@@ -22,7 +23,7 @@ import { PedidoComponent } from "./pedido.component";
   providers: [PedidoService, ProdutoService,],
   declarations: [PedidoCardComponent,PedidoComponent, PedidoItemComponent, PedidoFormComponent],
   exports: [PedidoCardComponent, PedidoFormComponent, PedidoItemComponent, PedidoComponent],
-  imports: [PipesModule, CommonModule, AlertModule, ProdutoModule, GeneralUIModule,
+  imports: [ TabsModule, PipesModule, CommonModule, AlertModule, ProdutoModule, GeneralUIModule,
     LayoutModule,  MaterialModule, ReactiveFormsModule,
     FlexBoxModule, PathResolverPipesModule, ModalModule]
 })

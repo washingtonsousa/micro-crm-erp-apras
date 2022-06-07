@@ -97,7 +97,7 @@ class ViewModelMapping {
 
     static function MapPedido() {
 
-        self::$config->registerMapping(PedidoPaginationAggregatorViewModel::class, PaginationAggregator::class)  ;
+        self::$config->registerMapping(PedidoPaginationAggregatorViewModel::class, PaginationAggregator::class);
         
         self::$config->registerMapping(PaginationAggregator::class, PedidoPaginationAggregatorViewModel::class)
         ->forMember('items',  Operation::mapCollectionTo(PedidoViewModel::class));

@@ -34,6 +34,8 @@ class PedidoController extends AbstractController {
               $requestValue = $this->serializerInterface->deserialize($request->getContent(), PedidoViewModel::class, 'json', [
               ]);
 
+
+
               $result = $this->pedidoAppService->subscribe($requestValue);
               return new JsonResponse($result);
 

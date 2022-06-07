@@ -31,6 +31,18 @@ export class PedidoFormComponent extends UpdateCreateReactiveForm<Pedido>  imple
         super();
       }
 
+      removeProduto(index:any) {
+
+        const indexOf = this.entity.pedidoProdutos.indexOf(index);
+        if (index > -1) {
+          this.entity.pedidoProdutos.splice(indexOf, 1); // 2nd parameter means remove one item only
+        }
+        this.formGroup.patchValue({
+          pedidoProdutos: this.entity.pedidoProdutos
+        });
+
+      }
+
       onChooseProduto($event:any) {
 
         this.entity.pedidoProdutos.push($event);

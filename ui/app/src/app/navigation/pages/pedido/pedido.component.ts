@@ -4,6 +4,7 @@ import { Pedido } from "src/app/business/entities/model/pedido";
 import { PedidoService } from "src/app/services/core/api/pedido-service.service";
 import { CrudPageTemplate } from "../../abstractions/template/crud-page-template";
 import { Router } from "@angular/router";
+import { TabsetComponent } from "ngx-bootstrap/tabs";
 
 @Component({
     selector: "pedido",
@@ -12,7 +13,7 @@ import { Router } from "@angular/router";
 export class PedidoComponent extends CrudPageTemplate<Pedido> {
 
   @ViewChild("modalPedidoUpdate") modalPedidoUpdate!: CleanModalComponent;
-
+  
 
   constructor(public override dataService:  PedidoService,
     public override changeDetector: ChangeDetectorRef, public router:Router){

@@ -8,4 +8,5 @@ export class Pedido {
   pedidoProdutos: PedidoProduto[] = [];
   cliente!: Cliente;
   status!:number;
+  dataCriacao!:any;
 }
