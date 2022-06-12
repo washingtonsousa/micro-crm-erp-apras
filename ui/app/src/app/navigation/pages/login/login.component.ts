@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { ViewEncapsulation } from "@angular/compiler";
-import { Component } from "@angular/core";
-import { Router, RouterOutlet } from "@angular/router";
+import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { TokenResponse } from "src/app/business/entities/response/token-response";
 import { ContextService } from "src/app/services/core/static/context.service";
+import { GlobalEmitters } from "src/app/services/core/static/global-emitters";
 import { Alert } from "src/app/ui-components/flex-box/abstractions/interfaces/alert";
 
 @Component({
@@ -11,13 +11,23 @@ import { Alert } from "src/app/ui-components/flex-box/abstractions/interfaces/al
   templateUrl: "login.component.html",
   styleUrls: ["./login.scss"]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   alerts: Alert[] = [];
-
+  @Input("show") public show:boolean = true;
 
   constructor(private route: Router) {
+  }
+  ngOnInit(): void {
+    GlobalEmitters.get("login-window").subscribe({
 
+      next: (data:boolean) => {
+
+            this.show = data;
+
+      }
+
+    });
   }
 
 

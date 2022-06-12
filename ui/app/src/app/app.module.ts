@@ -21,6 +21,7 @@ import { UsuarioService } from './services/core/api/usuario-service.service';
 import { ProdutoService } from './services/core/api/produto-service.service';
 import { PedidoService } from './services/core/api/pedido-service.service';
 import { ErrorInterceptor } from './infra/interceptors/jtw/error-interceptor';
+import { LoginModule } from './navigation/pages/login/login.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ErrorInterceptor } from './infra/interceptors/jtw/error-interceptor';
     MaterialModule,
     GeneralUIModule,
     TooltipModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    LoginModule
   ],
   providers: [
     {

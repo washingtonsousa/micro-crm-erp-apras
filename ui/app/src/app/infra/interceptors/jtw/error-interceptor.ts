@@ -3,6 +3,8 @@ import { HttpHandler, HttpRequest, HttpInterceptor, HttpEvent, HttpResponse, Htt
 import { ErrorHandler, Injectable } from '@angular/core';
 import { ContextService } from 'src/app/services/core/static/context.service';
 import { Router } from '@angular/router';
+import { LoadingIconService } from 'src/app/services/core/static/loading-icon.service';
+import { GlobalEmitters } from 'src/app/services/core/static/global-emitters';
 
 @Injectable()
 export class ErrorInterceptor implements ErrorHandler {
@@ -19,11 +21,11 @@ export class ErrorInterceptor implements ErrorHandler {
         if (error instanceof HttpErrorResponse)
         {
 
-        //  console.log(event.status);
               if(error.status == 401) {
                // console.log(event.status);
-                this.router.navigate(['/login']);
-                window.location.reload();
+               // this.router.navigate(['/login']);                
+                GlobalEmitters.get("login-window").emit(true);
+                LoadingIconService.hide();
 
               }
           }
