@@ -22,8 +22,7 @@ export class ErrorInterceptor implements ErrorHandler {
         {
 
               if(error.status == 401) {
-               // console.log(event.status);
-               // this.router.navigate(['/login']);                
+
                 GlobalEmitters.get("login-window").emit(true);
                 LoadingIconService.hide();
 

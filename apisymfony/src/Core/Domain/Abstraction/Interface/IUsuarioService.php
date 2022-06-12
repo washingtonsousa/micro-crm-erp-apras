@@ -15,4 +15,5 @@ interface IUsuarioService {
             public function getUsers(GetUsuarioPaginatedEntityQuery $paginatedQuery) : PaginationAggregator;
             public function getCurrentLoggedInUser() : ?Usuario;
             public function remove($id) : bool;
+            public function changeCurrentLoggedInUserSenha($oldPassword, $newPassword) : ?Usuario;
 }

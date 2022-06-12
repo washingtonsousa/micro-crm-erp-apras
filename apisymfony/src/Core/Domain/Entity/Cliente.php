@@ -28,6 +28,12 @@ class Cliente
      */
     public $strNome;
 
+      /**
+     * @var string
+     *
+     * @ORM\Column(name="cod_cliente", type="string", length=255, nullable=false)
+     */
+    public $codigoCliente = '0';
 
     /**
     * 

@@ -60,6 +60,13 @@ services:
         arguments:
             - '@App\Core\Domain\Abstraction\Interface\IUsuarioRepository'
         public: true
+
+    app.listener.authentication_success_response:
+        class: App\Core\Domain\Event\AuthenticationSuccessListener
+        arguments:
+            - '@App\Core\Domain\Abstraction\Interface\IUsuarioRepository'
+        tags:
+          - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
         
     App\Core\Shared\Handler\HandlerAggregator: '@handler_aggregator'
     App\Core\Shared\Event\DomainNotificationContainer: '@domain_notification_container'

@@ -4,6 +4,7 @@ namespace App\Core\Application\Service;
 use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
+use App\Core\Application\ViewModel\Request\UsuarioChangeSenhaRequestViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Domain\Abstraction\Interface\IUsuarioService;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
@@ -69,21 +70,16 @@ class UsuarioAppService implements IUsuarioAppService {
 
     }
 
-    public function partialUpdate(UsuarioViewModel $userViewModel) : UsuarioViewModel {
+    public function partialUpdate(UsuarioChangeSenhaRequestViewModel $changeSenhaData) : ?UsuarioViewModel {
 
-        $usuario = $this->mapper->map($userViewModel, Usuario::class);
+        $usuario = $this->userService->changeCurrentLoggedInUserSenha($changeSenhaData->oldPassword, $changeSenhaData->password);
 
-        //$result =  $this->userService->update($usuario);
+        if($usuario == null)
+        return $usuario;
 
-        $result = null;
+        $userViewModel = $this->mapper->map($usuario, UsuarioViewModel::class);
 
-        if($result == null)
-            return null;
-
-        $userViewModel = $this->mapper->map($result, UsuarioViewModel::class);
-
-        return    $userViewModel ;
-
+        return  $userViewModel;
 
     }
 

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Core\Application\Abstraction\Interface\IUsuarioAppService;
+use App\Core\Application\ViewModel\Request\UsuarioChangeSenhaRequestViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,11 +55,13 @@ class UsuarioController extends AbstractController {
 
         public function patch(Request $request)
         {
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
+              $requestValue = $this->serializerInterface->deserialize($request->getContent(), UsuarioChangeSenhaRequestViewModel::class, 'json', [
                 DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
               ]);
+
                $result = $this->usuarioAppService->partialUpdate($requestValue);
-               return new JsonResponse();
+
+               return new JsonResponse($result, $result == null ? 401 : 204);
 
         }
 

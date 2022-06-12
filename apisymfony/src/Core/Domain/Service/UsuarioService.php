@@ -159,5 +159,30 @@ class UsuarioService implements IUsuarioService {
         }
 
 
+        public function changeCurrentLoggedInUserSenha($oldPassword, $newPassword) : ?Usuario {
+                
+
+                $user = $this->getCurrentLoggedInUser();
+
+                $valid = $this->encoder->isPasswordValid($user, $oldPassword);
+
+                if(!$valid)
+                return null;
+
+                $user->setSenha($this->encoder->hashPassword($user, $newPassword));
+                $user->setDataAtualizacao(new DateTime());
+
+                $command = new PersistCommand($user, $this->unityOfWork);
+
+                $result = $command->Execute();
+
+                if($result->isSuccess())
+                        return $result->getEntity();
+
+                return null;
+
+        }
+
+
 
 }

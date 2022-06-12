@@ -3,7 +3,7 @@ import { GlobalEmitters } from "./global-emitters";
 
 export class LoadingIconService {
 
-      public static show(message:string = "") {
+      public static show(message:string = "Aguarde...") {
             GlobalEmitters.get("loading-icon").emit(new GlobalIconConfigModel(true,message));
       }
 

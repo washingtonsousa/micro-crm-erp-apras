@@ -34,7 +34,11 @@ export class LoginComponent implements OnInit {
   onLogin(tokenResponse:TokenResponse) {
 
               ContextService.HandleTokenResponse(tokenResponse);
+              GlobalEmitters.get("login-window").emit(false);
+              console.log("onLoginNavigate");
               this.route.navigate(["/"]);
+
+
   }
 
   onError(errorResponse:HttpErrorResponse) {

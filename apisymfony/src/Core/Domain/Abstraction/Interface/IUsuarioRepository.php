@@ -16,5 +16,4 @@ public function getById($id) : ?Usuario;
  */
 public function checkIfExists(string $documento, string $email);
 
-
 }

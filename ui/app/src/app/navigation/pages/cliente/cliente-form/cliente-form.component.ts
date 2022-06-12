@@ -74,7 +74,8 @@ export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> impl
 
     this.formGroup = this.formBuilder.group({
       idCliente:[this.entity?.idCliente],
-      strNome: [this.entity?.strNome, [Validators.required]]
+      strNome: [this.entity?.strNome, [Validators.required]],
+      codigoCliente: [this.entity?.codigoCliente, [Validators.required]]
 
     });
 

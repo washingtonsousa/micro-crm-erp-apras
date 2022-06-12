@@ -8,11 +8,17 @@ export class ContextService {
 
         public static HandleTokenResponse(tokenResponse: TokenResponse) {
             localStorage.setItem("token", tokenResponse.token);
-        }
+            localStorage.setItem("currentLoggedInUserName", tokenResponse.user.nome);
+
+          }
 
         public static GetContext() {
           let  AuthToken =  (localStorage.getItem("token") == undefined || localStorage.getItem("token") == null) ? "" : localStorage.getItem("token");
           return new Context(AuthToken == null ? "" : AuthToken);
+        }
+
+        public static getCurrentLoggedInUserName() : string | undefined | null {
+          return localStorage.getItem("currentLoggedInUserName");
         }
 
         static get isLoggedIn(): boolean {

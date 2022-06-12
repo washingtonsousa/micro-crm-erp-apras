@@ -47,6 +47,7 @@ class UsuarioRepository  extends ServiceEntityRepository implements IUsuarioRepo
 
             }
 
+
             public function loadUserByIdentifier(string $identifier): ?UserInterface
             {
              

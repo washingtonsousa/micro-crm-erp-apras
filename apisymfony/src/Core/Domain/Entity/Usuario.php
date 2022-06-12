@@ -292,4 +292,14 @@ class Usuario extends SerializableEntity implements  UserInterface, PasswordAuth
 
         return $this;
     }
+
+    /**
+     * Get the value of nome
+     *
+     * @return  string
+     */ 
+    public function getNome()
+    {
+        return $this->nome;
+    }
 }

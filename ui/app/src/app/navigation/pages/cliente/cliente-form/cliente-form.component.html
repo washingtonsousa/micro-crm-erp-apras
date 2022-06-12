@@ -12,6 +12,18 @@
 
   </alert>
 
+  <label class="mb-2 required"> Código: </label>
+
+
+  <input type="text" class="form-control mb-1" formControlName="codigoCliente" />
+
+  <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['codigoCliente'].errors?.required">
+
+    Insira o codigo do Cliente, é obrigatório
+
+  </alert>
+
+
   <label class="mb-2"> Imagem/Ícone do cliente: </label>
 
   <image-item [imageSrc]="imageSrc" (onValueChanges)="file = $event"> </image-item>

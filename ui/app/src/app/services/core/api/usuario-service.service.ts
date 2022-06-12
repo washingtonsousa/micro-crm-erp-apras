@@ -53,6 +53,8 @@ export class UsuarioService implements IPaginatedCrudService<Usuario> {
         return this.http.delete<DefaultDataResponse<boolean>>(environment.apiUri + "/api/usuario/" + id);
       }
 
-
+      public Patch(changeSenhaRequestData: any) : Observable<DefaultDataResponse<Usuario>> {
+        return this.http.patch<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario/",changeSenhaRequestData);
+      }
 
 }

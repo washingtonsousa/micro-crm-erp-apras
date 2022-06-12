@@ -23,7 +23,7 @@ export class PedidoItemComponent implements OnInit {
             }
 
             @ViewChild('staticTabs', { static: false }) staticTabs?: TabsetComponent;
- 
+
       selectTab(tabId: number) {
         if (this.staticTabs?.tabs[tabId]) {
           this.staticTabs.tabs[tabId].active = true;
@@ -47,7 +47,9 @@ export class PedidoItemComponent implements OnInit {
 
                     this.pedido = value.data;
 
-                  }
+                  },
+
+                  error: (err) => {  LoadingIconService.hide(); console.log(err); }
 
                 });
 

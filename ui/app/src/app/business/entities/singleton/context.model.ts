@@ -11,6 +11,8 @@ export class Context {
        this.token = token;
      }
 
+
+
      public jwtData(): JWTData | null {
 
       try {

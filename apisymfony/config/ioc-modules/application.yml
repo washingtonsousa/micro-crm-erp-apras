@@ -11,3 +11,4 @@ services:
     App\Core\Application\Abstraction\Interface\IProdutoAppService: '@App\Core\Application\Service\ProdutoAppService'
     App\Core\Application\Abstraction\Interface\IProdutoImagemAppService: '@App\Core\Application\Service\ProdutoImagemAppService'
     App\Core\Application\Abstraction\Interface\IPedidoAppService: '@App\Core\Application\Service\PedidoAppService'
+    App\Core\Application\Abstraction\Interface\IFichaProducaoAppService: '@App\Core\Application\Service\FichaProducaoAppService'
