@@ -58,6 +58,10 @@ class PedidoProduto
      */
     private $pedido;
 
+    /**
+     *@ORM\OneToMany(targetEntity="FichaProducao", mappedBy="pedidoProduto", cascade={"all"})
+     */
+    private $fichasproducao;
 
 
     /**

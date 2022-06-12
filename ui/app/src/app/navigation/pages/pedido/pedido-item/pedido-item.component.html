@@ -95,9 +95,9 @@
             <tbody>
 
 
-            <tr *ngFor="let produto of pedido?.pedidoProdutos">
+              <ng-template ngFor let-produto [ngForOf]="pedido?.pedidoProdutos">
 
-  
+              <tr>
 
                   <td>
                    {{  produto?.produto?.nome }} 
@@ -112,9 +112,33 @@
                    </td>
 
                    <td>
+
                     <a class="pointer btn btn-sm btn-outline-success"> <i class="fas fa-plus"></i> Ficha de produção  </a>
+
                    </td>
-                   <tr>
+
+                   <table>
+
+                    <thead>
+
+                    </thead>
+
+                    <tbody>
+
+                      <tr >
+
+                        
+
+                      </tr>
+
+                    </tbody>
+
+                   </table>
+
+                  </tr>
+
+                   </ng-template>
+                   
                 </tbody>
               </table>
                  

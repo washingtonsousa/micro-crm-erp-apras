@@ -53,8 +53,6 @@ class PedidoViewModel extends EntityViewModel   implements \JsonSerializable  {
           'status' => $this->status,
           'cliente' => $this->cliente,
           'dataCriacao' => $this->dataCriacao
-
-
       ];
   }
 

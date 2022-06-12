@@ -47,7 +47,7 @@ class FichaProducao
      *
      * @ORM\Column(name="dt_corte_separacao", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $dtCorteSeparacao = 'CURRENT_TIMESTAMP';
+    private $dtCorteSeparacao;
 
     /**
      * @var int|null
@@ -68,7 +68,7 @@ class FichaProducao
      *
      * @ORM\Column(name="dt_bordado_estampa", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $dtBordadoEstampa = 'CURRENT_TIMESTAMP';
+    private $dtBordadoEstampa;
 
     /**
      * @var int|null
@@ -124,7 +124,7 @@ class FichaProducao
      *
      * @ORM\Column(name="dt_cadastro", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $dtCadastro = 'CURRENT_TIMESTAMP';
+    private $dtCadastro;
 
     /**
      * @var \PedidoProduto
@@ -134,7 +134,7 @@ class FichaProducao
      *   @ORM\JoinColumn(name="id_pedido_produto", referencedColumnName="id_pedido_produto")
      * })
      */
-    private $idPedidoProduto;
+    private $pedidoProduto;
 
     /**
      * @var \Usuario

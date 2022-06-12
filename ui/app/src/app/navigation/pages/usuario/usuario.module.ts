@@ -10,14 +10,15 @@ import { FlexBoxModule } from "src/app/ui-components/flex-box/flex-box.module";
 import { GeneralUIModule } from "src/app/ui-components/general/generalUI.module";
 import { MaterialModule } from "src/app/ui-components/material/material.module";
 import { UsuarioCardComponent } from "./usuario-card/usuario-card.component";
+import { UsuarioChangeSenhaFormComponent } from "../../../layout/user-menu/usuario-change-senha-form/usuario-change-senha-form.component";
 import { UsuarioFormComponent } from "./usuario-form/usuario-form.component";
 import { UsuarioComponent } from "./usuario.component";
 
 
 @NgModule({
   providers: [UsuarioService],
-  declarations: [UsuarioCardComponent, UsuarioFormComponent, UsuarioComponent],
-  exports: [UsuarioCardComponent, UsuarioComponent, UsuarioFormComponent],
+  declarations: [UsuarioCardComponent, UsuarioFormComponent,  UsuarioComponent],
+  exports: [UsuarioCardComponent, UsuarioComponent,  UsuarioFormComponent],
   imports: [CommonModule, HttpClientModule, ReactiveFormsModule, MaterialModule, GeneralUIModule,
     LayoutModule, FlexBoxModule, AlertModule, ModalModule]
 })

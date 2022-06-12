@@ -1,0 +1,57 @@
+<form [formGroup]="formGroup"  (ngSubmit)="Submit()">
+
+    <label class="mb-2 required"> Senha Antiga: </label>
+  
+    <input type="text" class="form-control mb-1" formControlName="oldPassword" />
+  
+    <alert type="danger" *ngIf="formGroup.get('oldPassword')?.touched && formGroup.controls['oldPassword'].errors?.required">
+  
+      Insira a senha antiga, é obrigatório
+  
+    </alert>
+  
+  
+    <section>
+  
+    <label class="mb-2 required"> Senha nova: </label>
+  
+    <input  type="password" class="form-control mb-1" formControlName="password"  />
+  
+    <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['password'].errors?.required">
+  
+      Insira a senha, é obrigatório
+  
+    </alert>
+  
+    <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['password'].errors?.minlength">
+  
+      A senha deve ter no mínimo 8 caracteres
+  
+    </alert>
+  
+    <label class="mb-2 required"> Repita a Senha nova: </label>
+  
+    <input   type="text" type="password" (change)="onSenhaValueChanges($event)" class="form-control mb-1" />
+  
+    <alert type="danger" *ngIf="formGroup.touched && (formGroup.controls['password'].value != passwordConferencia)">
+  
+        senhas não conferem
+  
+    </alert>
+  
+  </section>
+ 
+  
+    <p class="mt-2"> <small>
+  
+      Todos os itens marcados com "*" são obrigatórios.
+  
+    </small></p>
+  
+    <button [disabled]="!formGroup.valid" class="mt-2 w-100 btn btn-primary "> <i class="fas fa-save"></i>Atualizar  </button>
+  
+  
+  
+  
+  </form>
+  
