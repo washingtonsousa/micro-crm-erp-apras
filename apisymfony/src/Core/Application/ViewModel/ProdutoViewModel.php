@@ -14,6 +14,7 @@ class ProdutoViewModel extends EntityViewModel  implements \JsonSerializable {
     public $descricao;
     public $dtDataCadastro;
     public $produtoImagem;
+    public $codigoCliente;
 
     public function jsonSerialize() {
 
@@ -26,7 +27,8 @@ class ProdutoViewModel extends EntityViewModel  implements \JsonSerializable {
             'tamanho' => $this->tamanho,
             'descricao' => $this->descricao,
             'dtDataCadastro' => $this->dtDataCadastro,
-            'produtoImagem' => $this->produtoImagem
+            'produtoImagem' => $this->produtoImagem,
+            'codigoCliente' => $this->codigoCliente
         ];
     }
 

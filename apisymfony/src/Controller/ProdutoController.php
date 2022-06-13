@@ -56,7 +56,7 @@ class ProdutoController extends AbstractController {
 
         public function patch(Request $request)
         {
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
+              $requestValue = $this->serializerInterface->deserialize($request->getContent(), ProdutoViewModel::class, 'json', [
                 DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
               ]);
               //  $result = $this->produtoAppService->partialUpdate($requestValue);
@@ -67,9 +67,9 @@ class ProdutoController extends AbstractController {
         public function put(Request $request)
         {
 
-            $requestValue = $this->serializerInterface->deserialize($request->getContent(), ClienteViewModel::class, 'json', [
+            $requestValue = $this->serializerInterface->deserialize($request->getContent(), ProdutoViewModel::class, 'json', [
             ]);
-
+     
             $id = $request->attributes->get('id');
 
             $result = $this->produtoAppService->update($requestValue, $id);

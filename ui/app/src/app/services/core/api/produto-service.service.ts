@@ -52,7 +52,7 @@ export class ProdutoService implements IPaginatedCrudService<Produto> {
       }
 
       public Update( Produto: Produto, aditionalParams:any[] = [false]) : Observable<DefaultDataResponse<Produto>> {
-        return this.http.put<DefaultDataResponse<Produto>>(environment.apiUri + "/api/produto/" + Produto.idProduto, Produto,  { params: { changeSenha: aditionalParams[0] }});
+        return this.http.put<DefaultDataResponse<Produto>>(environment.apiUri + "/api/produto/" + Produto.idProduto, Produto);
       }
 
       public Remove(id: number ) : Observable<DefaultDataResponse<boolean>> {

@@ -25,10 +25,10 @@ final class Version20220518123434 extends AbstractMigration
         $this->addSql('ALTER TABLE log CHANGE id_usuario id_usuario INT DEFAULT NULL');
         $this->addSql('ALTER TABLE pacote_estoque_cliente CHANGE id_ficha_producao id_ficha_producao INT DEFAULT NULL, CHANGE id_usuario_envio id_usuario_envio INT DEFAULT NULL');
         $this->addSql('ALTER TABLE pedido CHANGE id_cliente id_cliente INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE pedido_produto RENAME INDEX id_produto TO IDX_3ED5C1B98231E0A7');
-        $this->addSql('ALTER TABLE pedido_produto RENAME INDEX id_pedido TO IDX_3ED5C1B9E2DBA323');
-        $this->addSql('ALTER TABLE produto ADD codigo_produto VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE produto_imagem CHANGE id_imagem id_imagem INT DEFAULT NULL, CHANGE idproduto idproduto INT DEFAULT NULL');
+        // $this->addSql('ALTER TABLE pedido_produto RENAME INDEX id_produto TO IDX_3ED5C1B98231E0A7');
+        // $this->addSql('ALTER TABLE pedido_produto RENAME INDEX id_pedido TO IDX_3ED5C1B9E2DBA323');
+        // $this->addSql('ALTER TABLE produto ADD codigo_produto VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE produto_imagem CHANGE id_imagem id_imagem INT DEFAULT NULL, CHANGE id_produto id_produto INT DEFAULT NULL');
         $this->addSql('ALTER TABLE usuario CHANGE data_atualizacao data_atualizacao DATETIME DEFAULT CURRENT_TIMESTAMP');
     }
 

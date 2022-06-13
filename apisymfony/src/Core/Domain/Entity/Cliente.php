@@ -56,8 +56,14 @@ class Cliente
         return $this->idCliente;
     }
 
+    public function getCodigoCliente()
+    {
+        return $this->codigoCliente;
+    }
+
     public function fullUpdate(Cliente $cliente) {
         $this->strNome = $cliente->getNome();
+        $this->codigoCliente = $cliente->getCodigoCliente();
     }
 
     /**

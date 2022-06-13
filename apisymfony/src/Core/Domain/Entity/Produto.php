@@ -70,7 +70,12 @@ class Produto
      */
     private $produtoImagem;
 
-
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="cod_cliente", type="string", nullable=true)
+     */
+    private $codigoCliente;
 
     /**
      * Get the value of idProduto
@@ -80,5 +85,12 @@ class Produto
     public function getIdProduto()
     {
         return $this->idProduto;
+    }
+    
+    public function fullUpdate(Produto $produto) {
+        $this->codigoProduto = $produto->codigoProduto;
+        $this->nome = $produto->nome;
+        $this->tamanho = $produto->tamanho;
+        $this->cor = $produto->cor;
     }
 }

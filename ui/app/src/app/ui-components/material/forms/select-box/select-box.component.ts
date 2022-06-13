@@ -8,7 +8,7 @@ import { SelectBoxItem } from "./select-box-item.model";
 
       <div *ngIf="!disabled" class=" select-box-area w-100 d-flex flex-column flex-align-center justify-content-center">
 
-      <input autocomplete="off" (click)="onInputClick()" [(ngModel)]="filteredKey" (input)="onChangeInput($event)" type="text" class="form-control" name="selector-box" />
+      <input autocomplete="off" (click)="onInputClick()" (focus)="onInputClick()" [(ngModel)]="filteredKey" (input)="onChangeInput($event)" type="text" class="form-control" name="selector-box" />
 
       <div *ngIf="filteredList.length && showList" class="suspended-drop-down floating-box">
 
@@ -57,8 +57,6 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
   constructor(private changeDetector: ChangeDetectorRef, private elRef: ElementRef) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-
-    console.log(changes);
   }
 
 
@@ -131,8 +129,6 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
     var filerStr =   this.filteredValue?.toString();
 
     this.filteredList = this.list.filter(s => {
-
-      console.log(s);
 
       return s.value.toString().toLowerCase().includes(filerStr?.toLowerCase())
 

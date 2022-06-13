@@ -12,6 +12,10 @@
 
   </alert>
 
+  <label class="mb-2 required"> Código do cliente: </label>
+
+  <select-box formControlName="codigoCliente" [list]="clienteOptions"></select-box>
+
   <label class="mb-2 required"> Código do produto: </label>
 
 
@@ -23,9 +27,15 @@
 
   </alert>
 
+  <alert type="danger" *ngIf="formGroup.touched && (formGroup.controls['codigoProduto'].errors?.minlength || formGroup.controls['codigoProduto'].errors?.maxlength)">
+
+    Codigo do Produto deve ser único e ter apenas 4 caractéres
+
+  </alert>
+
   <label class="mb-2"> Imagem do produto: </label>
 
-  <image-item [imageSrc]="imageSrc" (onValueChanges)="file = $event"> </image-item>
+  <image-item [imageSrc]="imageSrc" (onValueChanges)="onFileChanges($event)"> </image-item>
 
   <label class="mb-2 required"> Cor: </label>
 
@@ -34,7 +44,7 @@
 
   <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['cor'].errors?.required">
 
-    Insira o código, é obrigatório
+    Insira a cor, é obrigatório
 
   </alert>
 

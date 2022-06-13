@@ -2,7 +2,7 @@
 
     <label class="mb-2 required"> Senha Antiga: </label>
   
-    <input type="text" class="form-control mb-1" formControlName="oldPassword" />
+    <input autocomplete="off" type="password" class="form-control mb-1" formControlName="oldPassword" />
   
     <alert type="danger" *ngIf="formGroup.get('oldPassword')?.touched && formGroup.controls['oldPassword'].errors?.required">
   
@@ -15,7 +15,7 @@
   
     <label class="mb-2 required"> Senha nova: </label>
   
-    <input  type="password" class="form-control mb-1" formControlName="password"  />
+    <input autocomplete="off" type="password" class="form-control mb-1" formControlName="password"  />
   
     <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['password'].errors?.required">
   
@@ -31,11 +31,11 @@
   
     <label class="mb-2 required"> Repita a Senha nova: </label>
   
-    <input   type="text" type="password" (change)="onSenhaValueChanges($event)" class="form-control mb-1" />
+    <input  autocomplete="off" type="password" (change)="onSenhaValueChanges($event)" class="form-control mb-1" />
   
     <alert type="danger" *ngIf="formGroup.touched && (formGroup.controls['password'].value != passwordConferencia)">
   
-        senhas não conferem
+        Senhas não conferem
   
     </alert>
   

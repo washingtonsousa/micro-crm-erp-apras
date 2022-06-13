@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { ContextService } from "src/app/services/core/static/context.service";
 
 
 
@@ -7,7 +8,12 @@ import { Component } from "@angular/core";
     templateUrl: "home.component.html",
     styleUrls: ['home.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+    ngOnInit(): void {
+        this.nomeUsuario =  ContextService.getCurrentLoggedInUserName();
+    }
+
+    nomeUsuario:string |undefined | null= "";
 
 
 

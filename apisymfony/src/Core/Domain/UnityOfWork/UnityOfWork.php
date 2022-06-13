@@ -3,6 +3,7 @@ namespace App\Core\Domain\UnityOfWork;
 
 use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
 use App\Core\Domain\Entity\NonDatabaseEntity\StatementResult;
+use App\Core\Shared\Resolver\DependencyResolver;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Exception;
@@ -21,7 +22,7 @@ class UnityOfWork implements IUnityOfWork {
 
     public function Commit() : StatementResult {
         $time_pre = microtime(true);
-
+        $logger =  DependencyResolver::make('app.logger');
         try {
 
             
@@ -31,8 +32,12 @@ class UnityOfWork implements IUnityOfWork {
             $time_post = microtime(true);
 
             $exec_time = $time_post - $time_pre;
-           
-            return new StatementResult(true, $exec_time);
+            $result = new StatementResult(true, $exec_time);
+
+            $logger->info("{ CommitLog : ".json_encode($result)."}");
+    
+
+            return $result;
 
         } 
         
@@ -43,6 +48,7 @@ class UnityOfWork implements IUnityOfWork {
             $exec_time = $time_post - $time_pre;
 
             $result = new StatementResult(true, $exec_time, $ex);
+                $logger->info("{ CommitLog : ".json_encode($result)."}");
 
             return $result;
         }
@@ -52,7 +58,21 @@ class UnityOfWork implements IUnityOfWork {
 
     public function Remove(mixed $entity) {
 
-        return $this->manager->remove($entity);
+        $logger =  DependencyResolver::make('app.logger');
+
+        try   {
+            $logger->info("{ RemoveUnityOfWorkInfo : 'success'");
+
+            return $this->manager->remove($entity);
+        }
+
+        catch(Exception $ex) {
+
+            $logger->info("{ RemoveUnityOfWorkInfo : ".json_encode($ex)."}");
+
+            return null;
+        }
+       
     }
       
     public function Persist(mixed $entity) {

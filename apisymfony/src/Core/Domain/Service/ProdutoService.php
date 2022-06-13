@@ -62,8 +62,7 @@ class ProdutoService implements IProdutoService {
 
                 $produtoForUpdate = $this->getById($id); 
                 
-                //$produtoForUpdate->fullUpdate($produto);
-
+                $produtoForUpdate->fullUpdate($produto);
 
                 $command = new PersistCommand($produtoForUpdate, $this->unityOfWork);
 

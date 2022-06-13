@@ -15,6 +15,10 @@ import { SelectBoxItem } from "src/app/ui-components/material/forms/select-box/s
 import { forkJoin, Observable, tap } from "rxjs";
 import { tamanhosSelectBoxItems } from "src/app/business/helpers/data/produto-data.helper";
 import { ProdutoExtension } from "src/app/business/helpers/data/produto-extension";
+import { ClienteService } from "src/app/services/core/api/cliente-service.service";
+import { PaginationDataRequest } from "src/app/business/entities/request/pagination-data-request";
+import { Cliente } from "src/app/business/entities/model/cliente";
+import { PaginationReponse } from "src/app/business/entities/response/pagination-response";
 
 
 
@@ -31,6 +35,7 @@ export class ProdutoFormComponent extends UpdateCreateReactiveForm<Produto> impl
   tamanhos: SelectBoxItem[] = tamanhosSelectBoxItems;
   currentCountPosition: number = 0;
   multipleSubscribeProgress:number = 0;
+  clienteOptions: SelectBoxItem[] = [];
 
   get progressPercentageMessage() : string  {
 
@@ -38,7 +43,7 @@ export class ProdutoFormComponent extends UpdateCreateReactiveForm<Produto> impl
   }
 
   constructor(public override formBuilder: FormBuilder,
-    public override dataService: ProdutoService)
+    public override dataService: ProdutoService, public  clienteService: ClienteService)
   {
     super();
   }
@@ -88,6 +93,12 @@ createObservablesFromProdutoSubscription(results: any[]) {
 
   return this.createForkWithProgressMessage(observablesArray, "Enviando fotos dos produtos... ");
 
+  
+}
+
+onFileChanges(file: File) {
+  console.log(file);
+  this.file = file;
 }
 
 onNextMultipleUpload() {
@@ -101,7 +112,7 @@ onNextMultipleUpload() {
 onNextSubmitList(results: any) {
 
   this.currentCountPosition = 0;
-
+  console.log(this.file);
   if(this.file == undefined) {
 
     LoadingIconService.hide();
@@ -198,9 +209,10 @@ onNextSubmitList(results: any) {
 
       idProduto: [this.entity?.idProduto],
       nome: [this.entity?.nome, [Validators.required]],
-      codigoProduto: [this.entity?.codigoProduto, [Validators.required]],
+      codigoProduto: [this.entity?.codigoProduto, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       tamanho:[this.entity?.tamanho,  [Validators.required]],
       cor: [this.entity?.cor, [Validators.required]],
+      codigoCliente: [this.entity?.codigoCliente, [Validators.required]]
 
     });
 
@@ -208,6 +220,18 @@ onNextSubmitList(results: any) {
 
   override ngOnInit(): void {
    super.ngOnInit();
+
+   this.clienteService.Get(new PaginationDataRequest<Cliente>(1,-1)).subscribe({
+
+          next: (data:DefaultDataResponse<PaginationReponse<Cliente>>) => {
+
+            for(let cliente of data.data.items) {
+              this.clienteOptions.push(new SelectBoxItem(cliente.strNome, cliente.codigoCliente))
+            }
+
+          }
+
+   })
   }
 
   override ngOnChanges() {

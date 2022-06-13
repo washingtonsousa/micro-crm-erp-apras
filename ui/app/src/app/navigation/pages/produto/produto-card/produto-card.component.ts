@@ -1,11 +1,12 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from "@angular/core";
 import { Produto } from "src/app/business/entities/model/produto";
 
 @Component({
     selector: "produto-card",
     templateUrl: "produto-card.component.html"
 })
-export class ProdutoCardComponent {
+export class ProdutoCardComponent   {
+
      @Input("produto")   produto!: Produto;
      @Input("editMode")   editMode: boolean = true;
 

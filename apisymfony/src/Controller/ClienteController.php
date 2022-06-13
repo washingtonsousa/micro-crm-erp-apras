@@ -58,15 +58,6 @@ class ClienteController extends AbstractController {
 
         }
 
-        public function patch(Request $request)
-        {
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
-                DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
-              ]);
-            //    $result = $this->clienteAppService->partialUpdate($requestValue);
-               return new JsonResponse();
-
-        }
 
         public function put(Request $request)
         {

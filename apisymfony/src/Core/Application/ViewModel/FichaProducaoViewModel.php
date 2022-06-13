@@ -5,7 +5,6 @@ use App\Core\Application\Abstraction\ViewModel\EntityViewModel;
 use DateTime;
 
 class FichaProducaoViewModel extends EntityViewModel   implements \JsonSerializable  {
-
  
     public $idFichaProducao;
 

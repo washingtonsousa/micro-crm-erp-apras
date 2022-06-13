@@ -9,8 +9,11 @@ export class Produto {
   codigoProduto!:string;
   tamanho!: string;
   cor!: string;
+  codigoCliente!: string;
 
-
+  get ean() : string {
+    return this.codigoCliente + this.codigoProduto + this.tamanho;
+  }
 
 
 }

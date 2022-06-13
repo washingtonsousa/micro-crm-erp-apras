@@ -27,7 +27,6 @@ export class GlobalLoadingIconComponent implements OnInit{
 
     LoadingIconService.listen().subscribe({
       next: (data: GlobalIconConfigModel) => {
-
             this.show = data.show;
             this.message = data.message
 

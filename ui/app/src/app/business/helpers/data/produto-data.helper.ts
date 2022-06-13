@@ -1,15 +1,10 @@
 export var tamanhosSelectBoxItems =  [
-  { key: 'PP', value:'PP' },
-  { key: 'P', value:'P' },
-  { key: 'M', value:'M' },
-  { key: 'G', value:'G' },
-  { key: 'XG', value:'XG' },
-  { key: 'XGG', value:'XGG' },
-  { key: '0', value:'0' },
-  { key: '2', value:'2' },
-  { key: '4', value:'4' },
-  { key: '6', value:'6' },
-  { key: '8', value:'8' },
+  { key: 'Vazio', value:'' },
+  { key: '00', value:'00' },
+  { key: '02', value:'02' },
+  { key: '04', value:'04' },
+  { key: '06', value:'06' },
+  { key: '08', value:'08' },
   { key: '10', value:'10' },
   { key: '12', value:'12' },
   { key: '14', value:'14' },
@@ -22,9 +17,9 @@ export var tamanhosSelectBoxItems =  [
   { key: '41', value:'41' },
   { key: '42', value:'42' },
   { key: '43', value:'43' },
-  { key: '44', value:'44' }
-  // { key: '46', value:'46' },
-  // { key: '48', value:'48' },
-  // { key: '50', value:'50' }
+  { key: '44', value:'44' },
+  { key: '46', value:'46' },
+  { key: '48', value:'48' },
+  { key: '50', value:'50' }
 
 ];
