@@ -41,7 +41,7 @@ export class UsuarioService implements IPaginatedCrudService<Usuario> {
       }
 
       public Subscribe( usuario: Usuario) : Observable<DefaultDataResponse<Usuario>> {
-        return this.http.post<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario", usuario);
+        return this.http.post<DefaultDataResponse<Usuario>>(environment.apiUri + "/api/usuario/", usuario);
       }
 
 
