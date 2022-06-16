@@ -11,6 +11,7 @@ import { FlexBoxModule } from "src/app/ui-components/flex-box/flex-box.module";
 import { GeneralUIModule } from "src/app/ui-components/general/generalUI.module";
 import { MaterialModule } from "src/app/ui-components/material/material.module";
 import { FichaProducaoComponent } from "./ficha-producao.component";
+import { FichaProducaoFormComponent } from "./form/ficha-producao-form.component";
 
 
 
@@ -18,8 +19,8 @@ import { FichaProducaoComponent } from "./ficha-producao.component";
 
 @NgModule({
     providers: [],
-    declarations: [FichaProducaoComponent],
-    exports: [FichaProducaoComponent],
+    declarations: [FichaProducaoComponent, FichaProducaoFormComponent],
+    exports: [FichaProducaoComponent, FichaProducaoFormComponent],
     imports: [ TabsModule, PipesModule, CommonModule, AlertModule,  GeneralUIModule,
       LayoutModule,  MaterialModule, ReactiveFormsModule,
       FlexBoxModule, PathResolverPipesModule, ModalModule]
