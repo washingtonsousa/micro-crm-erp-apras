@@ -20,7 +20,7 @@ import { PedidoComponent } from "./pedido.component";
 
 
 @NgModule({
-  providers: [PedidoService, ProdutoService,],
+  providers: [PedidoService, ProdutoService],
   declarations: [PedidoCardComponent,PedidoComponent, PedidoItemComponent, PedidoFormComponent],
   exports: [PedidoCardComponent, PedidoFormComponent, PedidoItemComponent, PedidoComponent],
   imports: [ TabsModule, PipesModule, CommonModule, AlertModule, ProdutoModule, GeneralUIModule,

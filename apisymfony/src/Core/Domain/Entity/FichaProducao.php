@@ -136,6 +136,14 @@ class FichaProducao
      */
     private $pedidoProduto;
 
+
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_pedido_produto", type="integer", nullable=false)
+     */
+    private $idPedidoProduto;
+
     /**
      * @var \Usuario
      *
