@@ -9,56 +9,55 @@ use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Domain\Abstraction\Interface\IFichaProducaoService;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
 use App\Core\Domain\Entity\FichaProducao;
+use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetFichaProducaoPaginatedEntityQuery;
 use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetUsuarioPaginatedEntityQuery;
 use App\Core\Domain\Entity\Usuario;
+use App\Core\Domain\UseCase\Abstractions\ICreateFichaProducaoUseCase;
 use App\Core\Shared\Mapper\AutoMapperInitializer;
+use App\Core\Shared\Resolver\DependencyResolver;
 use AutoMapperPlus\AutoMapperInterface;
 
 class FichaProducaoAppService implements IFichaProducaoAppService {
 
-    protected IFichaProducaoService $userService;
     protected AutoMapperInterface $mapper;
 
-    public function __construct(IFichaProducaoService $userService,
-     AutoMapperInitializer $mapperInitializer)
+    public function __construct(
+     protected IFichaProducaoService $fichaService,
+     AutoMapperInitializer $mapperInitializer, 
+     protected ICreateFichaProducaoUseCase $fichaCreateUseCase)
     {
-        $this->userService = $userService;
-
+        $this->fichaService = $fichaService;
         $this->mapper = $mapperInitializer->getMapper();
     }
 
-    public function subscribe(FichaProducaoViewModel $userViewModel) : ?FichaProducaoViewModel {
+    public function subscribe(FichaProducaoViewModel $fichaViewModel) : ?FichaProducaoViewModel {
 
-        $usuario = $this->mapper->map($userViewModel, FichaProducao::class);
+        $ficha = $this->mapper->map($fichaViewModel, FichaProducao::class);
 
-        // if(!UsuarioSpecification::IsValidForInsert($usuario))
-        //     return null;
-
-        $result =  $this->userService->subscribe($usuario);
+        $result =  $this->fichaCreateUseCase->Execute($ficha);
      
         if($result == null)
             return null;
 
-        $userViewModel = $this->mapper->map($result, FichaProducaoViewModel::class);
+        $fichaViewModel = $this->mapper->map($result, FichaProducaoViewModel::class);
 
-
-        return    $userViewModel ;
+        return  $fichaViewModel ;
 
 
     }
 
-    public function update(FichaProducaoViewModel $userViewModel, $id) : FichaProducaoViewModel {
+    public function update(FichaProducaoViewModel $fichaViewModel, $id) : FichaProducaoViewModel {
 
-        $usuario = $this->mapper->map($userViewModel, Usuario::class);
+        $usuario = $this->mapper->map($fichaViewModel, Usuario::class);
 
-        $result =  $this->userService->update($usuario, $id);
+        $result =  $this->fichaService->update($usuario, $id);
      
         if($result == null)
             return null;
 
-        $userViewModel = $this->mapper->map($result, UsuarioViewModel::class);
+        $fichaViewModel = $this->mapper->map($result, UsuarioViewModel::class);
 
-        return    $userViewModel ;
+        return    $fichaViewModel ;
 
 
     }
@@ -66,27 +65,33 @@ class FichaProducaoAppService implements IFichaProducaoAppService {
     
     public function remove($id) : bool {
         
-        return $this->userService->remove($id);
+        return $this->fichaService->remove($id);
 
     }
 
 
-    public function get(PaginatedEntityRequestViewModel $paramsModel) : PaginationAggregatorViewModel {
+    public function get(PaginatedEntityRequestViewModel $paramsModel) : ?PaginationAggregatorViewModel {
 
         $params = $this->mapper->map($paramsModel, PaginatedEntityRequest::class);
 
-        $query = new GetUsuarioPaginatedEntityQuery($params);
+        $query = new GetFichaProducaoPaginatedEntityQuery($params);
 
-        $domainResult  = null;
+        DependencyResolver::make("app.logger")->info('FichaProducaoAppService:get');
 
-        $result =  $this->mapper->map( $domainResult, PaginationAggregatorViewModel::class);
+        $result =  $this->fichaService->get($query);
+
+        $result =  $this->mapper->map( $result, PaginationAggregatorViewModel::class);
+        
         return  $result;
     }
 
     public function getById(int $id) : ?FichaProducaoViewModel {
 
-        $result =  null;
+
+
+        $result =  $this->mapper->map($this->fichaService->getById($id), FichaProducaoViewModel::class);
         return  $result;
+
 
     }
 

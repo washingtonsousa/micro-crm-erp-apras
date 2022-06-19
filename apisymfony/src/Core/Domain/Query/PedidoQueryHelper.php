@@ -12,13 +12,14 @@ class PedidoQueryHelper {
         return $repo->createQueryBuilder('p')
         ->leftJoin('p.cliente', 'c')
         ->leftJoin('p.pedidoProdutos', 'pPP')
+        ->leftJoin('pPP.fichasProducao', 'f')
         ->leftJoin('pPP.produto', 'prd')
         ->orderBy('p.'.$orderField, $order);
         
     }
 
     public static function buildDefaultSelectForGetPageList(\Doctrine\ORM\QueryBuilder $queryBuilder) {
-        return $queryBuilder->select('p', 'c', 'pPP', 'prd');
+        return $queryBuilder->select('p', 'c', 'pPP', 'prd', 'f');
     }
 
 

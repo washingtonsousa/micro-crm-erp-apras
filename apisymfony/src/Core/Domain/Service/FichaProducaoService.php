@@ -1,8 +1,8 @@
 <?php
 namespace App\Core\Domain\Service;
 
+use App\Core\Domain\Abstraction\Interface\IFichaProducaoRepository;
 use App\Core\Domain\Abstraction\Interface\IFichaProducaoService;
-use App\Core\Domain\Abstraction\Interface\IPedidoService;
 use App\Core\Domain\Abstraction\Interface\IPedidoRepository;
 use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
 use App\Core\Domain\Command\GetEntityCommand;
@@ -10,18 +10,19 @@ use App\Core\Domain\Command\GetPageOfItemsCommand;
 use App\Core\Domain\Command\PersistCommand;
 use App\Core\Domain\Entity\FichaProducao;
 use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
-use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetPedidoPaginatedEntityQuery;
+use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetFichaProducaoPaginatedEntityQuery;
 use App\Core\Domain\Entity\Pedido;
+use App\Core\Shared\Resolver\DependencyResolver;
 
 class FichaProducaoService implements IFichaProducaoService {
 
-    private IPedidoRepository $pedidoRepo;
+    private IFichaProducaoRepository $fichaRepo;
     private IUnityOfWork $unityOfWork;
 
-    public function __construct(IUnityOfWork $unityOfWork, IPedidoRepository $pedidoRepo)
+    public function __construct(IUnityOfWork $unityOfWork, IFichaProducaoRepository $fichaRepo)
     {
             $this->unityOfWork = $unityOfWork;
-            $this->pedidoRepo = $pedidoRepo;
+            $this->fichaRepo = $fichaRepo;
     }
 
 
@@ -61,25 +62,27 @@ class FichaProducaoService implements IFichaProducaoService {
                 return null;
         }
 
-        public function subscribe(FichaProducao $pedido) {
+        public function subscribe(FichaProducao $fichaProducao) {
 
-                // $pedido->prepareForInsert();
+                 $command = new PersistCommand($fichaProducao, $this->unityOfWork);
+                 $result = $command->Execute();
 
-                // $command = new PersistCommand($pedido, $this->unityOfWork);
-                // $result = $command->Execute();
+                 DependencyResolver::make("app.logger")->info('FichaProducaoService:subscribe');
 
-                // if($result->isSuccess())
-                //         $pedido = $result->getEntity();
 
-                // return $pedido;
+                 if($result->isSuccess())
+                         $pedido = $result->getEntity();
+
+                 return $pedido;
 
         }
 
 
-        public function get(GetPedidoPaginatedEntityQuery $paginatedQuery) : PaginationAggregator {
+        public function get(GetFichaProducaoPaginatedEntityQuery $paginatedQuery) : PaginationAggregator {
 
-                
-                $command = new GetPageOfItemsCommand($this->pedidoRepo, $paginatedQuery);
+                $command = new GetPageOfItemsCommand($this->fichaRepo, $paginatedQuery);
+
+                DependencyResolver::make("app.logger")->info('FichaProducaoService:get');
 
                 $result = $command->Execute();
 
@@ -90,9 +93,9 @@ class FichaProducaoService implements IFichaProducaoService {
         }
 
 
-        public function getById(int $id) : ?Pedido {
+        public function getById(int $id) : ?FichaProducao {
                 
-                $command = new GetEntityCommand($id, $this->pedidoRepo);
+                $command = new GetEntityCommand($id, $this->fichaRepo);
 
                 $result = $command->Execute();
 

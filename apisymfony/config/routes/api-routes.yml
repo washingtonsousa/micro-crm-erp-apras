@@ -22,3 +22,7 @@ api_produto:
 api_pedido:
     prefix: /pedido
     resource: './pedido.yml'
+
+api_ficha_producao:
+    prefix: /ficha_producao
+    resource: './ficha_producao.yml'

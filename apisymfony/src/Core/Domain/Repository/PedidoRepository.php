@@ -40,7 +40,7 @@ class PedidoRepository  extends ServiceEntityRepository implements IPedidoReposi
                 ->leftJoin('p.cliente', 'c')
                 ->leftJoin('p.pedidoProdutos', 'pPP')
                 ->leftJoin('pPP.produto', 'prd')
-                ->leftJoin('pPP.fichasproducao', 'fichaprod')
+                ->leftJoin('pPP.fichasProducao', 'fichaprod')
                 ->select('p', 'pPP', 'prd', 'c', 'fichaprod')
                 ->where('p.idPedido = :idPedido')
                 ->setParameter('idPedido', $id) 

@@ -3,20 +3,24 @@ namespace App\Core\Application\Mapping;
 
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\ClientePaginationAggregatorViewModel;
+use App\Core\Application\Abstraction\ViewModel\Pagination\FichaProducaoPaginationAggregatorViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\PedidoPaginationAggregatorViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\ProdutoPaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\ClienteImagemViewModel;
 use App\Core\Application\ViewModel\ClienteViewModel;
+use App\Core\Application\ViewModel\FichaProducaoViewModel;
 use App\Core\Application\ViewModel\ImagemViewModel;
 use App\Core\Application\ViewModel\PedidoProdutoViewModel;
 use App\Core\Application\ViewModel\PedidoViewModel;
 use App\Core\Application\ViewModel\ProdutoImagemViewModel;
 use App\Core\Application\ViewModel\ProdutoViewModel;
+use App\Core\Application\ViewModel\ReverseHandle\FichaProducaoPedidoProdutoReverseViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
 use App\Core\Domain\Entity\Cliente;
 use App\Core\Domain\Entity\ClienteImagem;
+use App\Core\Domain\Entity\FichaProducao;
 use App\Core\Domain\Entity\Imagem;
 use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\Pedido;
@@ -49,6 +53,7 @@ class ViewModelMapping {
         self::MapProduto();
         self::MapPedido();
         self::MapImagem();
+        self::MapFicha();
    
 
     }
@@ -68,6 +73,23 @@ class ViewModelMapping {
         self::$config->registerMapping(ProdutoImagemViewModel::class, ProdutoImagem::class);
         self::$config->registerMapping(ProdutoImagem::class, ProdutoImagemViewModel::class)
         ->forMember("imagem", Operation::mapTo(ImagemViewModel::class));
+
+    }
+
+    static function MapFicha() {
+
+        self::$config->registerMapping(FichaProducaoPaginationAggregatorViewModel::class, PaginationAggregator::class);
+        
+        self::$config->registerMapping(PaginationAggregator::class, FichaProducaoPaginationAggregatorViewModel::class)
+        ->forMember('items',  Operation::mapCollectionTo(FichaProducaoViewModel::class));
+        
+        self::$config->registerMapping(FichaProducaoViewModel::class, FichaProducao::class);
+
+        self::$config->registerMapping(FichaProducaoPedidoProdutoReverseViewModel::class, FichaProducao::class);
+        self::$config->registerMapping(FichaProducao::class, FichaProducaoPedidoProdutoReverseViewModel::class);
+
+        self::$config->registerMapping(FichaProducao::class, FichaProducaoViewModel::class)
+        ->forMember("pedidoProduto", Operation::mapTo(PedidoProdutoViewModel::class));
 
     }
 
@@ -112,8 +134,9 @@ class ViewModelMapping {
         ->forMember('cliente', Operation::mapTo(ClienteViewModel::class));
 
         self::$config->registerMapping(PedidoProduto::class, PedidoProdutoViewModel::class)
-        ->forMember('produto', Operation::mapTo(ProdutoViewModel::class));
-        
+        ->forMember('produto', Operation::mapTo(ProdutoViewModel::class))
+        ->forMember('fichasProducao', Operation::mapCollectionTo(FichaProducaoPedidoProdutoReverseViewModel::class))
+        ->reverseMap(); 
     }
 
 }

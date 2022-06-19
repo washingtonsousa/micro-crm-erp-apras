@@ -1,0 +1,31 @@
+# Pedidos
+
+api_ficha_producao_post:
+    path: /
+    controller: App\Controller\FichaProducaoController::subscribe
+    methods:  [POST]
+
+api_ficha_producao_get:
+    path: /
+    controller: App\Controller\FichaProducaoController::get
+    methods:  [GET]
+
+api_ficha_producao_get_by_id:
+    path: /{id}
+    controller: App\Controller\FichaProducaoController::getById
+    methods:  [GET]
+
+api_ficha_producao_patch:
+    path: /
+    controller: App\Controller\FichaProducaoController::patch
+    methods:  [PATCH]
+
+api_ficha_producao_put:
+    path: /{id}
+    controller: App\Controller\FichaProducaoController::put
+    methods:  [PUT]
+
+api_ficha_producao_delete:
+    path: /{id}
+    controller: App\Controller\FichaProducaoController::delete
+    methods:  [DELETE]

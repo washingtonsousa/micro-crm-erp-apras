@@ -1,10 +1,9 @@
 <?php
 namespace App\Controller;
 
-use App\Core\Application\Abstraction\Interface\IPedidoAppService;
-use App\Core\Application\ViewModel\ClienteViewModel;
+use App\Core\Application\Abstraction\Interface\IFichaProducaoAppService;
+use App\Core\Application\ViewModel\FichaProducaoViewModel;
 use App\Core\Application\ViewModel\PedidoViewModel;
-use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,11 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class FichaDeProducaoController extends AbstractController {
+class FichaProducaoController extends AbstractController {
 
 
 
-        public function __construct(private IPedidoAppService $pedidoAppService,
+        public function __construct(private IFichaProducaoAppService $fichaProducaoAppService,
        private SerializerInterface  $serializerInterface
         )
         {
@@ -27,14 +26,12 @@ class FichaDeProducaoController extends AbstractController {
         public function subscribe( Request $request)
         {   
 
-
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), PedidoViewModel::class, 'json', [
+              $requestValue = $this->serializerInterface->deserialize($request->getContent(), FichaProducaoViewModel::class, 'json', [
               ]);
 
-
-
-              $result = $this->pedidoAppService->subscribe($requestValue);
+              $result = $this->fichaProducaoAppService->subscribe($requestValue);
               return new JsonResponse($result);
+
 
         }
         
@@ -42,9 +39,7 @@ class FichaDeProducaoController extends AbstractController {
         public function get(IPaginatedRequestHandler $handler)
         {
           
-              $result = $this->pedidoAppService->get($handler->getRequestViewModel());
-
-              
+              $result = $this->fichaProducaoAppService->get($handler->getRequestViewModel());
               return new JsonResponse($result);
 
         }
@@ -52,7 +47,7 @@ class FichaDeProducaoController extends AbstractController {
         public function getById(Request $request)
         {
             
-              $result = $this->pedidoAppService->getById($request->attributes->get('id'));
+              $result = $this->fichaProducaoAppService->getById($request->attributes->get('id'));
 
                   
 
@@ -62,10 +57,10 @@ class FichaDeProducaoController extends AbstractController {
 
         public function patch(Request $request)
         {
-              $requestValue = $this->serializerInterface->deserialize($request->getContent(), UsuarioViewModel::class, 'json', [
+              $requestValue = $this->serializerInterface->deserialize($request->getContent(), FichaProducaoViewModel::class, 'json', [
                 DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
               ]);
-            //    $result = $this->pedidoAppService->partialUpdate($requestValue);
+            //    $result = $this->fichaProducaoAppService->partialUpdate($requestValue);
                return new JsonResponse();
 
         }
@@ -73,12 +68,12 @@ class FichaDeProducaoController extends AbstractController {
         public function put(Request $request)
         {
 
-            $requestValue = $this->serializerInterface->deserialize($request->getContent(), ClienteViewModel::class, 'json', [
+            $requestValue = $this->serializerInterface->deserialize($request->getContent(), FichaProducaoViewModel::class, 'json', [
             ]);
 
             $id = $request->attributes->get('id');
 
-            $result = $this->pedidoAppService->update($requestValue, $id);
+            $result = $this->fichaProducaoAppService->update($requestValue, $id);
 
             return new JsonResponse($result);
 
@@ -89,7 +84,7 @@ class FichaDeProducaoController extends AbstractController {
 
             $id = $request->attributes->get('id');
 
-            $result = $this->pedidoAppService->remove($id);
+            $result = $this->fichaProducaoAppService->remove($id);
 
             return new JsonResponse(null, $result ? 200 : 204);
 

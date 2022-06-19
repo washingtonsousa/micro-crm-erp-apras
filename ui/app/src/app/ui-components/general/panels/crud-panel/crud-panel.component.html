@@ -66,7 +66,7 @@
 
               <button class="control-btn btn btn-warning" (click)="toggleOrdering()"> <i class="fas fa-exchange"></i>  </button>
 
-              <button class="control-btn btn btn-success" (click)="onAddClick.emit($event)" tooltip="Adicionar"> <i class="fas fa-plus"></i>  </button>
+              <button *ngIf="!disableAddBtn" class="control-btn btn btn-success" (click)="onAddClick.emit($event)" tooltip="Adicionar"> <i class="fas fa-plus"></i>  </button>
 
         </div>
 

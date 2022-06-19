@@ -48,7 +48,7 @@ class PedidoProduto
      *   @ORM\JoinColumn(name="id_produto", referencedColumnName="id_produto")
      * })
      */
-    private $produto;
+    public $produto;
 
     /**
      * @ORM\ManyToOne(targetEntity="Pedido")
@@ -61,7 +61,7 @@ class PedidoProduto
     /**
      *@ORM\OneToMany(targetEntity="FichaProducao", mappedBy="pedidoProduto", cascade={"all"})
      */
-    private $fichasproducao;
+    public $fichasProducao;
 
 
     /**

@@ -1,0 +1,150 @@
+<container>
+
+  <box-container>
+
+  <tabset #staticTabs>
+
+    <tab heading="Detalhes da ficha" class="p-3">
+
+
+
+
+
+    <div class="row">
+
+      <div class="col-xl-12">
+
+          <h3> <i class="fas fa-file"></i> Detalhes da ficha </h3>
+
+          <hr />
+
+        </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xl-4">
+      <h4> Código Ficha:  </h4>
+      <p>
+
+        {{ fichaProducao?.idFichaProducao }}
+
+      </p>
+    </div>
+    <div class="col-xl-4">
+      <h4> Código Pedido:  </h4>
+      <p>
+
+       <a [routerLink]="['/pedido/' + fichaProducao?.pedidoProduto?.idPedido]" class="pointer"> {{ fichaProducao?.pedidoProduto?.idPedido }} </a>
+
+      </p>
+    </div>
+
+
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-xl-4">
+        <h4> Data de abertura:  </h4>
+        <p>
+
+          {{ fichaProducao?.dtCadastro | serverDateFormat }}
+
+        </p>
+      </div>
+      <div class="col-xl-4">
+
+        <h4> Usuário cadastramento:  </h4>
+        <p>
+
+          {{ fichaProducao?.usuarioCadastroFicha?.nome }}
+
+        </p>
+      </div>
+
+
+      <div class="col-xl-4">
+
+        <h4> Situação Ficha:  </h4>
+
+        <p> {{  fichaProducao?.estadoFicha | fichaStatus }}   </p>
+
+      </div>
+
+        </div>
+
+
+
+        <div class="row">
+
+          <h4> <i class="fas fa-tshirt"></i> Produto</h4>
+          <hr />
+          </div>
+
+        <div class="row">
+
+          <div class="col-xl-4">
+
+            <h4> Produto  </h4>
+            <p>
+
+              {{ fichaProducao?.pedidoProduto?.produto?.nome }}
+
+            </p>
+          </div>
+
+
+          <div class="col-xl-4">
+
+            <h4> Quantidade para produção  </h4>
+            <p>
+
+              {{ fichaProducao?.qtnProducao }}
+
+            </p>
+          </div>
+
+
+          <div class="col-xl-4">
+
+            <h4> Quantidade produzido  </h4>
+
+            <p>
+
+              {{ fichaProducao?.qtnProduzido }}
+
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+
+  </tab>
+
+  <tab heading="Corte / Separação" class="p-3">
+
+
+
+  </tab>
+
+  <tab heading="Bordado / estamparia" class="p-3">
+
+
+
+  </tab>
+
+
+  <tab heading="Costura" class="p-3">
+
+
+
+  </tab>
+
+</tabset>
+</box-container>
+</container>

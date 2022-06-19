@@ -1,0 +1,19 @@
+
+
+
+<card-with-icon iconClass="fas fa-list"  [title]="'Número: ' + ficha?.idFichaProducao?.toString()">
+
+
+  <p>
+    <b> Cliente: </b> {{ ficha.pedidoProduto?.pedido?.cliente?.strNome }}
+  </p>
+
+
+  <p>
+   <!-- <b> Status: </b>  {{ pedido?.status | pedidoStatus }} -->
+  </p>
+
+  <edit-delete-dropdown (edit)="edit.emit(ficha.idFichaProducao)" (delete)="delete.emit(ficha.idFichaProducao)" class="justify-content-end w-100 p-3 d-flex"></edit-delete-dropdown>
+
+
+</card-with-icon>

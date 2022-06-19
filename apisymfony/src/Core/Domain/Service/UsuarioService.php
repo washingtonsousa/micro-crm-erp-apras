@@ -98,7 +98,7 @@ class UsuarioService implements IUsuarioService {
                 $usuarioForUpdate->fullUpdate($usuario);
 
                 if($changeSenha)
-                   $usuarioForUpdate->setSenha($this->encoder->hashPassword($this->user, $this->user->getPassword()));
+                   $usuarioForUpdate->setSenha($this->encoder->hashPassword($usuarioForUpdate, $usuario->getPassword()));
 
                 $command = new PersistCommand($usuarioForUpdate, $this->unityOfWork);
 

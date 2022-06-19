@@ -49,9 +49,10 @@ class UsuarioAppService implements IUsuarioAppService {
 
     public function update(UsuarioViewModel $userViewModel, $id, $changeSenha = false) : UsuarioViewModel {
 
+
         $usuario = $this->mapper->map($userViewModel, Usuario::class);
 
-        $result =  $this->userService->update($usuario, $id);
+        $result =  $this->userService->update($usuario, $id, $changeSenha);
      
         if($result == null)
             return null;

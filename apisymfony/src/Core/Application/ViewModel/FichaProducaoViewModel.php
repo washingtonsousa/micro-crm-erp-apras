@@ -40,21 +40,45 @@ class FichaProducaoViewModel extends EntityViewModel   implements \JsonSerializa
 
     public $idPedidoProduto;
 
+    public $pedidoProduto;
+
     public $idUsuarioCorteSeparacao;
+
+    public $usuarioCorteSeparacao;
+
 
     public $idUsuarioBordadoEstamparia;
 
+    public $usuarioBordadoEstamparia;
+
+
     public $idUsuarioCostura;
+
+    public $usuarioCostura;
+
 
     public $idUsuarioCadastroFicha;
 
+    public $usuarioCadastroFicha;
+
+
     public function jsonSerialize() {
 
+       if($this->pedidoProduto != null)
+           $this->pedidoProduto->fichasProducao = array();
 
       return [
+        'idFichaProducao' => $this->idFichaProducao,
+
           'idPedidoProduto' => $this->idPedidoProduto,
           'idUsuarioCadastroFicha' => $this->idUsuarioCadastroFicha,
-          'dtCadastro' => $this->dtCadastro
+          'dtCadastro' => $this->dtCadastro,
+          'qtnProducao' => $this->qtnProducao,
+          'usuarioCadastroFicha' => $this->usuarioCadastroFicha,
+          'estadoFicha' => $this->estadoFicha,
+          'pedidoProduto' => $this->pedidoProduto
+
+
       ];
   }
 

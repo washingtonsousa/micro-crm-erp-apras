@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 import { AlertModule } from "ngx-bootstrap/alert";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { TabsModule } from "ngx-bootstrap/tabs";
@@ -10,20 +11,19 @@ import { PipesModule } from "src/app/pipes/pipes.module";
 import { FlexBoxModule } from "src/app/ui-components/flex-box/flex-box.module";
 import { GeneralUIModule } from "src/app/ui-components/general/generalUI.module";
 import { MaterialModule } from "src/app/ui-components/material/material.module";
+import { FichaProducaoCardComponent } from "./card/ficha-card.component";
 import { FichaProducaoComponent } from "./ficha-producao.component";
 import { FichaProducaoFormComponent } from "./form/ficha-producao-form.component";
-
-
-
+import { FichaItemComponent } from "./item/ficha-item.component";
 
 
 @NgModule({
     providers: [],
-    declarations: [FichaProducaoComponent, FichaProducaoFormComponent],
-    exports: [FichaProducaoComponent, FichaProducaoFormComponent],
-    imports: [ TabsModule, PipesModule, CommonModule, AlertModule,  GeneralUIModule,
-      LayoutModule,  MaterialModule, ReactiveFormsModule,
-      FlexBoxModule, PathResolverPipesModule, ModalModule]
+    declarations: [FichaProducaoCardComponent, FichaItemComponent, FichaProducaoComponent, FichaProducaoFormComponent],
+    exports: [FichaProducaoComponent, FichaItemComponent, FichaProducaoFormComponent],
+    imports: [ TabsModule, MaterialModule, PipesModule, CommonModule, AlertModule,  GeneralUIModule,
+      LayoutModule,  MaterialModule,  LayoutModule, ReactiveFormsModule,
+      FlexBoxModule, PathResolverPipesModule, ModalModule, RouterModule]
 })
 export class FichaProducaoModule {
 

@@ -10,8 +10,8 @@ interface IFichaProducaoAppService {
 
         public function getById(int $id) : ?FichaProducaoViewModel;
         public function update(FichaProducaoViewModel $cliente, $id) : ?FichaProducaoViewModel;
-        public function subscribe(FichaProducaoViewModel $produto) : ?FichaProducaoViewModel;
-        public function get(PaginatedEntityRequestViewModel $paramsModel) : PaginationAggregatorViewModel;
+        public function subscribe(FichaProducaoViewModel $fichaViewModel) : ?FichaProducaoViewModel;
+        public function get(PaginatedEntityRequestViewModel $paramsModel) : ?PaginationAggregatorViewModel;
         public function remove($id) : bool;
 
 }

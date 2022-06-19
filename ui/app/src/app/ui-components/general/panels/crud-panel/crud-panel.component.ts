@@ -20,6 +20,8 @@ export class CrudPanelComponent   {
   searchValue: string = '';
 
 
+  @Input("disableAddBtn") disableAddBtn:boolean = false;
+
   get numbers() {
 
     var numbers: number[] = [];

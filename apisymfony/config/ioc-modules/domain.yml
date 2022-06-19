@@ -5,6 +5,11 @@ services:
     public: true
     autowire: true
 
+  App\Core\Domain\UseCase\Concrete\:
+    resource: '../../src/Core/Domain/UseCase/Concrete'
+    public: true
+    autowire: true
+
   App\Core\Domain\Repository\:
     resource: '../../src/Core/Domain/Repository/'
     public: true
@@ -15,11 +20,25 @@ services:
           public: true
           autowire: true
 
+
+
+
+  #Use cases
+  App\Core\Domain\UseCase\Abstractions\ICreateFichaProducaoUseCase: '@App\Core\Domain\UseCase\Concrete\CreateFichaProducaoUseCase'
+
+
+  #Repositories
+
   App\Core\Domain\Abstraction\Interface\IClienteRepository: '@App\Core\Domain\Repository\ClienteRepository'
   App\Core\Domain\Abstraction\Interface\IUsuarioRepository: '@App\Core\Domain\Repository\UsuarioRepository'
   App\Core\Domain\Abstraction\Interface\IProdutoRepository: '@App\Core\Domain\Repository\ProdutoRepository'
   App\Core\Domain\Abstraction\Interface\IPedidoRepository: '@App\Core\Domain\Repository\PedidoRepository'
   App\Core\Domain\Abstraction\Interface\IImagemRepository: '@App\Core\Domain\Repository\ImagemRepository'
+  App\Core\Domain\Abstraction\Interface\IFichaProducaoRepository: '@App\Core\Domain\Repository\FichaProducaoRepository'
+
+  #Domain Services
+
+  
   App\Core\Domain\Abstraction\Interface\IUsuarioService: '@App\Core\Domain\Service\UsuarioService'
   App\Core\Domain\Abstraction\Interface\IClienteService: '@App\Core\Domain\Service\ClienteService'
   App\Core\Domain\Abstraction\Interface\IProdutoService: '@App\Core\Domain\Service\ProdutoService'
@@ -30,5 +49,8 @@ services:
   App\Core\Domain\Abstraction\Interface\IProdutoImagemService: '@App\Core\Domain\Service\ProdutoImagemService'
   App\Core\Domain\Abstraction\Interface\IClienteImagemRepository: '@App\Core\Domain\Repository\ClienteImagemRepository'
   App\Core\Domain\Abstraction\Interface\IProdutoImagemRepository: '@App\Core\Domain\Repository\ProdutoImagemRepository'
+ 
+
+ #Diverse
   App\Core\Domain\Abstraction\Interface\IUnityOfWork: '@unity_of_work'
   Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'

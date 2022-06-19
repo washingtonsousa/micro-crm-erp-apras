@@ -2,6 +2,9 @@
 
 namespace App\Core\Domain\Entity;
 
+use App\Core\Domain\Enum\FichaProducaoStatusEnum;
+use App\Core\Shared\Resolver\DependencyResolver;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FichaProducao
 {
+
+
     /**
      * @var int
      *
@@ -38,7 +43,7 @@ class FichaProducao
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dt_producao", type="datetime", nullable=false)
+     * @ORM\Column(name="dt_producao", type="datetime", nullable=true)
      */
     private $dtProducao;
 
@@ -144,7 +149,16 @@ class FichaProducao
      */
     private $idPedidoProduto;
 
+
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_usuario_corte_separacao", type="integer", nullable=false)
+     */
+    private $idUsuarioCorteSeparacao;
+
+
+     /**
      * @var \Usuario
      *
      * @ORM\ManyToOne(targetEntity="Usuario")
@@ -152,7 +166,15 @@ class FichaProducao
      *   @ORM\JoinColumn(name="id_usuario_corte_separacao", referencedColumnName="id_usuario")
      * })
      */
-    private $idUsuarioCorteSeparacao;
+    private $usuarioCorteSeparacao;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_usuario_bordado_estamparia", type="integer", nullable=false)
+     */
+    private $idUsuarioBordadoEstamparia;
 
     /**
      * @var \Usuario
@@ -162,7 +184,15 @@ class FichaProducao
      *   @ORM\JoinColumn(name="id_usuario_bordado_estamparia", referencedColumnName="id_usuario")
      * })
      */
-    private $idUsuarioBordadoEstamparia;
+    private $usuarioBordadoEstamparia;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_usuario_costura", type="integer", nullable=false)
+     */
+    private $idUsuarioCostura;
 
     /**
      * @var \Usuario
@@ -172,8 +202,19 @@ class FichaProducao
      *   @ORM\JoinColumn(name="id_usuario_costura", referencedColumnName="id_usuario")
      * })
      */
-    private $idUsuarioCostura;
+    private $usuarioCostura;
 
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_usuario_cadastro_ficha", type="integer", nullable=false)
+     */
+    private $idUsuarioCadastroFicha;
+
+
+    
     /**
      * @var \Usuario
      *
@@ -182,7 +223,33 @@ class FichaProducao
      *   @ORM\JoinColumn(name="id_usuario_cadastro_ficha", referencedColumnName="id_usuario")
      * })
      */
-    private $idUsuarioCadastroFicha;
+    private $usuarioCadastroFicha;
 
 
+    public function prepareForInsert() {
+
+    $manager =  DependencyResolver::make("app.orm")->getManager();
+    
+    $this->usuarioCadastroFicha =  $manager->getReference(Usuario::class, $this->idUsuarioCadastroFicha);
+    $this->pedidoProduto =  $manager->getReference(PedidoProduto::class, $this->idPedidoProduto);
+    $this->estadoFicha = FichaProducaoStatusEnum::INICIAL;
+    $this->dtCadastro = new DateTime();
+
+   
+    }    
+
+
+    /**
+     * Set the value of idUsuarioCadastroFicha
+     *
+     * @param  int  $idUsuarioCadastroFicha
+     *
+     * @return  self
+     */ 
+    public function setIdUsuarioCadastroFicha(int $idUsuarioCadastroFicha)
+    {
+        $this->idUsuarioCadastroFicha = $idUsuarioCadastroFicha;
+
+        return $this;
+    }
 }
