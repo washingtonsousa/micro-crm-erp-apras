@@ -11,7 +11,7 @@ export class FichaStatusResolverPipe implements PipeTransform {
     transform(status: number | null | undefined)  {
 
         if(status == 1)
-          return "Enviado";
+          return "Cadastrada";
         if(status == 2)
           return "Recebido Corte / Separação";
         if(status == 3)

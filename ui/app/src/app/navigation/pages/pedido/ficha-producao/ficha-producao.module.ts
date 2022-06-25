@@ -14,14 +14,15 @@ import { MaterialModule } from "src/app/ui-components/material/material.module";
 import { FichaProducaoCardComponent } from "./card/ficha-card.component";
 import { FichaProducaoComponent } from "./ficha-producao.component";
 import { FichaProducaoFormComponent } from "./form/ficha-producao-form.component";
+import { FichaCorteSeparacaoComponent } from "./item/corte-separacao/ficha-corte-separacao.component";
 import { FichaItemComponent } from "./item/ficha-item.component";
 
 
 @NgModule({
     providers: [],
-    declarations: [FichaProducaoCardComponent, FichaItemComponent, FichaProducaoComponent, FichaProducaoFormComponent],
+    declarations: [FichaProducaoCardComponent, FichaCorteSeparacaoComponent, FichaItemComponent, FichaProducaoComponent, FichaProducaoFormComponent],
     exports: [FichaProducaoComponent, FichaItemComponent, FichaProducaoFormComponent],
-    imports: [ TabsModule, MaterialModule, PipesModule, CommonModule, AlertModule,  GeneralUIModule,
+    imports: [ TabsModule, PipesModule, MaterialModule, PipesModule, CommonModule, AlertModule,  GeneralUIModule,
       LayoutModule,  MaterialModule,  LayoutModule, ReactiveFormsModule,
       FlexBoxModule, PathResolverPipesModule, ModalModule, RouterModule]
 })

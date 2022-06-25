@@ -1,0 +1,61 @@
+
+    <section *ngIf="fichaProducao?.estadoFicha == FichaProducaoEstado.CADASTRADA" class="row">
+
+      <div class="col-xl-12">
+
+          <button class="btn btn-primary" (click)="Receive()">
+
+              Receber
+
+
+              <i class="fa fa-exchange" aria-hidden="true"></i>
+
+          </button>
+
+      </div>
+
+    </section>
+
+    <section *ngIf="fichaProducao?.estadoFicha == FichaProducaoEstado.RECEBIDO_CORTE" class="row">
+
+      <div class="col-xl-12">
+
+         <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="Submit()">
+
+            <label>
+
+              Data Recebimento: {{ fichaProducao?.dtProducao | serverDateFormat }}
+
+            </label>
+
+            <label>
+              Quantidade Produzida sem defeitos:
+            </label>
+
+            <input type="number" (keyup)="onFillQtn($event)"  class="form-control" formControlName="qtnCorteSeparacao" />
+
+
+              <alert *ngIf="formGroup.controls['qtnCorteSeparacao'].errors?.max" type="danger">
+
+                Quantidade ultrapassa limite máximo da ficha
+
+             </alert>
+
+
+
+            <label>
+              Quantidade com defeitos / não produzida
+            </label>
+            <p>
+            {{
+
+              fichaProducao?.qtnCorteSeparacaoPerda
+
+            }}
+          </p>
+        </form>
+
+
+      </div>
+
+    </section>

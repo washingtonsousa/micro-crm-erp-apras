@@ -9,6 +9,8 @@ export class FichaProducao {
   estadoFicha: number = 0;
   qtnProducao!: number;
   dtProducao!: ServerDate;
+
+
   dtCorteSeparacao!: ServerDate;
   qtnCorteSeparacaoPerda!: number;
   qtnCorteSeparacao!: number;
@@ -30,6 +32,9 @@ export class FichaProducao {
   idUsuarioCadastroFicha!: number;
 
   usuarioCadastroFicha!: Usuario;
+  usuarioCorteSeparacao!: Usuario;
+  usuarioBordadoEstamparia!: Usuario;
+  usuarioCostura!: Usuario;
 
 
   //Pedido Herdado Associacao

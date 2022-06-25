@@ -126,20 +126,22 @@
 
   </tab>
 
-  <tab heading="Corte / Separação" class="p-3">
+  <tab *ngIf="fichaProducao && (fichaProducao.estadoFicha >= FichaProducaoEstado.CADASTRADA)"  heading="Corte / Separação" class="p-3">
+
+    <ficha-corte-separacao [fichaProducaoAdapter]="fichaProducaoAdapter">
+
+    </ficha-corte-separacao>
+
+  </tab>
+
+  <tab *ngIf="fichaProducao && (fichaProducao.estadoFicha > FichaProducaoEstado.RECEBIDO_CORTE)" heading="Bordado / estamparia" class="p-3">
 
 
 
   </tab>
 
-  <tab heading="Bordado / estamparia" class="p-3">
 
-
-
-  </tab>
-
-
-  <tab heading="Costura" class="p-3">
+  <tab *ngIf="fichaProducao && (fichaProducao.estadoFicha > FichaProducaoEstado.RECEBIDO_COSTURA)"  heading="Costura" class="p-3">
 
 
 
