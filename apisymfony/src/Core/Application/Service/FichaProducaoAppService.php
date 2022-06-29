@@ -42,9 +42,26 @@ class FichaProducaoAppService implements IFichaProducaoAppService {
         $fichaViewModel = $this->mapper->map($result, FichaProducaoViewModel::class);
 
         return  $fichaViewModel ;
+    }
+
+
+
+    public function patch(FichaProducaoViewModel $fichaViewModel, $id): ?FichaProducaoViewModel {
+
+        $usuario = $this->mapper->map($fichaViewModel, Usuario::class);
+
+        $result =  $this->fichaService->update($usuario, $id);
+     
+        if($result == null)
+            return null;
+
+        $fichaViewModel = $this->mapper->map($result, UsuarioViewModel::class);
+
+        return    $fichaViewModel ;
 
 
     }
+
 
     public function update(FichaProducaoViewModel $fichaViewModel, $id) : FichaProducaoViewModel {
 
