@@ -13,7 +13,7 @@ class GetFichaProducaoPaginatedEntityQuery extends PaginatedEntityQuery {
 
         public function __construct(PaginatedEntityRequest $request)
         {   
-            $this->allowedFields = array('idFichaProducao');   
+            $this->allowedFields = array('idFichaProducao', 'idPedido');   
             parent::__construct($request);
         }
 
@@ -35,6 +35,7 @@ class GetFichaProducaoPaginatedEntityQuery extends PaginatedEntityQuery {
             $params = $this->getAllowedQueryParams();
 
             $array['idFichaProducao'] = new QueryFilter('idFichaProducao', $this->request->getTerm(), 'like');
+            $array['idPedido'] = new QueryFilter('idPedido', $this->request->getTerm(), 'like');
 
             return  $array;
 
@@ -43,16 +44,15 @@ class GetFichaProducaoPaginatedEntityQuery extends PaginatedEntityQuery {
         protected function prepareQueryExpression()
         {
             $filters = $this->getAllowedFilters();
-           
-            foreach($filters as $filter) {
 
-                if(isset($this->queryExpressionBuilder))
-                $this->queryExpressionBuilder->addORExpression($filter, 'f');
+            $filterIdFichaProducao= $filters['idFichaProducao'];
+            $filterIdPedido= $filters['idPedido'];
 
-                if(!isset(  $this->queryExpressionBuilder))
-                $this->queryExpressionBuilder = new QueryExpressionBuilder('f', $filter);
-     
-            }
+            $this->queryExpressionBuilder = new QueryExpressionBuilder('f', $filterIdFichaProducao);
+            
+            $this->queryPedidoProdutoExpressionBuilder = new QueryExpressionBuilder('pP', $filterIdPedido);
+
+            $this->queryExpressionBuilder->addORInnerBuildedExpression($this->queryPedidoProdutoExpressionBuilder->build());
 
             return $this->queryExpressionBuilder->build();
 

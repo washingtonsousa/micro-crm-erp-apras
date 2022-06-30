@@ -30,7 +30,10 @@ export class FichaProducaoService implements IPaginatedCrudService<FichaProducao
 
   }
   Update(entity: FichaProducao, aditionalParams: any[]): Observable<DefaultDataResponse<FichaProducao>> {
-    throw new Error("Method not implemented.");
+    return this.http.patch<DefaultDataResponse<FichaProducao>>(
+      environment.apiUri +
+      "/api/ficha_producao/" + entity.idFichaProducao, entity
+      );
   }
   Remove(id: number): Observable<DefaultDataResponse<boolean>> {
     throw new Error("Method not implemented.");

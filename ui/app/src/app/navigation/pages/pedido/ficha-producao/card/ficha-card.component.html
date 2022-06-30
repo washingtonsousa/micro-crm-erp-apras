@@ -1,8 +1,13 @@
 
 
 
-<card-with-icon iconClass="fas fa-list"  [title]="'Número: ' + ficha?.idFichaProducao?.toString()">
+<card-with-icon iconClass="fas fa-file"  [title]="'Número: ' + ficha?.idFichaProducao?.toString()">
 
+
+
+  <p>
+    <b> numero pedido: </b> {{ ficha.pedidoProduto?.idPedido }}
+  </p>
 
   <p>
     <b> Cliente: </b> {{ ficha.pedidoProduto?.pedido?.cliente?.strNome }}

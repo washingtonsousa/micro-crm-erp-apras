@@ -45,7 +45,7 @@ class FichaProducaoService implements IFichaProducaoService {
         }
 
 
-        public function update(FichaProducao $pedido, $id, $changeSenha = false) {
+        public function update(FichaProducao $pedido, $id) {
 
                 $pedidoForUpdate = $this->getById($id); 
                 

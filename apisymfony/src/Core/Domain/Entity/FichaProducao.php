@@ -236,8 +236,22 @@ class FichaProducao
     $this->dtCadastro = new DateTime();
 
    
-    }    
+    } 
+    
+    public function setStateAsCorteSeparacao() {
+        $this->dtProducao = new DateTime();
+        $this->estadoFicha =  FichaProducaoStatusEnum::EM_CORTE_SEPARACAO;    
+    }
 
+    public function setStateAsBordadoEstamparia() {
+        $this->dtCorteSeparacao = new DateTime();
+        $this->estadoFicha =  FichaProducaoStatusEnum::EM_BORDADO_ESTAMPARIA;    
+    }
+
+    public function setStateAsCostura() {
+        $this->dtBordadoEstampa = new DateTime();
+        $this->estadoFicha =  FichaProducaoStatusEnum::EM_COSTURA;    
+    }
 
     /**
      * Set the value of idUsuarioCadastroFicha
@@ -249,6 +263,40 @@ class FichaProducao
     public function setIdUsuarioCadastroFicha(int $idUsuarioCadastroFicha)
     {
         $this->idUsuarioCadastroFicha = $idUsuarioCadastroFicha;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idFichaProducao
+     *
+     * @return  int
+     */ 
+    public function getIdFichaProducao()
+    {
+        return $this->idFichaProducao;
+    }
+
+    /**
+     * Get the value of estadoFicha
+     *
+     * @return  int
+     */ 
+    public function getEstadoFicha()
+    {
+        return $this->estadoFicha;
+    }
+
+    /**
+     * Set the value of idFichaProducao
+     *
+     * @param  int  $idFichaProducao
+     *
+     * @return  self
+     */ 
+    public function setIdFichaProducao(int $idFichaProducao)
+    {
+        $this->idFichaProducao = $idFichaProducao;
 
         return $this;
     }

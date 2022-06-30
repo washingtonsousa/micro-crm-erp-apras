@@ -16,7 +16,7 @@ api_ficha_producao_get_by_id:
     methods:  [GET]
 
 api_ficha_producao_patch:
-    path: /
+    path: /{id}
     controller: App\Controller\FichaProducaoController::patch
     methods:  [PATCH]
 

@@ -22,12 +22,12 @@
 
          <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="Submit()">
 
-            <label>
+            <p>
 
               Data Recebimento: {{ fichaProducao?.dtProducao | serverDateFormat }}
 
-            </label>
-
+            </p>
+            <p>
             <label>
               Quantidade Produzida sem defeitos:
             </label>
@@ -41,8 +41,8 @@
 
              </alert>
 
-
-
+            </p>
+            <p>
             <label>
               Quantidade com defeitos / não produzida
             </label>

@@ -60,7 +60,9 @@ class FichaProducaoController extends AbstractController {
               $requestValue = $this->serializerInterface->deserialize($request->getContent(), FichaProducaoViewModel::class, 'json', [
                 DateTimeNormalizer::FORMAT_KEY => 'dd/mm/YYYY H:i:s',
               ]);
-            //    $result = $this->fichaProducaoAppService->partialUpdate($requestValue);
+              $id = $request->attributes->get('id');
+
+                $result = $this->fichaProducaoAppService->patch($requestValue, $id);
                return new JsonResponse();
 
         }
