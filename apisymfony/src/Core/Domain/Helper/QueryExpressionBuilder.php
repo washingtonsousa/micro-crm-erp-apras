@@ -53,14 +53,20 @@ class QueryExpressionBuilder {
        public function addANDInnerBuildedExpression(QueryExpression $exp) : QueryExpressionBuilder {
 
               $this->queryExpressionSTR .= ' AND ' . '('.$exp->getExpString().')';
-              $this->filters[] = $exp->getQueryFilters();
+              foreach($exp->getQueryFilters() as $filter) {
+                     $this->filters[] = $filter;
+              }
               return $this;
        }
 
        public function addORInnerBuildedExpression(QueryExpression $exp) : QueryExpressionBuilder {
 
               $this->queryExpressionSTR .= ' OR ' . '('.$exp->getExpString().')';
-              $this->filters[] = $exp->getQueryFilters();
+
+              foreach($exp->getQueryFilters() as $filter) {
+                     $this->filters[] = $filter;
+              }
+
               return $this;
        }
 

@@ -2,15 +2,18 @@
 namespace App\Core\Domain\UseCase\Concrete;
 
 use App\Core\Domain\Abstraction\Interface\IFichaProducaoService;
+use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
 use App\Core\Domain\Abstraction\Interface\IUsuarioService;
+use App\Core\Domain\Command\PersistCommand;
 use App\Core\Domain\Entity\FichaProducao;
+use App\Core\Domain\Enum\FichaProducaoStatusEnum;
 use App\Core\Domain\UseCase\Abstractions\IFichaProducaoStateControlUseCase;
 
 class FichaProducaoStateControlUseCase implements IFichaProducaoStateControlUseCase {
 
   
 
-    public function __construct(protected IUsuarioService $usuarioService,
+    public function __construct(protected IUsuarioService $usuarioService, protected IUnityOfWork $unityOfWork,
     
     protected IFichaProducaoService $fichaService)
     {
@@ -21,13 +24,16 @@ class FichaProducaoStateControlUseCase implements IFichaProducaoStateControlUseC
         
         $usuarioLogado = $this->usuarioService->getCurrentLoggedInUser();
 
-        $ficha->setIdUsuarioCadastroFicha($usuarioLogado->idUsuario);
+        $fichaFromDb = $this->fichaService->getById($ficha->getIdFichaProducao());
 
-        $ficha->prepareForInsert();
+        if($fichaFromDb->getEstadoFicha() == FichaProducaoStatusEnum::INICIAL)
+        $fichaFromDb->setStateAsCorteSeparacao();
 
-        $ficha = $this->fichaService->subscribe($ficha);
+        $command = new PersistCommand($fichaFromDb, $this->unityOfWork);
 
-        return $ficha;
+        $result =  $command->Execute();
+
+        return $fichaFromDb;
 
     }
 

@@ -76,7 +76,9 @@ class FichaProducaoViewModel extends EntityViewModel   implements \JsonSerializa
           'qtnProducao' => $this->qtnProducao,
           'usuarioCadastroFicha' => $this->usuarioCadastroFicha,
           'estadoFicha' => $this->estadoFicha,
-          'pedidoProduto' => $this->pedidoProduto
+          'pedidoProduto' => $this->pedidoProduto,
+          'dtProducao' => $this->dtProducao
+
 
 
       ];

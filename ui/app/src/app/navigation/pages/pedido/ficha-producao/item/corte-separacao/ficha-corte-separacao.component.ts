@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FichaProducaoAdapter } from "src/app/business/adapters/ficha-producao-json.adapter";
 import { FichaProducao } from "src/app/business/entities/model/ficha-producao";
 import { FichaProducaoEstado } from "src/app/business/enums/ficha-producao-estado.enum";
+import { FichaProducaoService } from "src/app/services/core/api/ficha-producao.service";
 
 
 
@@ -20,16 +21,37 @@ export class FichaCorteSeparacaoComponent implements OnInit {
   }
 
   constructor(
-    public  formBuilder: FormBuilder)
+    public  formBuilder: FormBuilder, public service:FichaProducaoService)
   {
   }
 
   Receive() {
+    this.service.Update(this.fichaProducaoAdapter.fichaProducao, []).subscribe(
+      {
 
+       next: (data) => {
+
+              console.log(data);
+
+       }
+      }
+    );
   }
 
   Submit() {
 
+      let ficha = this.fichaProducaoAdapter.fichaProducao;
+
+      this.service.Update(this.fichaProducaoAdapter.fichaProducao, []).subscribe(
+        {
+
+         next: (data) => {
+
+                console.log(data);
+
+         }
+        }
+      )
   }
 
   onFillQtn(event:any) {

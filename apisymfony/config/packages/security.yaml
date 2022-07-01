@@ -51,7 +51,7 @@ security:
     access_control:
         # - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/usuario, roles: [IS_FULLY_AUTHENTICATED, ROLE_ADMIN, ROLE_FUNCIONARIO], methods: [PATCH]}
-        - { path: ^/api/usuario, roles: ROLE_ADMIN, methods: [PUT, GET, POST, DELETE]}
+        - { path: ^/api/usuario, roles: ROLE_ADMIN, methods: [PUT, GET, PATCH, POST, DELETE]}
 
 
 when@test:

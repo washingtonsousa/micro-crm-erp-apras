@@ -25,7 +25,7 @@ services:
 
   #Use cases
   App\Core\Domain\UseCase\Abstractions\ICreateFichaProducaoUseCase: '@App\Core\Domain\UseCase\Concrete\CreateFichaProducaoUseCase'
-
+  App\Core\Domain\UseCase\Abstractions\IFichaProducaoStateControlUseCase: '@App\Core\Domain\UseCase\Concrete\FichaProducaoStateControlUseCase'
 
   #Repositories
 

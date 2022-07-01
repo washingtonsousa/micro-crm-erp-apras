@@ -3,6 +3,7 @@ namespace App\Core\Application\Service;
 
 use App\Core\Application\Abstraction\Interface\IFichaProducaoAppService;
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
+use App\Core\Application\Abstraction\ViewModel\Pagination\FichaProducaoPaginationAggregatorViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\FichaProducaoViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
@@ -13,6 +14,7 @@ use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetFichaProducaoPaginatedEnti
 use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetUsuarioPaginatedEntityQuery;
 use App\Core\Domain\Entity\Usuario;
 use App\Core\Domain\UseCase\Abstractions\ICreateFichaProducaoUseCase;
+use App\Core\Domain\UseCase\Abstractions\IFichaProducaoStateControlUseCase;
 use App\Core\Shared\Mapper\AutoMapperInitializer;
 use App\Core\Shared\Resolver\DependencyResolver;
 use AutoMapperPlus\AutoMapperInterface;
@@ -24,6 +26,7 @@ class FichaProducaoAppService implements IFichaProducaoAppService {
     public function __construct(
      protected IFichaProducaoService $fichaService,
      AutoMapperInitializer $mapperInitializer, 
+     protected IFichaProducaoStateControlUseCase $stateControlUseCase,
      protected ICreateFichaProducaoUseCase $fichaCreateUseCase)
     {
         $this->fichaService = $fichaService;
@@ -48,14 +51,16 @@ class FichaProducaoAppService implements IFichaProducaoAppService {
 
     public function patch(FichaProducaoViewModel $fichaViewModel, $id): ?FichaProducaoViewModel {
 
-        $usuario = $this->mapper->map($fichaViewModel, Usuario::class);
+        $ficha = $this->mapper->map($fichaViewModel, FichaProducao::class);
 
-        $result =  $this->fichaService->update($usuario, $id);
+        $ficha->setIdFichaProducao($id);
+
+        $result =  $this->stateControlUseCase->Execute($ficha, $id);
      
         if($result == null)
             return null;
 
-        $fichaViewModel = $this->mapper->map($result, UsuarioViewModel::class);
+        $fichaViewModel = $this->mapper->map($result, FichaProducaoViewModel::class);
 
         return    $fichaViewModel ;
 
@@ -97,8 +102,9 @@ class FichaProducaoAppService implements IFichaProducaoAppService {
 
         $result =  $this->fichaService->get($query);
 
-        $result =  $this->mapper->map( $result, PaginationAggregatorViewModel::class);
+        $result =  $this->mapper->map( $result, FichaProducaoPaginationAggregatorViewModel::class);
         
+
         return  $result;
     }
 

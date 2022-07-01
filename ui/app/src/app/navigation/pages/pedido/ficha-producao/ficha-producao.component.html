@@ -9,7 +9,7 @@
 
       <div class="row">
 
-          <ficha-card (delete)="remove($event)" (edit)="router?.navigate(['ficha-producao'+$event])" [fichaProducao]="ficha" class="col-xl-3 col-lg-4 p-2" *ngFor="let ficha of pageData?.items">
+          <ficha-card (delete)="remove($event)" (edit)="router?.navigate(['ficha-producao/'+$event])" [fichaProducao]="ficha" class="col-xl-3 col-lg-4 p-2" *ngFor="let ficha of pageData?.items">
           </ficha-card>
 
       </div>
