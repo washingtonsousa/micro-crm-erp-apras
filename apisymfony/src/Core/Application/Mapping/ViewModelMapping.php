@@ -16,6 +16,7 @@ use App\Core\Application\ViewModel\PedidoViewModel;
 use App\Core\Application\ViewModel\ProdutoImagemViewModel;
 use App\Core\Application\ViewModel\ProdutoViewModel;
 use App\Core\Application\ViewModel\ReverseHandle\FichaProducaoPedidoProdutoReverseViewModel;
+use App\Core\Application\ViewModel\UsuarioFichaHistoricoViewModel;
 use App\Core\Application\ViewModel\UsuarioViewModel;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
 use App\Core\Domain\Entity\Cliente;
@@ -28,6 +29,7 @@ use App\Core\Domain\Entity\PedidoProduto;
 use App\Core\Domain\Entity\Produto;
 use App\Core\Domain\Entity\ProdutoImagem;
 use App\Core\Domain\Entity\Usuario;
+use App\Core\Domain\Entity\UsuarioFichaHistorico;
 use AutoMapperPlus\Configuration\AutoMapperConfig;
 use AutoMapperPlus\MappingOperation\Operation;
 
@@ -85,10 +87,18 @@ class ViewModelMapping {
         
         self::$config->registerMapping(FichaProducaoViewModel::class, FichaProducao::class);
 
+
+        self::$config->registerMapping(UsuarioFichaHistorico::class, UsuarioFichaHistoricoViewModel::class);
+        self::$config->registerMapping(UsuarioFichaHistoricoViewModel::class, UsuarioFichaHistorico::class);
+
+
         self::$config->registerMapping(FichaProducaoPedidoProdutoReverseViewModel::class, FichaProducao::class);
-        self::$config->registerMapping(FichaProducao::class, FichaProducaoPedidoProdutoReverseViewModel::class);
+        self::$config->registerMapping(FichaProducao::class, 
+        FichaProducaoPedidoProdutoReverseViewModel::class)
+        ->forMember('usuarioFichaHistoricos', Operation::mapCollectionTo(UsuarioFichaHistoricoViewModel::class));
 
         self::$config->registerMapping(FichaProducao::class, FichaProducaoViewModel::class)
+        ->forMember('usuarioFichaHistoricos', Operation::mapCollectionTo(UsuarioFichaHistoricoViewModel::class))
         ->forMember("pedidoProduto", Operation::mapTo(PedidoProdutoViewModel::class));
 
     }

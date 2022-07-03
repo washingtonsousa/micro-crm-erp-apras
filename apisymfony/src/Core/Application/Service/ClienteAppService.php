@@ -4,13 +4,12 @@ namespace App\Core\Application\Service;
 use App\Core\Application\Abstraction\Interface\IClienteAppService;
 use App\Core\Application\Abstraction\ViewModel\PaginatedEntityRequestViewModel;
 use App\Core\Application\Abstraction\ViewModel\Pagination\ClientePaginationAggregatorViewModel;
-use App\Core\Application\Abstraction\ViewModel\Pagination\PaginationAggregatorViewModel;
 use App\Core\Application\ViewModel\ClienteViewModel;
 use App\Core\Domain\Abstraction\Interface\IClienteService;
 use App\Core\Domain\Abstraction\PaginatedEntityRequest;
 use App\Core\Domain\Entity\Cliente;
-use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetClientePaginatedEntityQuery;
+use App\Core\Domain\Specification\ClienteSpecification;
 use App\Core\Shared\Mapper\AutoMapperInitializer;
 use AutoMapperPlus\AutoMapperInterface;
 
@@ -31,27 +30,26 @@ class ClienteAppService implements IClienteAppService {
 
         $cliente = $this->mapper->map($clienteViewModel, Cliente::class);
 
-        // if(!UsuarioSpecification::IsValidForInsert($usuario))
-        //     return null;
+         if(!ClienteSpecification::IsValidForInsert($cliente))
+             return null;
 
         $result =  $this->service->subscribe($cliente);
      
         if($result == null)
             return null;
 
-        $userViewModel = $this->mapper->map($result, ClienteViewModel::class);
+        $clienteViewModel = $this->mapper->map($result, ClienteViewModel::class);
 
-
-        return    $userViewModel ;
+        return    $clienteViewModel ;
 
 
     }
 
     public function update(ClienteViewModel $clienteViewModel, $id) : ClienteViewModel {
 
-        $usuario = $this->mapper->map($clienteViewModel, Cliente::class);
+        $cliente = $this->mapper->map($clienteViewModel, Cliente::class);
 
-        $result =  $this->service->update($usuario, $id);
+        $result =  $this->service->update($cliente, $id);
      
         if($result == null)
             return null;

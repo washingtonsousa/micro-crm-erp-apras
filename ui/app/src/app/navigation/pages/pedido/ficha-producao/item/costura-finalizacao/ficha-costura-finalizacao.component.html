@@ -1,0 +1,106 @@
+
+
+    <section *ngIf="fichaProducao?.estadoFicha == FichaProducaoEstado.RECEBIDO_COSTURA" class="row">
+
+      <div class="col-xl-12">
+
+         <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="Submit()">
+
+            <p>
+
+              Data Recebimento: {{ fichaProducao?.dtBordadoEstampa | serverDateFormat }}
+
+            </p>
+            <p>
+            <label>
+              Quantidade Produzida sem defeitos:
+            </label>
+
+            <input type="number" (keyup)="onFillQtn($event)"  class="form-control" formControlName="qtnCostura" />
+
+
+              <alert *ngIf="formGroup.controls['qtnCostura'].errors?.max" type="danger">
+
+                Quantidade ultrapassa limite máximo da ficha
+
+             </alert>
+
+            </p>
+            <p>
+            <label>
+              Quantidade com defeitos / não produzida
+            </label>
+            <p>
+            {{
+
+              fichaProducao?.qtnCosturaPerda
+
+            }}
+          </p>
+
+          <button [disabled]="!formGroup.valid" class="btn btn-primary" type="submit">
+
+            Finalizar
+
+
+            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+
+        </button>
+
+        </form>
+
+
+      </div>
+
+
+
+    </section>
+
+
+    <section *ngIf="fichaProducao && fichaProducao.estadoFicha > FichaProducaoEstado.RECEBIDO_COSTURA" class="row">
+
+
+      <p>
+
+        <b>   Data recebimento:   </b>  {{ fichaProducao?.dtBordadoEstampa | serverDateFormat }}
+
+      </p>
+
+      <p>
+
+        <b>  Data preenchimento:   </b> {{ fichaProducao?.dtCostura | serverDateFormat }}
+
+      </p>
+      <p>
+        Quantidade Produzida sem defeitos:  {{  fichaProducao?.qtnCostura }}
+      </p>
+      <p>
+
+        Quantidade com defeitos / não produzida :
+
+      {{
+
+        fichaProducao?.qtnCosturaPerda
+
+      }}
+    </p>
+
+
+    <!--   Dados Histórico   -->
+
+
+
+    <p>
+
+      Funcionário recebedor / cadastrante :
+
+    {{
+
+      fichaProducaoAdapter?.usuarioCadastroBordado?.usuario?.nome
+
+    }}
+
+  </p>
+
+
+    </section>

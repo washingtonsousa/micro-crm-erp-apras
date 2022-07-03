@@ -1,24 +1,23 @@
 
 
 
-<card-with-icon iconClass="fas fa-file"  [title]="'Número: ' + ficha?.idFichaProducao?.toString()">
-
-
+<horizontal-card [imgSrc]="ficha?.pedidoProduto?.produto?.produtoImagem?.imagem | imageUrl"  [title]="'Ficha número: ' + ficha?.idFichaProducao?.toString()">
 
   <p>
-    <b> numero pedido: </b> {{ ficha.pedidoProduto?.idPedido }}
-  </p>
-
-  <p>
-    <b> Cliente: </b> {{ ficha.pedidoProduto?.pedido?.cliente?.strNome }}
+    <b> Número pedido: </b> {{ ficha.pedidoProduto?.idPedido }}
+    <b> Cliente: </b> {{ ficha?.pedidoProduto?.pedido?.cliente?.strNome }}
   </p>
 
 
   <p>
-   <!-- <b> Status: </b>  {{ pedido?.status | pedidoStatus }} -->
+    <b> Quantidade para produção: </b> {{ ficha?.qtnProducao }}
   </p>
+  <p>
+    <b> Situação: </b> {{ ficha?.estadoFicha | fichaStatus }}
+  </p>
+
 
   <edit-delete-dropdown (edit)="edit.emit(ficha.idFichaProducao)" (delete)="delete.emit(ficha.idFichaProducao)" class="justify-content-end w-100 p-3 d-flex"></edit-delete-dropdown>
 
 
-</card-with-icon>
+</horizontal-card>

@@ -31,27 +31,29 @@ export class PedidoItemComponent implements OnInit {
       }
 
 
+      load() {
+        LoadingIconService.show("Aguarde...");
 
+        var idFromParam: any = this.route.snapshot.paramMap.get("id");
+        var id = parseInt(idFromParam);
+
+        this.pedidoService.GetById(id).subscribe({
+
+          next: (value:DefaultDataResponse<Pedido>) => {
+            console.log(value);
+            LoadingIconService.hide();
+
+            this.pedido = value.data;
+
+          },
+
+          error: (err) => {  LoadingIconService.hide(); console.log(err); }
+
+        });
+      }
             ngOnInit(): void {
 
-              LoadingIconService.show("Aguarde...");
-
-                var idFromParam: any = this.route.snapshot.paramMap.get("id");
-                var id = parseInt(idFromParam);
-
-                this.pedidoService.GetById(id).subscribe({
-
-                  next: (value:DefaultDataResponse<Pedido>) => {
-                    console.log(value);
-                    LoadingIconService.hide();
-
-                    this.pedido = value.data;
-
-                  },
-
-                  error: (err) => {  LoadingIconService.hide(); console.log(err); }
-
-                });
+              this.load();
 
             }
 

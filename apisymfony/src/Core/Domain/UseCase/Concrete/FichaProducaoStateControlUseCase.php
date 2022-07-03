@@ -26,8 +26,31 @@ class FichaProducaoStateControlUseCase implements IFichaProducaoStateControlUseC
 
         $fichaFromDb = $this->fichaService->getById($ficha->getIdFichaProducao());
 
-        if($fichaFromDb->getEstadoFicha() == FichaProducaoStatusEnum::INICIAL)
-        $fichaFromDb->setStateAsCorteSeparacao();
+        if($fichaFromDb->getEstadoFicha() == FichaProducaoStatusEnum::INICIAL) {
+
+           $fichaFromDb->setStateAsCorteSeparacao($usuarioLogado->idUsuario);
+        }
+
+        else if($fichaFromDb->getEstadoFicha() == FichaProducaoStatusEnum::EM_CORTE_SEPARACAO) {
+
+                $fichaFromDb->setStateAsBordadoEstamparia($usuarioLogado->idUsuario);
+                $fichaFromDb->setCorteSeparacaoData($ficha);
+        }
+
+
+        else if($fichaFromDb->getEstadoFicha() == FichaProducaoStatusEnum::EM_BORDADO_ESTAMPARIA) {
+
+            $fichaFromDb->setStateAsCostura($usuarioLogado->idUsuario);
+            $fichaFromDb->setBordadoEstampariaData($ficha);
+        }
+
+        else if($fichaFromDb->getEstadoFicha() == FichaProducaoStatusEnum::EM_COSTURA) {
+
+            $fichaFromDb->setStateAsFinalizado($usuarioLogado->idUsuario);
+            $fichaFromDb->setCosturaData($ficha);
+            $fichaFromDb->setFinalizacaoData();
+
+        }
 
         $command = new PersistCommand($fichaFromDb, $this->unityOfWork);
 

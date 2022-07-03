@@ -15,7 +15,7 @@ export class ServerDatePipe implements PipeTransform {
                 return "";
 
             let split = serverDate?.date.split(" ");
-            let hourFromServerDate = split[1];
+            let hourFromServerDate = split[1].substring(0,8);
             let dateFromServerDate = split[0];
 
 

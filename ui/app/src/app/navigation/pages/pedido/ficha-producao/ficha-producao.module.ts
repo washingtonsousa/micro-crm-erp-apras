@@ -14,13 +14,15 @@ import { MaterialModule } from "src/app/ui-components/material/material.module";
 import { FichaProducaoCardComponent } from "./card/ficha-card.component";
 import { FichaProducaoComponent } from "./ficha-producao.component";
 import { FichaProducaoFormComponent } from "./form/ficha-producao-form.component";
+import { FichaBordadoEstampariaComponent } from "./item/bordado-estamparia/ficha-bordado-estamparia.component";
 import { FichaCorteSeparacaoComponent } from "./item/corte-separacao/ficha-corte-separacao.component";
+import { FichaCosturaFinalizacaoComponent } from "./item/costura-finalizacao/ficha-costura-finalizacao.component";
 import { FichaItemComponent } from "./item/ficha-item.component";
 
 
 @NgModule({
     providers: [],
-    declarations: [FichaProducaoCardComponent, FichaCorteSeparacaoComponent, FichaItemComponent, FichaProducaoComponent, FichaProducaoFormComponent],
+    declarations: [FichaProducaoCardComponent, FichaCosturaFinalizacaoComponent, FichaBordadoEstampariaComponent, FichaCorteSeparacaoComponent, FichaItemComponent, FichaProducaoComponent, FichaProducaoFormComponent],
     exports: [FichaProducaoComponent, FichaItemComponent, FichaProducaoFormComponent],
     imports: [ TabsModule, PipesModule, MaterialModule, PipesModule, CommonModule, AlertModule,  GeneralUIModule,
       LayoutModule,  MaterialModule,  LayoutModule, ReactiveFormsModule,

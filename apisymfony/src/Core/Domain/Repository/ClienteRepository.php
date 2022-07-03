@@ -55,12 +55,14 @@ class ClienteRepository  extends ServiceEntityRepository implements IClienteRepo
             }
 
            
-            public function checkIfExists(string $strNome) {
+            public function checkIfExists(string $strNome, string $codigo) {
 
                 $result = (int) $this->createQueryBuilder('u')
                 ->select('COUNT(u.idCliente)')
                 ->where('u.strNome = :strNome')
+                ->andWhere('u.codigoCliente = :codigoCliente')
                 ->setParameter('strNome', $strNome)
+                ->setParameter('codigoCliente', $codigo)
                 ->getQuery()
                 ->getSingleScalarResult();
 

@@ -4,12 +4,14 @@ namespace App\Core\Domain\Service;
 use App\Core\Domain\Abstraction\Interface\IClienteRepository;
 use App\Core\Domain\Abstraction\Interface\IClienteService;
 use App\Core\Domain\Abstraction\Interface\IUnityOfWork;
+use App\Core\Domain\Command\CheckIfClienteExistsCommand;
 use App\Core\Domain\Command\GetEntityCommand;
 use App\Core\Domain\Command\GetPageOfItemsCommand;
 use App\Core\Domain\Command\PersistCommand;
 use App\Core\Domain\Entity\Cliente;
 use App\Core\Domain\Entity\NonDatabaseEntity\PaginationAggregator;
 use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetClientePaginatedEntityQuery;
+use App\Core\Domain\Specification\ClienteSpecification;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -34,13 +36,11 @@ class ClienteService implements IClienteService {
 
         public function CheckIfExists(Cliente $cliente) : ?bool {
                 
+                         $command = new CheckIfClienteExistsCommand($cliente, $this->repo);
+                         $result = $command->Execute();
 
-                        // $command = new CheckIfUserExistsCommand($user, $this->userRepo);
-
-                        // $result = $command->Execute();
-
-                        // if($result->isSuccess())
-                        //         return $result->getResult();
+                         if($result->isSuccess())
+                                 return $result->getResult();
 
                         return null;
 
@@ -85,8 +85,8 @@ class ClienteService implements IClienteService {
         public function subscribe(Cliente $cliente) {
                 
 
-                // if(!UsuarioSpecification::MustNotExists($this->CheckIfExists($user)))
-                //     return null;
+                if(!ClienteSpecification::MustNotExists($this->CheckIfExists($cliente)))
+                     return null;
 
                 $command = new PersistCommand($cliente, $this->unityOfWork);
 

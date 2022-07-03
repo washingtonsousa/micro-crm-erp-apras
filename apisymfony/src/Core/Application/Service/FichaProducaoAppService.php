@@ -15,6 +15,7 @@ use App\Core\Domain\Entity\NonDatabaseEntity\Query\GetUsuarioPaginatedEntityQuer
 use App\Core\Domain\Entity\Usuario;
 use App\Core\Domain\UseCase\Abstractions\ICreateFichaProducaoUseCase;
 use App\Core\Domain\UseCase\Abstractions\IFichaProducaoStateControlUseCase;
+use App\Core\Shared\Event\AssertionConcern;
 use App\Core\Shared\Mapper\AutoMapperInitializer;
 use App\Core\Shared\Resolver\DependencyResolver;
 use AutoMapperPlus\AutoMapperInterface;
@@ -70,14 +71,14 @@ class FichaProducaoAppService implements IFichaProducaoAppService {
 
     public function update(FichaProducaoViewModel $fichaViewModel, $id) : FichaProducaoViewModel {
 
-        $usuario = $this->mapper->map($fichaViewModel, Usuario::class);
+        $usuario = $this->mapper->map($fichaViewModel, FichaProducao::class);
 
         $result =  $this->fichaService->update($usuario, $id);
      
         if($result == null)
             return null;
 
-        $fichaViewModel = $this->mapper->map($result, UsuarioViewModel::class);
+        $fichaViewModel = $this->mapper->map($result, FichaProducaoViewModel::class);
 
         return    $fichaViewModel ;
 
@@ -110,7 +111,11 @@ class FichaProducaoAppService implements IFichaProducaoAppService {
 
     public function getById(int $id) : ?FichaProducaoViewModel {
 
+        if(AssertionConcern::IsSatisfiedBy(array(
 
+                AssertionConcern::AssertTrue($id > 0, "Id inválido")
+
+        )))
 
         $result =  $this->mapper->map($this->fichaService->getById($id), FichaProducaoViewModel::class);
         return  $result;

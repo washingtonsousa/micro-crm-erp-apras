@@ -16,7 +16,7 @@ public function getById($id) : ?Cliente;
 /**
  * @return bool
  */
-public function checkIfExists(string $strNome);
+public function checkIfExists(string $strNome, string $codigo);
 
 
 }

@@ -21,9 +21,7 @@ class CreateFichaProducaoUseCase implements ICreateFichaProducaoUseCase {
         
         $usuarioLogado = $this->usuarioService->getCurrentLoggedInUser();
 
-        $ficha->setIdUsuarioCadastroFicha($usuarioLogado->idUsuario);
-
-        $ficha->prepareForInsert();
+        $ficha->prepareForInsert($usuarioLogado->idUsuario);
 
         $ficha = $this->fichaService->subscribe($ficha);
 

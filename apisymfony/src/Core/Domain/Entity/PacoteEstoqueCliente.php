@@ -36,6 +36,14 @@ class PacoteEstoqueCliente
      *   @ORM\JoinColumn(name="id_ficha_producao", referencedColumnName="id_ficha_producao")
      * })
      */
+    private $fichaProducao;
+
+
+    /**
+     * @var \FichaProducao
+     *
+     * @ORM\Column(name="id_ficha_producao", type="integer", nullable=true)
+     */
     private $idFichaProducao;
 
     /**

@@ -1,6 +1,7 @@
 import { ServerDate } from "../server/server-date.model";
 import { PedidoProduto } from "./pedido-produto";
 import { Usuario } from "./usuario";
+import { UsuarioFichaHistorico } from "./usuario-historico";
 
 export class FichaProducao {
 
@@ -24,23 +25,9 @@ export class FichaProducao {
   qtnPerdido!: number;
   dtCadastro!: ServerDate;
 
-
-  //Usuarios
-  idUsuarioCorteSeparacao!: number;
-  idUsuarioBordadoEstamparia!: number;
-  idUsuarioCostura!: number;
-  idUsuarioCadastroFicha!: number;
-
-  usuarioCadastroFicha!: Usuario;
-  usuarioCorteSeparacao!: Usuario;
-  usuarioBordadoEstamparia!: Usuario;
-  usuarioCostura!: Usuario;
-
-
   //Pedido Herdado Associacao
   pedidoProduto!: PedidoProduto;
 
-
-
+  usuarioFichaHistoricos: UsuarioFichaHistorico[] = [];
 
 }

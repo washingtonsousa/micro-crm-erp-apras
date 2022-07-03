@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FichaProducao } from "src/app/business/entities/model/ficha-producao";
 import { PedidoProduto } from "src/app/business/entities/model/pedido-produto";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
 import { FichaProducaoService } from "src/app/services/core/api/ficha-producao.service";
+import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
 
 
 
@@ -16,7 +17,7 @@ export class FichaProducaoFormComponent implements OnInit {
 
   formGroup!: FormGroup;
   @Input("pedidoProduto") pedidoProduto!: PedidoProduto;
-
+  @Output("onSubmitSuccess") onSubmitSuccess: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     public  formBuilder: FormBuilder,
     public  dataService: FichaProducaoService)
@@ -27,10 +28,14 @@ export class FichaProducaoFormComponent implements OnInit {
       console.log("fichaSendoCriada");
       console.log(this.formGroup.value);
 
+      LoadingIconService.show();
+
       this.dataService.Subscribe(this.formGroup.value).subscribe({
 
           next: (value: DefaultDataResponse<FichaProducao>) => {
               console.log(value);
+              LoadingIconService.hide();
+              this.onSubmitSuccess.emit();
           }
 
 

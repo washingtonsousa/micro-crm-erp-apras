@@ -2,14 +2,14 @@
 
   <box-container>
 
-    <crud-panel [disableAddBtn]="true"  (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData">
+    <crud-panel [disableAddBtn]="true" (onRefreshClick)="loadPageData()" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData">
     </crud-panel>
 
     <div class="container" class="mt-3">
 
       <div class="row">
 
-          <ficha-card (delete)="remove($event)" (edit)="router?.navigate(['ficha-producao/'+$event])" [fichaProducao]="ficha" class="col-xl-3 col-lg-4 p-2" *ngFor="let ficha of pageData?.items">
+          <ficha-card (delete)="remove($event)" (edit)="router?.navigate(['ficha-producao/'+$event])" [fichaProducao]="ficha" class="col-xl-6 col-lg-6 col-md-12 col-12 p-2" *ngFor="let ficha of pageData?.items">
           </ficha-card>
 
       </div>

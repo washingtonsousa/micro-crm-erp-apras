@@ -28,8 +28,7 @@ export class FichaItemComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-
+  load() {
     LoadingIconService.show();
 
     var idFromParam: any = this.route.snapshot.paramMap.get("id");
@@ -50,6 +49,14 @@ export class FichaItemComponent implements OnInit {
     })
   }
 
+  ngOnInit(): void {
+
+    this.load();
+  }
+
+  onFichaUpdate(event:any) {
+    this.load();
+  }
 
   SalvarCorte() {
 

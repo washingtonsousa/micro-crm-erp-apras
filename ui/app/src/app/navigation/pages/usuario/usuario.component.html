@@ -2,7 +2,20 @@
 
   <box-container>
 
-    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalUsuario.openModal()">  </crud-panel>
+    <crud-panel (onSearchClick)="onChangeSearchTerm($event)"
+
+      (onChangeOrdering)="request.order = $event; loadPageData()"
+
+      (onCurrentPageChanges)="request.page = $event; loadPageData();"
+
+      (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData"
+
+      (onRefreshClick)="loadPageData()"
+
+      (onAddClick)="modalUsuario.openModal()">
+
+
+   </crud-panel>
 
           <div class="container" class="mt-3">
 

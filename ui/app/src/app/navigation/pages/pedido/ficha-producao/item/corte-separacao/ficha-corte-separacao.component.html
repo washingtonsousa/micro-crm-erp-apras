@@ -53,9 +53,72 @@
 
             }}
           </p>
+
+          <button [disabled]="!formGroup.valid" class="btn btn-primary" type="submit">
+
+            Enviar Para Bordado/Estamparia
+
+
+            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+
+        </button>
+
         </form>
 
 
       </div>
+
+
+
+    </section>
+
+
+    <section *ngIf="fichaProducao && fichaProducao.estadoFicha > FichaProducaoEstado.RECEBIDO_CORTE" class="row">
+
+
+      <p>
+
+        <b>  Data recebimento: </b> {{ fichaProducao?.dtProducao | serverDateFormat }}
+
+      </p>
+
+
+      <p>
+
+        <b>  Data preenchimento: </b>  {{ fichaProducao?.dtCorteSeparacao | serverDateFormat }}
+
+      </p>
+
+      <p>
+        Quantidade Produzida sem defeitos:  {{  fichaProducao?.qtnCorteSeparacao }}
+      </p>
+      <p>
+
+        Quantidade com defeitos / não produzida :
+
+      {{
+
+        fichaProducao?.qtnCorteSeparacaoPerda
+
+      }}
+    </p>
+
+
+    <!--   Dados Histórico   -->
+
+
+
+    <p>
+
+      Funcionário recebedor :
+
+    {{
+
+      fichaProducaoAdapter?.usuarioRecebimentoCorte?.usuario?.nome
+
+    }}
+
+  </p>
+
 
     </section>

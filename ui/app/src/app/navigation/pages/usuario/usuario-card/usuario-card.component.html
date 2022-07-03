@@ -4,6 +4,13 @@
   <p>  {{ usuario.email }}  </p>
   <p> Documento: {{ usuario.documento }}  </p>
 
+  <p> {{ usuario.nivelAcesso | nivelAcesso }}  </p>
+
+
+  <p> <small> Cadastro:  {{ usuario.dataCriacao | serverDateFormat }} </small>   </p>
+  <p><small>  Atualização  {{ usuario.dataAtualizacao | serverDateFormat }}  </small>   </p>
+
+
   <edit-delete-dropdown (edit)="edit.emit(usuario.idUsuario)" (delete)="delete.emit(usuario.idUsuario)" class="justify-content-end w-100 p-3 d-flex"></edit-delete-dropdown>
 
 

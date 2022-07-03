@@ -77,7 +77,7 @@
 
 <clean-modal #modalFichaCreate>
 
-  <ficha-producao-form #fichaForm></ficha-producao-form>
+  <ficha-producao-form #fichaForm (onSubmitSuccess)="modalFichaCreate.closeModal(); onAddFicha.emit()"></ficha-producao-form>
 
 </clean-modal>
 

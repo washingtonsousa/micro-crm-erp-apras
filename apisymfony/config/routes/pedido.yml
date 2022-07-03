@@ -15,11 +15,6 @@ api_pedido_get_by_id:
     controller: App\Controller\PedidoController::getById
     methods:  [GET]
 
-api_pedido_patch:
-    path: /
-    controller: App\Controller\PedidoController::patch
-    methods:  [PATCH]
-
 api_pedido_put:
     path: /{id}
     controller: App\Controller\PedidoController::put
