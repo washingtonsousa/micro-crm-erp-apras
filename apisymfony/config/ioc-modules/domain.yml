@@ -26,6 +26,8 @@ services:
   #Use cases
   App\Core\Domain\UseCase\Abstractions\ICreateFichaProducaoUseCase: '@App\Core\Domain\UseCase\Concrete\CreateFichaProducaoUseCase'
   App\Core\Domain\UseCase\Abstractions\IFichaProducaoStateControlUseCase: '@App\Core\Domain\UseCase\Concrete\FichaProducaoStateControlUseCase'
+  App\Core\Domain\UseCase\Abstractions\ICreatePedidoUseCase: '@App\Core\Domain\UseCase\Concrete\CreatePedidoUseCase'
+  App\Core\Domain\UseCase\Abstractions\IClienteFullUpdateUseCase: '@App\Core\Domain\UseCase\Concrete\ClienteFullUpdateUseCase'
 
   #Repositories
 
@@ -47,10 +49,12 @@ services:
   App\Core\Domain\Abstraction\Interface\IFichaProducaoService: '@App\Core\Domain\Service\FichaProducaoService'
   App\Core\Domain\Abstraction\Interface\IClienteImagemService: '@App\Core\Domain\Service\ClienteImagemService'
   App\Core\Domain\Abstraction\Interface\IProdutoImagemService: '@App\Core\Domain\Service\ProdutoImagemService'
+  App\Core\Domain\Abstraction\Interface\IMultiEntityPaginationAggregatorService: '@App\Core\Domain\Service\MultiEntityPaginationAggregatorService'
+  App\Core\Domain\Abstraction\Interface\IPersistanceDomainService: '@App\Core\Domain\Service\PersistanceDomainService'
   App\Core\Domain\Abstraction\Interface\IClienteImagemRepository: '@App\Core\Domain\Repository\ClienteImagemRepository'
   App\Core\Domain\Abstraction\Interface\IProdutoImagemRepository: '@App\Core\Domain\Repository\ProdutoImagemRepository'
- 
 
- #Diverse
+
+  #Diverse
   App\Core\Domain\Abstraction\Interface\IUnityOfWork: '@unity_of_work'
   Symfony\Component\Cache\Adapter\AdapterInterface: '@cache.app'

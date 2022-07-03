@@ -12,15 +12,14 @@ export class CrudPanelComponent   {
   @Output("onRefreshClick") onRefreshClick: EventEmitter<any> = new EventEmitter<any>();
   @Output("onAddClick") onAddClick: EventEmitter<any> = new EventEmitter<any>();
   @Output("onSearchClick") onSearchClick: EventEmitter<any> = new EventEmitter<any>();
+
+
   order: string = "DESC";
   @Input("pageData") paginationResponse!:  PaginationReponse<any>;
   @Output("onItensPerPageChange") onItensPerPageChange: EventEmitter<number> = new EventEmitter<number>();
   @Output("onCurrentPageChanges") onCurrentPageChanges: EventEmitter<number> = new EventEmitter<number>();
   @Output("onChangeOrdering") onChangeOrdering: EventEmitter<string> = new EventEmitter<string>();
   searchValue: string = '';
-
-
-  @Input("disableAddBtn") disableAddBtn:boolean = false;
 
   get numbers() {
 

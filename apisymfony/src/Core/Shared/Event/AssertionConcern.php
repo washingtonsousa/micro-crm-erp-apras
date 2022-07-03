@@ -11,7 +11,7 @@ class AssertionConcern {
     public static function  IsSatisfiedBy($validations)
     {
 
-      $notificationsNotNull = array_filter($validations, fn($value) => !is_null($value));
+      $notificationsNotNull = $validations == null ? array() : array_filter($validations, fn($value) => !is_null($value));
 
 
       AssertionConcern::NotifyAll($notificationsNotNull);

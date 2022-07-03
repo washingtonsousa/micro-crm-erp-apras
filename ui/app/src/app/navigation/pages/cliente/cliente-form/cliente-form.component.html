@@ -1,7 +1,5 @@
 <form [formGroup]="formGroup" (ngSubmit)="Submit()">
 
-
-
   <label class="mb-2 required"> Nome: </label>
 
   <input type="text" class="form-control mb-1" formControlName="strNome" />
@@ -23,6 +21,13 @@
 
   </alert>
 
+  <p>
+
+
+  <label> Cliente é a própria fábrica? </label>
+
+  <switch-btn [checked]="entity?.isLoja == 1" (onCheck)="patchClienteLojaFlag($event)"> </switch-btn>
+</p>
 
   <label class="mb-2"> Imagem/Ícone do cliente: </label>
 

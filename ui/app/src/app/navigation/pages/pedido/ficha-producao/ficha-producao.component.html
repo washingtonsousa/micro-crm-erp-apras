@@ -2,7 +2,7 @@
 
   <box-container>
 
-    <crud-panel [disableAddBtn]="true" (onRefreshClick)="loadPageData()" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData">
+    <crud-panel (onRefreshClick)="loadPageData()" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData">
     </crud-panel>
 
     <div class="container" class="mt-3">

@@ -6,6 +6,7 @@ export class Cliente {
   idCliente!: number;
   clienteImagem!: ClienteImagem;
   codigoCliente!: string;
+  isLoja: number = 0;
 
 
 

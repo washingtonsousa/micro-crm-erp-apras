@@ -47,8 +47,11 @@ class FichaProducaoViewModel extends EntityViewModel   implements \JsonSerializa
 
     public function jsonSerialize() {
 
-       if($this->pedidoProduto != null)
+       if($this->pedidoProduto != null) {
+
            $this->pedidoProduto->fichasProducao = array();
+           $this->pedidoProduto->pedido->cliente->clienteImagem = null;
+       }
 
       return [
 

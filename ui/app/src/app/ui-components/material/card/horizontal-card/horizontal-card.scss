@@ -16,19 +16,25 @@
 .card-img {
   width:30%;
   padding:4px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .horizontal-card {
 
 
-
+  min-height: 100px;
   border-left-width: 2px;
   border-left-style: solid;
 }
 
 .horizontal-card-body {
   padding: 4px;
+  padding-top: 10px;
   width:70%;
+
 }
 
 
