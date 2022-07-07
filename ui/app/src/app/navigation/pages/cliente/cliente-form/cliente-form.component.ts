@@ -27,6 +27,17 @@ export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> impl
   }
 
 
+  patchClienteLojaFlag(isLoja:boolean) {
+
+        this.formGroup.patchValue({
+
+          isLoja: isLoja ? 1 : 0
+
+        });
+
+
+  }
+
 
   Submit() {
 
@@ -75,7 +86,8 @@ export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> impl
     this.formGroup = this.formBuilder.group({
       idCliente:[this.entity?.idCliente],
       strNome: [this.entity?.strNome, [Validators.required]],
-      codigoCliente: [this.entity?.codigoCliente, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
+      codigoCliente: [this.entity?.codigoCliente, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
+      isLoja: [this.entity?.isLoja, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
 
     });
 

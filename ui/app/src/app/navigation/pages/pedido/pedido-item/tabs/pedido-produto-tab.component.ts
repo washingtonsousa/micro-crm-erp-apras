@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { PedidoProdutoAdapter } from "src/app/business/adapters/pedido-produto-json.adapter";
 import { PedidoProduto } from "src/app/business/entities/model/pedido-produto";
 
@@ -12,6 +12,9 @@ export class PedidoProdutoTabComponent implements OnInit, OnChanges {
 
 
     currentPedidoProdutoDetail!: PedidoProdutoAdapter;
+    @Output("onAddFicha") onAddFicha: EventEmitter<any> = new EventEmitter<any>();
+
+
 
     ngOnChanges(changes: SimpleChanges): void {
       console.log(changes);

@@ -42,44 +42,38 @@ class FichaProducaoViewModel extends EntityViewModel   implements \JsonSerializa
 
     public $pedidoProduto;
 
-    public $idUsuarioCorteSeparacao;
-
-    public $usuarioCorteSeparacao;
-
-
-    public $idUsuarioBordadoEstamparia;
-
-    public $usuarioBordadoEstamparia;
-
-
-    public $idUsuarioCostura;
-
-    public $usuarioCostura;
-
-
-    public $idUsuarioCadastroFicha;
-
-    public $usuarioCadastroFicha;
+    public array $usuarioFichaHistoricos = array();
 
 
     public function jsonSerialize() {
 
-       if($this->pedidoProduto != null)
+       if($this->pedidoProduto != null) {
+
            $this->pedidoProduto->fichasProducao = array();
+           $this->pedidoProduto->pedido->cliente->clienteImagem = null;
+       }
 
       return [
-        'idFichaProducao' => $this->idFichaProducao,
 
+          'idFichaProducao' => $this->idFichaProducao,
           'idPedidoProduto' => $this->idPedidoProduto,
-          'idUsuarioCadastroFicha' => $this->idUsuarioCadastroFicha,
           'dtCadastro' => $this->dtCadastro,
           'qtnProducao' => $this->qtnProducao,
-          'usuarioCadastroFicha' => $this->usuarioCadastroFicha,
+          'usuarioFichaHistoricos' => $this->usuarioFichaHistoricos,
           'estadoFicha' => $this->estadoFicha,
           'pedidoProduto' => $this->pedidoProduto,
-          'dtProducao' => $this->dtProducao
-
-
+          'dtProducao' => $this->dtProducao,
+          'qtnCorteSeparacao' => $this->qtnCorteSeparacao,
+          'qtnCorteSeparacaoPerda' => $this->qtnCorteSeparacaoPerda,
+          'dtCorteSeparacao' => $this->dtCorteSeparacao,
+          'qtnBordadoEstampa' => $this->qtnBordadoEstampa,
+          'qtnBordadoEstampaPerda' => $this->qtnBordadoEstampaPerda,
+          'dtBordadoEstampa' => $this->dtBordadoEstampa,
+          'qtnCostura' => $this->qtnCostura,
+          'qtnCosturaPerda' => $this->qtnCosturaPerda,
+          'dtCostura' => $this->dtBordadoEstampa,
+          'qtnProduzido' => $this->qtnProduzido,
+          'qtnPerdido' => $this->qtnPerdido
 
       ];
   }

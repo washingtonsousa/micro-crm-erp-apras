@@ -14,7 +14,7 @@ export abstract class CrudPageTemplate<T> {
 
   public pageData!: PaginationReponse<T>;
   public notifications: any[] = [];
-  public request:PaginationDataRequest<T> = new PaginationDataRequest<T>(1,4);
+  public request:PaginationDataRequest<T> = new PaginationDataRequest<T>(1,6);
   public currentEntityForUpdate!: T;
   public dataService!: IPaginatedCrudService<T>;
   public changeDetector!: ChangeDetectorRef

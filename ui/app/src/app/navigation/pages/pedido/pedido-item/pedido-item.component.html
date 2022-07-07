@@ -44,7 +44,7 @@
 
               </h4>
               <p>
-                {{ pedido?.dataCriacao?.date}}
+                {{ pedido?.dataCriacao | serverDateFormat}}
               </p>
               <h4> Observações:</h4>
               <p>
@@ -74,7 +74,7 @@
 
           <tab heading="Produtos" class="p-3">
 
-              <pedido-produto-tab [pedidoProdutos]="pedido?.pedidoProdutos">
+              <pedido-produto-tab (onAddFicha)="load()" [pedidoProdutos]="pedido?.pedidoProdutos">
               </pedido-produto-tab>
 
           </tab>

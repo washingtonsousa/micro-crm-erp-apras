@@ -2,23 +2,23 @@
 
   <box-container>
 
-    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalPedido.openModal()">
+    <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onRefreshClick)="loadPageData()" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" >
 
 
     </crud-panel>
 
 
-    <div class="container" class="mt-3">
+    <crud-container (onAddClick)="modalPedido.openModal()">
 
       <div class="row">
 
-          <pedido-card (delete)="remove($event)" (edit)="router?.navigate(['pedido/'+$event])" [pedido]="pedido" class="col-xl-3 col-lg-4 p-2" *ngFor="let pedido of pageData?.items">
+        <pedido-card (delete)="remove($event)" (edit)="router?.navigate(['pedido/'+$event])" [pedido]="pedido" class="col-xl-2 col-lg-3 p-2" *ngFor="let pedido of pageData?.items">
 
-          </pedido-card>
+        </pedido-card>
 
       </div>
 
-    </div>
+    </crud-container>
 
 
     <clean-modal #modalPedido title="Cadastro de Pedido">

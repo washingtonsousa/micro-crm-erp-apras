@@ -22,6 +22,13 @@ class Cliente
     public $idCliente;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="fl_loja", type="integer", nullable=false)
+     */
+    public $isLoja;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="str_nome", type="string", length=255, nullable=false)
@@ -44,7 +51,7 @@ class Cliente
     /**
     *  @ORM\OneToMany(targetEntity="Pedido", mappedBy="cliente", cascade={"all"}, indexBy="idCliente")
     */
-    private $pedidos;
+    public $pedidos;
 
     /**
      * Get the value of idCliente
@@ -93,4 +100,5 @@ class Cliente
 
         return $this;
     }
+
 }

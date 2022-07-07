@@ -1,5 +1,5 @@
 
-<crud-panel [disableAddBtn]="true" [pageData]="pageData" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadShowcase();" (onItensPerPageChange)="onItemsPerPageChange($event)" >
+<crud-panel  [pageData]="pageData" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadShowcase();" (onItensPerPageChange)="onItemsPerPageChange($event)" >
   <section class="d-flex">  <small> Tamanho: </small>   <select-box (onValueChanges)="onFilterTamanho($event)"  [list]="tamanhos"></select-box> </section>
 </crud-panel>
 

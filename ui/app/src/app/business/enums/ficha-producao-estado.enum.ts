@@ -4,6 +4,7 @@ export enum FichaProducaoEstado {
   RECEBIDO_CORTE = 2,
   RECEBIDO_BORDADO = 3,
   RECEBIDO_COSTURA = 4,
-  FINALIZADO = 5
+  FINALIZADO = 5,
+  ENVIADO_ESTOQUE = 6
 
 }

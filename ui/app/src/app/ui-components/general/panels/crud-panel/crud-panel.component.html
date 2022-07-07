@@ -3,9 +3,7 @@
 
     <div class="container">
 
-
       <div class="row mb-3">
-
 
           <div class="crud-item col-xl-6 col-12 row d-flex">
 
@@ -18,14 +16,15 @@
             <div class="col-xl-6 col-12 d-flex">
 
 
-            <small>  Itens: </small>
+
+            <small class="mr-1">  Itens: </small>
 
 
             <select class="form-control"(change)="onItensPerPageChangeFunction($event)"  name="itemsPerPage">
 
               <option value="4">
 
-                4
+                6
 
               </option>
 
@@ -65,8 +64,6 @@
               <button class="control-btn btn btn-default" (click)="onRefreshClick.emit()"> <i class="fas fa-refresh"></i>  </button>
 
               <button class="control-btn btn btn-warning" (click)="toggleOrdering()"> <i class="fas fa-exchange"></i>  </button>
-
-              <button *ngIf="!disableAddBtn" class="control-btn btn btn-success" (click)="onAddClick.emit($event)" tooltip="Adicionar"> <i class="fas fa-plus"></i>  </button>
 
         </div>
 

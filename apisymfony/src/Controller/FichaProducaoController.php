@@ -3,7 +3,6 @@ namespace App\Controller;
 
 use App\Core\Application\Abstraction\Interface\IFichaProducaoAppService;
 use App\Core\Application\ViewModel\FichaProducaoViewModel;
-use App\Core\Application\ViewModel\PedidoViewModel;
 use App\Core\Shared\Abstraction\Interface\IPaginatedRequestHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,7 +18,6 @@ class FichaProducaoController extends AbstractController {
        private SerializerInterface  $serializerInterface
         )
         {
-
         }
         
 
@@ -46,11 +44,8 @@ class FichaProducaoController extends AbstractController {
 
         public function getById(Request $request)
         {
-            
+
               $result = $this->fichaProducaoAppService->getById($request->attributes->get('id'));
-
-                  
-
               return new JsonResponse($result);
 
         }
@@ -63,7 +58,7 @@ class FichaProducaoController extends AbstractController {
               $id = $request->attributes->get('id');
 
                 $result = $this->fichaProducaoAppService->patch($requestValue, $id);
-               return new JsonResponse();
+               return new JsonResponse($result);
 
         }
 
@@ -85,9 +80,7 @@ class FichaProducaoController extends AbstractController {
         {
 
             $id = $request->attributes->get('id');
-
             $result = $this->fichaProducaoAppService->remove($id);
-
             return new JsonResponse(null, $result ? 200 : 204);
 
         }

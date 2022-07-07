@@ -89,6 +89,7 @@ class Produto
     
     public function fullUpdate(Produto $produto) {
         $this->codigoProduto = $produto->codigoProduto;
+        $this->codigoCliente = $produto->codigoCliente;
         $this->nome = $produto->nome;
         $this->tamanho = $produto->tamanho;
         $this->cor = $produto->cor;

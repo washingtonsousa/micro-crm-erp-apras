@@ -1,4 +1,4 @@
-import { Component, Output,EventEmitter } from "@angular/core";
+import { Component, Output,EventEmitter, Input } from "@angular/core";
 
 
 
@@ -9,7 +9,7 @@ import { Component, Output,EventEmitter } from "@angular/core";
 
       <!-- Rounded switch -->
       <label class="switch">
-        <input type="checkbox" (change)="checkValue($event)">
+        <input type="checkbox" [checked]="checked" (change)="checkValue($event)">
         <span class="slider round"></span>
       </label>
 
@@ -19,6 +19,8 @@ import { Component, Output,EventEmitter } from "@angular/core";
 export class SwitchButtonComponent {
 
   @Output("onCheck") checkControl: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input("checked") checked = false;
+
 
   checkValue($event:any) {
         console.log($event);

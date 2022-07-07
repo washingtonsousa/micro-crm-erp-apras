@@ -1,18 +1,17 @@
 
 
 
-<card-with-icon iconClass="fas fa-tshirt"  [title]="produto?.nome" [imgSrc]="produto?.produtoImagem?.imagem | imageUrl">
+<card-with-icon (onCheck)="checkCard(true)" #cardAutoRef [checkBoxEnabled]="true" iconClass="fas fa-tshirt"  [title]="produto?.nome" [imgSrc]="produto?.produtoImagem?.imagem | imageUrl">
 
+  <p>
+    Cód EAN: {{produto | ean}}
+  </p>
 
-  <span>
-    Código Etiqueta/Barras: {{produto | ean}}
-  </span>
+  <p>
 
-  <span>
+      Cód Produto: {{produto?.codigoProduto}}
 
-      Código Produto: {{produto?.codigoProduto}}
-
-  </span>
+  </p>
 
   <p>
 

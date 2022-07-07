@@ -13,6 +13,7 @@ import { UsuarioCardComponent } from "./usuario-card/usuario-card.component";
 import { UsuarioChangeSenhaFormComponent } from "../../../layout/user-menu/usuario-change-senha-form/usuario-change-senha-form.component";
 import { UsuarioFormComponent } from "./usuario-form/usuario-form.component";
 import { UsuarioComponent } from "./usuario.component";
+import { PipesModule } from "src/app/pipes/pipes.module";
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { UsuarioComponent } from "./usuario.component";
   declarations: [UsuarioCardComponent, UsuarioFormComponent,  UsuarioComponent],
   exports: [UsuarioCardComponent, UsuarioComponent,  UsuarioFormComponent],
   imports: [CommonModule, HttpClientModule, ReactiveFormsModule, MaterialModule, GeneralUIModule,
-    LayoutModule, FlexBoxModule, AlertModule, ModalModule]
+    LayoutModule, PipesModule, FlexBoxModule, AlertModule, ModalModule]
 })
 export class UsuarioModule {
 

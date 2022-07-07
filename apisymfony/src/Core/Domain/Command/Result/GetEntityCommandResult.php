@@ -7,7 +7,7 @@ use Exception;
 
 class GetEntityCommandResult {
 
-    private mixed $entity;
+    private mixed $entity = null;
     private ?Exception $ex;
 
     private function __construct()

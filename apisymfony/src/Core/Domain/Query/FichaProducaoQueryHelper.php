@@ -12,12 +12,14 @@ class FichaProducaoQueryHelper {
         ->leftJoin('pP.produto', 'prd')
         ->leftJoin('pP.pedido', 'p')
         ->leftJoin('p.cliente', 'c')
+        ->leftJoin('f.usuarioFichaHistoricos', 'uFH')
+
         ->orderBy('f.'.$orderField, $order);
         
     }
 
     public static function buildDefaultSelectForGetPageList(\Doctrine\ORM\QueryBuilder $queryBuilder) {
-        return $queryBuilder->select('f', 'p', 'c', 'pP', 'prd');
+        return $queryBuilder->select('f', 'p', 'c', 'pP', 'prd', 'uFH');
     }
 
 }

@@ -15,11 +15,6 @@ api_produto_get_by_id:
     controller: App\Controller\ProdutoController::getById
     methods:  [GET]
 
-api_produto_patch:
-    path: /
-    controller: App\Controller\ProdutoController::patch
-    methods:  [PATCH]
-
 api_produto_put:
     path: /{id}
     controller: App\Controller\ProdutoController::put

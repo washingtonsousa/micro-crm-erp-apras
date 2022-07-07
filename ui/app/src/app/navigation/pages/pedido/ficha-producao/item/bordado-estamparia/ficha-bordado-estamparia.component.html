@@ -1,0 +1,108 @@
+
+
+    <section *ngIf="fichaProducao?.estadoFicha == FichaProducaoEstado.RECEBIDO_BORDADO" class="row">
+
+      <div class="col-xl-12">
+
+         <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="Submit()">
+
+            <p>
+
+              Data Recebimento: {{ fichaProducao?.dtCorteSeparacao | serverDateFormat }}
+
+            </p>
+            <p>
+            <label>
+              Quantidade Produzida sem defeitos:
+            </label>
+
+            <input type="number" (keyup)="onFillQtn($event)"  class="form-control" formControlName="qtnBordadoEstampa" />
+
+
+              <alert *ngIf="formGroup.controls['qtnBordadoEstampa'].errors?.max" type="danger">
+
+                Quantidade ultrapassa limite máximo da ficha
+
+             </alert>
+
+            </p>
+            <p>
+            <label>
+              Quantidade com defeitos / não produzida
+            </label>
+            <p>
+            {{
+
+              fichaProducao?.qtnBordadoEstampaPerda
+
+            }}
+          </p>
+
+          <button [disabled]="!formGroup.valid" class="btn btn-primary" type="submit">
+
+            Enviar Para Costura
+
+
+            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+
+        </button>
+
+        </form>
+
+
+      </div>
+
+
+
+    </section>
+
+
+    <section *ngIf="fichaProducao && fichaProducao.estadoFicha > FichaProducaoEstado.RECEBIDO_BORDADO" class="row">
+
+
+      <p>
+
+       <b> Data Recebimento: </b>  {{ fichaProducao?.dtCorteSeparacao | serverDateFormat }}
+
+      </p>
+
+
+      <p>
+
+        <b> Data Preenchimento: </b> {{ fichaProducao?.dtBordadoEstampa | serverDateFormat }}
+
+      </p>
+
+      <p>
+        Quantidade Produzida sem defeitos:  {{  fichaProducao?.qtnBordadoEstampa }}
+      </p>
+      <p>
+
+        Quantidade com defeitos / não produzida :
+
+      {{
+
+        fichaProducao?.qtnBordadoEstampaPerda
+
+      }}
+    </p>
+
+
+    <!--   Dados Histórico   -->
+
+
+
+    <p>
+
+      Funcionário recebedor / cadastrante :
+
+    {{
+
+      fichaProducaoAdapter?.usuarioCadastroBordado?.usuario?.nome
+
+    }}
+
+  </p>
+
+
+    </section>

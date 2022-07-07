@@ -14,4 +14,9 @@ class FichaProducaoStatusEnum {
 
     const FINALIZADO = 5;
 
+    const ENVIADO_ESTOQUE = 6;
+
+
+    const CANCELADA = -1;
+
 }
