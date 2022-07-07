@@ -24,6 +24,13 @@ export class FichaProducaoFormComponent implements OnInit {
   {
   }
 
+  get maxQuantidade() {
+    let maxQuantidade = this.pedidoProduto.quantidade > 200 ? 200 : this.pedidoProduto.quantidade;
+
+    return maxQuantidade;
+
+  }
+
   Submit() {
       console.log("fichaSendoCriada");
       console.log(this.formGroup.value);
@@ -51,6 +58,7 @@ export class FichaProducaoFormComponent implements OnInit {
   }
 
   init() {
+
     let maxQuantidade = this.pedidoProduto.quantidade > 200 ? 200 : this.pedidoProduto.quantidade;
 
     console.log(maxQuantidade);
@@ -60,8 +68,8 @@ export class FichaProducaoFormComponent implements OnInit {
 
         qtnProducao: [ 1, [
           Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(maxQuantidade)
+          Validators.min(1),
+          Validators.max(maxQuantidade)
           ]
         ]
 

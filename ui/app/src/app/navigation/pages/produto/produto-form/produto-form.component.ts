@@ -72,6 +72,9 @@ export class ProdutoFormComponent extends UpdateCreateReactiveForm<Produto> impl
 
     this.tamanhos.forEach(element => {
 
+      if(element.value == '')
+        return;
+
       var produtoForInsert = Object.assign({}, this.formGroup.value);
       produtoForInsert.tamanho = element.value;
       observablesArray.push(

@@ -1,6 +1,16 @@
 <container>
 
+  <h1> Pedidos </h1>
+
+
+  <hr />
+
+
   <box-container>
+
+
+
+
 
     <crud-panel (onSearchClick)="onChangeSearchTerm($event)" (onRefreshClick)="loadPageData()" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" >
 

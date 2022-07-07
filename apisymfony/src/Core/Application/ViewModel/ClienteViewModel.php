@@ -11,7 +11,7 @@ class ClienteViewModel extends EntityViewModel implements \JsonSerializable {
     public mixed $clienteImagem;
     public mixed $pedidos;
     public string $codigoCliente;
-    public int $isLoja;
+    public bool $isLoja;
     
     public function jsonSerialize() {
 

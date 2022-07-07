@@ -56,7 +56,7 @@ class PedidoProduto
      *   @ORM\JoinColumn(name="id_pedido", referencedColumnName="id_pedido")
      * })
      */
-    private $pedido;
+    public $pedido;
 
     /**
      *@ORM\OneToMany(targetEntity="FichaProducao", mappedBy="pedidoProduto", cascade={"all"})

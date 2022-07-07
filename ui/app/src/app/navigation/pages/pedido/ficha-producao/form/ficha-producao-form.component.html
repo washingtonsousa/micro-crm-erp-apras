@@ -5,7 +5,13 @@
 
     <input type="number" formControlName="qtnProducao" class="form-control"  />
 
-    <alert *ngIf="formGroup.touched && formGroup.controls['qtnProducao'].errors?.maxlength" type="danger">
+    <p>
+
+      Máximo de produtos: {{maxQuantidade}}
+
+    </p>
+
+    <alert *ngIf="formGroup.touched && formGroup.controls['qtnProducao'].errors?.max" type="danger">
 
           Quantidade ultrapassa limite máximo de ítens por ficha
 

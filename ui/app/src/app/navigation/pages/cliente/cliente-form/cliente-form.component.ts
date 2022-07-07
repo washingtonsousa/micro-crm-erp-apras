@@ -87,7 +87,7 @@ export class ClienteFormComponent extends UpdateCreateReactiveForm<Cliente> impl
       idCliente:[this.entity?.idCliente],
       strNome: [this.entity?.strNome, [Validators.required]],
       codigoCliente: [this.entity?.codigoCliente, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-      isLoja: [this.entity?.isLoja, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
+      isLoja: [this.entity?.isLoja == undefined ? false : this.entity.isLoja, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
 
     });
 

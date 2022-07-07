@@ -1,7 +1,7 @@
 
 
 
-<card-with-icon (onCheck)="checkCard(true)" #cardAutoRef [checkBoxEnabled]="true" iconClass="fas fa-tshirt"  [title]="produto?.nome" [imgSrc]="produto?.produtoImagem?.imagem | imageUrl">
+<card-with-icon (onCheck)="checkCard(true)" #cardAutoRef [checkBoxEnabled]="false" iconClass="fas fa-tshirt"  [title]="produto?.nome" [imgSrc]="produto?.produtoImagem?.imagem | imageUrl">
 
   <p>
     Cód EAN: {{produto | ean}}
@@ -15,7 +15,7 @@
 
   <p>
 
-   <small>  Tamanho: {{ produto?.tamanho }} </small>
+   <small>  Tamanho: {{ produto?.tamanho  | tamanho }} </small>
 
   </p>
 

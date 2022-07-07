@@ -1,14 +1,19 @@
 <container>
+  <h1> Produtos </h1>
 
+    <hr />
   <box-container>
+
+
+  
 
     <crud-panel  (onRefreshClick)="loadPageData()" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalProduto.openModal()">
 
     <section class="d-flex">
 
-       <input class="mx-1" (change)="checkControl($event)"  [checked]="checked" type="checkbox" />
+       <!-- <input class="mx-1" (change)="checkControl($event)"  [checked]="checked" type="checkbox" /> -->
 
-       <select #selectAction class="form-control" (change)="onDeleteSelectedCheck(selectAction.value)">
+       <!-- <select #selectAction class="form-control" (change)="onDeleteSelectedCheck(selectAction.value)">
         <option>
 
           Ações
@@ -20,7 +25,7 @@
 
            </option>
 
-       </select>
+       </select> -->
 
        <small> Tamanho: </small>   <select-box (onValueChanges)="onFilterTamanho($event)"  [list]="tamanhos"></select-box> </section>
 

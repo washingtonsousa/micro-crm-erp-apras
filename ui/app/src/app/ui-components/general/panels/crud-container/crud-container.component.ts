@@ -12,9 +12,9 @@ import { PaginationReponse } from "src/app/business/entities/response/pagination
 
 <div class="row">
 
-  <div class="col-xl-12 w-100 d-flex justify-content-end p-4">
+  <div class="controls-area col-xl-12 w-100 d-flex justify-content-end p-4">
 
-      <button class="btn btn-success" (click)="onAddClick.emit()"> <i class="fas fa-plus"></i> </button>
+      <button class="btn btn-success btn-lg" (click)="onAddClick.emit()"> <i class="fas fa-plus"></i> </button>
 
   </div>
 
@@ -25,6 +25,8 @@ import { PaginationReponse } from "src/app/business/entities/response/pagination
 
 
   `,
+
+styleUrls: ["crud-container.scss"]
 })
 export class CrudContainerComponent   {
 

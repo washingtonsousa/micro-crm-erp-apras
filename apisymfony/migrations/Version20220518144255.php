@@ -19,14 +19,13 @@ final class Version20220518144255 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
-        // $this->addSql('CREATE UNIQUE INDEX UNIQ_A5136F422A813255 ON cliente_imagem (id_cliente)');
-        // $this->addSql('CREATE UNIQUE INDEX UNIQ_A5136F423C2736E4 ON cliente_imagem (id_imagem)');
-        // $this->addSql('ALTER TABLE produto_imagem DROP FOREIGN KEY fk_produto_imagem_produto1');
-        // $this->addSql('DROP INDEX fk_produto_imagem_produto1_idx ON produto_imagem');
-        // $this->addSql('ALTER TABLE produto_imagem ADD id_produto INT NOT NULL, DROP idproduto, CHANGE id_imagem id_imagem INT NOT NULL');
-        // $this->addSql('ALTER TABLE produto_imagem ADD CONSTRAINT FK_911CC0688231E0A7 FOREIGN KEY (id_produto) REFERENCES produto (id_produto)');
-        // $this->addSql('CREATE INDEX fk_produto_imagem_produto1_idx ON produto_imagem (id_produto)');
+         $this->addSql('CREATE UNIQUE INDEX UNIQ_A5136F422A813255 ON cliente_imagem (id_cliente)');
+         $this->addSql('CREATE UNIQUE INDEX UNIQ_A5136F423C2736E4 ON cliente_imagem (id_imagem)');
+         $this->addSql('ALTER TABLE produto_imagem DROP FOREIGN KEY fk_produto_imagem_produto1');
+         $this->addSql('DROP INDEX fk_produto_imagem_produto1_idx ON produto_imagem');
+         $this->addSql('ALTER TABLE produto_imagem ADD id_produto INT NOT NULL, DROP idproduto, CHANGE id_imagem id_imagem INT NOT NULL');
+         $this->addSql('ALTER TABLE produto_imagem ADD CONSTRAINT FK_911CC0688231E0A7 FOREIGN KEY (id_produto) REFERENCES produto (id_produto)');
+         $this->addSql('CREATE INDEX fk_produto_imagem_produto1_idx ON produto_imagem (id_produto)');
     }
 
     public function down(Schema $schema): void

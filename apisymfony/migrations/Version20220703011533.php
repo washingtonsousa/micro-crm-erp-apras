@@ -20,17 +20,17 @@ final class Version20220703011533 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE usuario_historico_ficha (id_usuario_ficha_historico INT AUTO_INCREMENT NOT NULL, id_ficha_producao INT NOT NULL, id_usuario INT NOT NULL, estado_ficha INT NOT NULL, dt_historico DATETIME NOT NULL, INDEX fk_usuario_historico_idx (id_usuario), INDEX fk_ficha_producao_historico_idx (id_ficha_producao), PRIMARY KEY(id_usuario_ficha_historico)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE usuario_historico_ficha ADD CONSTRAINT FK_2F67ADC4C29DC7EC FOREIGN KEY (id_ficha_producao) REFERENCES ficha_producao (id_ficha_producao)');
-        $this->addSql('ALTER TABLE usuario_historico_ficha ADD CONSTRAINT FK_2F67ADC4FCF8192D FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)');
-        $this->addSql('ALTER TABLE ficha_producao DROP FOREIGN KEY fk_ficha_producao_usuario1');
-        $this->addSql('ALTER TABLE ficha_producao DROP FOREIGN KEY fk_ficha_producao_usuario2');
-        $this->addSql('ALTER TABLE ficha_producao DROP FOREIGN KEY fk_ficha_producao_usuario3');
-        $this->addSql('ALTER TABLE ficha_producao DROP FOREIGN KEY fk_ficha_producao_usuario4');
-        $this->addSql('DROP INDEX fk_ficha_producao_usuario1_idx ON ficha_producao');
-        $this->addSql('DROP INDEX fk_ficha_producao_usuario2_idx ON ficha_producao');
-        $this->addSql('DROP INDEX fk_ficha_producao_usuario3_idx ON ficha_producao');
-        $this->addSql('DROP INDEX fk_ficha_producao_usuario4_idx ON ficha_producao');
+        // $this->addSql('CREATE TABLE usuario_historico_ficha (id_usuario_ficha_historico INT AUTO_INCREMENT NOT NULL, id_ficha_producao INT NOT NULL, id_usuario INT NOT NULL, estado_ficha INT NOT NULL, dt_historico DATETIME NOT NULL, INDEX fk_usuario_historico_idx (id_usuario), INDEX fk_ficha_producao_historico_idx (id_ficha_producao), PRIMARY KEY(id_usuario_ficha_historico)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
+        // $this->addSql('ALTER TABLE usuario_historico_ficha ADD CONSTRAINT FK_2F67ADC4C29DC7EC FOREIGN KEY (id_ficha_producao) REFERENCES ficha_producao (id_ficha_producao)');
+        // $this->addSql('ALTER TABLE usuario_historico_ficha ADD CONSTRAINT FK_2F67ADC4FCF8192D FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)');
+        // $this->addSql('ALTER TABLE ficha_producao DROP FOREIGN KEY fk_ficha_producao_usuario1');
+        // $this->addSql('ALTER TABLE ficha_producao DROP FOREIGN KEY fk_ficha_producao_usuario2');
+        // $this->addSql('ALTER TABLE ficha_producao DROP FOREIGN KEY fk_ficha_producao_usuario3');
+        // $this->addSql('ALTER TABLE ficha_producao DROP FOREIGN KEY fk_ficha_producao_usuario4');
+        // $this->addSql('DROP INDEX fk_ficha_producao_usuario1_idx ON ficha_producao');
+        // $this->addSql('DROP INDEX fk_ficha_producao_usuario2_idx ON ficha_producao');
+        // $this->addSql('DROP INDEX fk_ficha_producao_usuario3_idx ON ficha_producao');
+        // $this->addSql('DROP INDEX fk_ficha_producao_usuario4_idx ON ficha_producao');
         $this->addSql('ALTER TABLE ficha_producao DROP id_usuario_corte_separacao, DROP id_usuario_bordado_estamparia, DROP id_usuario_costura, DROP id_usuario_cadastro_ficha, CHANGE id_pedido_produto id_pedido_produto INT NOT NULL');
         $this->addSql('ALTER TABLE ficha_producao RENAME INDEX fk_ficha_producao_pedido_produto1_idx TO IDX_FFFB7AEA3B37CBF');
     }
