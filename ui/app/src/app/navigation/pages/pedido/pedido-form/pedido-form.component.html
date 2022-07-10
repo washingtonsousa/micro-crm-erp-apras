@@ -4,7 +4,7 @@
 
   <label class="mb-2 required"> Cliente: </label>
 
-  <select-box formControlName="idCliente" [list]="clienteSelectBox"></select-box>
+  <select-box (onValueChanges)="onChooseCliente($event)" formControlName="idCliente" [list]="clienteSelectBox"></select-box>
 
   <alert type="danger" *ngIf="formGroup.touched && formGroup.controls['idCliente'].errors?.required">
 
@@ -63,7 +63,7 @@
 
             {{
 
-              pedidoProduto?.produto?.tamanho
+              pedidoProduto?.tamanho | tamanho
 
             }}
 
@@ -88,7 +88,7 @@
 
 
 
-    <button type="button" class="btn btn-sm btn-outline-success" (click)="modalProdutos.openModal()"> <i class="fas fa-plus"></i> Adicionar </button>
+    <button [disabled]="!choosedCliente" type="button" class="btn btn-sm btn-outline-success" (click)="modalProdutos.openModal()"> <i class="fas fa-plus"></i> Adicionar </button>
 
   </section>
 
@@ -117,7 +117,7 @@
 
 <clean-modal #modalProdutos title="Produtos disponíveis">
 
- <produto-showcase (onChoose)="onChooseProduto($event); modalProdutos.closeModal();  " >
+ <produto-showcase #produtoShowCase (onChoose)="onChooseProduto($event); modalProdutos.closeModal();  " >
 
 
  </produto-showcase>

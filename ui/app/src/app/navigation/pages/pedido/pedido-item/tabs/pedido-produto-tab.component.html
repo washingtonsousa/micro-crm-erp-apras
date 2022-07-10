@@ -10,6 +10,12 @@
 
           <h6>    Produto</h6>
         </td>
+
+        <td>
+          <h6>  Tamanho</h6>
+        </td>
+
+
             <td >
               <h6>    Qtd</h6>
             </td>
@@ -40,6 +46,15 @@
 
         <td>
          {{  adapter?.pedidoProduto?.produto?.nome }}
+        </td>
+
+
+        <td>
+        <p>
+
+          {{ adapter?.pedidoProduto?.tamanho | tamanho }}
+
+         </p>
         </td>
 
         <td>

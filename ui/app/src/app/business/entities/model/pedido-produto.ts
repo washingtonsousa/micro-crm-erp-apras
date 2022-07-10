@@ -9,9 +9,8 @@ export class PedidoProduto {
   pedido!: Pedido;
   produto!: Produto;
   quantidade!:number;
+  tamanho!:string;
   idPedidoProduto!: number;
-
-
   fichasProducao: FichaProducao[] = [];
 
 

@@ -9,6 +9,9 @@
   <box-container>
 
     <crud-panel (onRefreshClick)="loadPageData()" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData">
+
+    <label> <small>Situação Ficha:</small> </label>  <select-box (onValueChanges)="onFilterEstadoFicha($event)" formControlName="idCliente" [list]="estadoFichaSelectBox"></select-box>
+
     </crud-panel>
 
     <div class="container" class="mt-3">

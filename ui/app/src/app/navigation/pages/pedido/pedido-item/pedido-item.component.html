@@ -9,12 +9,12 @@
     <box-container>
 
 
-   
-
-      <alert *ngIf="!pedido?.idPedido" type="info">
 
 
-          <h1>  Pedido não encontrato ou não existe ou houve falha no carregamento </h1>
+      <alert *ngIf="!pedido?.idPedido" type="danger">
+
+
+          <p>  Pedido não encontrado, não existe ou houve falha no carregamento. Operação não permitida. </p>
 
       </alert>
 

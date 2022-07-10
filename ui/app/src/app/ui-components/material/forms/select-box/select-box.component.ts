@@ -43,7 +43,7 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
 
   disabled = false;
 
-  selectedItem!:any;
+  selectedItemValue!:any;
   filteredValue:any;
   filteredKey:any;
 
@@ -66,6 +66,9 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
 
   onInputClick() {
     this.showList = true;
+
+    if(this.selectedItemValue == '')
+      this.filteredList = this.list;
   }
 
   @HostListener('document:click', ['$event'])
@@ -82,12 +85,12 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
   onSelect($event:any) {
 
       this.markAsTouched();
-      this.selectedItem = $event.value;
+      this.selectedItemValue = $event.value;
       this.filteredKey = $event.key;
-      this.onValueChanges.emit(this.selectedItem);
+      this.onValueChanges.emit(this.selectedItemValue);
       this.showList = false;
-      this.writeValue(this.selectedItem);
-      this.onChange(this.selectedItem);
+      this.writeValue(this.selectedItemValue);
+      this.onChange(this.selectedItemValue);
 
   }
 
@@ -99,8 +102,6 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
 
 
     this.filteredList = this.list.filter(s => {
-
-      console.log(s);
 
       let value: string | number | any = s.value;
 
@@ -150,7 +151,7 @@ export class SelectBoxComponent implements ControlValueAccessor, OnInit, OnChang
   }
 
   writeValue(obj: any): void {
-    this.selectedItem = obj;
+    this.selectedItemValue = obj;
 
     this.selectInputByUniqueValue(obj);
 

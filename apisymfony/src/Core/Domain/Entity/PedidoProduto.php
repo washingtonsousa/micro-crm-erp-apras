@@ -43,6 +43,13 @@ class PedidoProduto
 
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="tamanho", type="string", length=255, nullable=true)
+     */
+    public $tamanho;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Produto")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_produto", referencedColumnName="id_produto")

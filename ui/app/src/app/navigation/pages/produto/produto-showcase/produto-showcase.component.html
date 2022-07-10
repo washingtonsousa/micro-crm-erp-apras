@@ -1,20 +1,29 @@
 
 <crud-panel  [pageData]="pageData" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadShowcase();" (onItensPerPageChange)="onItemsPerPageChange($event)" >
-  <section class="d-flex">  <small> Tamanho: </small>   <select-box (onValueChanges)="onFilterTamanho($event)"  [list]="tamanhos"></select-box> </section>
+  <!-- <section class="d-flex">  <small> Tamanho: </small>   <select-box (onValueChanges)="onFilterTamanho($event)"  [list]="tamanhos"></select-box> </section> -->
 </crud-panel>
 
 <div class="row">
 
 <produto-card [editMode]="false"  [produto]="produto" class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 p-2" *ngFor="let produto of pageData?.items">
 
-<input #amountInput type="number" value=1 class="form-control"  />
 
-<button (click)="choose(produto, amountInput.value)" class="btn btn-success w-100">
+<label class="mb-2 required"> Tamanho: </label>
+
+<select-box #selectBoxChoosen [list]="tamanhos"></select-box>
+
+<label class="mb-2 required"> Quantidade: </label>
+
+<input  #amountInput type="number" value=1 class="form-control mb-1"  />
+
+<button [disabled]="(!selectBoxChoosen.selectedItemValue)" (click)="choose(produto, amountInput.value, selectBoxChoosen.selectedItemValue)" class="btn btn-success w-100">
 
 Add
+
 <i class="fas fa-plus"></i>
 
 </button>
+
 
 </produto-card>
 

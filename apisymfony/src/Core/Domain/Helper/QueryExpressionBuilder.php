@@ -39,14 +39,22 @@ class QueryExpressionBuilder {
 
        public function addAndExpression(QueryFilter $filter) : QueryExpressionBuilder {
 
+
+
+              if(isset($this->queryExpressionSTR) && $this->queryExpressionSTR != "")
           $this->queryExpressionSTR .= ' AND ' . $this->buildExpByQueryFilter($filter);
+          else
+          $this->queryExpressionSTR .= $this->buildExpByQueryFilter($filter);
           return $this;
 
        }
 
        public function addORExpression(QueryFilter $filter) : QueryExpressionBuilder {
 
+              if(isset($this->queryExpressionSTR) && $this->queryExpressionSTR != "")
               $this->queryExpressionSTR .= ' OR ' . $this->buildExpByQueryFilter($filter);
+              else
+              $this->queryExpressionSTR .= $this->buildExpByQueryFilter($filter);
               return $this;
        }
 

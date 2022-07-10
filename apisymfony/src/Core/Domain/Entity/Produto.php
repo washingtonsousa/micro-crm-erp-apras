@@ -46,13 +46,6 @@ class Produto
     /**
      * @var string|null
      *
-     * @ORM\Column(name="tamanho", type="string", length=255, nullable=true)
-     */
-    private $tamanho;
-
-    /**
-     * @var string|null
-     *
      * @ORM\Column(name="descricao", type="string", length=255, nullable=true)
      */
     private $descricao;
