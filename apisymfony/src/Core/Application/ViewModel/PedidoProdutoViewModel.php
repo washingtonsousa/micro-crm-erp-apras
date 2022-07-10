@@ -15,7 +15,8 @@ class PedidoProdutoViewModel extends EntityViewModel {
     public mixed $fichasProducao = array();
     public mixed $produto;
     public mixed $pedido; 
-    
+    public string $tamanho; 
+
     public function jsonSerialize() {
 
   

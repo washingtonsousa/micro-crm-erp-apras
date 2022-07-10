@@ -48,7 +48,7 @@
 
   </alert>
 
-
+<!--
   <section *ngIf="!updateMode">
 
     <label> Criar itens todos os tamanhos? </label>
@@ -62,13 +62,13 @@
  <label class="mb-2 required"> Tamanho: </label>
 
  <select-box formControlName="tamanho" [list]="tamanhos"></select-box>
-
+</section>-->
   <p class="mt-2"> <small>
 
     Todos os itens marcados com "*" são obrigatórios.
 
   </small></p>
-</section>
+
 
   <button [disabled]="!formGroup.valid" class="mt-2 btn btn-primary "> <i class="fas fa-save"></i> Enviar  </button>
 

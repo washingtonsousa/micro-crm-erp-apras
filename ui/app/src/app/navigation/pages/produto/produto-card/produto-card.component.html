@@ -4,7 +4,7 @@
 <card-with-icon (onCheck)="checkCard(true)" #cardAutoRef [checkBoxEnabled]="false" iconClass="fas fa-tshirt"  [title]="produto?.nome" [imgSrc]="produto?.produtoImagem?.imagem | imageUrl">
 
   <p>
-    Cód EAN: {{produto | ean}}
+    <!-- Códs EAN: {{produto | ean}} -->
   </p>
 
   <p>
@@ -13,11 +13,6 @@
 
   </p>
 
-  <p>
-
-   <small>  Tamanho: {{ produto?.tamanho  | tamanho }} </small>
-
-  </p>
 
   <p>
 

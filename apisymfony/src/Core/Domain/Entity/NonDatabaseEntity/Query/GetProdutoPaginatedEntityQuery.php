@@ -13,7 +13,7 @@ class GetProdutoPaginatedEntityQuery extends PaginatedEntityQuery {
 
         public function __construct(PaginatedEntityRequest $request)
         {   
-            $this->allowedFields = array('idProduto', 'nome', 'tamanho');   
+            $this->allowedFields = array('idProduto', 'nome', 'tamanho', 'codigoCliente');   
             parent::__construct($request);
         }
 
@@ -35,13 +35,12 @@ class GetProdutoPaginatedEntityQuery extends PaginatedEntityQuery {
             $params = $this->getAllowedQueryParams();
 
             if(trim($this->request->getTerm()) != '') {
-
                 $array['nome'] = new QueryFilter('nome', $this->request->getTerm(), 'like');
-            
+                $array['strNome'] = new QueryFilter('strNome', $this->request->getTerm(), '=');
             }
-
-            if(trim($params['tamanho']) != '') {
-                    $array['tamanho'] = new QueryFilter('tamanho', $params['tamanho'], '=');
+      
+            if(trim($params['codigoCliente']) != '') {
+                $array['codigoCliente'] = new QueryFilter('codigoCliente', $params['codigoCliente'], '=');
             }
 
             return  $array;
@@ -55,15 +54,17 @@ class GetProdutoPaginatedEntityQuery extends PaginatedEntityQuery {
             if(count($filters) == 0)
             $this->queryExpressionBuilder = new QueryExpressionBuilder('p');
            
-            foreach($filters as $filter) {
 
-                if(isset($this->queryExpressionBuilder))
-                $this->queryExpressionBuilder->addORExpression($filter, 'p');
+            if(!isset($this->queryExpressionBuilder)) {
 
-                if(!isset($this->queryExpressionBuilder))
-                $this->queryExpressionBuilder = new QueryExpressionBuilder('p', $filter);
-     
+                if(isset($filters['idProduto'])) {
+                    $idProduto= $filters['idProduto'];
+                    $this->queryExpressionBuilder->addORExpression($idProduto);
+                }
+
             }
+
+
 
             return $this->queryExpressionBuilder->build();
 

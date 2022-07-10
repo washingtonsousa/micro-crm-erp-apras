@@ -1,7 +1,7 @@
 
 
 
-<card-with-icon iconClass="fas fa-list"  [title]="'Número: ' + pedido?.idPedido?.toString()">
+<card-with-icon (onIconClick)="edit.emit(pedido.idPedido)"  iconClass="fas fa-list"  [title]="'Número: ' + pedido?.idPedido?.toString()">
 
 
   <p>

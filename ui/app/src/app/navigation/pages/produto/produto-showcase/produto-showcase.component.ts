@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component,EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { PedidoProduto } from "src/app/business/entities/model/pedido-produto";
 import { Produto } from "src/app/business/entities/model/produto";
 import { ProdutoPaginationDataRequest } from "src/app/business/entities/request/produto-pagination-data-request";
@@ -21,30 +22,35 @@ export class ProdutoShowcaseComponent extends CrudPageTemplate<Produto> implemen
   public override request: ProdutoPaginationDataRequest = new ProdutoPaginationDataRequest();
   @Output("onChoose") onChoose: EventEmitter<PedidoProduto> = new EventEmitter<PedidoProduto>();
 
-  constructor(public override dataService:  ProdutoService,
+  constructor(public  formBuilder: FormBuilder, public override dataService:  ProdutoService,
     public override changeDetector: ChangeDetectorRef){
 
       super();
 
   }
 
-        choose(produto: Produto, amount: string) {
+        choose(produto: Produto, amount: string, tamanho: string
+          ) {
+
 
             var pedidoProduto = new PedidoProduto();
+            pedidoProduto.produto = produto;
 
             pedidoProduto.quantidade = parseInt(amount);
             pedidoProduto.idProduto = produto.idProduto;
-            pedidoProduto.produto = produto;
+            pedidoProduto.tamanho = tamanho;
 
             this.onChoose.emit(pedidoProduto);
 
         }
 
-        onFilterTamanho(newTamanho:string) {
-          this.request.tamanho = newTamanho;
+        onFilterCliente(codigoCliente:string) {
+          this.request.codigoCliente = codigoCliente;
           this.request.page = 1;
           this.loadPageData();
         }
+
+
 
        override ngOnInit(): void {
             this.loadShowcase();
@@ -52,11 +58,11 @@ export class ProdutoShowcaseComponent extends CrudPageTemplate<Produto> implemen
 
           loadShowcase() {
             LoadingIconService.show("Aguarde...");
+
             this.dataService.Get(this.request)
             .subscribe((data:DefaultDataResponse<PaginationReponse<Produto>>) => {
               super.pageData = data.data;
               LoadingIconService.hide();
-
 
             });
 

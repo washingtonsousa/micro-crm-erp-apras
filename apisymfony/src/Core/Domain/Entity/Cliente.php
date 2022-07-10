@@ -53,6 +53,7 @@ class Cliente
     */
     public $pedidos;
 
+    
     /**
      * Get the value of idCliente
      *

@@ -5,14 +5,11 @@ import { HttpErrorResponse, HttpEventType } from "@angular/common/http";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
 import { UpdateCreateReactiveForm } from "../../forms/abstractions/update-create-reactive-form";
 import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
-import { DatePipe } from "@angular/common";
-import { SafeStyle } from "@angular/platform-browser";
-import * as enviroment from "src/environments/environment";
 import { Produto } from "src/app/business/entities/model/produto";
 import { ProdutoService } from "src/app/services/core/api/produto-service.service";
 import { ProdutoImagem } from "src/app/business/entities/model/produto-imagem";
 import { SelectBoxItem } from "src/app/ui-components/material/forms/select-box/select-box-item.model";
-import { forkJoin, Observable, tap } from "rxjs";
+import { forkJoin,  tap } from "rxjs";
 import { tamanhosSelectBoxItems } from "src/app/business/helpers/data/produto-data.helper";
 import { ProdutoExtension } from "src/app/business/helpers/data/produto-extension";
 import { ClienteService } from "src/app/services/core/api/cliente-service.service";
@@ -48,110 +45,110 @@ export class ProdutoFormComponent extends UpdateCreateReactiveForm<Produto> impl
     super();
   }
 
-  createForkWithProgressMessage(observablesArray: any[], message = "Cadastrando os produtos em lista...") {
-    return forkJoin(observablesArray.map((req: any) => {
-      return req.pipe(
-        tap(e => {
+  // createForkWithProgressMessage(observablesArray: any[], message = "Cadastrando os produtos em lista...") {
+  //   return forkJoin(observablesArray.map((req: any) => {
+  //     return req.pipe(
+  //       tap(e => {
 
-          this.currentCountPosition ++;
+  //         this.currentCountPosition ++;
 
-          this.multipleSubscribeProgress = this.currentCountPosition ==
-          observablesArray.length ? 100 :
-           Math.ceil((100 / observablesArray.length) * this.currentCountPosition);
+  //         this.multipleSubscribeProgress = this.currentCountPosition ==
+  //         observablesArray.length ? 100 :
+  //          Math.ceil((100 / observablesArray.length) * this.currentCountPosition);
 
-          LoadingIconService.show(message + this.progressPercentageMessage);
+  //         LoadingIconService.show(message + this.progressPercentageMessage);
 
-        })
-      );
-    }));
-  }
+  //       })
+  //     );
+  //   }));
+  // }
 
-  createObservables() {
+  // createObservables() {
 
-    let observablesArray = <any> [];
+  //   let observablesArray = <any> [];
 
-    this.tamanhos.forEach(element => {
+  //   this.tamanhos.forEach(element => {
 
-      if(element.value == '')
-        return;
+  //     if(element.value == '')
+  //       return;
 
-      var produtoForInsert = Object.assign({}, this.formGroup.value);
-      produtoForInsert.tamanho = element.value;
-      observablesArray.push(
-          this.dataService.Subscribe(produtoForInsert)
-      );
+  //     var produtoForInsert = Object.assign({}, this.formGroup.value);
+  //     produtoForInsert.tamanho = element.value;
+  //     observablesArray.push(
+  //         this.dataService.Subscribe(produtoForInsert)
+  //     );
 
-    });
+  //   });
 
-    return this.createForkWithProgressMessage(observablesArray);
+  //   return this.createForkWithProgressMessage(observablesArray);
 
-  }
+  // }
 
-createObservablesFromProdutoSubscription(results: any[]) {
+// createObservablesFromProdutoSubscription(results: any[]) {
 
-  let observablesArray = <any> [];
+//   let observablesArray = <any> [];
 
-  for(let result of results)
-  observablesArray.push(this.dataService.UploadProdutoLogo(result.data.idProduto, this.file));
+//   for(let result of results)
+//   observablesArray.push(this.dataService.UploadProdutoLogo(result.data.idProduto, this.file));
 
-  return this.createForkWithProgressMessage(observablesArray, "Enviando fotos dos produtos... ");
+//   return this.createForkWithProgressMessage(observablesArray, "Enviando fotos dos produtos... ");
 
-  
-}
+
+// }
 
 onFileChanges(file: File) {
   console.log(file);
   this.file = file;
 }
 
-onNextMultipleUpload() {
+// onNextMultipleUpload() {
 
-  this.currentCountPosition = 0;
-  this.onSuccess.emit();
-  LoadingIconService.hide();
+//   this.currentCountPosition = 0;
+//   this.onSuccess.emit();
+//   LoadingIconService.hide();
 
-}
+// }
 
-onNextSubmitList(results: any) {
+// onNextSubmitList(results: any) {
 
-  this.currentCountPosition = 0;
-  console.log(this.file);
-  if(this.file == undefined) {
+//   this.currentCountPosition = 0;
+//   console.log(this.file);
+//   if(this.file == undefined) {
 
-    LoadingIconService.hide();
-    this.onSuccess.emit();
+//     LoadingIconService.hide();
+//     this.onSuccess.emit();
 
-  }
+//   }
 
-  if(this.file != undefined)
-    this.createObservablesFromProdutoSubscription(results).subscribe({
-          next:  (results) => this.onNextMultipleUpload()
-   });
+//   if(this.file != undefined)
+//     this.createObservablesFromProdutoSubscription(results).subscribe({
+//           next:  (results) => this.onNextMultipleUpload()
+//    });
 
 
-}
+//}
 
- SubmitList() {
+//  SubmitList() {
 
-  console.log("executandoUpdateEmLista");
-  this.createObservables().subscribe({
+//   console.log("executandoUpdateEmLista");
+//   this.createObservables().subscribe({
 
-           next: (results) => this.onNextSubmitList(results),
-           error: (err) => {
+//            next: (results) => this.onNextSubmitList(results),
+//            error: (err) => {
 
-             LoadingIconService.hide();
-             console.log(err);
+//              LoadingIconService.hide();
+//              console.log(err);
 
-           },
+//            },
 
-           complete: () => {
-            this.multipleSubscribeProgress = 0;
-           }
-         });
+//            complete: () => {
+//             this.multipleSubscribeProgress = 0;
+//            }
+//          });
 
-        console.log("executadoUpdateEmLista");
+//         console.log("executadoUpdateEmLista");
 
- }
+//  }
 
  SubmitSingleItem() {
 
@@ -164,6 +161,7 @@ onNextSubmitList(results: any) {
 
             next:  (dataImage:DefaultDataResponse<ProdutoImagem>) => {
               this.onSuccess.emit(data.data);
+
             },
             error: (data:HttpErrorResponse) => {
               this.onFail.emit(data.error);
@@ -183,9 +181,9 @@ onNextSubmitList(results: any) {
     if(this.formGroup == null)
     return;
 
-    if(this.todosTamanhos)
-      this.SubmitList();
-      else
+    // if(this.todosTamanhos)
+    //   this.SubmitList();
+    //   else
       this.SubmitSingleItem();
 
   }
@@ -204,6 +202,8 @@ onNextSubmitList(results: any) {
 
   initForm(): void {
 
+    this.formGroup.reset();
+
     this.updateMode = this.entity?.idProduto > 0;
 
     this.imageSrc = ProdutoExtension.getProdutoImagemSrc(this.entity);
@@ -213,7 +213,7 @@ onNextSubmitList(results: any) {
       idProduto: [this.entity?.idProduto],
       nome: [this.entity?.nome, [Validators.required]],
       codigoProduto: [this.entity?.codigoProduto, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      tamanho:[this.entity?.tamanho,  [Validators.required]],
+      // tamanho:[this.entity?.tamanho,  [Validators.required]],
       cor: [this.entity?.cor, [Validators.required]],
       codigoCliente: [this.entity?.codigoCliente, [Validators.required]]
 

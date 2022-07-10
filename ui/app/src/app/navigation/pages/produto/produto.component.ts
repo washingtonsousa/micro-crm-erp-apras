@@ -115,8 +115,8 @@ export class ProdutoComponent extends CrudPageTemplate<Produto> implements OnCha
   }
 
 
-  onFilterTamanho(newTamanho:string) {
-    this.request.tamanho = newTamanho;
+  onFilterCliente(codigoCliente:string) {
+    this.request.codigoCliente = codigoCliente;
     this.request.page = 1;
     this.loadPageData();
   }

@@ -5,7 +5,7 @@
   <box-container>
 
 
-  
+
 
     <crud-panel  (onRefreshClick)="loadPageData()" (onSearchClick)="onChangeSearchTerm($event)" (onChangeOrdering)="request.order = $event; loadPageData()" (onCurrentPageChanges)="request.page = $event; loadPageData();" (onItensPerPageChange)="onItemsPerPageChange($event)" [pageData]="pageData" (onAddClick)="modalProduto.openModal()">
 
@@ -27,7 +27,9 @@
 
        </select> -->
 
-       <small> Tamanho: </small>   <select-box (onValueChanges)="onFilterTamanho($event)"  [list]="tamanhos"></select-box> </section>
+       <!-- <small> Tamanho: </small>   <select-box (onValueChanges)="onFilterTamanho($event)"  [list]="tamanhos"></select-box> -->
+
+      </section>
 
     </crud-panel>
 

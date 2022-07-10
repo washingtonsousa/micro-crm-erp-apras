@@ -4,13 +4,13 @@ import { PaginationDataRequest } from "./pagination-data-request";
 
 export class ProdutoPaginationDataRequest extends PaginationDataRequest<Produto> {
 
-   public tamanho:string = '';
+   public codigoCliente:string = '';
 
 
-   constructor(tamanho:string = '', page:number = 1, pageSize:number = 4, order:string = "DESC") {
+   constructor(codigoCliente:string = '', page:number = 1, pageSize:number = 4, order:string = "DESC") {
 
       super(page, pageSize, order);
-      this.tamanho = tamanho;
+      this.codigoCliente = codigoCliente;
 
    }
 

@@ -10,7 +10,7 @@ export class ProdutoEANPipe implements PipeTransform {
     constructor(protected sanitizer: DomSanitizer) {}
 
     transform(produto: Produto )  {
-        return produto?.codigoCliente + produto?.codigoProduto + produto?.tamanho;
+        return produto?.codigoCliente + produto?.codigoProduto; //+ produto?.tamanho;
     }
 
 }

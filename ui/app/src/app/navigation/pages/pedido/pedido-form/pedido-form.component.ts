@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Cliente } from "src/app/business/entities/model/cliente";
 import { Pedido } from "src/app/business/entities/model/pedido";
@@ -10,6 +10,7 @@ import { PedidoService } from "src/app/services/core/api/pedido-service.service"
 import { LoadingIconService } from "src/app/services/core/static/loading-icon.service";
 import { SelectBoxItem } from "src/app/ui-components/material/forms/select-box/select-box-item.model";
 import { UpdateCreateReactiveForm } from "../../forms/abstractions/update-create-reactive-form";
+import { ProdutoShowcaseComponent } from "../../produto/produto-showcase/produto-showcase.component";
 
 
 @Component({
@@ -21,9 +22,9 @@ export class PedidoFormComponent extends UpdateCreateReactiveForm<Pedido>  imple
 
        pedidoFormGroup!:   FormGroup;
        clientes: Cliente[] = [];
-
+        choosedCliente!: Cliente | undefined;
         clienteSelectBox : SelectBoxItem[] = [];
-
+      @ViewChild('produtoShowCase') produtoShowCase!: ProdutoShowcaseComponent;
        constructor(public clienteService:ClienteService,
         public override formBuilder: FormBuilder,
         public override dataService: PedidoService)
@@ -52,6 +53,41 @@ export class PedidoFormComponent extends UpdateCreateReactiveForm<Pedido>  imple
         this.formGroup.patchValue({
           pedidoProdutos: this.entity.pedidoProdutos
         });
+
+      }
+
+      onChooseCliente(idCliente: any) {
+
+
+          let currentCliente = this.choosedCliente;
+
+          this.choosedCliente = this.clientes.find((cliente) => {
+
+              return idCliente == cliente.idCliente;
+
+          })
+
+          if(this.choosedCliente != undefined
+            &&
+
+            this.choosedCliente.codigoCliente !=
+            currentCliente?.codigoCliente
+
+            && !this.choosedCliente.isLoja
+
+            )
+            {
+            this.produtoShowCase.onFilterCliente(this.choosedCliente.codigoCliente);
+            this.entity.pedidoProdutos = [];
+            this.formGroup.patchValue({
+              pedidoProdutos: []
+            });
+
+            }
+
+
+          if(this.choosedCliente?.isLoja)
+          this.produtoShowCase.onFilterCliente('');
 
       }
 

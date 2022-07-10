@@ -8,13 +8,13 @@ import { Component, Input, Output,EventEmitter } from "@angular/core";
 
       <input  *ngIf="checkBoxEnabled" (click)="onCheck.emit()" type="checkbox" class="select-checkbox" [checked]="checked" />
 
-      <div *ngIf="!imgSrc" class="card-icon">
+      <div *ngIf="!imgSrc" class="card-icon" (click)="onIconClick.emit()">
 
             <i [class]="iconClass"> </i>
 
       </div>
 
-      <div *ngIf="imgSrc" class="card-img" >
+      <div  *ngIf="imgSrc" class="card-img" (click)="onIconClick.emit()" >
 
             <img [src]="imgSrc | sanitizerUrl"
             class="img-fluid" />
@@ -40,6 +40,7 @@ export class CardWithIconComponent {
   @Input("width") width: string = "100%";
   @Input("checked") checked: boolean = false;
   @Input("checkBoxEnabled") checkBoxEnabled: boolean = false;
+  @Output("onIconClick") onIconClick: EventEmitter<any> = new EventEmitter<any>();
 
 
   @Output("edit") edit: EventEmitter<any> = new EventEmitter<any>();
