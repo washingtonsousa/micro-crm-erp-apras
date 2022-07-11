@@ -1,14 +1,10 @@
-<container>
+<container id="panel-block">
 
   <box-container>
 
   <tabset #staticTabs>
 
     <tab heading="Detalhes da ficha" class="p-3">
-
-
-
-
 
     <div class="row">
 
@@ -139,13 +135,21 @@
 
             <p>
 
-              <button [disabled]="!fichaProducao || (fichaProducao.estadoFicha < FichaProducaoEstado.FINALIZADO)" type="button" class="btn btn-primary">
+              <button [disabled]="!fichaProducao || (fichaProducao.estadoFicha < FichaProducaoEstado.FINALIZADO)" type="button" class="btn btn-primary mb-1">
 
 
                   Enviar para estoque <i class="fas fa-box"></i>
 
 
               </button>
+
+              <button [disabled]="!fichaProducao" type="button" class="btn btn-success btn-lg">
+
+
+                Imprimir <i class="fas fa-print"></i>
+
+
+            </button>
 
             </p>
 
@@ -185,3 +189,8 @@
 </tabset>
 </box-container>
 </container>
+
+
+
+
+<ficha-print [ficha]="fichaProducaoAdapter"></ficha-print>

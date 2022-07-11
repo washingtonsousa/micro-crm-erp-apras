@@ -1,0 +1,15 @@
+@media print {
+    ficha-print {
+        display: block;
+    }
+
+    #panel-block {
+        display: none;
+    }
+}
+
+@media screen {
+    ficha-print {
+        display: none;
+    }
+}

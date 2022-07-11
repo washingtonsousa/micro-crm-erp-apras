@@ -12,6 +12,7 @@ import { FlexBoxModule } from "src/app/ui-components/flex-box/flex-box.module";
 import { GeneralUIModule } from "src/app/ui-components/general/generalUI.module";
 import { MaterialModule } from "src/app/ui-components/material/material.module";
 import { FichaProducaoCardComponent } from "./card/ficha-card.component";
+import { FichaPrintComponent } from "./ficha-print/ficha-print.component";
 import { FichaProducaoComponent } from "./ficha-producao.component";
 import { FichaProducaoFormComponent } from "./form/ficha-producao-form.component";
 import { FichaBordadoEstampariaComponent } from "./item/bordado-estamparia/ficha-bordado-estamparia.component";
@@ -22,8 +23,8 @@ import { FichaItemComponent } from "./item/ficha-item.component";
 
 @NgModule({
     providers: [],
-    declarations: [FichaProducaoCardComponent, FichaCosturaFinalizacaoComponent, FichaBordadoEstampariaComponent, FichaCorteSeparacaoComponent, FichaItemComponent, FichaProducaoComponent, FichaProducaoFormComponent],
-    exports: [FichaProducaoComponent, FichaItemComponent, FichaProducaoFormComponent],
+    declarations: [FichaProducaoCardComponent, FichaPrintComponent, FichaCosturaFinalizacaoComponent, FichaBordadoEstampariaComponent, FichaCorteSeparacaoComponent, FichaItemComponent, FichaProducaoComponent, FichaProducaoFormComponent],
+    exports: [FichaProducaoComponent, FichaPrintComponent, FichaItemComponent, FichaProducaoFormComponent],
     imports: [ TabsModule, PipesModule, MaterialModule, PipesModule, CommonModule, AlertModule,  GeneralUIModule,
       LayoutModule,  MaterialModule,  LayoutModule, ReactiveFormsModule,
       FlexBoxModule, PathResolverPipesModule, ModalModule, RouterModule]

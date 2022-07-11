@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Form, FormGroup } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FichaProducaoAdapter } from "src/app/business/adapters/ficha-producao-json.adapter";
 import { FichaProducao } from "src/app/business/entities/model/ficha-producao";
 import { DefaultDataResponse } from "src/app/business/entities/response/default-data-response";
@@ -12,7 +12,8 @@ import { LoadingIconService } from "src/app/services/core/static/loading-icon.se
 
 @Component({
   selector: "ficha-item",
-  templateUrl: "ficha-item.component.html"
+  templateUrl: "ficha-item.component.html",
+  styleUrls: ["ficha-item.scss"]
 })
 export class FichaItemComponent implements OnInit {
 
@@ -20,11 +21,17 @@ export class FichaItemComponent implements OnInit {
   FichaProducaoEstado = FichaProducaoEstado;
 
 
+
+
   get fichaProducao () : FichaProducao {
     return this.fichaProducaoAdapter?.fichaProducao;
   }
 
-  constructor(protected fichaService:FichaProducaoService, private route: ActivatedRoute) {
+  goToPrintPage() {
+    this.router.navigate(['ficha-print-page'], { state: { fichaData: this.fichaProducaoAdapter }} )
+}
+
+  constructor(protected fichaService:FichaProducaoService, private router: Router, private route: ActivatedRoute) {
 
   }
 
