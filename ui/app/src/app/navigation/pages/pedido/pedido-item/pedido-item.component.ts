@@ -30,6 +30,34 @@ export class PedidoItemComponent implements OnInit {
         }
       }
 
+      onAddProduto($event:any) {
+
+        this.pedido.pedidoProdutos.push($event);
+
+        LoadingIconService.show();
+
+        this.pedidoService.Patch(this.pedido).subscribe({
+
+          next: (data) => {
+
+            console.log(data);
+            LoadingIconService.hide();
+
+
+          },
+
+          error: (err) => {
+
+
+            console.log(err);
+            LoadingIconService.hide();
+
+          }
+
+
+        });
+
+      }
 
       load() {
         LoadingIconService.show("Aguarde...");

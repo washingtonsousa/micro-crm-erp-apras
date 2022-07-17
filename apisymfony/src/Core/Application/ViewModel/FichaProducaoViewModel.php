@@ -42,6 +42,8 @@ class FichaProducaoViewModel extends EntityViewModel   implements \JsonSerializa
 
     public $pedidoProduto;
 
+    public $impressa;
+
     public array $usuarioFichaHistoricos = array();
 
 
@@ -73,7 +75,8 @@ class FichaProducaoViewModel extends EntityViewModel   implements \JsonSerializa
           'qtnCosturaPerda' => $this->qtnCosturaPerda,
           'dtCostura' => $this->dtBordadoEstampa,
           'qtnProduzido' => $this->qtnProduzido,
-          'qtnPerdido' => $this->qtnPerdido
+          'qtnPerdido' => $this->qtnPerdido,
+          'impressa' => $this->impressa
 
       ];
   }

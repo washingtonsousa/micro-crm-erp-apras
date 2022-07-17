@@ -77,6 +77,22 @@ class PedidoController extends AbstractController {
 
         }
 
+
+        
+        public function patch(Request $request)
+        {
+
+            $requestValue = $this->serializerInterface->deserialize($request->getContent(), PedidoViewModel::class, 'json', [
+            ]);
+
+            $id = $request->attributes->get('id');
+
+            $result = $this->pedidoAppService->partialUpdate($requestValue, $id);
+
+            return new JsonResponse($result);
+
+        }
+
         public function delete(Request $request)
         {
 

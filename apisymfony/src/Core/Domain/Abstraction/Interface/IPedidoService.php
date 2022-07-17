@@ -9,9 +9,11 @@ use App\Core\Domain\Entity\Produto;
 
 interface IPedidoService {
 
+            public function partialUpdate(Pedido $pedido, $id);
             public function update(Pedido $pedido, $id);
             public function subscribe(Pedido $pedido);
             public function getById(int $id) : ?Pedido;
             public function get(GetPedidoPaginatedEntityQuery $paginatedQuery) : PaginationAggregator;
             public function remove($id) : bool;
+            
 }

@@ -19,14 +19,14 @@ class PedidoProduto
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idPedidoProduto;
+    public $idPedidoProduto;
 
     /**
      * @var int|null
      *
      * @ORM\Column(name="quantidade", type="integer", nullable=true)
      */
-    private $quantidade;
+    public $quantidade;
 
     /**
      * @var int
@@ -121,5 +121,15 @@ class PedidoProduto
     public function getProduto()
     {
         return $this->produto;
+    }
+
+    /**
+     * Get the value of idPedidoProduto
+     *
+     * @return  int
+     */ 
+    public function getIdPedidoProduto()
+    {
+        return $this->idPedidoProduto;
     }
 }

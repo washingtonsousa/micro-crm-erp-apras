@@ -14,5 +14,6 @@ interface IPedidoAppService {
         public function subscribe(PedidoViewModel $produto) : ?PedidoViewModel;
         public function get(PaginatedEntityRequestViewModel $paramsModel) : PaginationAggregatorViewModel;
         public function remove($id) : bool;
+        public function partialUpdate(PedidoViewModel $pedidoViewModel, $id) : ?PedidoViewModel;
 
 }

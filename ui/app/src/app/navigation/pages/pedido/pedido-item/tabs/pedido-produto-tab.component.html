@@ -88,6 +88,15 @@
     </table>
 
 
+    <button class="btn btn-success" (click)="modalProdutos.openModal()" > Add Produto </button>
+    <button class="btn btn-primary"> Atualizar mudanças </button>
+
+    <clean-modal #modalProdutos title="Produtos disponíveis">
+
+      <produto-showcase #produtoShowCase (onChoose)=" modalProdutos.closeModal();  " >
+      </produto-showcase>
+
+     </clean-modal>
 
 
 <clean-modal #modalFichaCreate>

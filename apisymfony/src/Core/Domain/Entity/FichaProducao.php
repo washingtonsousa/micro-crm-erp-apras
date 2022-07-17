@@ -117,6 +117,16 @@ class FichaProducao
      */
     public $qtnProduzido;
 
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="impressa", type="integer", nullable=false)
+     */
+    public $impressa = 0;
+
+
+
     /**
      * @var int|null
      *

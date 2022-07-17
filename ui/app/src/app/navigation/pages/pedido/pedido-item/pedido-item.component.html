@@ -83,7 +83,7 @@
 
           <tab heading="Produtos" class="p-3">
 
-              <pedido-produto-tab (onAddFicha)="load()" [pedidoProdutos]="pedido?.pedidoProdutos">
+              <pedido-produto-tab (onAddProduto)="onAddProduto($event)" (onAddFicha)="load()" [pedidoProdutos]="pedido?.pedidoProdutos">
               </pedido-produto-tab>
 
           </tab>

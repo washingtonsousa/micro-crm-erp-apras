@@ -131,4 +131,18 @@ class Pedido
     {
         return $this->idPedido;
     }
+
+    public function partialUpdate(Pedido $pedido) {
+
+        foreach($pedido->pedidoProdutos as $pedidoProduto) {
+
+                if($pedidoProduto->getIdPedidoProduto() == 0 || !isset($pedidoProduto->idPedidoProduto))
+                    continue;
+
+                $this->pedidoProdutos[] = $pedidoProduto;
+
+        }
+
+
+    }
 }

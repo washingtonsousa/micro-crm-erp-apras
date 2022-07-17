@@ -41,7 +41,11 @@ export class PedidoService implements IPaginatedCrudService<Pedido> {
       }
 
       public Update( Pedido: Pedido, aditionalParams:any[] = [false]) : Observable<DefaultDataResponse<Pedido>> {
-        return this.http.put<DefaultDataResponse<Pedido>>(environment.apiUri + "/api/pedido/" + Pedido.idPedido, Pedido,  { params: { changeSenha: aditionalParams[0] }});
+        return this.http.put<DefaultDataResponse<Pedido>>(environment.apiUri + "/api/pedido/" + Pedido.idPedido, Pedido);
+      }
+
+      public Patch( Pedido: Pedido, aditionalParams:any[] = [false]) : Observable<DefaultDataResponse<Pedido>> {
+        return this.http.patch<DefaultDataResponse<Pedido>>(environment.apiUri + "/api/pedido/" + Pedido.idPedido, Pedido);
       }
 
       public Remove(id: number ) : Observable<DefaultDataResponse<boolean>> {

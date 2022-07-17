@@ -57,6 +57,23 @@ class PedidoAppService implements IPedidoAppService {
 
     }
 
+
+    public function partialUpdate(PedidoViewModel $pedidoViewModel, $id) : ?PedidoViewModel {
+
+        $usuario = $this->mapper->map($pedidoViewModel, Pedido::class);
+
+        $result =  $this->service->partialUpdate($usuario, $id);
+     
+        if($result == null)
+            return null;
+
+        $pedidoViewModel = $this->mapper->map($result, PedidoViewModel::class);
+
+        return    $pedidoViewModel ;
+
+
+    }
+
     
     public function remove($id) : bool {
         

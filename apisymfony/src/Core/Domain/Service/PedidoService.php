@@ -59,6 +59,23 @@ class PedidoService implements IPedidoService {
                 return null;
         }
 
+
+        public function partialUpdate(Pedido $pedido, $id) {
+
+                $pedidoForUpdate = $this->getById($id); 
+                
+                $pedidoForUpdate->partialUpdate($pedido);
+
+                $command = new PersistCommand($pedidoForUpdate, $this->unityOfWork);
+
+                $result = $command->Execute();
+
+                if($result->isSuccess())
+                        return $result->getEntity();
+
+                return null;
+        }
+
         public function subscribe(Pedido $pedido) {
 
                 $pedido->prepareForInsert();

@@ -14,13 +14,21 @@ export class PedidoProdutoTabComponent implements OnInit, OnChanges {
     currentPedidoProdutoDetail!: PedidoProdutoAdapter;
     @Output("onAddFicha") onAddFicha: EventEmitter<any> = new EventEmitter<any>();
 
-
+    @Output("onAddProduto") onAddProduto: EventEmitter<any> = new EventEmitter<any>();
 
     ngOnChanges(changes: SimpleChanges): void {
       console.log(changes);
 
       if(changes.pedidoProdutos)
           this.initList();
+
+    }
+
+    onChooseProduto($event:any) {
+
+
+      this.pedidoProdutoAdapters.push(new PedidoProdutoAdapter($event));
+      this.onAddProduto.emit($event);
 
     }
 
