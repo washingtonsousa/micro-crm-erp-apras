@@ -135,7 +135,7 @@
 
             <p>
 
-              <button [disabled]="!fichaProducao || (fichaProducao.estadoFicha < FichaProducaoEstado.FINALIZADO)" type="button" class="btn btn-primary mb-1">
+              <button [disabled]="true || !fichaProducao || (fichaProducao.estadoFicha < FichaProducaoEstado.FINALIZADO)" type="button" class="btn btn-primary mb-1">
 
 
                   Enviar para estoque <i class="fas fa-box"></i>

@@ -45,9 +45,13 @@ export class ProdutoShowcaseComponent extends CrudPageTemplate<Produto> implemen
         }
 
         onFilterCliente(codigoCliente:string) {
+
+          console.log(codigoCliente);
+
           this.request.codigoCliente = codigoCliente;
           this.request.page = 1;
           this.loadPageData();
+          console.log("filterClienteShowCase")
         }
 
 

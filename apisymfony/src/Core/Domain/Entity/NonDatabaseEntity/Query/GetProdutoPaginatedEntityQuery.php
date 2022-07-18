@@ -51,18 +51,19 @@ class GetProdutoPaginatedEntityQuery extends PaginatedEntityQuery {
         {
             $filters = $this->getAllowedFilters();
 
-            if(count($filters) == 0)
             $this->queryExpressionBuilder = new QueryExpressionBuilder('p');
            
 
-            if(!isset($this->queryExpressionBuilder)) {
-
+       
                 if(isset($filters['idProduto'])) {
                     $idProduto= $filters['idProduto'];
                     $this->queryExpressionBuilder->addORExpression($idProduto);
                 }
 
-            }
+                if(isset($filters['codigoCliente'])) {
+                    $codCliente= $filters['codigoCliente'];
+                    $this->queryExpressionBuilder->addORExpression($codCliente);
+                }
 
 
 

@@ -73,10 +73,10 @@
          </td>
 
          <td>
-
+          <span *ngIf="!hasChanges">
           <a  (click)="fichaForm.setPedidoProduto(adapter?.pedidoProduto); modalFichaCreate.openModal()" class="pointer btn btn-sm btn-outline-success"> <i class="fas fa-plus"></i> Ficha de produção  </a>
           <a  (click)="modalFichas.openModal(); currentPedidoProdutoDetail = adapter" class="pointer btn btn-sm btn-outline-primary"> <i class="fas fa-eye"></i> Ver Fichas  </a>
-
+        </span>
          </td>
 
 
@@ -88,15 +88,10 @@
     </table>
 
 
-    <button class="btn btn-success" (click)="modalProdutos.openModal()" > Add Produto </button>
-    <button class="btn btn-primary"> Atualizar mudanças </button>
+    <button class="btn btn-success" (click)="onAddProduto.emit()" > Add Produto </button>
+    <button class="btn btn-primary" (click)="onUpdateClick.emit()" *ngIf="hasChanges"> Atualizar mudanças </button>
+    <button class="btn btn-warning" (click)="onRefreshClick.emit()" *ngIf="hasChanges"> Desfazer Alterações </button>
 
-    <clean-modal #modalProdutos title="Produtos disponíveis">
-
-      <produto-showcase #produtoShowCase (onChoose)=" modalProdutos.closeModal();  " >
-      </produto-showcase>
-
-     </clean-modal>
 
 
 <clean-modal #modalFichaCreate>

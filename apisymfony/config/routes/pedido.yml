@@ -20,6 +20,11 @@ api_pedido_put:
     controller: App\Controller\PedidoController::put
     methods:  [PUT]
 
+api_pedido_patch:
+    path: /{id}
+    controller: App\Controller\PedidoController::patch
+    methods:  [PATCH]
+
 api_pedido_delete:
     path: /{id}
     controller: App\Controller\PedidoController::delete

@@ -83,7 +83,7 @@
 
           <tab heading="Produtos" class="p-3">
 
-              <pedido-produto-tab (onAddProduto)="onAddProduto($event)" (onAddFicha)="load()" [pedidoProdutos]="pedido?.pedidoProdutos">
+              <pedido-produto-tab #pedidoProdutoTab (onRefreshClick)="load()" (onUpdateClick)="updatePedido()" (onAddProduto)="modalProdutos.openModal()" (onAddFicha)="load()" [pedidoProdutos]="pedido?.pedidoProdutos">
               </pedido-produto-tab>
 
           </tab>
@@ -197,3 +197,9 @@
 
 
 
+<clean-modal #modalProdutos title="Produtos disponíveis">
+
+  <produto-showcase #produtoShowCase (onChoose)="onChooseProduto($event); modalProdutos.closeModal();  " >
+  </produto-showcase>
+
+ </clean-modal>

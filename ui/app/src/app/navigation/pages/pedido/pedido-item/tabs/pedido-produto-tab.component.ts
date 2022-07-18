@@ -13,8 +13,22 @@ export class PedidoProdutoTabComponent implements OnInit, OnChanges {
 
     currentPedidoProdutoDetail!: PedidoProdutoAdapter;
     @Output("onAddFicha") onAddFicha: EventEmitter<any> = new EventEmitter<any>();
-
     @Output("onAddProduto") onAddProduto: EventEmitter<any> = new EventEmitter<any>();
+    @Output("onUpdateClick") onUpdateClick: EventEmitter<any> = new EventEmitter<any>();
+    @Output("onRefreshClick") onRefreshClick: EventEmitter<any> = new EventEmitter<any>();
+    get hasChanges() : boolean {
+
+      let value = this.pedidoProdutoAdapters.find((pp: PedidoProdutoAdapter) => {
+        return pp?.pedidoProduto?.idPedidoProduto == undefined
+        ||
+        pp?.pedidoProduto?.idPedidoProduto == null;
+
+      })
+
+      console.log(value);
+
+      return value != undefined;
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
       console.log(changes);
@@ -24,13 +38,6 @@ export class PedidoProdutoTabComponent implements OnInit, OnChanges {
 
     }
 
-    onChooseProduto($event:any) {
-
-
-      this.pedidoProdutoAdapters.push(new PedidoProdutoAdapter($event));
-      this.onAddProduto.emit($event);
-
-    }
 
 
     ngOnInit(): void {

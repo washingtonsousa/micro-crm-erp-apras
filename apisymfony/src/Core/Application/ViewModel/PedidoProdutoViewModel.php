@@ -13,7 +13,7 @@ class PedidoProdutoViewModel extends EntityViewModel {
     public mixed $idProduto;
     public mixed $idPedido;    
     public mixed $fichasProducao = array();
-    public mixed $produto;
+    public ProdutoViewModel $produto;
     public mixed $pedido; 
     public string $tamanho; 
 

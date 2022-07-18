@@ -136,9 +136,11 @@ class Pedido
 
         foreach($pedido->pedidoProdutos as $pedidoProduto) {
 
-                if($pedidoProduto->getIdPedidoProduto() == 0 || !isset($pedidoProduto->idPedidoProduto))
+                if($pedidoProduto->getIdPedidoProduto() != 0 || isset($pedidoProduto->idPedidoProduto))
                     continue;
 
+                $pedidoProduto->produto = DependencyResolver::make("app.orm")->getManager()->getReference(Produto::class, $pedidoProduto->getIdProduto());
+                $pedidoProduto->pedido = $this;
                 $this->pedidoProdutos[] = $pedidoProduto;
 
         }
